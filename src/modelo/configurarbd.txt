@@ -1,0 +1,9 @@
+databaseclass=servicios.Conexion_mySQL
+jdbc=jdbc:mysql://
+driver=com.mysql.jdbc.Driver
+host=localhost
+database=ofertapp_es
+username=root
+password=root
+options=charSet=LATIN1
+mostrarpropierties=si
