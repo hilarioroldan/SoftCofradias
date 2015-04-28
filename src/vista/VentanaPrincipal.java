@@ -7,6 +7,7 @@ package vista;
 
 import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
+import controlador.ControladorHermandadesHermanadas;
 
 /**
  *
@@ -144,6 +145,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("Hermandades hermanadas");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuItem11.setText("Planing Secretaria");
@@ -246,6 +252,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         x.setVisible(true);
         x.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+               ControladorHermandadesHermanadas hh = new ControladorHermandadesHermanadas();
+       hh.iniciar(); 
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
