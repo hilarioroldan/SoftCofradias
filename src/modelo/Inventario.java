@@ -1,13 +1,15 @@
 
 package modelo;
 
+import java.io.FileInputStream;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Inventario {
     
     int identificador;
     String nombre;
-    String descripcion;
     String autor;
     String estilo;
     Date fecha_realizacion;
@@ -17,11 +19,14 @@ public class Inventario {
     String restauracion;
     int cantidad;
     String observaciones;
+    String adquisicion;
+    FileInputStream imagen; // almacenamiento de la imagen
+    Date fecha_baja;
+    int longitudBytes;
 
-    public Inventario(int identificador, String nombre, String descripcion, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones) {
+    public Inventario(int identificador, String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) {
         this.identificador = identificador;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.autor = autor;
         this.estilo = estilo;
         this.fecha_realizacion = fecha_realizacion;
@@ -31,11 +36,35 @@ public class Inventario {
         this.restauracion = restauracion;
         this.cantidad = cantidad;
         this.observaciones = observaciones;
+        this.adquisicion = adquisicion;
+        this.imagen = imagen;
+        this.fecha_baja = fecha_baja;
+        this.longitudBytes = longitudBytes;
     }
 
-    Inventario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Inventario(String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) {
+        this.nombre = nombre;
+        this.autor = autor;
+        this.estilo = estilo;
+        this.fecha_realizacion = fecha_realizacion;
+        this.procedencia = procedencia;
+        this.valoracion_economica = valoracion_economica;
+        this.mejora = mejora;
+        this.restauracion = restauracion;
+        this.cantidad = cantidad;
+        this.observaciones = observaciones;
+        this.adquisicion = adquisicion;
+        this.imagen = imagen;
+        this.fecha_baja = fecha_baja;
+        this.longitudBytes = longitudBytes;
     }
+
+    public Inventario(int identificador) {
+        this.identificador = identificador;
+    }
+    
+    public Inventario() {
+    }   
 
     public int getIdentificador() {
         return identificador;
@@ -51,14 +80,6 @@ public class Inventario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getAutor() {
@@ -133,9 +154,82 @@ public class Inventario {
         this.observaciones = observaciones;
     }
 
+    public String getAdquisicion() {
+        return adquisicion;
+    }
+
+    public void setAdquisicion(String adquisicion) {
+        this.adquisicion = adquisicion;
+    }
+
+    public FileInputStream getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(FileInputStream imagen) {
+        this.imagen = imagen;
+    }
+
+    public Date getFecha_baja() {
+        return fecha_baja;
+    }
+
+    public void setFecha_baja(Date fecha_baja) {
+        this.fecha_baja = fecha_baja;
+    }
+
+    public int getLongitudBytes() {
+        return longitudBytes;
+    }
+
+    public void setLongitudBytes(int longitudBytes) {
+        this.longitudBytes = longitudBytes;
+    }
+
     @Override
     public String toString() {
-        return "Inventario{" + "identificador=" + identificador + ", nombre=" + nombre + ", descripcion=" + descripcion + ", autor=" + autor + ", estilo=" + estilo + ", fecha_realizacion=" + fecha_realizacion + ", procedencia=" + procedencia + ", valoracion_economica=" + valoracion_economica + ", mejora=" + mejora + ", restauracion=" + restauracion + ", cantidad=" + cantidad + ", observaciones=" + observaciones + '}';
-    }   
+        return "Inventario{" + "identificador=" + identificador + ", nombre=" + nombre + ", autor=" + autor + ", estilo=" + estilo + ", fecha_realizacion=" + fecha_realizacion + ", procedencia=" + procedencia + ", valoracion_economica=" + valoracion_economica + ", mejora=" + mejora + ", restauracion=" + restauracion + ", cantidad=" + cantidad + ", observaciones=" + observaciones + ", adquisicion=" + adquisicion + ", imagen=" + imagen + ", fecha_baja=" + fecha_baja + ", longitudBytes=" + longitudBytes + '}';
+    }
+    
+    
+    
+    /*Instanciar metodos creados en Inventario*/
+    /*Esta clase me permite instanciar la clase InventarioBD y llamar al metodo grabar para hacer uso de el*/
+    
+    public void grabar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        i.grabar();
+    }
+
+    public void actualizar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        i.modificar();
+    }
+    
+    /*Este metodo retorna un conjunto de datos de la tabla Inventario*/
+    public void leer() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        i.leer();
+    }
+    
+    /*Este metodo me permite instanciar la clase InventarioBD y llamar al metodo borrar para hacer uso de el*/
+    public void borrar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        i.borrar();
+    }
+    
+    /*Este metodo lee todos los datos de la tabla Inventario*/
+    public ArrayList leerTodos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        return i.leerTodos();
+    }
+    
+    /*Este metodo busca un Inventario indicando el identificador y porque campo se va a filtrar*/
+    public ArrayList <Inventario> buscarFiltro(String filtro, String campo) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);      
+        return i.buscar(filtro, campo);
+    }
+
+    
     
 }

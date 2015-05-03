@@ -8,6 +8,7 @@ package vista;
 import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
 import controlador.ControladorHermandadesHermanadas;
+import controlador.ControladorInventario;
 
 /**
  *
@@ -248,9 +249,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        InventarioVista x = new InventarioVista();
-        x.setVisible(true);
-        x.setLocationRelativeTo(null);
+        ControladorInventario ci = new ControladorInventario();
+        ci.iniciar();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed

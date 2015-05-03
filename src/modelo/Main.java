@@ -43,6 +43,8 @@ public class Main {
         } catch (java.lang.IllegalAccessException e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un error de acceso ilegal" + e.toString());
             System.exit(-1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
 
         try {

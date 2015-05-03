@@ -2,7 +2,6 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,7 +37,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
 
         //se añade las acciones a los controles del formulario padre
         ecv.btnIngresar.setActionCommand("INGRESAR");
-        ecv.btnBuscar.setActionCommand("BUSCAR1");
+        ecv.btnBuscar.setActionCommand("MOSTRAR");
         ecv.btnBuscar2.setActionCommand("BUSCAR2");
         ecv.btnEliminar.setActionCommand("ELIMINAR");
         ecv.btnSalir.setActionCommand("SALIR1");
@@ -105,7 +104,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
                 cargarTablaEntidadConocida3();
                 break;
                 
-            case "BUSCAR1":
+            case "MOSTRAR":
                 cargarTablaEntidadConocida2();
                 break;
             case "BUSCAR2":
