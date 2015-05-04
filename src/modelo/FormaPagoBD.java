@@ -41,7 +41,7 @@ public class FormaPagoBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE formapago SET nombre='"+fo.getForma_pago()+"' WHERE identificador="+fo.getIdentificador()+";";            
+            cbd.un_sql = "UPDATE formapago SET forma_pago='"+fo.getForma_pago()+"' WHERE identificador="+fo.getIdentificador()+";";            
             cbd.un_st.executeUpdate(cbd.un_sql);
         } else {
              /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/

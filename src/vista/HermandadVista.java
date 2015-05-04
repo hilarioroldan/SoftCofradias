@@ -118,7 +118,7 @@ public class HermandadVista extends javax.swing.JFrame {
 
         btnNuevo.setText("Nuevo");
 
-        btnConfigurar.setText("Configurar");
+        btnConfigurar.setText("Mas Opciones");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

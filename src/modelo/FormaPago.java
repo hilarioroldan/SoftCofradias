@@ -1,6 +1,9 @@
 
 package modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class FormaPago {
     
     int identificador;
@@ -10,6 +13,10 @@ public class FormaPago {
         this.identificador = identificador;
         this.forma_pago = forma_pago;
     }
+
+    public FormaPago(int identificador) {
+        this.identificador = identificador;
+    }   
 
     public FormaPago() {
     }   
@@ -35,7 +42,28 @@ public class FormaPago {
         return "FormaPago{" + "identificador=" + identificador + ", forma_pago=" + forma_pago + '}';
     }
     
+        
+    /*Este metodo me permite instanciar la clase InventarioBD y llamar al metodo borrar para hacer uso de el*/
+    public void borrar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        FormaPagoBD i = new FormaPagoBD(this);        
+        i.borrar();
+    }
     
+    /*Este metodo lee todos los datos de la tabla Inventario*/
+    public ArrayList leerTodos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        FormaPagoBD i = new FormaPagoBD(this);        
+        return i.leerTodos();
+    }
+    
+   public void grabar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        FormaPagoBD i = new FormaPagoBD(this);        
+        i.grabar();
+    }
+
+    public void actualizar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        FormaPagoBD i = new FormaPagoBD(this);        
+        i.modificar();
+    }
     
     
 }
