@@ -265,9 +265,7 @@ public class ControladorJuntaGobierno implements ActionListener{
                fila[2] = junta.getApellido();
                fila[3] = junta.getCargo();
                fila[4] = junta.getObservaciones();
-               fila[5] = String.valueOf(junta.getNumero_hermano_id());
-               
-               
+               fila[5] = String.valueOf(junta.getNumero_hermano_id());             
                 
                 ff.addRow(fila);
             }           
@@ -278,7 +276,8 @@ public class ControladorJuntaGobierno implements ActionListener{
             j1.tablagobierno1.setModel(ff);
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+    //e.getStackTrace();
+    JOptionPane.showMessageDialog(null, "1Error al extraer los datos de la tabla "+e, "Error", JOptionPane.ERROR_MESSAGE);        
         }
         
     }

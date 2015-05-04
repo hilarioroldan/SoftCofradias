@@ -14,6 +14,7 @@ import javax.swing.table.TableRowSorter;
 import modelo.Hermandad;
 import servicios.ConectarServicio;
 import servicios.Conexion;
+import vista.HermandadConfigurarVista;
 import vista.HermandadVista;
 
 public class ControladorHermandad implements ActionListener {
@@ -24,7 +25,7 @@ public class ControladorHermandad implements ActionListener {
 
     public enum di {
 
-        GUARDAR, MODIFICAR, NUEVO, SALIR;
+        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR;
     }
 
     public void iniciar() {
@@ -39,11 +40,13 @@ public class ControladorHermandad implements ActionListener {
         hv.btnModificar.setActionCommand("MODIFICAR");
         hv.btnNuevo.setActionCommand("NUEVO");
         hv.btnSalir.setActionCommand("SALIR");
+        hv.btnConfigurar.setActionCommand("CONFIGURAR");
         //Se pone a escuchar las acciones del usuario
         hv.btnGuardar.addActionListener(this);
         hv.btnModificar.addActionListener(this);
         hv.btnNuevo.addActionListener(this);
         hv.btnSalir.addActionListener(this);
+        hv.btnConfigurar.addActionListener(this);
         hv.tblHermandad.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla hermandad           
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -106,7 +109,16 @@ public class ControladorHermandad implements ActionListener {
                 
             case NUEVO:
                 limpiarTexto();
+                
+            case CONFIGURAR:
+                abrirConfigurar();
         }
+    }
+    
+    public void abrirConfigurar() {
+        HermandadConfigurarVista hcv = new HermandadConfigurarVista();
+        hcv.setVisible(true);
+        hcv.setLocationRelativeTo(null);
     }
 
     /*Metodo para buscar una Hermandad indicando el campo y el valor*/

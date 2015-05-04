@@ -8,7 +8,9 @@ package vista;
 import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
 import controlador.ControladorHermandadesHermanadas;
+import controlador.ControladorHermano;
 import controlador.ControladorInventario;
+import controlador.ControladorJuntaGobierno;
 
 /**
  *
@@ -37,16 +39,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem22 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem25 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem27 = new javax.swing.JMenuItem();
-        jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -101,37 +95,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenu6.setText("Hermanos");
+        jMenuItem1.setText("Hermanos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
-        jMenuItem22.setText("Añadir hermano");
-        jMenu6.add(jMenuItem22);
-
-        jMenuItem23.setText("Mostrar hermanos");
-        jMenu6.add(jMenuItem23);
-
-        jMenuItem24.setText("Buscar hermano");
-        jMenu6.add(jMenuItem24);
-
-        jMenuItem25.setText("Dar de baja a un hermano");
-        jMenu6.add(jMenuItem25);
-
-        jMenu1.add(jMenu6);
-
-        jMenu7.setText("Junta de Gobierno");
-
-        jMenuItem26.setText("Añadir miembro");
-        jMenu7.add(jMenuItem26);
-
-        jMenuItem27.setText("Mostrar miembros");
-        jMenu7.add(jMenuItem27);
-
-        jMenuItem28.setText("Buscar miembro");
-        jMenu7.add(jMenuItem28);
-
-        jMenuItem29.setText("Eliminar miembro");
-        jMenu7.add(jMenuItem29);
-
-        jMenu1.add(jMenu7);
+        jMenuItem3.setText("Junta de Gobierno");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -258,6 +236,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        hh.iniciar(); 
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ControladorHermano ch = new ControladorHermano();
+        ch.iniciar();        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       ControladorJuntaGobierno cj = new ControladorJuntaGobierno();
+       cj.iniciar();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,9 +288,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
@@ -316,14 +303,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem25;
-    private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
-    private javax.swing.JMenuItem jMenuItem28;
-    private javax.swing.JMenuItem jMenuItem29;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem9;

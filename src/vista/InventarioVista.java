@@ -101,7 +101,7 @@ public class InventarioVista extends javax.swing.JFrame {
         txtCantidad2 = new javax.swing.JTextField();
         txtFechaRealizacion2 = new javax.swing.JTextField();
         txtFechaBaja2 = new javax.swing.JTextField();
-        btnSalir5 = new javax.swing.JButton();
+        btnSalir2 = new javax.swing.JButton();
         buscar = new javax.swing.JPanel();
         jScrollPane16 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
@@ -253,7 +253,11 @@ public class InventarioVista extends javax.swing.JFrame {
 
         btnInsertar1.setText("Insertar");
 
-        txtFechaRealizacion1.setText("Fotmato: 2015-05-16");
+        txtFechaRealizacion1.setForeground(new java.awt.Color(102, 102, 102));
+        txtFechaRealizacion1.setText("Formato: 1999-01-01");
+
+        txtFechaBaja1.setForeground(new java.awt.Color(102, 102, 102));
+        txtFechaBaja1.setText("Formato: 1999-01-01");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -619,7 +623,7 @@ public class InventarioVista extends javax.swing.JFrame {
 
         jScrollPane5.setViewportView(jPanel6);
 
-        btnSalir5.setText("Salir");
+        btnSalir2.setText("Salir");
 
         javax.swing.GroupLayout mostrarLayout = new javax.swing.GroupLayout(mostrar);
         mostrar.setLayout(mostrarLayout);
@@ -630,7 +634,7 @@ public class InventarioVista extends javax.swing.JFrame {
                 .addGroup(mostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mostrarLayout.createSequentialGroup()
                         .addGap(0, 771, Short.MAX_VALUE)
-                        .addComponent(btnSalir5))
+                        .addComponent(btnSalir2))
                     .addComponent(jScrollPane5))
                 .addContainerGap())
         );
@@ -640,7 +644,7 @@ public class InventarioVista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(btnSalir5)
+                .addComponent(btnSalir2)
                 .addContainerGap())
         );
 
@@ -1236,9 +1240,9 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JButton btnIzquierda1;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnSalir1;
+    public javax.swing.JButton btnSalir2;
     public javax.swing.JButton btnSalir3;
     public javax.swing.JButton btnSalir4;
-    public javax.swing.JButton btnSalir5;
     public javax.swing.JPanel buscar;
     public javax.swing.JComboBox combo3;
     public javax.swing.JComboBox combo4;

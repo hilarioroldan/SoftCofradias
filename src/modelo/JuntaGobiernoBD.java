@@ -144,7 +144,7 @@ public class JuntaGobiernoBD {
         
         Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
         
-        cbd.un_sql = "SELECT * FROM juntadegobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
+        cbd.un_sql = "SELECT * FROM juntagobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         while(cbd.resultado.next()){
@@ -156,7 +156,7 @@ public class JuntaGobiernoBD {
                 //h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
                 j.setApellido(cbd.resultado.getString("apellidos"));
                 j.setCargo(cbd.resultado.getString("cargo"));
-                j.setObservaciones(cbd.resultado.getString("observacion"));
+                j.setObservaciones(cbd.resultado.getString("observaciones"));
                 j.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 
                 listaGobierno.add(j);

@@ -494,13 +494,22 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtFechaRealizacion1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Fotmato: 2015-05-16"/>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="66" green="66" red="66" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Formato: 1999-01-01"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtFechaBaja1">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="66" green="66" red="66" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Formato: 1999-01-01"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -539,7 +548,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="771" max="32767" attributes="0"/>
-                              <Component id="btnSalir5" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSalir2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -553,7 +562,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="545" max="-2" attributes="0"/>
                       <EmptySpace pref="54" max="32767" attributes="0"/>
-                      <Component id="btnSalir5" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSalir2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1026,7 +1035,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnSalir5">
+            <Component class="javax.swing.JButton" name="btnSalir2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>

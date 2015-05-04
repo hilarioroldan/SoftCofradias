@@ -42,7 +42,7 @@ public class ControladorInventario implements ActionListener {
 
         iv.setVisible(true);
         iv.setLocationRelativeTo(null);
-        
+
         // desabilitamos el boton registo de todos los paneles menos para el insertar
         iv.txtRegistro2.setEnabled(false);
         iv.txtRegistro3.setEnabled(false);
@@ -66,9 +66,11 @@ public class ControladorInventario implements ActionListener {
         iv.btnEliminar.setActionCommand("ELIMINAR");
         iv.btnModificar.setActionCommand("MODIFICAR");
         iv.btnSalir1.setActionCommand("SALIR1");
+        iv.btnSalir2.setActionCommand("SALIR2");
+        iv.btnSalir3.setActionCommand("SALIR3");
+        iv.btnSalir4.setActionCommand("SALIR4");
         //Se pone a escuchar las acciones del usuario
         iv.btnInsertar1.addActionListener(this);
-        iv.btnSalir1.addActionListener(this);        
         iv.btnIzquierda1.addActionListener(this);
         iv.btnDerecha1.addActionListener(this);
         iv.btnBuscar4.addActionListener(this);
@@ -77,6 +79,10 @@ public class ControladorInventario implements ActionListener {
         iv.btnModificar.addActionListener(this);
         iv.btnExaminar1.addActionListener(this);
         iv.btnExaminar2.addActionListener(this);
+        iv.btnSalir1.addActionListener(this);
+        iv.btnSalir2.addActionListener(this);
+        iv.btnSalir3.addActionListener(this);
+        iv.btnSalir4.addActionListener(this);
 
         //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
         iv.tblInventario1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,6 +105,21 @@ public class ControladorInventario implements ActionListener {
                 tblInventario3MousePressed(evt);
             }
         });
+        
+        // controlador de eventos de raton
+        iv.txtFechaRealizacion1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFechaRealizacion1MouseClicked(evt);
+            }
+        });
+        //
+        iv.txtFechaBaja1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFechaBaja1MouseClicked(evt);
+            }
+        });
     }
 
     @Override
@@ -108,6 +129,8 @@ public class ControladorInventario implements ActionListener {
 
             case "INSERTAR1":
                 insertarPantalla1();
+                cargarTablaEntidadConocida1();
+                vaciarTxtPantalla1_2();
                 break;
 
             case "btnIzquierda1":
@@ -137,6 +160,21 @@ public class ControladorInventario implements ActionListener {
                 iv.dispose();
                 break;
 
+            case "SALIR2":
+
+                iv.dispose();
+                break;
+
+            case "SALIR3":
+
+                iv.dispose();
+                break;
+
+            case "SALIR4":
+
+                iv.dispose();
+                break;
+
             case "ELIMINAR":
 
                 eliminarInventarioSeleccionado();
@@ -148,19 +186,19 @@ public class ControladorInventario implements ActionListener {
             case "EXAMINAR1":
                 examinar1();
                 break;
-                
+
             case "EXAMINAR2":
                 examinar2();
                 break;
-                
+
             case "MODIFICAR":
                 modificarInventarioSeleccionado();
                 break;
         }
     }
-    
+
     public void modificarInventarioSeleccionado() {
-        
+
         String identificador = iv.txtRegistro4.getText();
         String nombre = iv.txtNombre4.getText();
         String autor = iv.txtAutor4.getText();
@@ -191,6 +229,8 @@ public class ControladorInventario implements ActionListener {
             JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
+        } catch (java.lang.IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Error al introducir un dato incorrecto, revise todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         cargarTablaEntidadConocida1();
@@ -198,7 +238,7 @@ public class ControladorInventario implements ActionListener {
         vaciarTxtPantalla2();
         iv.btnIzquierda1.setEnabled(false);
         iv.btnDerecha1.setEnabled(false);
-        
+
     }
 
     public void vaciarTxtPantalla4() {
@@ -219,7 +259,7 @@ public class ControladorInventario implements ActionListener {
         iv.tblInventario3.setModel(new DefaultTableModel());
         iv.txtFiltro3.setText("");
     }
-    
+
     public void vaciarTxtPantalla3() {
         iv.txtRegistro4.setText("");
         iv.txtNombre4.setText("");
@@ -238,7 +278,7 @@ public class ControladorInventario implements ActionListener {
         iv.tblInventario2.setModel(new DefaultTableModel());
         iv.txtFiltro4.setText("");
     }
-    
+
     public void vaciarTxtPantalla2() {
         iv.txtRegistro2.setText("");
         iv.txtNombre2.setText("");
@@ -255,10 +295,28 @@ public class ControladorInventario implements ActionListener {
         iv.txtObservaciones2.setText("");
         iv.cuadroImagen2.setIcon(null);
         iv.tblInventario2.setModel(new DefaultTableModel());
-        
+
         iv.btnIzquierda1.setEnabled(false);
         iv.btnDerecha1.setEnabled(false);
-        
+
+    }
+
+    public void vaciarTxtPantalla1_2() {
+        iv.txtRegistro1.setText("");
+        iv.txtNombre1.setText("");
+        iv.txtAdquisicion1.setText("");
+        iv.txtAutor1.setText("");
+        iv.txtEstilo1.setText("");
+        iv.txtFechaRealizacion1.setText("");
+        iv.txtProcedencia1.setText("");
+        iv.txtValoracionEconomica1.setText("");
+        iv.txtMejora1.setText("");
+        iv.txtRestauracion1.setText("");
+        iv.txtFechaBaja1.setText("");
+        iv.txtCantidad1.setText("");
+        iv.txtObservaciones1.setText("");
+        iv.cuadroImagen1.setIcon(null);
+
     }
     
     public void vaciarTxtPantalla1() {
@@ -277,7 +335,7 @@ public class ControladorInventario implements ActionListener {
         iv.txtObservaciones1.setText("");
         iv.cuadroImagen1.setIcon(null);
         iv.tblInventario1.setModel(new DefaultTableModel());
-        
+
     }
 
     public void eliminarInventarioSeleccionado() {
@@ -292,7 +350,7 @@ public class ControladorInventario implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun articulo del inventario", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         vaciarTxtPantalla2();
     }
 
@@ -327,12 +385,12 @@ public class ControladorInventario implements ActionListener {
                 fila[11] = inventario.getAdquisicion();
                 fila[12] = String.valueOf(inventario.getFecha_baja());
                 m.addRow(fila);
-                
+
                 // devolvemos el primer valor a la interfaz (txt)
-                if (contador==1) {
-                    
+                if (contador == 1) {
+
                     Image foto = null;
-                    
+
                     iv.txtRegistro4.setText(fila[0]);
                     iv.txtNombre4.setText(fila[1]);
                     iv.txtAutor4.setText(fila[2]);
@@ -346,10 +404,10 @@ public class ControladorInventario implements ActionListener {
                     iv.txtObservaciones4.setText(fila[10]);
                     iv.txtAdquisicion4.setText(fila[11]);
                     iv.txtFechaBaja4.setText(fila[12]);
-                    
+
                     foto = this.leerImagen(Integer.parseInt(fila[0]));
-                    
-                    if (foto!= null) {
+
+                    if (foto != null) {
                         iv.cuadroImagen4.setIcon(new ImageIcon(foto));
                         iv.cuadroImagen4.updateUI();
                     } else {
@@ -411,14 +469,13 @@ public class ControladorInventario implements ActionListener {
             JOptionPane.showMessageDialog(null, "11Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void ponerPrimerInventario() {
-        
+
         int identificadorMenor = 0;
         int identificadorMayor = 0;
-        
+
         ////// busqueda del identificador menor en la BD ///////
-        
         try { // busqueda del menor
 
             // buscamos el numero mayor de identificador que existe en la BD
@@ -431,11 +488,10 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         ////// busqueda del identificador mayor en la BD ///////
-        
         try { // busqueda del mayor
 
             // buscamos el numero mayor de identificador que existe en la BD
@@ -448,77 +504,73 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
-        // fin de busqueda //     
-        
-        //
-        if (identificadorMayor==0 && identificadorMenor==0) {
-            iv.btnDerecha1.setEnabled(false);
-            iv.btnIzquierda1.setEnabled(false);
-        } else {
-                JOptionPane.showMessageDialog(null, "mayor:"+identificadorMayor+"y menor:"+identificadorMenor);
-        
-        if (identificadorMayor==identificadorMenor) {
-            iv.btnIzquierda1.setEnabled(false);
-            iv.btnDerecha1.setEnabled(false);
-        } else {
-            iv.btnIzquierda1.setEnabled(false);
-            iv.btnDerecha1.setEnabled(true);
-        }
-        
-        //
-
-        ArrayList inventarioSeleccionado;
-        Inventario x = null;
-
-        try {
-            inventarioSeleccionado = buscarInventario(String.valueOf(identificadorMenor), "identificador");
-
-                    Iterator<Inventario> it = inventarioSeleccionado.iterator();
-
-                    while (it.hasNext()) {
-                        x = it.next();
-
-                        iv.txtRegistro2.setText(String.valueOf(x.getIdentificador()));
-                        iv.txtNombre2.setText(x.getNombre());
-                        iv.txtAutor2.setText(x.getAutor());
-                        iv.txtEstilo2.setText(x.getEstilo());
-                        iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
-                        iv.txtProcedencia2.setText(x.getProcedencia());
-                        iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
-                        iv.txtMejora2.setText(x.getMejora());
-                        iv.txtRestauracion2.setText(x.getRestauracion());
-                        iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
-                        iv.txtObservaciones2.setText(x.getObservaciones());
-                        iv.txtAdquisicion2.setText(x.getAdquisicion());
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
-                    }
-
-                    Image foto = null;
-                    foto = leerImagen(Integer.parseInt(iv.txtRegistro2.getText()));
-                    if (foto != null) {
-                        iv.cuadroImagen2.setIcon(new ImageIcon(foto));
-                    salto = false;
-                    } else {
-                        iv.cuadroImagen2.setIcon(null);
-                    }
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // fin de busqueda //     
+        //
+        if (identificadorMayor == 0 && identificadorMenor == 0) {
+            iv.btnDerecha1.setEnabled(false);
+            iv.btnIzquierda1.setEnabled(false);
+        } else {
+                //JOptionPane.showMessageDialog(null, "mayor:"+identificadorMayor+"y menor:"+identificadorMenor);
+
+            if (identificadorMayor == identificadorMenor) {
+                iv.btnIzquierda1.setEnabled(false);
+                iv.btnDerecha1.setEnabled(false);
+            } else {
+                iv.btnIzquierda1.setEnabled(false);
+                iv.btnDerecha1.setEnabled(true);
+            }
+
+        //
+            ArrayList inventarioSeleccionado;
+            Inventario x = null;
+
+            try {
+                inventarioSeleccionado = buscarInventario(String.valueOf(identificadorMenor), "identificador");
+
+                Iterator<Inventario> it = inventarioSeleccionado.iterator();
+
+                while (it.hasNext()) {
+                    x = it.next();
+
+                    iv.txtRegistro2.setText(String.valueOf(x.getIdentificador()));
+                    iv.txtNombre2.setText(x.getNombre());
+                    iv.txtAutor2.setText(x.getAutor());
+                    iv.txtEstilo2.setText(x.getEstilo());
+                    iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                    iv.txtProcedencia2.setText(x.getProcedencia());
+                    iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
+                    iv.txtMejora2.setText(x.getMejora());
+                    iv.txtRestauracion2.setText(x.getRestauracion());
+                    iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
+                    iv.txtObservaciones2.setText(x.getObservaciones());
+                    iv.txtAdquisicion2.setText(x.getAdquisicion());
+                    iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
                 }
-        
+
+                Image foto = null;
+                foto = leerImagen(Integer.parseInt(iv.txtRegistro2.getText()));
+                if (foto != null) {
+                    iv.cuadroImagen2.setIcon(new ImageIcon(foto));
+                    salto = false;
+                } else {
+                    iv.cuadroImagen2.setIcon(null);
+                }
+
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }
 
     public void btnizq1() {
-        
+
         int identificadorMenor = 0;
-        
+
         ////// busqueda del identificador menor en la BD ///////
-        
         try { // busqueda del menor
 
             // buscamos el numero menor de identificador que existe en la BD
@@ -531,12 +583,10 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
         // fin de busqueda //
-        
         salto = false;
 
         ArrayList inventarioSeleccionado;
@@ -575,7 +625,7 @@ public class ControladorInventario implements ActionListener {
                     foto = leerImagen(Integer.parseInt(iv.txtRegistro2.getText()));
                     if (foto != null) {
                         iv.cuadroImagen2.setIcon(new ImageIcon(foto));
-                    salto = false;
+                        salto = false;
                     } else {
                         iv.cuadroImagen2.setIcon(null);
                     }
@@ -645,9 +695,9 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         try {
 
             // buscamos el numero mayor de identificador que existe en la BD
@@ -660,7 +710,7 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         // fin de busqueda
@@ -674,7 +724,7 @@ public class ControladorInventario implements ActionListener {
 
             if (inventarioSeleccionado.size() > 0) { // si contiene algun valor el array
 
-                if ((contador+1)==identificadorMayor) {
+                if ((contador + 1) == identificadorMayor) {
 
                     iv.btnIzquierda1.setEnabled(true);
                     iv.btnDerecha1.setEnabled(false);
@@ -782,9 +832,8 @@ public class ControladorInventario implements ActionListener {
         }
 
         contador = Integer.parseInt(iv.txtRegistro2.getText());
-        
+
         ///////////////////////////////////////////////////////////
-        
         int identificadorMayor = 0;
         int identificadorMenor = 0;
 
@@ -800,10 +849,10 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-         try { // busqueda del menor
+
+        try { // busqueda del menor
 
             // buscamos el numero menor de identificador que existe en la BD
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
@@ -815,12 +864,11 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         // fin de busqueda
-        
-        if (identificadorMayor==identificadorMenor) {
+        if (identificadorMayor == identificadorMenor) {
             iv.btnDerecha1.setEnabled(false);
             iv.btnIzquierda1.setEnabled(false);
         } else if (iv.txtRegistro2.getText().equalsIgnoreCase(String.valueOf(identificadorMenor))) {
@@ -832,7 +880,7 @@ public class ControladorInventario implements ActionListener {
         } else {
             iv.btnDerecha1.setEnabled(true);
             iv.btnIzquierda1.setEnabled(true);
-        }  
+        }
 
     }
 
@@ -855,8 +903,8 @@ public class ControladorInventario implements ActionListener {
 
         Image foto = null;
         foto = leerImagen(Integer.parseInt(iv.txtRegistro4.getText()));
-        
-        if (foto!=null) {
+
+        if (foto != null) {
             iv.cuadroImagen4.setIcon(new ImageIcon(foto));
         } else {
             iv.cuadroImagen4.setIcon(null);
@@ -893,7 +941,6 @@ public class ControladorInventario implements ActionListener {
 
     // metodo para leer una imagen en binario desde la base de datos
     // esta imagen se reajustará al tamaño del texfield automaticamente
-
     public Image leerImagen(int id) {
 
         Image newimg = null;
@@ -966,7 +1013,7 @@ public class ControladorInventario implements ActionListener {
             iv.tblInventario1.setModel(m);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "111Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla" + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -1035,7 +1082,7 @@ public class ControladorInventario implements ActionListener {
             }
         }
     }
-    
+
     public void examinar2() {
         iv.cuadroImagen4.setIcon(null);
         JFileChooser j = new JFileChooser();
@@ -1080,7 +1127,7 @@ public class ControladorInventario implements ActionListener {
 
                 agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
                 JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
-                
+
             } else {
 
                 agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, Date.valueOf(fecha_baja), this.longitudBytes);
@@ -1095,39 +1142,35 @@ public class ControladorInventario implements ActionListener {
         } catch (java.lang.IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, "Error: Parametros incorrectos introducidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        cargarTablaEntidadConocida1();
         
-        vaciarTxtPantalla1();
     }
 
     /*public void modificarPantalla2() {
-        String identificador = iv.txtRegistro1.getText();
-        String nombre = iv.txtNombre1.getText();
-        String autor = iv.txtAutor1.getText();
-        String estilo = iv.txtEstilo1.getText();
-        String fecha_realizacion = iv.txtFechaRealizacion1.getText();
-        String procedencia = iv.txtProcedencia1.getText();
-        String valoracion_economica = iv.txtValoracionEconomica1.getText();
-        String mejora = iv.txtMejora1.getText();
-        String restauracion = iv.txtRestauracion1.getText();
-        String cantidad = iv.txtCantidad1.getText();
-        String observaciones = iv.txtObservaciones1.getText();
-        String adquisicion = iv.txtAdquisicion1.getText();
-        String fecha_baja = iv.txtFechaBaja1.getText();
+     String identificador = iv.txtRegistro1.getText();
+     String nombre = iv.txtNombre1.getText();
+     String autor = iv.txtAutor1.getText();
+     String estilo = iv.txtEstilo1.getText();
+     String fecha_realizacion = iv.txtFechaRealizacion1.getText();
+     String procedencia = iv.txtProcedencia1.getText();
+     String valoracion_economica = iv.txtValoracionEconomica1.getText();
+     String mejora = iv.txtMejora1.getText();
+     String restauracion = iv.txtRestauracion1.getText();
+     String cantidad = iv.txtCantidad1.getText();
+     String observaciones = iv.txtObservaciones1.getText();
+     String adquisicion = iv.txtAdquisicion1.getText();
+     String fecha_baja = iv.txtFechaBaja1.getText();
 
-        try {
-            agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, Date.valueOf(fecha_baja), this.longitudBytes);
-            JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+     try {
+     agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, Date.valueOf(fecha_baja), this.longitudBytes);
+     JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
 
-            iv.cuadroImagen1.setIcon(null);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
-    
+     iv.cuadroImagen1.setIcon(null);
+     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+     JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
+     }
+     }*/
     public int buscarIdentificadorMinimo() {
-         ////// busqueda del identificador menor en la BD ///////
+        ////// busqueda del identificador menor en la BD ///////
         int identificadorMenor = 0;
         try { // busqueda del menor
 
@@ -1141,10 +1184,9 @@ public class ControladorInventario implements ActionListener {
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
         // fin de busqueda //
         return identificadorMenor;
     }
@@ -1177,6 +1219,14 @@ public class ControladorInventario implements ActionListener {
     public ArrayList<Inventario> leerTodas() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario();
         return i.leerTodos();
+    }
+    
+    private void txtFechaRealizacion1MouseClicked(java.awt.event.MouseEvent evt) {                                                  
+        iv.txtFechaRealizacion1.setText("");
+    }
+    
+    private void txtFechaBaja1MouseClicked(java.awt.event.MouseEvent evt) {                                                  
+        iv.txtFechaBaja1.setText("");
     }
 
 }
