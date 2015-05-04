@@ -15,6 +15,7 @@ public class EntidadesConocidas {
     private int cp;
     private String provincia;
     private String email;
+    //
     
     public EntidadesConocidas(int identificador) {
         this.identificador = identificador;        
