@@ -31,8 +31,10 @@ private static int contador=1;
                                 SQLException {
         
         Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-        
+         Conexion cbd2 = ConectarServicio.getInstancia().getConexionDb();
         cbd.un_sql = "SELECT numero_hermano FROM hermanos WHERE numero_hermano=" + h2.getNumero_hermano()+";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+          cbd.un_sql = "SELECT identificador FROM formapago WHERE identificador=" + h2.getForma_pago_id()+";";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
        if (cbd.resultado != null) {
@@ -41,7 +43,12 @@ private static int contador=1;
        } else {
             JOptionPane.showInputDialog(null, "Error al registrar una hermano", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+         if (cbd2.resultado != null) {
+            cbd2.un_sql = "INSERT INTO formapago VALUES ('"+h2.getForma_pago_id()+"','"+h2.getForma_de_pago()+"')";            
+            cbd2.un_st.executeUpdate(cbd2.un_sql);
+       } else {
+            JOptionPane.showInputDialog(null, "Error al registrar una forma de pago", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     /*Metodo Modificar*/
@@ -175,6 +182,10 @@ private static int contador=1;
         
         cbd.un_sql = "DELETE from hermanos WHERE numero_hermano="+h2.getNumero_hermano()+";";
         cbd.un_st.executeUpdate(cbd.un_sql);
+        Conexion cbd2 = ConectarServicio.getInstancia().getConexionDb();
+        
+        cbd2.un_sql = "DELETE from formapago  WHERE identificador="+h2.getForma_pago_id()+";";
+        cbd2.un_st.executeUpdate(cbd2.un_sql);
     }
     
 }

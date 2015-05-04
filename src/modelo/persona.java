@@ -27,7 +27,7 @@ public class persona {
     private String banco;
     private String cuenta_bancaria;
     private int tipo_pago_id;
-    private int forma_pago_id; 
+    int forma_pago_id; 
     private int id_hermandad;
 
  public persona(){
@@ -58,7 +58,10 @@ public class persona {
     this.apellido=apellido;
     
     }
-   
+   //constructor personalizado para insercion de datos en la tabla formadepagos
+    public persona(int forma_pago_id){
+    this.forma_pago_id=forma_pago_id;
+    }
 
     public int getId_hermandad() {
         return id_hermandad;
@@ -168,6 +171,8 @@ public class persona {
     @Override
     public String toString() {
         return "persona{" + "nombre=" + nombre + ", nif=" + nif + ", apellido=" + apellido + ", municipio=" + municipio + ", provincia=" + provincia + ", pais=" + pais + ", tfno=" + tfno + ", email=" + email + ", banco=" + banco + ", cuenta_bancaria=" + cuenta_bancaria + ", tipo_pago_id=" + tipo_pago_id + ", forma_pago_id=" + forma_pago_id + ", id_hermandad=" + id_hermandad + '}';
-    }  
+    }
+
+    
     
 }

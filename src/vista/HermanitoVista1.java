@@ -112,6 +112,8 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         id_pago = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tipo_pago = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        combo = new javax.swing.JComboBox();
         salir = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         buscar = new javax.swing.JPanel();
@@ -604,6 +606,10 @@ public class HermanitoVista1 extends javax.swing.JFrame {
 
         jLabel10.setText("Nº Tipo de pago:");
 
+        jLabel37.setText("forma de pago: ");
+
+        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Domiciliario", "Bancario" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -612,21 +618,26 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bancotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(id_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tipo_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bancotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel19)
+                        .addComponent(jLabel37)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -643,7 +654,9 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(id_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(tipo_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tipo_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37)
+                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1038,6 +1051,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     public javax.swing.JTextField busquedaA;
     public javax.swing.JTextField busquedah;
     public javax.swing.JComboBox cmbBD1;
+    public javax.swing.JComboBox combo;
     public javax.swing.JTextField cuenta;
     public javax.swing.JTextField cuenta1;
     public javax.swing.JToggleButton eliminar;
@@ -1083,6 +1097,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;

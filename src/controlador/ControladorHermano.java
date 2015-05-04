@@ -36,12 +36,16 @@ public class ControladorHermano implements ActionListener {
     HermanitoVista1 hv1;
     DefaultTableModel ff;
 
-    public void agregarHermano(int numero_hermano, String nombre, String apellido, String nif, String municipio, String provincia,String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        h1 = new hermanito(numero_hermano, nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad);
+    public void agregarHermano(int numero_hermano, String nombre, String apellido, String nif, String municipio, String provincia,String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,String forma_pago ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        h1 = new hermanito(numero_hermano, nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad,forma_pago);
         h1.grabar();  
     
     }
+    
+ 
+    
         
+   
         
             public void modificarHermano(int numero_hermano, String nombre, String apellido, String nif, String municipio, String provincia,String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
@@ -51,11 +55,12 @@ public class ControladorHermano implements ActionListener {
             
             
             /*Metodo para borrar una Hermandad*/
-   public void eliminarHermano(int numero_hermano) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+   public void eliminarHermano(int numero_hermano,int forma_pago_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         hermanito h1;
-        h1 = new hermanito(numero_hermano);
+        h1 = new hermanito(numero_hermano,forma_pago_id);
         h1.borrar();
     }
+ 
 
    
     public enum di {
@@ -118,11 +123,11 @@ public class ControladorHermano implements ActionListener {
             String tipo_pago_id=hv1.tipo_pago.getText();
             String forma_pago_id=hv1.id_pago.getText();
             String id_hermandad=hv1.hid.getText();
-                
+             String forma_pago = String.valueOf(hv1.combo.getSelectedItem());   
                 
 
                 try {
-               agregarHermano(Integer.parseInt(numero_hermano), nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,Integer.parseInt(tipo_pago_id),Integer.parseInt(forma_pago_id),Integer.parseInt(id_hermandad));
+               agregarHermano(Integer.parseInt(numero_hermano), nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,Integer.parseInt(tipo_pago_id),Integer.parseInt(forma_pago_id),Integer.parseInt(id_hermandad),forma_pago);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InstantiationException ex) {
@@ -132,6 +137,10 @@ public class ControladorHermano implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
             }
+                /**/
+                
+       
+                hv1.dispose();
             break;
             case SALIR:
                 hv1.dispose();
@@ -147,8 +156,8 @@ break;
           case MODIFICAR:
               
              hv1.modificacion.setSize(1200,550);
-        hv1.modificacion.setLocation(100,100);
-        hv1.modificacion.setVisible(true);
+            hv1.modificacion.setLocation(100,100);
+            hv1.modificacion.setVisible(true);
              int clic = hv1.tablaHermano.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
 
            
@@ -314,15 +323,20 @@ break;
     
     
     private void eliminarSeleccion() {
-        String num = hv1.herm.getText();
+       
+        int clic = hv1.tablaHermano.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+        int clic2 = hv1.tablaHermano.getSelectedRow();
+        String forma_pago_id = hv1.tablaHermano.getValueAt(clic, 13).toString();
+        String num = hv1.tablaHermano.getValueAt(clic2,0).toString();
         try {
-            eliminarHermano(Integer.parseInt(num));
+            eliminarHermano(Integer.parseInt(num),Integer.parseInt(forma_pago_id));
             JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
         }
               cargarTablaHermanos();
 
+          
         hv1.tablaHermano.setModel(new DefaultTableModel());
        
     }
