@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import modelo.FormaPago;
 import modelo.Hermandad;
+import modelo.TipoPago;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 import vista.HermandadConfigurarVista;
@@ -27,7 +28,7 @@ public class ControladorHermandad implements ActionListener {
 
     public enum di {
 
-        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnModificar1, btnEliminar1;
+        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
     }
 
     public void iniciar() {
@@ -53,12 +54,19 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnModificarTP.setActionCommand("MODIFICARTP");
         hcv.btnEliminarTP.setActionCommand("ELIMINARTP");
         hcv.btnInsertarFormaPago.setActionCommand("btnInsertarFormaPago");
+        hcv.btnInsertarTipoPago.setActionCommand("btnInsertarTipoPago");
         hcv.btnSalir1.setActionCommand("btnSalir1");
         hcv.btnSalir2.setActionCommand("btnSalir2");
         hcv.btnSalir3.setActionCommand("btnSalir3");
         hcv.btnSalir4.setActionCommand("btnSalir4");
+        hcv.btnSalir5.setActionCommand("btnSalir5");
+        hcv.btnSalir6.setActionCommand("btnSalir6");
+        hcv.btnSalir7.setActionCommand("btnSalir7");
+        hcv.btnSalir8.setActionCommand("btnSalir8");
         hcv.btnModificar1.setActionCommand("btnModificar1");
+        hcv.btnModificar2.setActionCommand("btnModificar2");
         hcv.btnEliminar1.setActionCommand("btnEliminar1");
+        hcv.btnEliminar2.setActionCommand("btnEliminar2");
         //Se pone a escuchar las acciones del usuario
         hv.btnGuardar.addActionListener(this);
         hv.btnModificar.addActionListener(this);
@@ -74,37 +82,65 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnModificarTP.addActionListener(this);
         hcv.btnEliminarTP.addActionListener(this);
         hcv.btnInsertarFormaPago.addActionListener(this);
+        hcv.btnInsertarTipoPago.addActionListener(this);
         hcv.btnSalir1.addActionListener(this);
         hcv.btnSalir2.addActionListener(this);
         hcv.btnSalir3.addActionListener(this);
         hcv.btnSalir4.addActionListener(this);
+        hcv.btnSalir5.addActionListener(this);
+        hcv.btnSalir6.addActionListener(this);
+        hcv.btnSalir7.addActionListener(this);
+        hcv.btnSalir8.addActionListener(this);
         hcv.btnModificar1.addActionListener(this);
+        hcv.btnModificar2.addActionListener(this);
         hcv.btnEliminar1.addActionListener(this);
+        hcv.btnEliminar2.addActionListener(this);
         hv.tblHermandad.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla hermandad           
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
             }
         });
-        
+
         hcv.tblFormaPago1.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla forma pago           
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed2(evt);
             }
         });
-        
+
         hcv.tblFormaPago2.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla forma pago 2          
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed3(evt);
             }
         });
-        
+
         hcv.tblFormaPago3.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla forma pago 3          
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed4(evt);
+            }
+        });
+        
+        hcv.TblTipoPago1.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla tipo pago           
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed5(evt);
+            }
+        });
+        
+        hcv.TblTipoPago2.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla tipo pago           
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed6(evt);
+            }
+        });
+        
+        hcv.TblTipoPago3.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla tipo pago           
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed7(evt);
             }
         });
     }
@@ -151,100 +187,139 @@ public class ControladorHermandad implements ActionListener {
                 String telf2M = hv.txtTelefono2.getText();    //String en bd
                 String faxM = hv.txtFax.getText();    //String bd
                 String descripcionM = hv.txtDescripcion.getText();
-                
-                 
+
                 try {
                     modificarHermandad(Integer.parseInt(identificadorM), nombre_hermandadM, Integer.parseInt(año_fundacionM), domicilioM, municipioM, provinciaM, telf1M, telf2M, faxM, descripcionM);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {                        
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                     JOptionPane.showMessageDialog(null, "El identificador " + hv.txtIdentificador.getText() + "ya existe, ingrese un identificador distinto", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch(NumberFormatException x){
-                    
-                }                
+                } catch (NumberFormatException x) {
+
+                }
                 cargarTablaHermandades();
                 limpiarTexto();
                 break;
-                
+
             case NUEVO:
                 limpiarTexto();
                 break;
-                
+
             case CONFIGURAR:
                 abrirConfigurar();
                 break;
-                
+
             case INSERTARFP:
                 insertarFP();
                 break;
-                
+
             case MOSTRARFP:
                 mostrarFP();
                 break;
-                
+
             case MODIFICARFP:
                 modificarFP();
                 break;
-                
+
             case ELIMINARFP:
                 eliminarFP();
                 break;
-                
+
             case INSERTARTP:
-            insertarTP();
+                insertarTP();
                 break;
-                
+
             case MOSTRARTP:
                 mostrarTP();
                 break;
-                
+
             case MODIFICARTP:
                 modificarTP();
                 break;
-                
+
             case ELIMINARTP:
                 eliminarTP();
                 break;
-                
+
             case btnInsertarFormaPago:
-                insertarFormaDePago();
+                insertarFormaDePago();                
                 actualizarTblFormaPago1();
                 break;
+
+            case btnInsertarTipoPago:               
+                    insertarTipoDePago();
+                    actualizarTblTipoPago1();
                 
+                break;
+
             case btnModificar1:
                 modificarFormaDePago();
                 actualizarTblFormaPago2();
                 actualizarTblFormaPago1();
                 break;
                 
+                 case btnModificar2:
+                modificarTipoDePago();
+                actualizarTblTipoPago2();
+                actualizarTblTipoPago1();
+                break;
+
             case btnEliminar1:
-                eliminarFormaPago1();
+                eliminarFormaPago();
                 actualizarTblFormaPago3();
                 actualizarTblFormaPago2();
                 actualizarTblFormaPago1();
                 break;
                 
+                case btnEliminar2:
+                eliminarTipoPago();
+                actualizarTblTipoPago3();
+                actualizarTblTipoPago2();
+                actualizarTblTipoPago1();
+                break;
+
             case btnSalir1:
                 hcv.formaPagoInsertar.dispose();
                 hcv.setVisible(true);
                 break;
-                
+
             case btnSalir2:
                 hcv.formaPagoMostrar.dispose();
                 hcv.setVisible(true);
                 break;
-                
-                case btnSalir3:
+
+            case btnSalir3:
                 hcv.formaPagoModificar.dispose();
                 hcv.setVisible(true);
                 break;
-                    
-                    case btnSalir4:
-                hcv.formaPagoEliminar.dispose();
+
+            case btnSalir4:
+                hcv.tipoPagoMostrar.dispose();
+                hcv.setVisible(true);
+                break;
+
+            case btnSalir5:
+                hcv.tipoPagoInsertar.dispose();
+                hcv.setVisible(true);
+                break;
+
+            case btnSalir6:
+                hcv.tipoPagoMostrar.dispose();
+                hcv.setVisible(true);
+                break;
+
+            case btnSalir7:
+                hcv.tipoPagoModificar.dispose();
+                hcv.setVisible(true);
+                break;
+
+            case btnSalir8:
+                hcv.tipoPagoEliminar.dispose();
                 hcv.setVisible(true);
                 break;
         }
     }
-    
-    public void eliminarFormaPago1() {
+
+    //metodo para eliminar una forma de pago
+    public void eliminarFormaPago() {
         int identificador = Integer.parseInt(hcv.txtIdentificador4.getText());
         try {
             eliminarFormaPago(identificador);
@@ -252,7 +327,8 @@ public class ControladorHermandad implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
         }
     }
-    
+
+    //metodo para modificadr una forma de pago
     public void modificarFormaDePago() {
         try {
             int identificador = Integer.parseInt(hcv.txtIdentificador3.getText());
@@ -262,18 +338,52 @@ public class ControladorHermandad implements ActionListener {
             e.printStackTrace();
         }
     }
-    
+
+    //metodo para insertar una forma de pago
     public void insertarFormaDePago() {
         try {
             int identificador = Integer.parseInt(hcv.txtIdentificador1.getText());
-        String descripcion = hcv.txtDescripcion1.getText();
-        agregarFormaPago(identificador, descripcion);  
+            String descripcion = hcv.txtDescripcion1.getText();
+            agregarFormaPago(identificador, descripcion);
         } catch (Exception e) {
         }
-             
     }
-    
-    public void actualizarTblFormaPago1(){
+
+    //metodo para eliminar una forma de pago
+    public void eliminarTipoPago() {
+        int identificador = Integer.parseInt(hcv.txtIdentificador8.getText());
+        try {
+            eliminarTipoPago(identificador);
+            JOptionPane.showMessageDialog(null, "¡Eliminado correctamente!");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+        }
+    }
+
+    //metodo para modificar una forma de pago
+    public void modificarTipoDePago() {
+        try {
+            int identificador = Integer.parseInt(hcv.txtIdentificador7.getText());
+            String descripcion = hcv.txtDescripcion7.getText();
+            Double precio = Double.parseDouble(hcv.txtPrecio3.getText());
+            modificarTipoPago(identificador, descripcion, precio);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //metodo para insertar una forma de pago
+    public void insertarTipoDePago() {
+        try {
+            int identificador = Integer.parseInt(hcv.txtIdentificador5.getText());
+            String descripcion = hcv.txtDescripcion5.getText();
+            Double precio = Double.parseDouble(hcv.txtPrecio1.getText());
+            agregarTipoPago(identificador, descripcion, precio);
+        } catch (Exception e) {
+        }
+    }
+
+    // metodo que actualiza una table en forma de pago
+    public void actualizarTblFormaPago1() {
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Forma de pago"};
@@ -294,13 +404,13 @@ public class ControladorHermandad implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
             hcv.tblFormaPago1.setRowSorter(ordenar);
             hcv.tblFormaPago1.setModel(m);
-            
-        }  catch (Exception e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void actualizarTblFormaPago2(){
+
+    public void actualizarTblFormaPago2() {
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Forma de pago"};
@@ -321,13 +431,13 @@ public class ControladorHermandad implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
             hcv.tblFormaPago2.setRowSorter(ordenar);
             hcv.tblFormaPago2.setModel(m);
-            
-        }  catch (Exception e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void actualizarTblFormaPago3(){
+
+    public void actualizarTblFormaPago3() {
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Forma de pago"};
@@ -348,64 +458,164 @@ public class ControladorHermandad implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
             hcv.tblFormaPago3.setRowSorter(ordenar);
             hcv.tblFormaPago3.setModel(m);
-            
-        }  catch (Exception e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public void insertarFP(){
+    // metodo que actualiza una table en forma de pago
+    public void actualizarTblTipoPago1() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Tipo de pago", "Precio"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String fila[] = new String[3];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from tipopago";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString(1);
+                fila[1] = cdb.resultado.getString(2);
+                fila[2] = cdb.resultado.getString(3);
+                m.addRow(fila);
+            }
+
+            hcv.TblTipoPago1.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
+            hcv.TblTipoPago1.setRowSorter(ordenar);
+            hcv.TblTipoPago1.setModel(m);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void actualizarTblTipoPago2() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Tipo de pago", "Precio"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String fila[] = new String[3];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from tipopago";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString(1);
+                fila[1] = cdb.resultado.getString(2);
+                fila[2] = cdb.resultado.getString(3);
+                m.addRow(fila);
+            }
+
+            hcv.TblTipoPago2.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
+            hcv.TblTipoPago2.setRowSorter(ordenar);
+            hcv.TblTipoPago2.setModel(m);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void actualizarTblTipoPago3() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Tipo de pago", "Precio"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String fila[] = new String[3];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from tipopago";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString(1);
+                fila[1] = cdb.resultado.getString(2);
+                fila[2] = cdb.resultado.getString(3);
+                m.addRow(fila);
+            }
+
+            hcv.TblTipoPago3.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<TableModel>(m);
+            hcv.TblTipoPago3.setRowSorter(ordenar);
+            hcv.TblTipoPago3.setModel(m);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void insertarFP() {
         hcv.formaPagoInsertar.setVisible(true);
-        hcv.formaPagoInsertar.setLocation(500,200);
+        hcv.formaPagoInsertar.setLocation(500, 200);
         hcv.formaPagoInsertar.setSize(500, 300);
         hcv.setVisible(false);
     }
-    
-    public void mostrarFP(){
+
+    public void mostrarFP() {
         hcv.formaPagoMostrar.setVisible(true);
         hcv.formaPagoMostrar.setLocation(500, 200);
         hcv.formaPagoMostrar.setSize(500, 400);
         hcv.setVisible(false);
         actualizarTblFormaPago1();
     }
-    
-    public void modificarFP(){
+
+    public void modificarFP() {
         hcv.formaPagoModificar.setVisible(true);
         hcv.formaPagoModificar.setLocation(500, 200);
-        hcv.formaPagoModificar.setSize(500, 400);        
+        hcv.formaPagoModificar.setSize(500, 400);
         hcv.setVisible(false);
         actualizarTblFormaPago2();
     }
-    
-    public void eliminarFP(){
+
+    public void eliminarFP() {
         hcv.formaPagoEliminar.setVisible(true);
         hcv.formaPagoEliminar.setLocation(500, 200);
         hcv.formaPagoEliminar.setSize(500, 400);
         hcv.setVisible(false);
         actualizarTblFormaPago3();
     }
-    
-    public void insertarTP(){
-        JOptionPane.showMessageDialog(null, "insertartp");
+
+    public void insertarTP() {
+        hcv.tipoPagoInsertar.setVisible(true);
+        hcv.tipoPagoInsertar.setLocation(500, 200);
+        hcv.tipoPagoInsertar.setSize(500, 400);
+        hcv.setVisible(false);
     }
-    
-    public void mostrarTP(){
-        JOptionPane.showMessageDialog(null, "mostrartp");
+
+    public void mostrarTP() {
+        hcv.tipoPagoMostrar.setVisible(true);
+        hcv.tipoPagoMostrar.setLocation(500, 200);
+        hcv.tipoPagoMostrar.setSize(500, 400);
+        hcv.setVisible(false);
+        actualizarTblTipoPago1();
     }
-    
-    public void modificarTP(){
-        JOptionPane.showMessageDialog(null, "modificartp");
+
+    public void modificarTP() {
+        hcv.tipoPagoModificar.setVisible(true);
+        hcv.tipoPagoModificar.setLocation(500, 200);
+        hcv.tipoPagoModificar.setSize(500, 400);
+        hcv.setVisible(false);
+        actualizarTblTipoPago2();
     }
-    
-    public void eliminarTP(){
-        JOptionPane.showMessageDialog(null, "eliminartp");
+
+    public void eliminarTP() {
+        hcv.tipoPagoEliminar.setVisible(true);
+        hcv.tipoPagoEliminar.setLocation(500, 200);
+        hcv.tipoPagoEliminar.setSize(500, 400);
+        hcv.setVisible(false);
+        actualizarTblTipoPago3();
     }
-    
-    public void abrirConfigurar() {        
+
+    public void abrirConfigurar() {
         hcv.setVisible(true);
         hcv.setLocationRelativeTo(hv);
     }
-    
+
     /*Metodo para agregar un pago de cuota*/
     public void agregarFormaPago(int identificador, String tipo_pago) {
         FormaPago x = new FormaPago(identificador, tipo_pago);
@@ -416,20 +626,47 @@ public class ControladorHermandad implements ActionListener {
             JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /*Metodo para modificar un pago de cuota*/
     public void modificarFormaPago(int identificador, String nombre) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         try {
-            FormaPago x = new FormaPago(identificador, nombre);        
+            FormaPago x = new FormaPago(identificador, nombre);
             x.actualizar();
             JOptionPane.showMessageDialog(null, "¡Modificado correctamente!");
         } catch (Exception e) {
         }
     }
-    
+
     /*Metodo para borrar una forma de pago*/
     public void eliminarFormaPago(int identificador) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         FormaPago x = new FormaPago(identificador);
+        x.borrar();
+    }
+
+    /*Metodo para agregar un pago de cuota*/
+    public void agregarTipoPago(int identificador, String tipo_pago, Double precio) {
+        TipoPago x = new TipoPago(identificador, tipo_pago, precio);
+        try {
+            x.grabar();
+            JOptionPane.showMessageDialog(null, "Tipo de cuota insertada correctamente");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /*Metodo para modificar un pago de cuota*/
+    public void modificarTipoPago(int identificador, String nombre, Double precio) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        try {
+            TipoPago x = new TipoPago(identificador, nombre, precio);
+            x.actualizar();
+            JOptionPane.showMessageDialog(null, "¡Modificado correctamente!");
+        } catch (Exception e) {
+        }
+    }
+
+    /*Metodo para borrar una forma de pago*/
+    public void eliminarTipoPago(int identificador) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        TipoPago x = new TipoPago(identificador);
         x.borrar();
     }
 
@@ -507,27 +744,27 @@ public class ControladorHermandad implements ActionListener {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
         int clic = hv.tblHermandad.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
 
-        if (clic!=-1) {
+        if (clic != -1) {
             try {
                 hv.txtIdentificador.setText(hv.tblHermandad.getValueAt(clic, 0).toString());
-            hv.txtNombreHermandad.setText(hv.tblHermandad.getValueAt(clic, 1).toString());
-            hv.txtAñoFundacion.setText(hv.tblHermandad.getValueAt(clic, 2).toString());
-            hv.txtDomicilio.setText(hv.tblHermandad.getValueAt(clic, 3).toString());
-            hv.txtMunicipio.setText(hv.tblHermandad.getValueAt(clic, 4).toString());
-            hv.txtProvincia.setText(hv.tblHermandad.getValueAt(clic, 5).toString());
-            hv.txtTelefono1.setText(hv.tblHermandad.getValueAt(clic, 6).toString());
-            hv.txtTelefono2.setText(hv.tblHermandad.getValueAt(clic, 7).toString());
-            hv.txtFax.setText(hv.tblHermandad.getValueAt(clic, 8).toString());
-            hv.txtDescripcion.setText(hv.tblHermandad.getValueAt(clic, 9).toString());
+                hv.txtNombreHermandad.setText(hv.tblHermandad.getValueAt(clic, 1).toString());
+                hv.txtAñoFundacion.setText(hv.tblHermandad.getValueAt(clic, 2).toString());
+                hv.txtDomicilio.setText(hv.tblHermandad.getValueAt(clic, 3).toString());
+                hv.txtMunicipio.setText(hv.tblHermandad.getValueAt(clic, 4).toString());
+                hv.txtProvincia.setText(hv.tblHermandad.getValueAt(clic, 5).toString());
+                hv.txtTelefono1.setText(hv.tblHermandad.getValueAt(clic, 6).toString());
+                hv.txtTelefono2.setText(hv.tblHermandad.getValueAt(clic, 7).toString());
+                hv.txtFax.setText(hv.tblHermandad.getValueAt(clic, 8).toString());
+                hv.txtDescripcion.setText(hv.tblHermandad.getValueAt(clic, 9).toString());
             } catch (Exception e) {
             }
         }
     }
-    
+
     private void jTable1MousePressed2(java.awt.event.MouseEvent evt) {
         int clic = hcv.tblFormaPago1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
 
-        if (clic!=-1) {
+        if (clic != -1) {
             try {
                 hcv.txtIdentificador2.setText(hcv.tblFormaPago1.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion2.setText(hcv.tblFormaPago1.getValueAt(clic, 1).toString());
@@ -535,11 +772,11 @@ public class ControladorHermandad implements ActionListener {
             }
         }
     }
-    
+
     private void jTable1MousePressed3(java.awt.event.MouseEvent evt) {
         int clic = hcv.tblFormaPago2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
 
-        if (clic!=-1) {
+        if (clic != -1) {
             try {
                 hcv.txtIdentificador3.setText(hcv.tblFormaPago2.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion3.setText(hcv.tblFormaPago2.getValueAt(clic, 1).toString());
@@ -547,11 +784,11 @@ public class ControladorHermandad implements ActionListener {
             }
         }
     }
-    
+
     private void jTable1MousePressed4(java.awt.event.MouseEvent evt) {
         int clic = hcv.tblFormaPago3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
 
-        if (clic!=-1) {
+        if (clic != -1) {
             try {
                 hcv.txtIdentificador4.setText(hcv.tblFormaPago3.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion4.setText(hcv.tblFormaPago3.getValueAt(clic, 1).toString());
@@ -560,6 +797,45 @@ public class ControladorHermandad implements ActionListener {
         }
     }
     
+    private void jTable1MousePressed5(java.awt.event.MouseEvent evt) {
+        int clic = hcv.TblTipoPago1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+
+        if (clic != -1) {
+            try {
+                hcv.txtIdentificador6.setText(hcv.TblTipoPago1.getValueAt(clic, 0).toString());
+                hcv.txtDescripcion6.setText(hcv.TblTipoPago1.getValueAt(clic, 1).toString());
+                hcv.txtPrecio2.setText(hcv.tblFormaPago1.getValueAt(clic, 2).toString());
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void jTable1MousePressed6(java.awt.event.MouseEvent evt) {
+        int clic = hcv.TblTipoPago2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+
+        if (clic != -1) {
+            try {
+                hcv.txtIdentificador7.setText(hcv.TblTipoPago2.getValueAt(clic, 0).toString());
+                hcv.txtDescripcion7.setText(hcv.TblTipoPago2.getValueAt(clic, 1).toString());
+                hcv.txtPrecio3.setText(hcv.tblFormaPago2.getValueAt(clic, 2).toString());
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void jTable1MousePressed7(java.awt.event.MouseEvent evt) {
+        int clic = hcv.TblTipoPago3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+
+        if (clic != -1) {
+            try {
+                hcv.txtIdentificador8.setText(hcv.TblTipoPago3.getValueAt(clic, 0).toString());
+                hcv.txtDescripcion8.setText(hcv.TblTipoPago3.getValueAt(clic, 1).toString());
+                hcv.txtPrecio3.setText(hcv.tblFormaPago2.getValueAt(clic, 2).toString());
+            } catch (Exception e) {
+            }
+        }
+    }
+
     public void limpiarTexto() {
         hv.txtIdentificador.setText("");
         hv.txtNombreHermandad.setText("");

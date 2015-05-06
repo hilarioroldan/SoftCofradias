@@ -69,9 +69,54 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         btnSalir4 = new javax.swing.JButton();
         btnEliminar1 = new javax.swing.JButton();
         tipoPagoInsertar = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtIdentificador5 = new javax.swing.JTextField();
+        txtDescripcion5 = new javax.swing.JTextField();
+        btnInsertarTipoPago = new javax.swing.JButton();
+        btnSalir5 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        txtPrecio1 = new javax.swing.JTextField();
         tipoPagoMostrar = new javax.swing.JDialog();
+        Jpanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtIdentificador6 = new javax.swing.JTextField();
+        txtDescripcion6 = new javax.swing.JTextField();
+        JScholl2 = new javax.swing.JScrollPane();
+        TblTipoPago1 = new javax.swing.JTable();
+        btnSalir6 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        txtPrecio2 = new javax.swing.JTextField();
         tipoPagoModificar = new javax.swing.JDialog();
+        Jpanel1 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        txtIdentificador7 = new javax.swing.JTextField();
+        txtDescripcion7 = new javax.swing.JTextField();
+        JScholl3 = new javax.swing.JScrollPane();
+        TblTipoPago2 = new javax.swing.JTable();
+        btnSalir7 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        txtPrecio3 = new javax.swing.JTextField();
+        btnModificar2 = new javax.swing.JButton();
         tipoPagoEliminar = new javax.swing.JDialog();
+        Jpanel2 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        txtIdentificador8 = new javax.swing.JTextField();
+        txtDescripcion8 = new javax.swing.JTextField();
+        JScholl4 = new javax.swing.JScrollPane();
+        TblTipoPago3 = new javax.swing.JTable();
+        btnSalir8 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        txtPrecio4 = new javax.swing.JTextField();
+        btnEliminar2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -239,7 +284,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         );
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("MOSTRAR FORMA DE PAGO");
+        jLabel10.setText("MODIFICAR FORMA DE PAGO");
 
         jLabel11.setText("Identificador:");
 
@@ -278,7 +323,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescripcion3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +368,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         );
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setText("MOSTRAR FORMA DE PAGO");
+        jLabel13.setText("ELIMINAR FORMA DE PAGO");
 
         jLabel14.setText("Identificador:");
 
@@ -362,7 +407,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescripcion4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,48 +451,398 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        tipoPagoInsertar.setUndecorated(true);
+
+        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setText("INSERTAR TIPO DE PAGO");
+
+        jLabel17.setText("Identificador:");
+
+        jLabel18.setText("Descripcion:");
+
+        btnInsertarTipoPago.setText("Insertar Tipo de Pago");
+
+        btnSalir5.setText("Salir");
+
+        jLabel19.setText("Precio:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir5)
+                .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel16)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescripcion5, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInsertarTipoPago))
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtDescripcion5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(btnInsertarTipoPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btnSalir5)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout tipoPagoInsertarLayout = new javax.swing.GroupLayout(tipoPagoInsertar.getContentPane());
         tipoPagoInsertar.getContentPane().setLayout(tipoPagoInsertarLayout);
         tipoPagoInsertarLayout.setHorizontalGroup(
             tipoPagoInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tipoPagoInsertarLayout.setVerticalGroup(
             tipoPagoInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(tipoPagoInsertarLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        tipoPagoMostrar.setUndecorated(true);
+
+        Jpanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel20.setText("MOSTRAR TIPO DE PAGO");
+
+        jLabel21.setText("Identificador:");
+
+        jLabel22.setText("Descripcion:");
+
+        TblTipoPago1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        JScholl2.setViewportView(TblTipoPago1);
+
+        btnSalir6.setText("Salir");
+
+        jLabel23.setText("Precio:");
+
+        txtPrecio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecio2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
+        Jpanel.setLayout(JpanelLayout);
+        JpanelLayout.setHorizontalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdentificador6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel20)
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescripcion6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(JpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JScholl2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir6)))
+                .addContainerGap())
+        );
+        JpanelLayout.setVerticalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtIdentificador6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtDescripcion6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(JScholl2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tipoPagoMostrarLayout = new javax.swing.GroupLayout(tipoPagoMostrar.getContentPane());
         tipoPagoMostrar.getContentPane().setLayout(tipoPagoMostrarLayout);
         tipoPagoMostrarLayout.setHorizontalGroup(
             tipoPagoMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Jpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tipoPagoMostrarLayout.setVerticalGroup(
             tipoPagoMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(tipoPagoMostrarLayout.createSequentialGroup()
+                .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+
+        tipoPagoModificar.setUndecorated(true);
+
+        Jpanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel24.setText("MODIFICAR TIPO DE PAGO");
+
+        jLabel25.setText("Identificador:");
+
+        jLabel26.setText("Descripcion:");
+
+        TblTipoPago2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        JScholl3.setViewportView(TblTipoPago2);
+
+        btnSalir7.setText("Salir");
+
+        jLabel27.setText("Precio:");
+
+        txtPrecio3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecio3ActionPerformed(evt);
+            }
+        });
+
+        btnModificar2.setText("Modificar");
+
+        javax.swing.GroupLayout Jpanel1Layout = new javax.swing.GroupLayout(Jpanel1);
+        Jpanel1.setLayout(Jpanel1Layout);
+        Jpanel1Layout.setHorizontalGroup(
+            Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jpanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Jpanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Jpanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdentificador7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel24)
+                    .addGroup(Jpanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescripcion7, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Jpanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JScholl3, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Jpanel1Layout.createSequentialGroup()
+                        .addComponent(btnModificar2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir7)))
+                .addContainerGap())
+        );
+        Jpanel1Layout.setVerticalGroup(
+            Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jpanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(txtIdentificador7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(txtDescripcion7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(JScholl3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir7)
+                    .addComponent(btnModificar2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tipoPagoModificarLayout = new javax.swing.GroupLayout(tipoPagoModificar.getContentPane());
         tipoPagoModificar.getContentPane().setLayout(tipoPagoModificarLayout);
         tipoPagoModificarLayout.setHorizontalGroup(
             tipoPagoModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Jpanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tipoPagoModificarLayout.setVerticalGroup(
             tipoPagoModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(tipoPagoModificarLayout.createSequentialGroup()
+                .addComponent(Jpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+
+        tipoPagoEliminar.setUndecorated(true);
+
+        Jpanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel28.setText("ELIMINAR TIPO DE PAGO");
+
+        jLabel29.setText("Identificador:");
+
+        jLabel30.setText("Descripcion:");
+
+        TblTipoPago3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        JScholl4.setViewportView(TblTipoPago3);
+
+        btnSalir8.setText("Salir");
+
+        jLabel31.setText("Precio:");
+
+        txtPrecio4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecio4ActionPerformed(evt);
+            }
+        });
+
+        btnEliminar2.setText("Eliminar");
+
+        javax.swing.GroupLayout Jpanel2Layout = new javax.swing.GroupLayout(Jpanel2);
+        Jpanel2.setLayout(Jpanel2Layout);
+        Jpanel2Layout.setHorizontalGroup(
+            Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jpanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Jpanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPrecio4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Jpanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdentificador8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel28)
+                    .addGroup(Jpanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescripcion8, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Jpanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JScholl4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Jpanel2Layout.createSequentialGroup()
+                        .addComponent(btnEliminar2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir8)))
+                .addContainerGap())
+        );
+        Jpanel2Layout.setVerticalGroup(
+            Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jpanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(txtIdentificador8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(txtDescripcion8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(txtPrecio4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(JScholl4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(Jpanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir8)
+                    .addComponent(btnEliminar2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tipoPagoEliminarLayout = new javax.swing.GroupLayout(tipoPagoEliminar.getContentPane());
         tipoPagoEliminar.getContentPane().setLayout(tipoPagoEliminarLayout);
         tipoPagoEliminarLayout.setHorizontalGroup(
             tipoPagoEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Jpanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tipoPagoEliminarLayout.setVerticalGroup(
             tipoPagoEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(tipoPagoEliminarLayout.createSequentialGroup()
+                .addComponent(Jpanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -569,6 +964,18 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarTPActionPerformed
 
+    private void txtPrecio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecio2ActionPerformed
+
+    private void txtPrecio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecio3ActionPerformed
+
+    private void txtPrecio4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecio4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -606,13 +1013,25 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScholl1;
+    private javax.swing.JScrollPane JScholl2;
+    private javax.swing.JScrollPane JScholl3;
+    private javax.swing.JScrollPane JScholl4;
+    private javax.swing.JPanel Jpanel;
+    private javax.swing.JPanel Jpanel1;
+    private javax.swing.JPanel Jpanel2;
+    public javax.swing.JTable TblTipoPago1;
+    public javax.swing.JTable TblTipoPago2;
+    public javax.swing.JTable TblTipoPago3;
     public javax.swing.JButton btnEliminar1;
+    public javax.swing.JButton btnEliminar2;
     public javax.swing.JButton btnEliminarFP;
     public javax.swing.JButton btnEliminarTP;
     public javax.swing.JButton btnInsertarFP;
     public javax.swing.JButton btnInsertarFormaPago;
     public javax.swing.JButton btnInsertarTP;
+    public javax.swing.JButton btnInsertarTipoPago;
     public javax.swing.JButton btnModificar1;
+    public javax.swing.JButton btnModificar2;
     public javax.swing.JButton btnModificarFP;
     public javax.swing.JButton btnModificarTP;
     public javax.swing.JButton btnMostrarFP;
@@ -622,6 +1041,10 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     public javax.swing.JButton btnSalir2;
     public javax.swing.JButton btnSalir3;
     public javax.swing.JButton btnSalir4;
+    public javax.swing.JButton btnSalir5;
+    public javax.swing.JButton btnSalir6;
+    public javax.swing.JButton btnSalir7;
+    public javax.swing.JButton btnSalir8;
     public javax.swing.JDialog formaPagoEliminar;
     public javax.swing.JDialog formaPagoInsertar;
     public javax.swing.JDialog formaPagoModificar;
@@ -633,8 +1056,24 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -646,6 +1085,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable tblFormaPago1;
@@ -659,9 +1099,21 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtDescripcion2;
     public javax.swing.JTextField txtDescripcion3;
     public javax.swing.JTextField txtDescripcion4;
+    public javax.swing.JTextField txtDescripcion5;
+    public javax.swing.JTextField txtDescripcion6;
+    public javax.swing.JTextField txtDescripcion7;
+    public javax.swing.JTextField txtDescripcion8;
     public javax.swing.JTextField txtIdentificador1;
     public javax.swing.JTextField txtIdentificador2;
     public javax.swing.JTextField txtIdentificador3;
     public javax.swing.JTextField txtIdentificador4;
+    public javax.swing.JTextField txtIdentificador5;
+    public javax.swing.JTextField txtIdentificador6;
+    public javax.swing.JTextField txtIdentificador7;
+    public javax.swing.JTextField txtIdentificador8;
+    public javax.swing.JTextField txtPrecio1;
+    public javax.swing.JTextField txtPrecio2;
+    public javax.swing.JTextField txtPrecio3;
+    public javax.swing.JTextField txtPrecio4;
     // End of variables declaration//GEN-END:variables
 }
