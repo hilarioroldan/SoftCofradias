@@ -103,7 +103,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         txtFiltro3 = new javax.swing.JTextField();
         btnBuscar1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         eliminar = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         txtIdentificador4 = new javax.swing.JTextField();
@@ -443,7 +443,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
 
         btnBuscar1.setText("Buscar");
 
-        jButton1.setText("Modificar");
+        btnModificar.setText("Modificar");
 
         javax.swing.GroupLayout modificarLayout = new javax.swing.GroupLayout(modificar);
         modificar.setLayout(modificarLayout);
@@ -506,7 +506,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                             .addGroup(modificarLayout.createSequentialGroup()
                                 .addComponent(btnBuscar1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)))))
+                                .addComponent(btnModificar)))))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(modificarLayout.createSequentialGroup()
                 .addContainerGap()
@@ -551,7 +551,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(jLabel64)
                     .addComponent(txtFiltro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar1)
-                    .addComponent(jButton1))
+                    .addComponent(btnModificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -775,6 +775,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscar2;
     public javax.swing.JToggleButton btnEliminar;
     public javax.swing.JButton btnIngresar;
+    public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnSalir;
     public javax.swing.JButton btnSalir2;
     public javax.swing.JButton btnSalir3;
@@ -785,7 +786,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JComboBox cmbBD3;
     private javax.swing.JPanel eliminar;
     private javax.swing.JPanel ingresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
