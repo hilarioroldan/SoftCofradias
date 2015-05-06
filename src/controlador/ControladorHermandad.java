@@ -18,6 +18,7 @@ import servicios.ConectarServicio;
 import servicios.Conexion;
 import vista.HermandadConfigurarVista;
 import vista.HermandadVista;
+import vista.VentanaPrincipal;
 
 public class ControladorHermandad implements ActionListener {
 
@@ -28,13 +29,14 @@ public class ControladorHermandad implements ActionListener {
 
     public enum di {
 
-        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
+        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
     }
 
     public void iniciar() {
         h = new Hermandad();
         hv = new HermandadVista();
         hcv = new HermandadConfigurarVista();
+        VentanaPrincipal x = new VentanaPrincipal();
         hv.setVisible(true);
         hv.setLocationRelativeTo(null);
         cargarTablaHermandades();
@@ -55,6 +57,7 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnEliminarTP.setActionCommand("ELIMINARTP");
         hcv.btnInsertarFormaPago.setActionCommand("btnInsertarFormaPago");
         hcv.btnInsertarTipoPago.setActionCommand("btnInsertarTipoPago");
+        hcv.btnSalir.setActionCommand("btnSalir");
         hcv.btnSalir1.setActionCommand("btnSalir1");
         hcv.btnSalir2.setActionCommand("btnSalir2");
         hcv.btnSalir3.setActionCommand("btnSalir3");
@@ -83,6 +86,7 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnEliminarTP.addActionListener(this);
         hcv.btnInsertarFormaPago.addActionListener(this);
         hcv.btnInsertarTipoPago.addActionListener(this);
+        hcv.btnSalir.addActionListener(this);
         hcv.btnSalir1.addActionListener(this);
         hcv.btnSalir2.addActionListener(this);
         hcv.btnSalir3.addActionListener(this);
@@ -275,6 +279,10 @@ public class ControladorHermandad implements ActionListener {
                 actualizarTblTipoPago2();
                 actualizarTblTipoPago1();
                 break;
+                    
+                case btnSalir:
+                    hcv.setVisible(false);
+                    break;
 
             case btnSalir1:
                 hcv.formaPagoInsertar.dispose();
@@ -804,7 +812,7 @@ public class ControladorHermandad implements ActionListener {
             try {
                 hcv.txtIdentificador6.setText(hcv.TblTipoPago1.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion6.setText(hcv.TblTipoPago1.getValueAt(clic, 1).toString());
-                hcv.txtPrecio2.setText(hcv.tblFormaPago1.getValueAt(clic, 2).toString());
+                hcv.txtPrecio2.setText(hcv.TblTipoPago1.getValueAt(clic, 2).toString());
             } catch (Exception e) {
             }
         }
@@ -817,7 +825,7 @@ public class ControladorHermandad implements ActionListener {
             try {
                 hcv.txtIdentificador7.setText(hcv.TblTipoPago2.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion7.setText(hcv.TblTipoPago2.getValueAt(clic, 1).toString());
-                hcv.txtPrecio3.setText(hcv.tblFormaPago2.getValueAt(clic, 2).toString());
+                hcv.txtPrecio3.setText(hcv.TblTipoPago2.getValueAt(clic, 2).toString());
             } catch (Exception e) {
             }
         }
@@ -830,7 +838,7 @@ public class ControladorHermandad implements ActionListener {
             try {
                 hcv.txtIdentificador8.setText(hcv.TblTipoPago3.getValueAt(clic, 0).toString());
                 hcv.txtDescripcion8.setText(hcv.TblTipoPago3.getValueAt(clic, 1).toString());
-                hcv.txtPrecio3.setText(hcv.tblFormaPago2.getValueAt(clic, 2).toString());
+                hcv.txtPrecio3.setText(hcv.TblTipoPago3.getValueAt(clic, 2).toString());
             } catch (Exception e) {
             }
         }

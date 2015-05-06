@@ -1036,7 +1036,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     public javax.swing.JButton btnModificarTP;
     public javax.swing.JButton btnMostrarFP;
     public javax.swing.JButton btnMostrarTP;
-    private javax.swing.JButton btnSalir;
+    public javax.swing.JButton btnSalir;
     public javax.swing.JButton btnSalir1;
     public javax.swing.JButton btnSalir2;
     public javax.swing.JButton btnSalir3;
