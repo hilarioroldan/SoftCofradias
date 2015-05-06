@@ -34,10 +34,12 @@ public class ControladorEntidadesConocidas implements ActionListener {
         
         cargarCmbBD1();
         cargarCmbBD2();
+        cargarCmbBD3();
 
         //se añade las acciones a los controles del formulario padre
         ecv.btnIngresar.setActionCommand("INGRESAR");
         ecv.btnBuscar.setActionCommand("MOSTRAR");
+        ecv.btnBuscar1.setActionCommand("BUSCAR1");
         ecv.btnBuscar2.setActionCommand("BUSCAR2");
         ecv.btnEliminar.setActionCommand("ELIMINAR");
         ecv.btnSalir.setActionCommand("SALIR1");
@@ -47,6 +49,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
         //Se pone a escuchar las acciones del usuario
         ecv.btnIngresar.addActionListener(this);
         ecv.btnBuscar.addActionListener(this);
+        ecv.btnBuscar1.addActionListener(this);
         ecv.btnBuscar2.addActionListener(this);
         ecv.btnEliminar.addActionListener(this);
         ecv.btnSalir.addActionListener(this);
@@ -106,6 +109,10 @@ public class ControladorEntidadesConocidas implements ActionListener {
                 
             case "MOSTRAR":
                 cargarTablaEntidadConocida2();
+                break;
+                
+                case "BUSCAR1":
+                cargarTablaEntidadConocida4();
                 break;
             case "BUSCAR2":
                 cargarTablaEntidadConocida3();
@@ -174,18 +181,33 @@ public class ControladorEntidadesConocidas implements ActionListener {
         }        
     }
     
+    private void cargarCmbBD3() {        
+        try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="DESCRIBE entidadesconocidas;";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            ecv.cmbBD3.removeAllItems();
+            
+            while(cbd.resultado.next()){
+                ecv.cmbBD3.addItem(cbd.resultado.getString(1));
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorEntidadesConocidas.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
     private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {                                     
         int clic = ecv.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
         
-        ecv.txtIdentificador2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 0));
-        ecv.txtNombreEntidad2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 1));
-        ecv.txtLocalidad2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 3));
-        ecv.txtDomicilio2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 2));
-        ecv.txtProvincia2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 5));
-        ecv.txtCp2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 4));
-        ecv.txtTelf12.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 6));
-        ecv.txtTelf22.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 7));
-        ecv.txtEmail2.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 8));
+        ecv.txtIdentificador5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 0));
+        ecv.txtNombreEntidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 1));
+        ecv.txtLocalidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 3));
+        ecv.txtDomicilio5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 2));
+        ecv.txtProvincia5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 5));
+        ecv.txtCp5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 4));
+        ecv.txtTelf15.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 6));
+        ecv.txtTelf25.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 7));
+        ecv.txtEmail5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 8));
     }
     
     private void tablaEntidadConocida2MousePressed(java.awt.event.MouseEvent evt) {                                     
@@ -322,6 +344,45 @@ public class ControladorEntidadesConocidas implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             ecv.tablaEntidadConocida3.setRowSorter(ordenar);
             ecv.tablaEntidadConocida3.setModel(m);
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+        
+    }
+    
+    public void cargarTablaEntidadConocida4() {
+        EntidadesConocidas entidad = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[9];
+            ArrayList <EntidadesConocidas> x;
+            String campo = (String) ecv.cmbBD3.getSelectedItem();
+            String filtro = ecv.txtFiltro3.getText();
+            x = ec.buscarFiltro(filtro, campo);
+            
+            Iterator <EntidadesConocidas> it = x.iterator();
+            while(it.hasNext()){
+                entidad = it.next();
+                fila[0] = String.valueOf(entidad.getIdentificador());
+                fila[1] = entidad.getNombre();
+                fila[2] = entidad.getDomicilio();
+                fila[3] = entidad.getLocalidad();
+                fila[4] = String.valueOf(entidad.getCP());
+                fila[5] = entidad.getProvincia();
+                fila[6] = entidad.getTelf1();
+                fila[7] = entidad.getTelf2();
+                fila[8] = entidad.getEmail();
+                m.addRow(fila);
+            }           
+            
+            ecv.tablaEntidadConocida1.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            ecv.tablaEntidadConocida1.setRowSorter(ordenar);
+            ecv.tablaEntidadConocida1.setModel(m);
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        

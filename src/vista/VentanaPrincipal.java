@@ -11,6 +11,7 @@ import controlador.ControladorHermandadesHermanadas;
 import controlador.ControladorHermano;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
+import controlador.ControladorPagoCuotas;
 import controlador.ControladorPlaningSecretaria;
 
 /**
@@ -159,6 +160,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem14);
 
         jMenuItem15.setText("Pago de cuotas");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem15);
 
         jMenuItem16.setText("Libro de asientos");
@@ -257,6 +263,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        ControladorPlaningSecretaria cps = new ControladorPlaningSecretaria();
        cps.iniciar();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        ControladorPagoCuotas x = new ControladorPagoCuotas();
+        x.iniciar();
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     /**
      * @param args the command line arguments

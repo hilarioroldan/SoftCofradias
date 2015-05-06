@@ -330,7 +330,7 @@ public class HermandadesHermanadasVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Mostrar Hermandad H", jPanel5);
+        jTabbedPane1.addTab("Modificar Hermandad H", jPanel5);
 
         jLabel32.setText("Identificador:");
 
