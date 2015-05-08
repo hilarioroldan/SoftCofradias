@@ -72,8 +72,8 @@ public class PlaningMayordomiaBD {
         if (cbd.resultado != null) {
             if (cbd.resultado.next()) {
                 pm.setIdentificador(cbd.resultado.getInt("identificador"));
-                pm.setHora(cbd.resultado.getTime("hora"));
-                pm.setFecha(cbd.resultado.getDate("fecha"));
+                pm.setHora(cbd.resultado.getString("hora"));
+                pm.setFecha(cbd.resultado.getString("fecha"));
                 pm.setLabor(cbd.resultado.getString("labor"));                
             } else {
                  /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
@@ -111,8 +111,8 @@ public class PlaningMayordomiaBD {
             while(cbd.resultado.next()){
                 pm = new PlaningMayordomia();
                 pm.setIdentificador(cbd.resultado.getInt("identificador"));
-                pm.setHora(cbd.resultado.getTime("hora"));
-                pm.setFecha(cbd.resultado.getDate("fecha"));
+                pm.setHora(cbd.resultado.getString("hora"));
+                pm.setFecha(cbd.resultado.getString("fecha"));
                 pm.setLabor(cbd.resultado.getString("labor")); 
                 
                 listaPlaningMayordomia.add(pm);
@@ -121,24 +121,25 @@ public class PlaningMayordomiaBD {
         return listaPlaningMayordomia;
     }
     
-    /*Buscar Filtro*/
+     /*Buscar Filtro*/
     public ArrayList <PlaningMayordomia> buscar(String filtro, String campo) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         
         ArrayList <PlaningMayordomia> listaPlaningMayordomia = new ArrayList <PlaningMayordomia>();
         
         Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
         
-        cbd.un_sql = "SELECT * FROM listaPlaningMayordomia WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY fecha;";
+        cbd.un_sql = "SELECT * FROM planingmayordomia WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY fecha;";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         while(cbd.resultado.next()){
+            
             pm = new PlaningMayordomia();
-                pm.setIdentificador(cbd.resultado.getInt("identificador"));
-                pm.setHora(cbd.resultado.getTime("hora"));
-                pm.setFecha(cbd.resultado.getDate("fecha"));
-                pm.setLabor(cbd.resultado.getString("labor")); 
+                pm.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
+                pm.setHora(cbd.resultado.getString("hora"));
+                pm.setFecha(cbd.resultado.getString("fecha"));
+                pm.setLabor(cbd.resultado.getString("labor"));              
                 
-                listaPlaningMayordomia.add(pm);            
+                listaPlaningMayordomia.add(pm);           
         }
         
         return listaPlaningMayordomia;

@@ -12,7 +12,9 @@ import controlador.ControladorHermano;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
 import controlador.ControladorPagoCuotas;
+import controlador.ControladorPlaningMayordomia;
 import controlador.ControladorPlaningSecretaria;
+import modelo.PlaningMayordomia;
 
 /**
  *
@@ -154,6 +156,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Mayordomia - Tesorería");
 
         jMenuItem13.setText("Planing Mayordomia");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem13);
 
         jMenuItem14.setText("Configuracion Cuotas");
@@ -268,6 +275,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ControladorPagoCuotas x = new ControladorPagoCuotas();
         x.iniciar();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        ControladorPlaningMayordomia cpm = new ControladorPlaningMayordomia();
+        cpm.iniciar();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
      * @param args the command line arguments

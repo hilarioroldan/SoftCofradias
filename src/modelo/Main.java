@@ -29,7 +29,7 @@ public class Main {
             System.exit(-1);
         }
 
-        try {
+       /* try {
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
         } catch (java.lang.ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Ocurrio la excepcion " + e);
@@ -45,7 +45,7 @@ public class Main {
             System.exit(-1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }
+        }*/
 
         try {
             VentanaPrincipal x = new VentanaPrincipal();

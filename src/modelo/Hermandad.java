@@ -167,7 +167,7 @@ public class Hermandad {
         return h.leerTodos();
     }
     
-    /*Este metodo busca un proveedor indicando el ruc y porque campo se va a filtrar*/
+    /*Este metodo busca un proveedor indicando el identificador y porque campo se va a filtrar*/
     public ArrayList <Hermandad> buscarFiltro(String filtro, String campo) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         HermandadBD h = new HermandadBD(this);        
         return h.buscar(filtro, campo);

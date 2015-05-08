@@ -895,7 +895,7 @@ public class InventarioVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Buscar articulo", buscar);
+        jTabbedPane1.addTab("Buscar/Modificar articulo", buscar);
 
         jScrollPane11.setBorder(null);
 

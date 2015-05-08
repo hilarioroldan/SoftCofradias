@@ -51,7 +51,6 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         txtHora2 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtLabor2 = new javax.swing.JTextArea();
-        Jdate2 = new com.toedter.calendar.JDateChooser();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl1 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
@@ -59,7 +58,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtFiltro1 = new javax.swing.JTextField();
         btnBuscar1 = new javax.swing.JButton();
-        btnMostrarTodos = new javax.swing.JButton();
+        txtFecha2 = new javax.swing.JTextField();
         btnSalir2 = new javax.swing.JButton();
         modificar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -71,7 +70,6 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         txtHora3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLabor3 = new javax.swing.JTextArea();
-        Jdate3 = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl2 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -80,6 +78,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         txtFiltro2 = new javax.swing.JTextField();
         btnBuscar2 = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
+        txtFecha3 = new javax.swing.JTextField();
         btnSalir3 = new javax.swing.JButton();
         eliminar = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -91,7 +90,6 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         txtHora4 = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtLabor4 = new javax.swing.JTextArea();
-        Jdate4 = new com.toedter.calendar.JDateChooser();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbl3 = new javax.swing.JTable();
         jLabel21 = new javax.swing.JLabel();
@@ -99,7 +97,8 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         txtFiltro3 = new javax.swing.JTextField();
         btnBuscar3 = new javax.swing.JButton();
-        btnEliminar3 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        txtFecha4 = new javax.swing.JTextField();
         btnSalir4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -233,8 +232,6 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
 
         btnBuscar1.setText("Buscar");
 
-        btnMostrarTodos.setText("Mostrar Todos");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -245,6 +242,21 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(btnBuscar1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtIdentificador2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,41 +267,24 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane3)))
-                        .addGap(80, 80, 80))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMostrarTodos))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 21, Short.MAX_VALUE))))
+                        .addGap(80, 80, 80))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(txtIdentificador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)
-                        .addComponent(txtHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9))
-                    .addComponent(Jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtIdentificador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
@@ -300,8 +295,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                     .addComponent(cmb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(txtFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar1)
-                    .addComponent(btnMostrarTodos))
+                    .addComponent(btnBuscar1))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -391,7 +385,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Jdate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFecha3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -409,7 +403,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                                 .addComponent(txtFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar2)
-                                .addGap(33, 33, 33)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnModificar))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 21, Short.MAX_VALUE))))
@@ -418,14 +412,13 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtIdentificador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtHora3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addComponent(Jdate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIdentificador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtHora3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtFecha3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -505,7 +498,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
 
         btnBuscar3.setText("Buscar");
 
-        btnEliminar3.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -527,7 +520,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Jdate4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFecha4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -546,22 +539,21 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                         .addComponent(txtFiltro3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar3)
-                        .addGap(31, 31, 31))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel17)
-                        .addComponent(txtIdentificador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18)
-                        .addComponent(txtHora4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19))
-                    .addComponent(Jdate4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtIdentificador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtHora4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtFecha4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
@@ -573,7 +565,7 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
                     .addComponent(jLabel22)
                     .addComponent(txtFiltro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar3)
-                    .addComponent(btnEliminar3))
+                    .addComponent(btnEliminar))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -657,16 +649,12 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.toedter.calendar.JDateChooser Jdate1;
-    public com.toedter.calendar.JDateChooser Jdate2;
-    public com.toedter.calendar.JDateChooser Jdate3;
-    public com.toedter.calendar.JDateChooser Jdate4;
     public javax.swing.JButton btnBuscar1;
     public javax.swing.JButton btnBuscar2;
     public javax.swing.JButton btnBuscar3;
-    public javax.swing.JButton btnEliminar3;
+    public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnInsertar;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JButton btnMostrarTodos;
     public javax.swing.JButton btnSalir1;
     public javax.swing.JButton btnSalir2;
     public javax.swing.JButton btnSalir3;
@@ -711,10 +699,13 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane6;
     public javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel modificar;
-    private javax.swing.JTabbedPane tablas;
-    private javax.swing.JTable tbl1;
-    private javax.swing.JTable tbl2;
-    private javax.swing.JTable tbl3;
+    public javax.swing.JTabbedPane tablas;
+    public javax.swing.JTable tbl1;
+    public javax.swing.JTable tbl2;
+    public javax.swing.JTable tbl3;
+    public javax.swing.JTextField txtFecha2;
+    public javax.swing.JTextField txtFecha3;
+    public javax.swing.JTextField txtFecha4;
     public javax.swing.JTextField txtFiltro1;
     public javax.swing.JTextField txtFiltro2;
     public javax.swing.JTextField txtFiltro3;
@@ -726,9 +717,9 @@ public class PlaningMayordomiaVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtIdentificador2;
     public javax.swing.JTextField txtIdentificador3;
     public javax.swing.JTextField txtIdentificador4;
-    private javax.swing.JTextArea txtLabor1;
-    private javax.swing.JTextArea txtLabor2;
-    private javax.swing.JTextArea txtLabor3;
-    private javax.swing.JTextArea txtLabor4;
+    public javax.swing.JTextArea txtLabor1;
+    public javax.swing.JTextArea txtLabor2;
+    public javax.swing.JTextArea txtLabor3;
+    public javax.swing.JTextArea txtLabor4;
     // End of variables declaration//GEN-END:variables
 }
