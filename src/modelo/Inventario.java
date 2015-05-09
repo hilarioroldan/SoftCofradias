@@ -2,7 +2,6 @@
 package modelo;
 
 import java.io.FileInputStream;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ public class Inventario {
     String nombre;
     String autor;
     String estilo;
-    Date fecha_realizacion;
+    String fecha_realizacion;
     String procedencia;
     Double valoracion_economica;
     String mejora;
@@ -21,10 +20,10 @@ public class Inventario {
     String observaciones;
     String adquisicion;
     FileInputStream imagen; // almacenamiento de la imagen
-    Date fecha_baja;
+    String fecha_baja;
     int longitudBytes;
 
-    public Inventario(int identificador, String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) {
+    public Inventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.autor = autor;
@@ -42,7 +41,7 @@ public class Inventario {
         this.longitudBytes = longitudBytes;
     }
 
-    public Inventario(String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) {
+    public Inventario(String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) {
         this.nombre = nombre;
         this.autor = autor;
         this.estilo = estilo;
@@ -98,11 +97,11 @@ public class Inventario {
         this.estilo = estilo;
     }
 
-    public Date getFecha_realizacion() {
+    public String getFecha_realizacion() {
         return fecha_realizacion;
     }
 
-    public void setFecha_realizacion(Date fecha_realizacion) {
+    public void setFecha_realizacion(String fecha_realizacion) {
         this.fecha_realizacion = fecha_realizacion;
     }
 
@@ -170,11 +169,11 @@ public class Inventario {
         this.imagen = imagen;
     }
 
-    public Date getFecha_baja() {
+    public String getFecha_baja() {
         return fecha_baja;
     }
 
-    public void setFecha_baja(Date fecha_baja) {
+    public void setFecha_baja(String fecha_baja) {
         this.fecha_baja = fecha_baja;
     }
 

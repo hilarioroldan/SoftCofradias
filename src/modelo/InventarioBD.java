@@ -35,7 +35,7 @@ public class InventarioBD {
             ps.setString(2, i.getNombre());
             ps.setString(3, i.getAutor());
             ps.setString(4, i.getEstilo());
-            ps.setDate(5, i.getFecha_realizacion());
+            ps.setString(5, i.getFecha_realizacion());
             ps.setString(6, i.getProcedencia());
             ps.setDouble(7, i.getValoracion_economica());
             ps.setString(8, i.getMejora());
@@ -45,7 +45,7 @@ public class InventarioBD {
             ps.setInt(12, 1);
             ps.setString(13, i.getAdquisicion());
             ps.setBinaryStream(14, i.getImagen(), i.getLongitudBytes()); // almacenamos la imagen: FileInputStream -donde se almacena la imagen- y su tamaño
-            ps.setDate(15, i.getFecha_baja());
+            ps.setString(15, i.getFecha_baja());
             ps.execute();   // ejecutamos
             ps.close();     // se cierra la conexion           
             
@@ -75,7 +75,7 @@ public class InventarioBD {
             ps.setString(2, i.getNombre());
             ps.setString(3, i.getAutor());
             ps.setString(4, i.getEstilo());
-            ps.setDate(5, i.getFecha_realizacion());
+            ps.setString(5, i.getFecha_realizacion());
             ps.setString(6, i.getProcedencia());
             ps.setDouble(7, i.getValoracion_economica());
             ps.setString(8, i.getMejora());
@@ -85,7 +85,7 @@ public class InventarioBD {
             //ps.setInt(11, 1);
             ps.setString(12, i.getAdquisicion());
             ps.setBinaryStream(13, i.getImagen(), i.getLongitudBytes());
-            ps.setDate(14, i.getFecha_baja());
+            ps.setString(14, i.getFecha_baja());
             ps.executeUpdate();
             ps.close();
         } else {
@@ -109,7 +109,7 @@ public class InventarioBD {
                 i.setNombre(cbd.resultado.getString("nombre"));
                 i.setAutor(cbd.resultado.getString("autor"));
                 i.setEstilo(cbd.resultado.getString("estilo"));
-                i.setFecha_realizacion(cbd.resultado.getDate("fecha_realizacion"));
+                i.setFecha_realizacion(cbd.resultado.getString("fecha_realizacion"));
                 i.setProcedencia(cbd.resultado.getString("procedencia"));
                 i.setValoracion_economica(cbd.resultado.getDouble("valoracion_economica"));
                 i.setMejora(cbd.resultado.getString("mejora"));
@@ -118,7 +118,7 @@ public class InventarioBD {
                 i.setObservaciones(cbd.resultado.getString("observaciones"));
                 i.setAdquisicion(cbd.resultado.getString("adquisicion"));
                 i.setImagen((FileInputStream) cbd.resultado.getBinaryStream("imagen"));
-                i.setFecha_baja(cbd.resultado.getDate("fecha_baja"));
+                i.setFecha_baja(cbd.resultado.getString("fecha_baja"));
                 
             } else {
                  /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
@@ -147,7 +147,7 @@ public class InventarioBD {
                 i.setNombre(cbd.resultado.getString("nombre"));
                 i.setAutor(cbd.resultado.getString("autor"));
                 i.setEstilo(cbd.resultado.getString("estilo"));
-                i.setFecha_realizacion(cbd.resultado.getDate("fecha_realizacion"));
+                i.setFecha_realizacion(cbd.resultado.getString("fecha_realizacion"));
                 i.setProcedencia(cbd.resultado.getString("procedencia"));
                 i.setValoracion_economica(cbd.resultado.getDouble("valoracion_economica"));
                 i.setMejora(cbd.resultado.getString("mejora"));
@@ -156,7 +156,7 @@ public class InventarioBD {
                 i.setObservaciones(cbd.resultado.getString("observaciones"));
                 i.setAdquisicion(cbd.resultado.getString("adquisicion"));
                 i.setImagen((FileInputStream) cbd.resultado.getBinaryStream("imagen"));
-                i.setFecha_baja(cbd.resultado.getDate("fecha_baja"));
+                i.setFecha_baja(cbd.resultado.getString("fecha_baja"));
                 
                 listaInventario.add(i);
             }           
@@ -181,7 +181,7 @@ public class InventarioBD {
             i.setNombre(cbd.resultado.getString("nombre"));
             i.setAutor(cbd.resultado.getString("autor"));
             i.setEstilo(cbd.resultado.getString("estilo"));
-            i.setFecha_realizacion(cbd.resultado.getDate("fecha_realizacion"));
+            i.setFecha_realizacion(cbd.resultado.getString("fecha_realizacion"));
             i.setProcedencia(cbd.resultado.getString("procedencia"));
             i.setValoracion_economica(cbd.resultado.getDouble("valoracion_economica"));
             i.setMejora(cbd.resultado.getString("mejora"));
@@ -190,7 +190,7 @@ public class InventarioBD {
             i.setObservaciones(cbd.resultado.getString("observaciones"));
             i.setAdquisicion(cbd.resultado.getString("adquisicion"));
             //i.setImagen((FileInputStream) cbd.resultado.getBinaryStream("imagen"));
-            i.setFecha_baja(cbd.resultado.getDate("fecha_baja"));
+            i.setFecha_baja(cbd.resultado.getString("fecha_baja"));
 
             listaInventario.add(i);
             

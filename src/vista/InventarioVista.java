@@ -61,8 +61,8 @@ public class InventarioVista extends javax.swing.JFrame {
         btnExaminar1 = new javax.swing.JButton();
         txtCantidad1 = new javax.swing.JTextField();
         btnInsertar1 = new javax.swing.JButton();
-        txtFechaRealizacion1 = new javax.swing.JTextField();
-        txtFechaBaja1 = new javax.swing.JTextField();
+        jDate1 = new com.toedter.calendar.JDateChooser();
+        jDate2 = new com.toedter.calendar.JDateChooser();
         btnSalir1 = new javax.swing.JButton();
         mostrar = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -253,12 +253,6 @@ public class InventarioVista extends javax.swing.JFrame {
 
         btnInsertar1.setText("Insertar");
 
-        txtFechaRealizacion1.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaRealizacion1.setText("Formato: 1999-01-01");
-
-        txtFechaBaja1.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaBaja1.setText("Formato: 1999-01-01");
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -288,6 +282,7 @@ public class InventarioVista extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jDate2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane28, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane27, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombre1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,8 +293,7 @@ public class InventarioVista extends javax.swing.JFrame {
                                     .addComponent(txtValoracionEconomica1, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRegistro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCantidad1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFechaRealizacion1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFechaBaja1, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnExaminar1)
@@ -340,10 +334,10 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(jLabel89)
                             .addComponent(txtEstilo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel90)
-                            .addComponent(txtFechaRealizacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                            .addComponent(jDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel91)
                             .addComponent(txtProcedencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -368,7 +362,7 @@ public class InventarioVista extends javax.swing.JFrame {
                                 .addComponent(jLabel95))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFechaBaja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel96)
@@ -393,10 +387,10 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(añadirLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(añadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(añadirLayout.createSequentialGroup()
-                        .addGap(0, 771, Short.MAX_VALUE)
-                        .addComponent(btnSalir1))
-                    .addComponent(jScrollPane7))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, añadirLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir1)))
                 .addContainerGap())
         );
         añadirLayout.setVerticalGroup(
@@ -404,9 +398,9 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(añadirLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Añadir articulo", añadir);
@@ -632,10 +626,10 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(mostrarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mostrarLayout.createSequentialGroup()
-                        .addGap(0, 771, Short.MAX_VALUE)
-                        .addComponent(btnSalir2))
-                    .addComponent(jScrollPane5))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mostrarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir2)))
                 .addContainerGap())
         );
         mostrarLayout.setVerticalGroup(
@@ -643,9 +637,9 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(mostrarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir2)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mostrar articulo", mostrar);
@@ -879,10 +873,10 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(buscarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(buscarLayout.createSequentialGroup()
-                        .addGap(0, 771, Short.MAX_VALUE)
-                        .addComponent(btnSalir4))
-                    .addComponent(jScrollPane16))
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buscarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir4)))
                 .addContainerGap())
         );
         buscarLayout.setVerticalGroup(
@@ -890,9 +884,9 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(buscarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir4)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Buscar/Modificar articulo", buscar);
@@ -1121,10 +1115,10 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(eliminarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(eliminarLayout.createSequentialGroup()
-                        .addGap(0, 771, Short.MAX_VALUE)
-                        .addComponent(btnSalir3))
-                    .addComponent(jScrollPane11))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eliminarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir3)))
                 .addContainerGap())
         );
         eliminarLayout.setVerticalGroup(
@@ -1132,9 +1126,9 @@ public class InventarioVista extends javax.swing.JFrame {
             .addGroup(eliminarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir3)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Eliminar articulo", eliminar);
@@ -1251,6 +1245,8 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel cuadroImagen3;
     public javax.swing.JLabel cuadroImagen4;
     public javax.swing.JPanel eliminar;
+    public com.toedter.calendar.JDateChooser jDate1;
+    public com.toedter.calendar.JDateChooser jDate2;
     public javax.swing.JLabel jLabel15;
     public javax.swing.JLabel jLabel17;
     public javax.swing.JLabel jLabel31;
@@ -1351,11 +1347,9 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtEstilo2;
     public javax.swing.JTextField txtEstilo3;
     public javax.swing.JTextField txtEstilo4;
-    public javax.swing.JTextField txtFechaBaja1;
     public javax.swing.JTextField txtFechaBaja2;
     public javax.swing.JTextField txtFechaBaja3;
     public javax.swing.JTextField txtFechaBaja4;
-    public javax.swing.JTextField txtFechaRealizacion1;
     public javax.swing.JTextField txtFechaRealizacion2;
     public javax.swing.JTextField txtFechaRealizacion3;
     public javax.swing.JTextField txtFechaRealizacion4;

@@ -10,6 +10,7 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -104,22 +105,8 @@ public class ControladorInventario implements ActionListener {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblInventario3MousePressed(evt);
             }
-        });
+        });        
         
-        // controlador de eventos de raton
-        iv.txtFechaRealizacion1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFechaRealizacion1MouseClicked(evt);
-            }
-        });
-        //
-        iv.txtFechaBaja1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFechaBaja1MouseClicked(evt);
-            }
-        });
     }
 
     @Override
@@ -213,18 +200,13 @@ public class ControladorInventario implements ActionListener {
         String adquisicion = iv.txtAdquisicion4.getText();
         String fecha_baja = iv.txtFechaBaja4.getText();
 
-        try {
-            if (fecha_baja == null || fecha_baja.equalsIgnoreCase("")) {
+        try {            
 
-                modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, null, longitudBytes);
-                JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
-            } else {
-
-                modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, Date.valueOf(fecha_baja), longitudBytes);
-                JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
-            }
+            modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, fecha_baja, longitudBytes);
+            JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
 
             iv.cuadroImagen4.setIcon(null);
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
@@ -307,12 +289,12 @@ public class ControladorInventario implements ActionListener {
         iv.txtAdquisicion1.setText("");
         iv.txtAutor1.setText("");
         iv.txtEstilo1.setText("");
-        iv.txtFechaRealizacion1.setText("");
+        
         iv.txtProcedencia1.setText("");
         iv.txtValoracionEconomica1.setText("");
         iv.txtMejora1.setText("");
         iv.txtRestauracion1.setText("");
-        iv.txtFechaBaja1.setText("");
+        
         iv.txtCantidad1.setText("");
         iv.txtObservaciones1.setText("");
         iv.cuadroImagen1.setIcon(null);
@@ -325,12 +307,12 @@ public class ControladorInventario implements ActionListener {
         iv.txtAdquisicion1.setText("");
         iv.txtAutor1.setText("");
         iv.txtEstilo1.setText("");
-        iv.txtFechaRealizacion1.setText("");
+        
         iv.txtProcedencia1.setText("");
         iv.txtValoracionEconomica1.setText("");
         iv.txtMejora1.setText("");
         iv.txtRestauracion1.setText("");
-        iv.txtFechaBaja1.setText("");
+        
         iv.txtCantidad1.setText("");
         iv.txtObservaciones1.setText("");
         iv.cuadroImagen1.setIcon(null);
@@ -1112,7 +1094,17 @@ public class ControladorInventario implements ActionListener {
         String nombre = iv.txtNombre1.getText();
         String autor = iv.txtAutor1.getText();
         String estilo = iv.txtEstilo1.getText();
-        String fecha_realizacion = iv.txtFechaRealizacion1.getText();
+        String fecha_realizacion = null;
+        
+        if (iv.jDate1!=null) {
+           // Trabajando con fecha
+        int año = iv.jDate1.getCalendar().get(Calendar.YEAR);
+        int mes = iv.jDate1.getCalendar().get(Calendar.MONTH);
+        int dia = iv.jDate1.getCalendar().get(Calendar.DAY_OF_MONTH);
+        fecha_realizacion = año+"-"+mes+"-"+dia;
+        // 
+        } 
+        
         String procedencia = iv.txtProcedencia1.getText();
         String valoracion_economica = iv.txtValoracionEconomica1.getText();
         String mejora = iv.txtMejora1.getText();
@@ -1120,17 +1112,29 @@ public class ControladorInventario implements ActionListener {
         String cantidad = iv.txtCantidad1.getText();
         String observaciones = iv.txtObservaciones1.getText();
         String adquisicion = iv.txtAdquisicion1.getText();
-        String fecha_baja = iv.txtFechaBaja1.getText();
+        String fecha_baja = null;
+        
+       if (iv.jDate2!=null) {
+           // Trabajando con fecha
+        int año2 = iv.jDate2.getCalendar().get(Calendar.YEAR);
+        int mes2 = iv.jDate2.getCalendar().get(Calendar.MONTH);
+        int dia2 = iv.jDate2.getCalendar().get(Calendar.DAY_OF_MONTH);
+        fecha_baja = año2+"-"+mes2+"-"+dia2;        
+       }       
 
         try {
-            if (fecha_baja == null || fecha_baja.equalsIgnoreCase("")) {
+            if (iv.jDate1!=null && iv.jDate2==null) {
 
-                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
+                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
                 JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
 
+            } else if (iv.jDate1==null) {
+                
+                JOptionPane.showMessageDialog(null, "El campo Fecha Realizacion es Obligatorio");
+                
             } else {
-
-                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, Date.valueOf(fecha_realizacion), procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, Date.valueOf(fecha_baja), this.longitudBytes);
+                
+                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, fecha_baja, this.longitudBytes);
                 JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
             }
 
@@ -1198,13 +1202,13 @@ public class ControladorInventario implements ActionListener {
     }
 
     /*Metodo para agregar un Inventario*/
-    public void agregarInventario(int identificador, String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void agregarInventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, valoracion_economica, mejora, restauracion, cantidad, observaciones, adquisicion, imagen, fecha_baja, longitudBytes);
         i.grabar();
     }
 
     /*Metodo para modificar una Entidad Conocida*/
-    public void modificarInventario(int identificador, String nombre, String autor, String estilo, Date fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, Date fecha_baja, int longitudBytes) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void modificarInventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, valoracion_economica, mejora, restauracion, cantidad, observaciones, adquisicion, imagen, fecha_baja, longitudBytes);
         i.actualizar();
     }
@@ -1219,14 +1223,6 @@ public class ControladorInventario implements ActionListener {
     public ArrayList<Inventario> leerTodas() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario();
         return i.leerTodos();
-    }
-    
-    private void txtFechaRealizacion1MouseClicked(java.awt.event.MouseEvent evt) {                                                  
-        iv.txtFechaRealizacion1.setText("");
-    }
-    
-    private void txtFechaBaja1MouseClicked(java.awt.event.MouseEvent evt) {                                                  
-        iv.txtFechaBaja1.setText("");
     }
 
 }
