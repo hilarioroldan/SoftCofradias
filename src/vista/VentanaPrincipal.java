@@ -11,6 +11,7 @@ import controlador.ControladorHermandadesHermanadas;
 import controlador.ControladorHermano;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
+import controlador.ControladorLibroAsiento;
 import controlador.ControladorPagoCuotas;
 import controlador.ControladorPlaningMayordomia;
 import controlador.ControladorPlaningSecretaria;
@@ -52,7 +53,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
@@ -163,9 +163,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem13);
 
-        jMenuItem14.setText("Configuracion Cuotas");
-        jMenu3.add(jMenuItem14);
-
         jMenuItem15.setText("Pago de cuotas");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +172,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem15);
 
         jMenuItem16.setText("Libro de asientos");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem16);
 
         jMenuItem17.setText("Cuenta Bancaria");
@@ -281,6 +283,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cpm.iniciar();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        ControladorLibroAsiento cla = new ControladorLibroAsiento();
+        cla.iniciar();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -329,7 +336,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;

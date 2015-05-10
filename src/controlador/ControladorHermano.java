@@ -128,15 +128,10 @@ public class ControladorHermano implements ActionListener {
 
                 try {
                agregarHermano(Integer.parseInt(numero_hermano), nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,Integer.parseInt(tipo_pago_id),Integer.parseInt(forma_pago_id),Integer.parseInt(id_hermandad),forma_pago);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Identificador repetido");
             }
+        /**/ 
                 /**/
                 
        
