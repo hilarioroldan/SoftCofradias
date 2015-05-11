@@ -1096,7 +1096,7 @@ public class ControladorInventario implements ActionListener {
         String estilo = iv.txtEstilo1.getText();
         String fecha_realizacion = null;
         
-        if (iv.jDate1!=null) {
+        if (iv.jDate1.getDate()!=null) {
            // Trabajando con fecha
         int año = iv.jDate1.getCalendar().get(Calendar.YEAR);
         int mes = iv.jDate1.getCalendar().get(Calendar.MONTH);
@@ -1114,21 +1114,23 @@ public class ControladorInventario implements ActionListener {
         String adquisicion = iv.txtAdquisicion1.getText();
         String fecha_baja = null;
         
-       if (iv.jDate2!=null) {
+       if (iv.jDate2.getDate()!=null) {
            // Trabajando con fecha
         int año2 = iv.jDate2.getCalendar().get(Calendar.YEAR);
         int mes2 = iv.jDate2.getCalendar().get(Calendar.MONTH);
         int dia2 = iv.jDate2.getCalendar().get(Calendar.DAY_OF_MONTH);
         fecha_baja = año2+"-"+mes2+"-"+dia2;        
-       }       
+       } else {
+           JOptionPane.showMessageDialog(null, "no");
+       }
 
         try {
-            if (iv.jDate1!=null && iv.jDate2==null) {
+            if (iv.jDate1.getDate()!=null && iv.jDate2.getDate()==null) {
 
                 agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
                 JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
 
-            } else if (iv.jDate1==null) {
+            } else if (iv.jDate1.getDate()==null) {
                 
                 JOptionPane.showMessageDialog(null, "El campo Fecha Realizacion es Obligatorio");
                 
