@@ -31,25 +31,19 @@ public class ControladorHermano implements ActionListener {
 
 
 
-
     hermanito h1;
     HermanitoVista1 hv1;
     DefaultTableModel ff;
 
-    public void agregarHermano(int numero_hermano, String nombre, String apellido, String nif, String municipio, String provincia,String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,String forma_pago ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        h1 = new hermanito(numero_hermano, nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad,forma_pago);
+    public void agregarHermano(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        h1 = new hermanito(numero_hermano,direccion,cp,fecha,nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id);
         h1.grabar();  
     
     }
     
- 
-    
-        
-   
-        
-            public void modificarHermano(int numero_hermano, String nombre, String apellido, String nif, String municipio, String provincia,String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+            public void modificarHermano(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
-        h1 = new hermanito(numero_hermano, nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad);
+        h1 = new hermanito(numero_hermano,direccion,cp,fecha,nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id);
         h1.actualizar();
     }
             
@@ -62,6 +56,12 @@ public class ControladorHermano implements ActionListener {
     }
  
 
+     /*Metodo para leer todas las hermandades*/
+    public ArrayList<hermanito> recargarHermanos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hermanito h2;
+        h2 = new hermanito();
+        return h2.leerTodos();
+    }
    
     public enum di {
 
@@ -101,7 +101,6 @@ public class ControladorHermano implements ActionListener {
     } 
     
 
-
     // ACCIONES DEL USUARIO
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -122,12 +121,15 @@ public class ControladorHermano implements ActionListener {
             String cuenta_bancaria=hv1.cuenta.getText();
             String tipo_pago_id=hv1.tipo_pago.getText();
             String forma_pago_id=hv1.id_pago.getText();
-            String id_hermandad=hv1.hid.getText();
-             String forma_pago = String.valueOf(hv1.combo.getSelectedItem());   
+            String fecha=hv1.fecha.getText();
+            String direccion=hv1.direccion1.getText();
+            String cp= hv1.CP.getText();
+           // String id_hermandad=hv1.hid.getText();
+             //String forma_pago = String.valueOf(hv1.combo.getSelectedItem());   
                 
 
                 try {
-               agregarHermano(Integer.parseInt(numero_hermano), nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,Integer.parseInt(tipo_pago_id),Integer.parseInt(forma_pago_id),Integer.parseInt(id_hermandad),forma_pago);
+               agregarHermano(Integer.parseInt(numero_hermano),direccion,Integer.parseInt(cp),fecha ,nombre,apellido,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,Integer.parseInt(tipo_pago_id),Integer.parseInt(forma_pago_id));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InstantiationException ex) {
@@ -176,7 +178,7 @@ break;
             hv1.cuenta1.setText(hv1.tablaHermano.getValueAt(clic, 10).toString());
             hv1.tipo_pago1.setText(hv1.tablaHermano.getValueAt(clic, 11).toString());
             hv1.id_pago1.setText(hv1.tablaHermano.getValueAt(clic, 12).toString());
-            hv1.hid1.setText(hv1.tablaHermano.getValueAt(clic, 13).toString());
+           // hv1.hid1.setText(hv1.tablaHermano.getValueAt(clic, 13).toString());
         }       
                //cargarTablaHermanos();
                //limpiarTexto();
@@ -192,14 +194,7 @@ break;
         
 
 }
-    
-
-    /*Metodo para leer todas las hermandades*/
-    public ArrayList<hermanito> recargarHermanos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        hermanito h2;
-        h2 = new hermanito();
-        return h2.leerTodos();
-    }
+   
     
     private void cargarCmbBD1() {        
         try{
@@ -304,12 +299,8 @@ break;
     }
     
     
-    
-    
-    
-    
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
-        int clic = hv1.tablaHermano.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+        int clic = hv1.tablaHermano.getSelectedRow(); // se guarda en la variable el  de la fila cuando se hace click en una
 
         if (clic!=-1) {
              hv1.busquedah.setText(hv1.tablaHermano.getValueAt(clic, 1).toString());
@@ -356,11 +347,13 @@ break;
             String cuenta_bancaria1=hv1.cuenta1.getText();
             String tipo_pago_id1=hv1.tipo_pago1.getText();
             String forma_pago_id1=hv1.id_pago1.getText();
-            String id_hermandad1=hv1.hid1.getText();
+             String fecha1=hv1.fecha.getText();
+            String direccion1=hv1.direccion1.getText();
+            String cp1= hv1.CP.getText();
                 
                  
            try {
-               modificarHermano(Integer.parseInt(numero_hermano1), nombre1,apellido1,nif1,municipio1,provincia1,pais1,tfno1,email1,banco1,cuenta_bancaria1,Integer.parseInt(tipo_pago_id1),Integer.parseInt(forma_pago_id1),Integer.parseInt(id_hermandad1));
+               modificarHermano(Integer.parseInt(numero_hermano1),direccion1,Integer.parseInt(cp1),fecha1 ,nombre1,apellido1,nif1,municipio1,provincia1,pais1,tfno1,email1,banco1,cuenta_bancaria1,Integer.parseInt(tipo_pago_id1),Integer.parseInt(forma_pago_id1));
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
             }            

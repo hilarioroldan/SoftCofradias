@@ -33,8 +33,7 @@ public class persona {
  public persona(){
  
  }
-
-    public persona( String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) {
+  public persona( String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id,int id_hermandad ) {
         
         this.nombre = nombre;
         this.nif = nif;
@@ -48,7 +47,24 @@ public class persona {
         this.cuenta_bancaria = cuenta_bancaria;
         this.tipo_pago_id = tipo_pago_id;
         this.forma_pago_id = forma_pago_id;
-        this.id_hermandad = id_hermandad;
+        this.id_hermandad=id_hermandad;
+        
+    }
+    public persona( String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
+        
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+        this.tipo_pago_id = tipo_pago_id;
+        this.forma_pago_id = forma_pago_id;
+        
         
     }
 

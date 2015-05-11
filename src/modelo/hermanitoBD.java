@@ -34,21 +34,14 @@ private static int contador=1;
          Conexion cbd2 = ConectarServicio.getInstancia().getConexionDb();
         cbd.un_sql = "SELECT numero_hermano FROM hermanos WHERE numero_hermano=" + h2.getNumero_hermano()+";";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-          cbd.un_sql = "SELECT identificador FROM formapago WHERE identificador=" + h2.getForma_pago_id()+";";
-        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
        if (cbd.resultado != null) {
-            cbd.un_sql = "INSERT INTO hermanos (numero_hermano, nombre,apellidos,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad) VALUES ('"+h2.getNumero_hermano()+"', '"+h2.getNombre()+"', '"+h2.getApellido()+"', '"+h2.getNif()+"','"+h2.getMunicipio()+"','"+h2.getPais()+"','"+h2.getProvincia()+"','"+h2.getTfno()+"','"+h2.getEmail()+"','"+h2.getBanco()+"','"+h2.getCuenta_bancaria()+"','"+h2.getTipo_pago_id()+"','"+h2.getForma_pago_id()+"','"+h2.getId_hermandad()+"')";            
+            cbd.un_sql = "INSERT INTO hermanos (numero_hermano, nombre,apellidos,nif,municipio,provincia,pais,tfno,email,banco,cuenta_bancaria,tipo_pago_id,forma_pago_id,id_hermandad,fecha_nacimiento,direccion,codigo_postal) VALUES ('"+h2.getNumero_hermano()+"', '"+h2.getNombre()+"', '"+h2.getApellido()+"', '"+h2.getNif()+"','"+h2.getMunicipio()+"','"+h2.getPais()+"','"+h2.getProvincia()+"','"+h2.getTfno()+"','"+h2.getEmail()+"','"+h2.getBanco()+"','"+h2.getCuenta_bancaria()+"','"+h2.getTipo_pago_id()+"','"+h2.getForma_pago_id()+"',1,'"+h2.getFecha()+"','"+h2.getDireccion()+"','"+h2.getCp()+"')";            
             cbd.un_st.executeUpdate(cbd.un_sql);
        } else {
             JOptionPane.showInputDialog(null, "Error al registrar una hermano", "Error", JOptionPane.ERROR_MESSAGE);
         }
-         if (cbd2.resultado != null) {
-            cbd2.un_sql = "INSERT INTO formapago VALUES ('"+h2.getForma_pago_id()+"','"+h2.getForma_de_pago()+"')";            
-            cbd2.un_st.executeUpdate(cbd2.un_sql);
-       } else {
-            JOptionPane.showInputDialog(null, "Error al registrar una forma de pago", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }
     
     /*Metodo Modificar*/
@@ -63,7 +56,7 @@ private static int contador=1;
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-             cbd.un_sql = "UPDATE hermanos SET  nombre='"+h2.getNombre()+"',apellidos='"+h2.getApellido()+"',nif='"+h2.getNif()+"',municipio='"+h2.getMunicipio()+"',provincia='"+h2.getProvincia()+"',pais='"+h2.getPais()+"',tfno='"+h2.getTfno()+"',email='"+h2.getEmail()+"',banco='"+h2.getBanco()+"',cuenta_bancaria='"+h2.getCuenta_bancaria()+"',tipo_pago_id='"+h2.getTipo_pago_id()+"',forma_pago_id='"+h2.getForma_pago_id()+"',id_hermandad='"+h2.getId_hermandad()+"' WHERE numero_hermano=" + h2.getNumero_hermano()+";";            
+             cbd.un_sql = "UPDATE hermanos SET  nombre='"+h2.getNombre()+"',apellidos='"+h2.getApellido()+"',nif='"+h2.getNif()+"',municipio='"+h2.getMunicipio()+"',provincia='"+h2.getProvincia()+"',pais='"+h2.getPais()+"',tfno='"+h2.getTfno()+"',email='"+h2.getEmail()+"',banco='"+h2.getBanco()+"',cuenta_bancaria='"+h2.getCuenta_bancaria()+"',tipo_pago_id='"+h2.getTipo_pago_id()+"',forma_pago_id='"+h2.getForma_pago_id()+"',id_hermandad=1, fecha_nacimiento='"+h2.getFecha()+"',direccion='"+h2.getDireccion()+"', codigo_postal='"+h2.getCp()+"' WHERE numero_hermano=" + h2.getNumero_hermano()+";";            
         
             cbd.un_st.executeUpdate(cbd.un_sql);
         } else {
@@ -98,7 +91,10 @@ private static int contador=1;
                 h2.setCuenta_bancaria(cbd.resultado.getString("cuenta_bancaria"));
                 h2.setTipo_pago_id(Integer.parseInt(cbd.resultado.getString("tipo_pago_id")));
                 h2.setForma_pago_id(Integer.parseInt(cbd.resultado.getString("forma_pago_id")));
-                h2.setId_hermandad(Integer.parseInt(cbd.resultado.getString("id_hermandad")));  
+                h2.setId_hermandad(Integer.parseInt(cbd.resultado.getString("id_hermandad"))); 
+                h2.setFecha(cbd.resultado.getString("fecha_nacimiento")); 
+                h2.setDireccion(cbd.resultado.getString("direccion")); 
+                h2.setCp(Integer.parseInt(cbd.resultado.getString("codigo_postal")));
             } else {
                  /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
                throw new Error("Registro " + h2.getNumero_hermano() + " No se encuentra en la tabla hermanos'" + this.getClass().getName());
@@ -137,6 +133,9 @@ private static int contador=1;
                 h2.setTipo_pago_id(Integer.parseInt(cbd.resultado.getString("tipo_pago_id")));
                 h2.setForma_pago_id(Integer.parseInt(cbd.resultado.getString("forma_pago_id")));
                 h2.setId_hermandad(Integer.parseInt(cbd.resultado.getString("id_hermandad")));
+                  h2.setFecha(cbd.resultado.getString("fecha_nacimiento")); 
+                h2.setDireccion(cbd.resultado.getString("direccion")); 
+                h2.setCp(Integer.parseInt(cbd.resultado.getString("codigo_postal")));
                 listaHermanos.add(h2);
             }           
         }
@@ -168,7 +167,9 @@ private static int contador=1;
                 h2.setTipo_pago_id(cbd.resultado.getInt("tipo_pago_id"));
                 h2.setForma_pago_id(cbd.resultado.getInt("forma_pago_id"));
                 h2.setId_hermandad(cbd.resultado.getInt("id_hermandad"));
-                
+                h2.setFecha(cbd.resultado.getString("fecha_nacimiento")); 
+                h2.setDireccion(cbd.resultado.getString("direccion")); 
+                h2.setCp(Integer.parseInt(cbd.resultado.getString("codigo_postal")));
               listaHermanos.add(h2);
             
         }

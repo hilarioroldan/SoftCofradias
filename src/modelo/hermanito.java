@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,25 +17,35 @@ public class hermanito extends persona {
     
     private int numero_hermano;
     private String forma_de_pago;
+    private String direccion;
+    private int cp;
+    private String fecha;
 
-    public hermanito( int numero_hermano,String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) {
-        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id, id_hermandad);
+    public hermanito( int numero_hermano,String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
+        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id);
         this.numero_hermano=numero_hermano;
    
         
     }
+
+    public hermanito(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
+        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id);
+        this.numero_hermano = numero_hermano;
+       this.direccion = direccion;
+        this.cp = cp;
+        this.fecha = fecha;
+    }
+    
+    
+    
+    
 
      public hermanito() {
         
       
         
          }
-       public hermanito( int numero_hermano,String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,String forma_de_pago) {
-        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id, id_hermandad);
-        this.numero_hermano=numero_hermano;
-        this.forma_de_pago=forma_de_pago;
-        
-    }
+     
      //CONSTRUCTOR PERSONALIZADO PARA LA TABLA FORMA DE PAGOS
      public hermanito(int forma_pago_id,String forma){
          super(forma_pago_id);
@@ -49,17 +60,7 @@ public class hermanito extends persona {
         
          }
 
-    public String getForma_de_pago() {
-        return forma_de_pago;
-    }
 
-    public void setForma_de_pago(String forma_de_pago) {
-        this.forma_de_pago = forma_de_pago;
-    }
-
-   
-    
-    
     
 
     public int getNumero_hermano() {
@@ -70,10 +71,47 @@ public class hermanito extends persona {
         this.numero_hermano = numero_hermano;
     }
 
-   
-    public String toString() {
-        return super.toString()+"hermanito{" + "numero_hermano=" + numero_hermano + ", tipo_de_pago=" + forma_de_pago + '}';
+    public String getForma_de_pago() {
+        return forma_de_pago;
     }
+
+    public void setForma_de_pago(String forma_de_pago) {
+        this.forma_de_pago = forma_de_pago;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getCp() {
+        return cp;
+    }
+
+    public void setCp(int cp) {
+        this.cp = cp;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"hermanito{" + "numero_hermano=" + numero_hermano + ", forma_de_pago=" + forma_de_pago + ", direccion=" + direccion + ", cp=" + cp + ", fecha=" + fecha + '}';
+    }
+
+    
+    
+   
+    
 
 
     

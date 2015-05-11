@@ -1,4 +1,8 @@
-//
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 import java.sql.SQLException;
@@ -7,6 +11,10 @@ import javax.swing.JOptionPane;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 
+/**
+ *
+ * @author alex
+ */
 public class JuntaGobiernoBD {
     
      private JuntaGobierno j;
@@ -136,7 +144,7 @@ public class JuntaGobiernoBD {
         
         Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
         
-        cbd.un_sql = "SELECT * FROM juntagobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
+        cbd.un_sql = "SELECT * FROM juntadegobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         while(cbd.resultado.next()){
@@ -148,7 +156,7 @@ public class JuntaGobiernoBD {
                 //h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
                 j.setApellido(cbd.resultado.getString("apellidos"));
                 j.setCargo(cbd.resultado.getString("cargo"));
-                j.setObservaciones(cbd.resultado.getString("observaciones"));
+                j.setObservaciones(cbd.resultado.getString("observacion"));
                 j.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 
                 listaGobierno.add(j);
