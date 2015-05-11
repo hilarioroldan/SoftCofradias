@@ -258,14 +258,12 @@ public class ControladorPagoCuotas implements ActionListener {
                 } else {
                     enerox = false;
                 }
-             JOptionPane.showMessageDialog(null, cv.jCheckBox2.isSelected());
             
             if (cv.jCheckBox2.isSelected()==true) {
                    febrerox =  true;
                 } else {
                     febrerox = false;
                 }
-             JOptionPane.showMessageDialog(null, febrerox);
             
             if (cv.jCheckBox3.isSelected()==true) {
                    marzox =  true;
@@ -320,14 +318,13 @@ public class ControladorPagoCuotas implements ActionListener {
                 } else {
                     noviembrex = false;
                 }
-            JOptionPane.showMessageDialog(null, cv.jCheckBox12.isSelected());
             
             if (cv.jCheckBox12.isSelected()==true) {
                    diciembrex =  true;
                 } else {
                     diciembrex = false;
                 }
-                JOptionPane.showMessageDialog(null, diciembrex);
+                
                 
             
             PreparedStatement ps = cbd.conexion.prepareStatement(cbd.un_sql);
@@ -396,27 +393,45 @@ public class ControladorPagoCuotas implements ActionListener {
         
         try {
             
+            int numero_hermano_i = Integer.parseInt(p1.her.getText()); // guardamos en esta variable el numero de hermano
+            
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql="select max(identificador) from cartoncuotas;";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            cbd.un_sql="select max(identificador) from cartoncuotas;"; // cogemos el identificador mas grande
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);           
             
             if(cbd.resultado.next()) {
                 
-            int contador = cbd.resultado.getInt(1);
-            int numero_hermano_i = Integer.parseInt(p1.her.getText());
+            int contador = cbd.resultado.getInt(1); // guardamos el identificador de antes en esta variable
+             
             int fecha = Integer.parseInt(p1.jTextField2.getText());
+            // comprobacion de que la fecha no existe
+            boolean error = false;
+            cbd.un_sql="select * from cartoncuotas where numero_hermano_id="+numero_hermano_i+";"; // cogemos el identificador mas grande
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql); 
+            while(cbd.resultado.next()){
+                int año = cbd.resultado.getInt("año");
+                if (año==fecha) {
+                    error=true;
+                }
+            }
+            // fin de comprobacion de la fecha
+            if (error==false) {
             agregarCarton(contador+1, fecha, numero_hermano_i);
-            
+            JOptionPane.showMessageDialog(null, "Insertado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "La fecha introducida ya existe");
+                error=false;
+            }
             
             
             } else {
                 
-                int numero_hermano_i = Integer.parseInt(p1.her.getText());
+                //int numero_hermano_i = Integer.parseInt(p1.her.getText());
                 int fecha = Integer.parseInt(p1.jTextField2.getText());
                 agregarCarton(1, fecha, numero_hermano_i);
                 
             }
-            JOptionPane.showMessageDialog(null, "Insertado correctamente");
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
         }
