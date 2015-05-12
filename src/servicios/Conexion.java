@@ -36,6 +36,10 @@ public class Conexion {
         conexion = DriverManager.getConnection(s_conexion,username,password);
         dbmt = conexion.getMetaData();
         un_st = conexion.createStatement();
-    }   
+    }  
+    
+    public Connection getConnection() {
+        return conexion;
+    }
     
 }

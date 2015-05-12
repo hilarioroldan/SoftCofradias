@@ -248,7 +248,7 @@ break;
             hv1.tablaHermano.setModel(ff);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -292,8 +292,8 @@ break;
             hv1.tablaHermano1.setModel(ff);
             
         } catch (Exception e) {
-       //   e.printStackTrace();  
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+          e.printStackTrace();  
+            //JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);        
         }
         
     }
