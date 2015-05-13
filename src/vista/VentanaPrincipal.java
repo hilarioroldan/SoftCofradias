@@ -9,6 +9,7 @@ import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
 import controlador.ControladorHermandadesHermanadas;
 import controlador.ControladorHermano;
+import controlador.ControladorInformes;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
 import controlador.ControladorLibroAsiento;
@@ -64,6 +65,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
@@ -205,11 +207,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu6.setText("Informes");
 
-        jMenuItem4.setText("Listado de hermanos");
+        jMenuItem4.setText("Listado de Hermanos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
 
-        jMenuItem5.setText("Listado Inventario");
+        jMenuItem5.setText("Listado de Enseres y Patrimonio");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem5);
+
+        jMenuItem6.setText("Listado Libro de Asientos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem6);
 
         jMenuBar1.add(jMenu6);
 
@@ -301,6 +321,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cla.iniciar();
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       ControladorInformes ci = new ControladorInformes();
+        ci.cargarInformeListaHermanos();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ControladorInformes ci = new ControladorInformes();
+        ci.cargarInformeListaEnseresyPatrimonio();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ControladorInformes ci = new ControladorInformes();
+        ci.cargarInformeListaLibrodeAsientos();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +398,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

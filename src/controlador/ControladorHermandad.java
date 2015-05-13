@@ -197,7 +197,7 @@ public class ControladorHermandad implements ActionListener {
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                     JOptionPane.showMessageDialog(null, "El identificador " + hv.txtIdentificador.getText() + "ya existe, ingrese un identificador distinto", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (NumberFormatException x) {
-
+                    JOptionPane.showMessageDialog(null, "Has introducido un valor no numérico en un campo inadecuado", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 cargarTablaHermandades();
                 limpiarTexto();

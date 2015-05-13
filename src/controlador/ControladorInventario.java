@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -38,74 +40,81 @@ public class ControladorInventario implements ActionListener {
 
     public void iniciar() {
 
-        i = new Inventario();
-        iv = new InventarioVista();
-
-        iv.setVisible(true);
-        iv.setLocationRelativeTo(null);
-
-        // desabilitamos el boton registo de todos los paneles menos para el insertar
-        iv.txtRegistro2.setEnabled(false);
-        iv.txtRegistro3.setEnabled(false);
-        iv.txtRegistro4.setEnabled(false);
-
-        cargarTablaEntidadConocida1();
-        // iniciliaciamos las fotos en primera posicion en la pantalla2
-        ponerPrimerInventario();
-        //iv.btnIzquierda1.setEnabled(false);
-        contador++;
-        // fin inicialicacion
-
-        //se añade las acciones a los controles del formulario padre
-        iv.btnInsertar1.setActionCommand("INSERTAR1");
-        iv.btnExaminar1.setActionCommand("EXAMINAR1");
-        iv.btnExaminar2.setActionCommand("EXAMINAR2");
-        iv.btnIzquierda1.setActionCommand("btnIzquierda1");
-        iv.btnDerecha1.setActionCommand("btnDerecha1");
-        iv.btnBuscar4.setActionCommand("BTNBUSCAR4");
-        iv.btnBuscar3.setActionCommand("BTNBUSCAR3");
-        iv.btnEliminar.setActionCommand("ELIMINAR");
-        iv.btnModificar.setActionCommand("MODIFICAR");
-        iv.btnSalir1.setActionCommand("SALIR1");
-        iv.btnSalir2.setActionCommand("SALIR2");
-        iv.btnSalir3.setActionCommand("SALIR3");
-        iv.btnSalir4.setActionCommand("SALIR4");
-        //Se pone a escuchar las acciones del usuario
-        iv.btnInsertar1.addActionListener(this);
-        iv.btnIzquierda1.addActionListener(this);
-        iv.btnDerecha1.addActionListener(this);
-        iv.btnBuscar4.addActionListener(this);
-        iv.btnBuscar3.addActionListener(this);
-        iv.btnEliminar.addActionListener(this);
-        iv.btnModificar.addActionListener(this);
-        iv.btnExaminar1.addActionListener(this);
-        iv.btnExaminar2.addActionListener(this);
-        iv.btnSalir1.addActionListener(this);
-        iv.btnSalir2.addActionListener(this);
-        iv.btnSalir3.addActionListener(this);
-        iv.btnSalir4.addActionListener(this);
-
-        //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
-        iv.tblInventario1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblInventario1MousePressed(evt);
-            }
-        });
-        //
-        iv.tblInventario2.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblInventario2MousePressed(evt);
-            }
-        });
-        //
-        iv.tblInventario3.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblInventario3MousePressed(evt);
-            }
-        });        
+        try {
+            i = new Inventario();
+            iv = new InventarioVista();
+            
+            iv.setVisible(true);
+            iv.setLocationRelativeTo(null);
+            
+            localizarIdentificadorMayorInventario();
+            iv.txtRegistro1.setEnabled(false);
+            
+            // desabilitamos el boton registo de todos los paneles menos para el insertar
+            iv.txtRegistro2.setEnabled(false);
+            iv.txtRegistro3.setEnabled(false);
+            iv.txtRegistro4.setEnabled(false);
+            
+            cargarTablaEntidadConocida1();
+            // iniciliaciamos las fotos en primera posicion en la pantalla2
+            ponerPrimerInventario();
+            //iv.btnIzquierda1.setEnabled(false);
+            contador++;
+            // fin inicialicacion
+            
+            //se añade las acciones a los controles del formulario padre
+            iv.btnInsertar1.setActionCommand("INSERTAR1");
+            iv.btnExaminar1.setActionCommand("EXAMINAR1");
+            iv.btnExaminar2.setActionCommand("EXAMINAR2");
+            iv.btnIzquierda1.setActionCommand("btnIzquierda1");
+            iv.btnDerecha1.setActionCommand("btnDerecha1");
+            iv.btnBuscar4.setActionCommand("BTNBUSCAR4");
+            iv.btnBuscar3.setActionCommand("BTNBUSCAR3");
+            iv.btnEliminar.setActionCommand("ELIMINAR");
+            iv.btnModificar.setActionCommand("MODIFICAR");
+            iv.btnSalir1.setActionCommand("SALIR1");
+            iv.btnSalir2.setActionCommand("SALIR2");
+            iv.btnSalir3.setActionCommand("SALIR3");
+            iv.btnSalir4.setActionCommand("SALIR4");
+            //Se pone a escuchar las acciones del usuario
+            iv.btnInsertar1.addActionListener(this);
+            iv.btnIzquierda1.addActionListener(this);
+            iv.btnDerecha1.addActionListener(this);
+            iv.btnBuscar4.addActionListener(this);
+            iv.btnBuscar3.addActionListener(this);
+            iv.btnEliminar.addActionListener(this);
+            iv.btnModificar.addActionListener(this);
+            iv.btnExaminar1.addActionListener(this);
+            iv.btnExaminar2.addActionListener(this);
+            iv.btnSalir1.addActionListener(this);
+            iv.btnSalir2.addActionListener(this);
+            iv.btnSalir3.addActionListener(this);
+            iv.btnSalir4.addActionListener(this);
+            
+            //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
+            iv.tblInventario1.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent evt) {
+                    tblInventario1MousePressed(evt);
+                }
+            });
+            //
+            iv.tblInventario2.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent evt) {
+                    tblInventario2MousePressed(evt);
+                }
+            });
+            //
+            iv.tblInventario3.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent evt) {
+                    tblInventario3MousePressed(evt);
+                }        
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -186,7 +195,12 @@ public class ControladorInventario implements ActionListener {
 
     public void modificarInventarioSeleccionado() {
 
-        String identificador = iv.txtRegistro4.getText();
+        if (iv.txtRegistro4.getText()==null || iv.txtRegistro4.getText().equals("")) {
+          
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un articulo", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        } else {
+              String identificador = iv.txtRegistro4.getText();
         String nombre = iv.txtNombre4.getText();
         String autor = iv.txtAutor4.getText();
         String estilo = iv.txtEstilo4.getText();
@@ -200,15 +214,23 @@ public class ControladorInventario implements ActionListener {
         String adquisicion = iv.txtAdquisicion4.getText();
         String fecha_baja = iv.txtFechaBaja4.getText();
 
-        try {            
-
-            modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, fecha_baja, longitudBytes);
+        try {   
+            
+            if (fecha_baja==null || fecha_baja.equalsIgnoreCase("")) {
+            modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, null, longitudBytes);
             JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
 
             iv.cuadroImagen4.setIcon(null);
+            } else {
+                modificarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fis, fecha_baja, longitudBytes);
+            JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
+
+            iv.cuadroImagen4.setIcon(null);
+            }
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
+ex.printStackTrace();
+//JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
         } catch (java.lang.IllegalArgumentException e) {
@@ -220,6 +242,7 @@ public class ControladorInventario implements ActionListener {
         vaciarTxtPantalla2();
         iv.btnIzquierda1.setEnabled(false);
         iv.btnDerecha1.setEnabled(false);
+        }
 
     }
 
@@ -284,12 +307,12 @@ public class ControladorInventario implements ActionListener {
     }
 
     public void vaciarTxtPantalla1_2() {
-        iv.txtRegistro1.setText("");
+        
         iv.txtNombre1.setText("");
         iv.txtAdquisicion1.setText("");
         iv.txtAutor1.setText("");
         iv.txtEstilo1.setText("");
-        
+        iv.jDate1.setDate(null);
         iv.txtProcedencia1.setText("");
         iv.txtValoracionEconomica1.setText("");
         iv.txtMejora1.setText("");
@@ -321,7 +344,8 @@ public class ControladorInventario implements ActionListener {
     }
 
     public void eliminarInventarioSeleccionado() {
-        int seleccion = Integer.parseInt(iv.txtRegistro3.getText());
+        try {
+            int seleccion = Integer.parseInt(iv.txtRegistro3.getText());
         if (seleccion != 0) {
             try {
                 eliminarInventario(seleccion);
@@ -334,10 +358,14 @@ public class ControladorInventario implements ActionListener {
         }
 
         vaciarTxtPantalla2();
+        localizarIdentificadorMayorInventario();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun articulo del inventario", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void buscarPantalla3() {
-        int contador = 1; // con este contador sacaremos el primero valor para devolverlo a la interfez (txt)
+        int contador = 1; // con este contador sacaremos el primer valor para devolverlo a la interfez (txt)
         Inventario inventario = null;
         DefaultTableModel m;
         try {
@@ -349,7 +377,9 @@ public class ControladorInventario implements ActionListener {
             String campo = (String) iv.combo4.getSelectedItem();
             String filtro = iv.txtFiltro4.getText();
             x = buscarInventario(filtro, campo);
-
+            
+            if (x.size()>0) {
+            
             Iterator<Inventario> it = x.iterator();
             while (it.hasNext()) {
                 inventario = it.next();
@@ -365,7 +395,8 @@ public class ControladorInventario implements ActionListener {
                 fila[9] = String.valueOf(inventario.getCantidad());
                 fila[10] = inventario.getObservaciones();
                 fila[11] = inventario.getAdquisicion();
-                fila[12] = String.valueOf(inventario.getFecha_baja());
+                fila[12] = inventario.getFecha_baja();
+                
                 m.addRow(fila);
 
                 // devolvemos el primer valor a la interfaz (txt)
@@ -404,9 +435,15 @@ public class ControladorInventario implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             iv.tblInventario2.setRowSorter(ordenar);
             iv.tblInventario2.setModel(m);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningun valor");
+            }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "1Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (java.lang.NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
@@ -423,6 +460,8 @@ public class ControladorInventario implements ActionListener {
             String filtro = iv.txtFiltro3.getText();
             x = buscarInventario(filtro, campo);
 
+            if (x.size()>0) {
+            
             Iterator<Inventario> it = x.iterator();
             while (it.hasNext()) {
                 inventario = it.next();
@@ -438,7 +477,8 @@ public class ControladorInventario implements ActionListener {
                 fila[9] = String.valueOf(inventario.getCantidad());
                 fila[10] = inventario.getObservaciones();
                 fila[11] = inventario.getAdquisicion();
-                fila[12] = String.valueOf(inventario.getFecha_baja());
+                fila[12] = inventario.getFecha_baja();
+                
                 m.addRow(fila);
             }
 
@@ -446,9 +486,14 @@ public class ControladorInventario implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             iv.tblInventario3.setRowSorter(ordenar);
             iv.tblInventario3.setModel(m);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se han encontrado resultados");
+            }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "11Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (java.lang.NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
@@ -529,7 +574,10 @@ public class ControladorInventario implements ActionListener {
                     iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
                     iv.txtObservaciones2.setText(x.getObservaciones());
                     iv.txtAdquisicion2.setText(x.getAdquisicion());
-                    iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                    if (x.getFecha_baja()!=null || x.getFecha_baja().equals("")) {
+                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                    }
+                    
                 }
 
                 Image foto = null;
@@ -543,6 +591,8 @@ public class ControladorInventario implements ActionListener {
 
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.lang.NullPointerException e) {
+                
             }
         }
 
@@ -915,7 +965,12 @@ public class ControladorInventario implements ActionListener {
 
         Image foto;
         foto = leerImagen(Integer.parseInt(iv.txtRegistro3.getText()));
-        iv.cuadroImagen3.setIcon(new ImageIcon(foto));
+        if (foto!=null) {
+            iv.cuadroImagen3.setIcon(new ImageIcon(foto));
+        } else {
+            iv.cuadroImagen3.setIcon(null);
+        }
+        
 
         contador = Integer.parseInt(iv.txtRegistro3.getText());
 
@@ -946,6 +1001,8 @@ public class ControladorInventario implements ActionListener {
 
                         } catch (IOException ex) {
                             JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+                        } catch (java.lang.NullPointerException e) {
+                            
                         }
                     } else {
                         //JOptionPane.showMessageDialog(null, "no hay imagen");
@@ -985,7 +1042,7 @@ public class ControladorInventario implements ActionListener {
                 fila[9] = cbd.resultado.getString("cantidad");
                 fila[10] = cbd.resultado.getString("observaciones");
                 fila[11] = cbd.resultado.getString("adquisicion");
-                fila[12] = cbd.resultado.getString("fecha_baja");
+                fila[12]= cbd.resultado.getString("fecha_baja");
                 m.addRow(fila);
             }
 
@@ -1082,6 +1139,8 @@ public class ControladorInventario implements ActionListener {
                     iv.cuadroImagen4.updateUI();
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "imagen: " + ex);
+                } catch (java.lang.NullPointerException ex) {
+                    JOptionPane.showMessageDialog(null, "Operacion no válida", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "imagen: " + ex);
@@ -1090,64 +1149,125 @@ public class ControladorInventario implements ActionListener {
     }
 
     public void insertarPantalla1() {
-        String identificador = iv.txtRegistro1.getText();
-        String nombre = iv.txtNombre1.getText();
-        String autor = iv.txtAutor1.getText();
-        String estilo = iv.txtEstilo1.getText();
-        String fecha_realizacion = null;
-        
-        if (iv.jDate1.getDate()!=null) {
-           // Trabajando con fecha
-        int año = iv.jDate1.getCalendar().get(Calendar.YEAR);
-        int mes = iv.jDate1.getCalendar().get(Calendar.MONTH);
-        int dia = iv.jDate1.getCalendar().get(Calendar.DAY_OF_MONTH);
-        fecha_realizacion = año+"-"+mes+"-"+dia;
-        // 
-        } 
-        
-        String procedencia = iv.txtProcedencia1.getText();
-        String valoracion_economica = iv.txtValoracionEconomica1.getText();
-        String mejora = iv.txtMejora1.getText();
-        String restauracion = iv.txtRestauracion1.getText();
-        String cantidad = iv.txtCantidad1.getText();
-        String observaciones = iv.txtObservaciones1.getText();
-        String adquisicion = iv.txtAdquisicion1.getText();
-        String fecha_baja = null;
-        
-       if (iv.jDate2.getDate()!=null) {
-           // Trabajando con fecha
-        int año2 = iv.jDate2.getCalendar().get(Calendar.YEAR);
-        int mes2 = iv.jDate2.getCalendar().get(Calendar.MONTH);
-        int dia2 = iv.jDate2.getCalendar().get(Calendar.DAY_OF_MONTH);
-        fecha_baja = año2+"-"+mes2+"-"+dia2;        
-       } else {
-           JOptionPane.showMessageDialog(null, "no");
-       }
-
         try {
-            if (iv.jDate1.getDate()!=null && iv.jDate2.getDate()==null) {
-
-                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
-                JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
-
-            } else if (iv.jDate1.getDate()==null) {
-                
-                JOptionPane.showMessageDialog(null, "El campo Fecha Realizacion es Obligatorio");
-                
-            } else {
-                
-                agregarInventario(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, fecha_baja, this.longitudBytes);
-                JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+            int identificador = 0;
+            //localizamos el identificador mayor//
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select max(identificador) from inventario";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            if (cbd.resultado.next()) { // si hay algun identificador cogemos el mayor para despues sumarle +1
+                identificador = cbd.resultado.getInt(1)+1;
+            } else { // si no devuelve nada sera porque no hay nada insertado, identificador sera 1
+                identificador = 1;
             }
-
-            iv.cuadroImagen1.setIcon(null);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
-        } catch (java.lang.IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, "Error: Parametros incorrectos introducidos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            // este codigo comentado abajo lo trasladamos al iniciar esta pantalla
+            // para cada vez que entremos en insertar tengamos el nuevo identificador
+            //
+            // tambien pondremos este codigo justamente al acabar este metodo, dentro de él, para que cuando
+            // se inserte pase al siguiente id, porque cogera el nuevo sumado+1, y volvera a coger el siguiente..
+            /*
+            int identificador = 0;
+            //localizamos el identificador mayor//
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select max(identificador) from inventario";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            if (cbd.resultado.next()) { // si hay algun identificador cogemos el mayor para despues sumarle +1
+                identificador = cbd.resultado.getInt(identificador)+1;
+            } else { // si no devuelve nada sera porque no hay nada insertado, identificador sera 1
+                identificador = 1;
+            }  */
+            
+            String nombre = iv.txtNombre1.getText();
+            String autor = iv.txtAutor1.getText();
+            String estilo = iv.txtEstilo1.getText();
+            String fecha_realizacion = null;
+            
+            if (iv.jDate1.getDate()!=null) {
+                // Trabajando con fecha
+                int año = iv.jDate1.getCalendar().get(Calendar.YEAR);
+                int mes = iv.jDate1.getCalendar().get(Calendar.MONTH);
+                int dia = iv.jDate1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                fecha_realizacion = año+"-"+mes+"-"+dia;
+                //
+            }
+            
+            String procedencia = iv.txtProcedencia1.getText();
+            String valoracion_economica = iv.txtValoracionEconomica1.getText();
+            String mejora = iv.txtMejora1.getText();
+            String restauracion = iv.txtRestauracion1.getText();
+            String cantidad = iv.txtCantidad1.getText();
+            String observaciones = iv.txtObservaciones1.getText();
+            String adquisicion = iv.txtAdquisicion1.getText();
+            String fecha_baja = "";
+            
+            if (iv.jDate2.getDate()!=null) {
+                // Trabajando con fecha
+                int año2 = iv.jDate2.getCalendar().get(Calendar.YEAR);
+                int mes2 = iv.jDate2.getCalendar().get(Calendar.MONTH);
+                int dia2 = iv.jDate2.getCalendar().get(Calendar.DAY_OF_MONTH);
+                fecha_baja = año2+"-"+mes2+"-"+dia2;
+            } else {
+                //JOptionPane.showMessageDialog(null, "no");
+            }
+            
+            try {
+                if (iv.jDate1.getDate()!=null && iv.jDate2.getDate()==null) {
+                    
+                    agregarInventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
+                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+                    
+                } else if (iv.jDate1.getDate()==null) {
+                    
+                    JOptionPane.showMessageDialog(null, "El campo Fecha Realizacion es Obligatorio");
+                    
+                } else {
+                    
+                    agregarInventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, fecha_baja, this.longitudBytes);
+                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+                }
+                
+                iv.cuadroImagen1.setIcon(null);
+                
+                //
+                
+                int identificador2 = 0; // cambiamos el nombre del identificador porque antes ya esta como identificador y dara error
+            //localizamos el identificador mayor//
+            //Conexion cbd = ConectarServicio.getInstancia().getConexionDb(); // la conexion ya esta realizada antes por lo tanto lo quitamos
+            cbd.un_sql = "select max(identificador) from inventario";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            if (cbd.resultado.next()) { // si hay algun identificador cogemos el mayor para despues sumarle +1
+                identificador2 = cbd.resultado.getInt(1)+1;
+            } else { // si no devuelve nada sera porque no hay nada insertado, identificador sera 1
+                identificador2 = 1;
+            }
+              
+            iv.txtRegistro1.setText(String.valueOf(identificador2));
+                
+                
+                //
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
+            } catch (java.lang.IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, "Error: Parametros incorrectos introducidos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE,null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
     }
 
@@ -1225,6 +1345,26 @@ public class ControladorInventario implements ActionListener {
     public ArrayList<Inventario> leerTodas() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario();
         return i.leerTodos();
+    }
+    
+    public void localizarIdentificadorMayorInventario() throws SQLException {
+        int identificador = 0;
+            //localizamos el identificador mayor//
+            Conexion cbd = null;
+        try {
+            cbd = ConectarServicio.getInstancia().getConexionDb();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            cbd.un_sql = "select max(identificador) from inventario";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            if (cbd.resultado.next()) { // si hay algun identificador cogemos el mayor para despues sumarle +1
+                identificador = cbd.resultado.getInt(1)+1;
+            } else { // si no devuelve nada sera porque no hay nada insertado, identificador sera 1
+                identificador = 1;
+            }
+            iv.txtRegistro1.setText(String.valueOf(identificador));
     }
 
 }
