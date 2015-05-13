@@ -29,8 +29,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         ingresar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtIdentificador = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtNombreEntidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -43,15 +41,13 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         txtCp = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtTelf1 = new javax.swing.JTextField();
-        txTelf2 = new javax.swing.JTextField();
+        txtTelf2 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
         btnIngresar = new javax.swing.JButton();
         buscar = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
-        txtIdentificador3 = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         txtNombreEntidad3 = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
@@ -77,8 +73,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         txtFiltro1 = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         modificar = new javax.swing.JPanel();
-        jLabel54 = new javax.swing.JLabel();
-        txtIdentificador5 = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
         txtNombreEntidad5 = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
@@ -105,8 +99,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         btnBuscar1 = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         eliminar = new javax.swing.JPanel();
-        jLabel43 = new javax.swing.JLabel();
-        txtIdentificador4 = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         txtNombreEntidad4 = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
@@ -134,8 +126,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Identificador:");
 
         jLabel2.setText("Nombre Entidad:");
 
@@ -169,29 +159,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ingresarLayout.createSequentialGroup()
-                        .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ingresarLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
-                            .addGroup(ingresarLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDomicilio)
                         .addGap(18, 18, 18)
-                        .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ingresarLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDomicilio)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreEntidad)))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ingresarLayout.createSequentialGroup()
                         .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnIngresar, javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,11 +184,15 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txTelf2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelf2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ingresarLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreEntidad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ingresarLayout.setVerticalGroup(
@@ -218,8 +200,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
             .addGroup(ingresarLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -237,7 +217,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtTelf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(txTelf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
@@ -248,8 +228,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Ingresar Entidad Conocida", ingresar);
-
-        jLabel32.setText("Identificador:");
 
         jLabel33.setText("Nombre Entidad:");
 
@@ -298,29 +276,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(buscarLayout.createSequentialGroup()
-                        .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(buscarLayout.createSequentialGroup()
-                                .addComponent(jLabel32)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdentificador3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel33))
-                            .addGroup(buscarLayout.createSequentialGroup()
-                                .addComponent(jLabel34)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocalidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLocalidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDomicilio3)
                         .addGap(18, 18, 18)
-                        .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(buscarLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel35)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDomicilio3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel36)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtProvincia3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreEntidad3)))
+                        .addComponent(jLabel36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProvincia3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(buscarLayout.createSequentialGroup()
                         .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(buscarLayout.createSequentialGroup()
@@ -348,7 +314,11 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))))
+                            .addComponent(btnBuscar)))
+                    .addGroup(buscarLayout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreEntidad3)))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(buscarLayout.createSequentialGroup()
                 .addContainerGap()
@@ -364,8 +334,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
             .addGroup(buscarLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(txtIdentificador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33)
                     .addComponent(txtNombreEntidad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -401,8 +369,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Buscar Entidad Conocida", buscar);
-
-        jLabel54.setText("Identificador:");
 
         jLabel55.setText("Nombre Entidad:");
 
@@ -453,29 +419,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(modificarLayout.createSequentialGroup()
-                        .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(modificarLayout.createSequentialGroup()
-                                .addComponent(jLabel54)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel55))
-                            .addGroup(modificarLayout.createSequentialGroup()
-                                .addComponent(jLabel56)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocalidad5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel56)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLocalidad5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel57)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDomicilio5)
                         .addGap(18, 18, 18)
-                        .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(modificarLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel57)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDomicilio5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel58)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtProvincia5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreEntidad5)))
+                        .addComponent(jLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProvincia5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(modificarLayout.createSequentialGroup()
                         .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(modificarLayout.createSequentialGroup()
@@ -506,7 +460,11 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                             .addGroup(modificarLayout.createSequentialGroup()
                                 .addComponent(btnBuscar1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnModificar)))))
+                                .addComponent(btnModificar))))
+                    .addGroup(modificarLayout.createSequentialGroup()
+                        .addComponent(jLabel55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreEntidad5)))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(modificarLayout.createSequentialGroup()
                 .addContainerGap()
@@ -522,8 +480,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
             .addGroup(modificarLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel54)
-                    .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel55)
                     .addComponent(txtNombreEntidad5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -560,8 +516,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Modificar Entidad Conocida", modificar);
-
-        jLabel43.setText("Identificador:");
 
         jLabel44.setText("Nombre Entidad:");
 
@@ -612,29 +566,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(eliminarLayout.createSequentialGroup()
-                        .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(eliminarLayout.createSequentialGroup()
-                                .addComponent(jLabel43)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdentificador4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel44))
-                            .addGroup(eliminarLayout.createSequentialGroup()
-                                .addComponent(jLabel45)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocalidad4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLocalidad4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDomicilio4)
                         .addGap(18, 18, 18)
-                        .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(eliminarLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel46)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDomicilio4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel47)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtProvincia4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreEntidad4)))
+                        .addComponent(jLabel47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProvincia4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(eliminarLayout.createSequentialGroup()
                         .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(eliminarLayout.createSequentialGroup()
@@ -665,7 +607,11 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                             .addGroup(eliminarLayout.createSequentialGroup()
                                 .addComponent(btnBuscar2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminar)))))
+                                .addComponent(btnEliminar))))
+                    .addGroup(eliminarLayout.createSequentialGroup()
+                        .addComponent(jLabel44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreEntidad4)))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(eliminarLayout.createSequentialGroup()
                 .addContainerGap()
@@ -681,8 +627,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
             .addGroup(eliminarLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(txtIdentificador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44)
                     .addComponent(txtNombreEntidad4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -786,10 +730,8 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JComboBox cmbBD3;
     private javax.swing.JPanel eliminar;
     private javax.swing.JPanel ingresar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -801,7 +743,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
@@ -813,7 +754,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
@@ -836,7 +776,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JTable tablaEntidadConocida1;
     public javax.swing.JTable tablaEntidadConocida2;
     public javax.swing.JTable tablaEntidadConocida3;
-    public javax.swing.JTextField txTelf2;
     public javax.swing.JTextField txtCp;
     public javax.swing.JTextField txtCp3;
     public javax.swing.JTextField txtCp4;
@@ -852,10 +791,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtFiltro1;
     public javax.swing.JTextField txtFiltro2;
     public javax.swing.JTextField txtFiltro3;
-    public javax.swing.JTextField txtIdentificador;
-    public javax.swing.JTextField txtIdentificador3;
-    public javax.swing.JTextField txtIdentificador4;
-    public javax.swing.JTextField txtIdentificador5;
     public javax.swing.JTextField txtLocalidad;
     public javax.swing.JTextField txtLocalidad3;
     public javax.swing.JTextField txtLocalidad4;
@@ -872,6 +807,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtTelf13;
     public javax.swing.JTextField txtTelf14;
     public javax.swing.JTextField txtTelf15;
+    public javax.swing.JTextField txtTelf2;
     public javax.swing.JTextField txtTelf23;
     public javax.swing.JTextField txtTelf24;
     public javax.swing.JTextField txtTelf25;

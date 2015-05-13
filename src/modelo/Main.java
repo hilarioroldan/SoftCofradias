@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         try {
-            FileInputStream propFile = new FileInputStream("C:\\Users\\hilario\\Documents\\NetBeansProjects\\SoftCofradias\\SoftCofradias\\src\\modelo\\configurarbd.txt");
+            FileInputStream propFile = new FileInputStream("src//modelo//configurarbd.txt");
             Properties p = new Properties(System.getProperties());
             p.load(propFile);
             System.setProperties(p);
@@ -29,7 +29,7 @@ public class Main {
             System.exit(-1);
         }
 
-       /* try {
+        try {
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
         } catch (java.lang.ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Ocurrio la excepcion " + e);
@@ -45,7 +45,7 @@ public class Main {
             System.exit(-1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }*/
+        }
 
         try {
             VentanaPrincipal x = new VentanaPrincipal();

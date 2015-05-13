@@ -56,7 +56,7 @@ public class HermandadesHermanadasBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE hermandadeshermanadas SET nombre='"+h.getNombre()+"', nombre='"+h.getNombre()+"',  parroquia='"+h.getParroquia()+"', localidad ='"+h.getLocalidad()+"', domicilio ='"+h.getDomicilio()+"',  telef1 ='"+h.getTelf1()+"', telef2 ='"+h.getTelf2()+"', WHERE id="+h.getId()+";";            
+            cbd.un_sql = "UPDATE hermandadeshermanadas SET nombre='"+h.getNombre()+"',  parroquia='"+h.getParroquia()+"', localidad ='"+h.getLocalidad()+"', domicilio ='"+h.getDomicilio()+"',  telf1 ='"+h.getTelf1()+"', telf2 ='"+h.getTelf2()+"' WHERE identificador="+h.getId()+";";            
             cbd.un_st.executeUpdate(cbd.un_sql);
         } else {
              /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
@@ -84,8 +84,8 @@ public class HermandadesHermanadasBD {
                 h.setParroquia(cbd.resultado.getString("parroquia"));
                 h.setLocalidad(cbd.resultado.getString("localidad"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
             } else {
                  /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
                 throw new Error("Registro " + h.getId()+ " No se encuentra en la tabla proveedor Ubicacion'" + this.getClass().getName());
@@ -126,8 +126,8 @@ public class HermandadesHermanadasBD {
                 h.setParroquia(cbd.resultado.getString("parroquia"));
                 h.setLocalidad(cbd.resultado.getString("localidad"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
                 listaHermandades.add(h);
             }           
         }
@@ -152,8 +152,8 @@ public class HermandadesHermanadasBD {
                 h.setParroquia(cbd.resultado.getString("parroquia"));
                 h.setLocalidad(cbd.resultado.getString("localidad"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
                 listaHermandades.add(h);
         }
         

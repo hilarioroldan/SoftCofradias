@@ -10,8 +10,8 @@ public class EntidadesConocidas {
     private String nombre;
     private String localidad;
     private String domicilio;
-    private String telf1;
-    private String telf2;
+    private int telf1;
+    private int telf2;
     private int cp;
     private String provincia;
     private String email;
@@ -21,7 +21,7 @@ public class EntidadesConocidas {
         this.identificador = identificador;        
     }
 
-    public EntidadesConocidas(int identificador, String nombre, String localidad, String domicilio, String telf1, String telf2, int cp, String provincia, String email) {
+    public EntidadesConocidas(int identificador, String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.localidad = localidad;
@@ -33,7 +33,7 @@ public class EntidadesConocidas {
         this.email=email;
     }
     
-    public EntidadesConocidas(String nombre, String localidad, String domicilio, String telf1, String telf2, int cp, String provincia, String email) {
+    public EntidadesConocidas(String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) {
         
         this.nombre = nombre;
         this.localidad = localidad;
@@ -81,19 +81,19 @@ public class EntidadesConocidas {
         this.domicilio = domicilio;
     }
 
-    public String getTelf1() {
+    public int getTelf1() {
         return telf1;
     }
 
-    public void setTelf1(String telf1) {
+    public void setTelf1(int telf1) {
         this.telf1 = telf1;
     }
 
-    public String getTelf2() {
+    public int getTelf2() {
         return telf2;
     }
 
-    public void setTelf2(String telf2) {
+    public void setTelf2(int telf2) {
         this.telf2 = telf2;
     }
     

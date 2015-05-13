@@ -2,7 +2,6 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,6 +22,10 @@ public class ControladorHermandadesHermanadas implements ActionListener {
     HermandadesHermanadas hH;
     HermandadesHermanadasVista hHvista;
     
+    int identificadorEliminar = 0;
+    int identificadorBuscar = 0;
+    int identificadorModificar = 0;
+    
     /** BOTONES: INGRESAR-SALIR **/
     
     public void iniciar() {
@@ -31,15 +34,19 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         hHvista.setVisible(true);
         hHvista.setLocationRelativeTo(null);
         
-        cargarTablaEntidadConocida1();
+        cargarTablaEntidadConocidaBuscar();
         
+        // cargamos los combo
         cargarCmbBD1();
         cargarCmbBD2();
+        cargarCmbBD3();
 
         //se añade las acciones a los controles del formulario padre
         hHvista.btnIngresar.setActionCommand("INGRESAR");
         hHvista.btnBuscar.setActionCommand("BUSCAR1");
         hHvista.btnBuscar2.setActionCommand("BUSCAR2");
+        hHvista.btnBuscar3.setActionCommand("BUSCAR3");
+        hHvista.btnModificar.setActionCommand("MODIFICAR");
         hHvista.btnEliminar.setActionCommand("ELIMINAR");
         hHvista.btnSalir.setActionCommand("SALIR1");
         hHvista.btnSalir2.setActionCommand("SALIR2");
@@ -49,6 +56,8 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         hHvista.btnIngresar.addActionListener(this);
         hHvista.btnBuscar.addActionListener(this);
         hHvista.btnBuscar2.addActionListener(this);
+        hHvista.btnBuscar3.addActionListener(this);
+        hHvista.btnModificar.addActionListener(this);
         hHvista.btnEliminar.addActionListener(this);
         hHvista.btnSalir.addActionListener(this);
         hHvista.btnSalir2.addActionListener(this);
@@ -83,22 +92,9 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         String comando = e.getActionCommand();
         switch (comando) {
             case "INGRESAR":
-                String identificador = hHvista.txtIdentificador.getText();
-                String nombre = hHvista.txtNombreHh.getText();
-                String localidad = hHvista.txtLocalidad.getText();
-                String domicilio = hHvista.txtDomicilio.getText();
-                String telf1 = hHvista.txtTelf1.getText();
-                String telf2 = hHvista.txTelf2.getText();
-                String parroquia = hHvista.txtParroquia.getText();
-           
-                try {
-                    agregarHermandadHermanadas(Integer.parseInt(identificador), nombre, parroquia, localidad, domicilio, telf1, telf2);
-                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
-                    limpiarTexto();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
-                }   
-                cargarTablaEntidadConocida1();
+                ingresarHermandadesHermanadas();
+                limpiarTexto();   
+                cargarTablaEntidadConocidaBuscar();
                 cargarTablaEntidadConocida2();
                 cargarTablaEntidadConocida3();
                 break;
@@ -108,6 +104,12 @@ public class ControladorHermandadesHermanadas implements ActionListener {
                 break;
             case "BUSCAR2":
                 cargarTablaEntidadConocida3();
+                break;
+            case "BUSCAR3":
+                buscarTablaEntidadConocidaModificar();
+                break;
+            case "MODIFICAR":
+                modificarEntidadConocida();                
                 break;
             case "ELIMINAR":
                 eliminarSeleccion();
@@ -125,21 +127,107 @@ public class ControladorHermandadesHermanadas implements ActionListener {
                 hHvista.dispose();
                 break;
         }
+        
+    }
+    
+    public void modificarEntidadConocida() {
+        
+        int clic = hHvista.tablaEntidadConocida1.getSelectedRow();
+        
+        if (clic!=-1) {
+            
+            try {
+            String nombre = hHvista.txtNombreEntidad2.getText();
+            String localidad = hHvista.txtLocalidad2.getText();
+            String domicilio = hHvista.txtDomicilio2.getText();
+            String parroquia = hHvista.txtParroquia2.getText();
+            int telf1 = Integer.parseInt(hHvista.txtTelf12.getText());
+            int telf2 = Integer.parseInt(hHvista.txtTelf22.getText());
+            modificarHermandad(identificadorModificar, nombre, localidad, domicilio, parroquia, telf1, telf2);
+       
+            JOptionPane.showMessageDialog(null, "Modificado correctamente");
+            
+            cargarTablaEntidadConocidaModificar();
+                cargarTablaEntidadConocidaBuscar();
+                limpiarTextoPantallaModificar();
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorHermandadesHermanadas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Has introducido un parámetro incorrecto. Revisa correctamente los campos");
+        }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes de seleccinar una fila de la Tabla");
+        }
+        
+        
+        
+    }
+    
+    public void ingresarHermandadesHermanadas() {
+        try {
+            int identificador = 0;
+            
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select max(identificador) from hermandadeshermanadas";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            if (cbd.resultado.next()) {
+                identificador = cbd.resultado.getInt(1)+1;
+            } else {
+                identificador = 1;
+            }
+            
+            String nombre = hHvista.txtNombreHh.getText();
+            String localidad = hHvista.txtLocalidad.getText();
+            String domicilio = hHvista.txtDomicilio.getText();
+            
+            // validacion de numeros
+            int telf1 = 000000000;
+            int telf2 = 000000000;
+            if (!hHvista.txtTelf1.getText().equalsIgnoreCase("")) {
+                telf1 = Integer.parseInt(hHvista.txtTelf1.getText());
+            }
+            if (!hHvista.txTelf2.getText().equalsIgnoreCase("")) {
+                telf2 = Integer.parseInt(hHvista.txTelf2.getText());
+            }            
+            // fin de validacion de numeros
+            
+            String parroquia = hHvista.txtParroquia.getText();
+            
+            agregarHermandadHermanadas(identificador, nombre, parroquia, localidad, domicilio, telf1, telf2);
+            JOptionPane.showMessageDialog(null, "Insertado Correctamente");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            ex.printStackTrace();
+        } catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Has introducido un parámetro incorrecto. Revisa correctamente los campos");
+        }
 
     }
     
     private void eliminarSeleccion() {
-        String seleccion = hHvista.txtIdentificador4.getText();
-        try {
-            eliminarHermandadHermanadas(Integer.parseInt(seleccion));
-            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
+        int clic = hHvista.tablaEntidadConocida3.getSelectedRow();
+        
+        if (clic!=-1) {
+            
+            try {
+            eliminarHermandadHermanadas(identificadorEliminar);
+            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(ControladorHermandadesHermanadas.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        cargarTablaEntidadConocida1();
+            
         limpiarTexto2();
-        hHvista.tablaEntidadConocida3.setModel(new DefaultTableModel());
-        hHvista.txtFiltro2.setText("");
+        cargarTablaEntidadConocidaEliminar();
+        cargarTablaEntidadConocidaBuscar();
+        
+        hHvista.txtFiltro2.setText(""); 
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la Tabla");
+        }      
+       
     }
     
     
@@ -155,7 +243,8 @@ public class ControladorHermandadesHermanadas implements ActionListener {
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermandadesHermanadas.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }  
+        hHvista.cmbBD1.removeItemAt(7);
     }
     
     private void cargarCmbBD2() {        
@@ -170,13 +259,30 @@ public class ControladorHermandadesHermanadas implements ActionListener {
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermandadesHermanadas.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }  
+        hHvista.cmbBD2.removeItemAt(7);
+    }
+    
+    private void cargarCmbBD3() {        
+        try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="DESCRIBE hermandadeshermanadas;";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            hHvista.cmbBD3.removeAllItems();
+            
+            while(cbd.resultado.next()){
+                hHvista.cmbBD3.addItem(cbd.resultado.getString(1));
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorHermandadesHermanadas.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        hHvista.cmbBD3.removeItemAt(7);
     }
     
     private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {                                     
         int clic = hHvista.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
         
-        hHvista.txtIdentificador2.setText((String) hHvista.tablaEntidadConocida1.getValueAt(clic, 0));
+        identificadorModificar = Integer.parseInt((String) hHvista.tablaEntidadConocida1.getValueAt(clic, 0));
         hHvista.txtNombreEntidad2.setText((String) hHvista.tablaEntidadConocida1.getValueAt(clic, 1));
         hHvista.txtLocalidad2.setText((String) hHvista.tablaEntidadConocida1.getValueAt(clic, 3));
         hHvista.txtDomicilio2.setText((String) hHvista.tablaEntidadConocida1.getValueAt(clic, 2));
@@ -188,7 +294,7 @@ public class ControladorHermandadesHermanadas implements ActionListener {
     private void tablaEntidadConocida2MousePressed(java.awt.event.MouseEvent evt) {                                     
         int clic = hHvista.tablaEntidadConocida2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
         
-        hHvista.txtIdentificador3.setText((String) hHvista.tablaEntidadConocida2.getValueAt(clic, 0));
+        identificadorBuscar = Integer.parseInt((String) hHvista.tablaEntidadConocida2.getValueAt(clic, 0));
         hHvista.txtNombreEntidad3.setText((String) hHvista.tablaEntidadConocida2.getValueAt(clic, 1));
         hHvista.txtLocalidad3.setText((String) hHvista.tablaEntidadConocida2.getValueAt(clic, 3));
         hHvista.txtDomicilio3.setText((String) hHvista.tablaEntidadConocida2.getValueAt(clic, 2));
@@ -200,7 +306,7 @@ public class ControladorHermandadesHermanadas implements ActionListener {
     private void tablaEntidadConocida3MousePressed(java.awt.event.MouseEvent evt) {                                     
         int clic = hHvista.tablaEntidadConocida3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
         
-        hHvista.txtIdentificador4.setText((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 0));
+        identificadorEliminar = Integer.parseInt((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 0));
         hHvista.txtNombreEntidad4.setText((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 1));
         hHvista.txtLocalidad4.setText((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 3));
         hHvista.txtDomicilio4.setText((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 2));
@@ -209,7 +315,41 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         hHvista.txtTelf24.setText((String) hHvista.tablaEntidadConocida3.getValueAt(clic, 5));
     }
     
-    public void cargarTablaEntidadConocida1() {
+    public void cargarTablaEntidadConocidaBuscar() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[7];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select * from hermandadeshermanadas";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            while(cbd.resultado.next()){
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("nombre");
+                fila[2] = cbd.resultado.getString("domicilio");
+                fila[3] = cbd.resultado.getString("localidad");
+                fila[4] = cbd.resultado.getString("telf1");
+                fila[5] = cbd.resultado.getString("telf2");
+                fila[6] = cbd.resultado.getString("parroquia");
+           
+                m.addRow(fila);
+            }
+            
+            hHvista.tablaEntidadConocida2.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            hHvista.tablaEntidadConocida2.setRowSorter(ordenar);
+            hHvista.tablaEntidadConocida2.setModel(m);
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+        
+    }
+    
+     public void cargarTablaEntidadConocidaModificar() {
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
@@ -242,69 +382,29 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         }
         
     }
-    
-    public void cargarTablaEntidadConocida2() {
-        HermandadesHermanadas hermandadesh = null;
+     
+      public void cargarTablaEntidadConocidaEliminar() {
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
             String[] fila = new String[7];
-            ArrayList <HermandadesHermanadas> x;
-            String campo = (String) hHvista.cmbBD1.getSelectedItem();
-            String filtro = hHvista.txtFiltro1.getText();
-            x = hH.buscarFiltro(filtro, campo);
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select * from hermandadeshermanadas";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
             
-            Iterator <HermandadesHermanadas> it = x.iterator();
-            while(it.hasNext()){
-                hermandadesh = it.next();
-                fila[0] = String.valueOf(hermandadesh.getId());
-                fila[1] = hermandadesh.getNombre();
-                fila[2] = hermandadesh.getDomicilio();
-                fila[3] = hermandadesh.getLocalidad();
-                fila[4] = hermandadesh.getTelf1();
-                fila[5] = hermandadesh.getTelf2();
-                fila[6] = hermandadesh.getParroquia();
+            while(cbd.resultado.next()){
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("nombre");
+                fila[2] = cbd.resultado.getString("domicilio");
+                fila[3] = cbd.resultado.getString("localidad");
+                fila[4] = cbd.resultado.getString("telf1");
+                fila[5] = cbd.resultado.getString("telf2");
+                fila[6] = cbd.resultado.getString("parroquia");
+           
                 m.addRow(fila);
-            }           
-            
-            hHvista.tablaEntidadConocida2.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            hHvista.tablaEntidadConocida2.setRowSorter(ordenar);
-            hHvista.tablaEntidadConocida2.setModel(m);
-            
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
-        }
-        
-    }
-    
-    public void cargarTablaEntidadConocida3() {
-        HermandadesHermanadas hermandadesh = null;
-        DefaultTableModel m;
-        try {
-            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] fila = new String[7];
-            ArrayList <HermandadesHermanadas> x;
-            String campo = (String) hHvista.cmbBD2.getSelectedItem();
-            String filtro = hHvista.txtFiltro2.getText();
-            x = hH.buscarFiltro(filtro, campo);
-            
-            Iterator <HermandadesHermanadas> it = x.iterator();
-            while(it.hasNext()){
-                hermandadesh = it.next();
-                fila[0] = String.valueOf(hermandadesh.getId());
-                fila[1] = hermandadesh.getNombre();
-                fila[2] = hermandadesh.getDomicilio();
-                fila[3] = hermandadesh.getLocalidad();
-                fila[4] = hermandadesh.getTelf1();
-                fila[5] = hermandadesh.getTelf2();
-                fila[6] = hermandadesh.getParroquia();
-                m.addRow(fila);
-            }           
+            }
             
             hHvista.tablaEntidadConocida3.setModel(m);
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
@@ -316,10 +416,168 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         }
         
     }
+    
+    public void cargarTablaEntidadConocida2() {
+        
+        if (!hHvista.txtFiltro1.getText().equalsIgnoreCase("")) {
+            
+           HermandadesHermanadas hermandadesh = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[7];
+            ArrayList <HermandadesHermanadas> x;
+            String campo = (String) hHvista.cmbBD1.getSelectedItem();
+            String filtro = hHvista.txtFiltro1.getText();
+            x = hH.buscarFiltro(filtro, campo);
+            
+            if (x.size()>0) {
+                Iterator <HermandadesHermanadas> it = x.iterator();
+            while(it.hasNext()){
+                hermandadesh = it.next();
+                fila[0] = String.valueOf(hermandadesh.getId());
+                fila[1] = hermandadesh.getNombre();
+                fila[2] = hermandadesh.getDomicilio();
+                fila[3] = hermandadesh.getLocalidad();
+                fila[4] = String.valueOf(hermandadesh.getTelf1());
+                fila[5] = String.valueOf(hermandadesh.getTelf2());
+                fila[6] = hermandadesh.getParroquia();
+                m.addRow(fila);
+            }           
+            
+            hHvista.tablaEntidadConocida2.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            hHvista.tablaEntidadConocida2.setRowSorter(ordenar);
+            hHvista.tablaEntidadConocida2.setModel(m);
+            
+            hHvista.txtFiltro1.setText("");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                cargarTablaEntidadConocidaBuscar();
+                hHvista.txtFiltro1.setText("");
+            }
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        } 
+        
+        } else {
+            cargarTablaEntidadConocidaBuscar();
+        }   
+        
+    }
+    
+    public void buscarTablaEntidadConocidaModificar() {
+        
+        if (!hHvista.txtFiltro3.getText().equalsIgnoreCase("")) {
+            
+           HermandadesHermanadas hermandadesh = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[7];
+            ArrayList <HermandadesHermanadas> x;
+            String campo = (String) hHvista.cmbBD3.getSelectedItem();
+            String filtro = hHvista.txtFiltro3.getText();
+            x = hH.buscarFiltro(filtro, campo);
+            
+            if (x.size()>0) {
+                Iterator <HermandadesHermanadas> it = x.iterator();
+            while(it.hasNext()){
+                hermandadesh = it.next();
+                fila[0] = String.valueOf(hermandadesh.getId());
+                fila[1] = hermandadesh.getNombre();
+                fila[2] = hermandadesh.getDomicilio();
+                fila[3] = hermandadesh.getLocalidad();
+                fila[4] = String.valueOf(hermandadesh.getTelf1());
+                fila[5] = String.valueOf(hermandadesh.getTelf2());
+                fila[6] = hermandadesh.getParroquia();
+                m.addRow(fila);
+            }           
+            
+            hHvista.tablaEntidadConocida1.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            hHvista.tablaEntidadConocida1.setRowSorter(ordenar);
+            hHvista.tablaEntidadConocida1.setModel(m);
+            
+            hHvista.txtFiltro3.setText("");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                cargarTablaEntidadConocidaModificar();
+                hHvista.txtFiltro3.setText("");
+            }
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        } 
+        
+        } else {
+            cargarTablaEntidadConocidaModificar();
+        }
+        
+    }
+    
+    public void cargarTablaEntidadConocida3() {
+        if (!hHvista.txtFiltro2.getText().equalsIgnoreCase("")) {
+            
+            HermandadesHermanadas hermandadesh = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "Telf1", "Telf2", "Parroquia"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[7];
+            ArrayList <HermandadesHermanadas> x;
+            String campo = (String) hHvista.cmbBD2.getSelectedItem();
+            String filtro = hHvista.txtFiltro2.getText();
+            x = hH.buscarFiltro(filtro, campo);
+            
+            if (x.size()>0) {
+                
+                
+            Iterator <HermandadesHermanadas> it = x.iterator();
+            while(it.hasNext()){
+                hermandadesh = it.next();
+                fila[0] = String.valueOf(hermandadesh.getId());
+                fila[1] = hermandadesh.getNombre();
+                fila[2] = hermandadesh.getDomicilio();
+                fila[3] = hermandadesh.getLocalidad();
+                fila[4] = String.valueOf(hermandadesh.getTelf1());
+                fila[5] = String.valueOf(hermandadesh.getTelf2());
+                fila[6] = hermandadesh.getParroquia();
+                m.addRow(fila);
+            }           
+            
+            hHvista.tablaEntidadConocida3.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            hHvista.tablaEntidadConocida3.setRowSorter(ordenar);
+            hHvista.tablaEntidadConocida3.setModel(m);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                cargarTablaEntidadConocidaEliminar();
+                hHvista.txtFiltro2.setText("");
+            }            
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+            
+        } else {
+            cargarTablaEntidadConocidaEliminar();
+        }
+        
+        
+    }
 
     /*Limpiar Texto*/
     public void limpiarTexto() {
-        hHvista.txtIdentificador.setText("");
         hHvista.txtNombreHh.setText("");
         hHvista.txtLocalidad.setText("");
         hHvista.txtDomicilio.setText("");
@@ -331,7 +589,6 @@ public class ControladorHermandadesHermanadas implements ActionListener {
     
     /*Limpiar Texto*/
     public void limpiarTexto2() {
-        hHvista.txtIdentificador4.setText("");
         hHvista.txtNombreEntidad4.setText("");
         hHvista.txtLocalidad4.setText("");
         hHvista.txtDomicilio4.setText("");
@@ -339,6 +596,16 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         hHvista.txtTelf24.setText("");
         hHvista.txtParroquia4.setText("");
         hHvista.txtParroquia4.setText("");
+    }
+    
+    public void limpiarTextoPantallaModificar() {
+        hHvista.txtNombreEntidad2.setText("");
+        hHvista.txtLocalidad2.setText("");
+        hHvista.txtDomicilio2.setText("");
+        hHvista.txtTelf12.setText("");
+        hHvista.txtTelf22.setText("");
+        hHvista.txtParroquia2.setText("");
+        hHvista.txtParroquia2.setText("");
     }
 
     /* Método para buscar una Entidad Conocida indicando el campo y el valor */
@@ -348,14 +615,14 @@ public class ControladorHermandadesHermanadas implements ActionListener {
     }
 
     /*Metodo para agregar una Entidad Conocida*/
-    public void agregarHermandadHermanadas(int identificador, String nombre, String domicilio, String localidad, String telf1, String telf2, String parroquia) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        hH = new HermandadesHermanadas(identificador, nombre, domicilio, localidad, telf1, telf2, parroquia);
+    public void agregarHermandadHermanadas(int identificador, String nombre, String parroquia, String localidad, String domicilio, int telf1, int telf2) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hH = new HermandadesHermanadas(identificador, nombre, parroquia, localidad, domicilio, telf1, telf2);
         hH.grabar();
     }
 
     /*Metodo para modificar una Entidad Conocida*/
-    public void modificarHermandad(String nombre, String localidad, String domicilio, String telf1, String telf2, String parroquia) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        hH = new HermandadesHermanadas(nombre, domicilio, localidad, telf1, telf2, parroquia);
+    public void modificarHermandad(int identificador, String nombre, String parroquia, String localidad, String domicilio, int telf1, int telf2) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hH = new HermandadesHermanadas(identificador, nombre, parroquia, localidad, domicilio, telf1, telf2);
         hH.actualizar();
     }
 

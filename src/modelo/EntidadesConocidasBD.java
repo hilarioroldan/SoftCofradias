@@ -66,8 +66,8 @@ public class EntidadesConocidasBD {
                 ec.setNombre(cbd.resultado.getString("nombre"));
                 ec.setLocalidad(cbd.resultado.getString("localidad"));
                 ec.setDomicilio(cbd.resultado.getString("domicilio"));
-                ec.setTelf1(cbd.resultado.getString("telf1"));
-                ec.setTelf2(cbd.resultado.getString("telf2"));
+                ec.setTelf1(cbd.resultado.getInt("telf1"));
+                ec.setTelf2(cbd.resultado.getInt("telf2"));
                 ec.setCP(Integer.parseInt(cbd.resultado.getString("cp")));
                 ec.setProvincia(cbd.resultado.getString("provincia"));
                 ec.setEmail(cbd.resultado.getString("email"));
@@ -109,8 +109,8 @@ public class EntidadesConocidasBD {
                 ec.setNombre(cbd.resultado.getString("nombre"));
                 ec.setLocalidad(cbd.resultado.getString("localidad"));
                 ec.setDomicilio(cbd.resultado.getString("domicilio"));
-                ec.setTelf1(cbd.resultado.getString("telf1"));
-                ec.setTelf2(cbd.resultado.getString("telf2"));
+                ec.setTelf1(cbd.resultado.getInt("telf1"));
+                ec.setTelf2(cbd.resultado.getInt("telf2"));
                 ec.setCP(Integer.parseInt(cbd.resultado.getString("cp")));
                 ec.setProvincia(cbd.resultado.getString("provincia"));
                 ec.setEmail(cbd.resultado.getString("email"));
@@ -138,8 +138,8 @@ public class EntidadesConocidasBD {
                 ec.setNombre(cbd.resultado.getString("nombre"));
                 ec.setLocalidad(cbd.resultado.getString("localidad"));
                 ec.setDomicilio(cbd.resultado.getString("domicilio"));
-                ec.setTelf1(cbd.resultado.getString("telf1"));
-                ec.setTelf2(cbd.resultado.getString("telf2"));
+                ec.setTelf1(cbd.resultado.getInt("telf1"));
+                ec.setTelf2(cbd.resultado.getInt("telf2"));
                 ec.setCP(Integer.parseInt(cbd.resultado.getString("cp")));
                 ec.setProvincia(cbd.resultado.getString("provincia"));
                 ec.setEmail(cbd.resultado.getString("email"));

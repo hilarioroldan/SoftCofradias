@@ -10,10 +10,10 @@ public class HermandadesHermanadas {
     private String parroquia;
     private String localidad;
     private String domicilio;
-    private String telf1;
-    private String telf2;
+    private int telf1;
+    private int telf2;
 
-    public HermandadesHermanadas(int id, String nombre, String parroquia, String localidad, String domicilio, String telf1, String telf2) {
+    public HermandadesHermanadas(int id, String nombre, String parroquia, String localidad, String domicilio, int telf1, int telf2) {
         this.id = id;
         this.nombre = nombre;
         this.parroquia = parroquia;
@@ -22,22 +22,22 @@ public class HermandadesHermanadas {
         this.telf1 = telf1;
         this.telf2 = telf2;
     }
-    
-    
-    public HermandadesHermanadas(String nombre, String domicilio, String localidad, String telf1, String telf2, String parroquia){
+
+    public HermandadesHermanadas(String nombre, String parroquia, String localidad, String domicilio, int telf1, int telf2) {
         this.nombre = nombre;
-        this.domicilio = domicilio;
+        this.parroquia = parroquia;
         this.localidad = localidad;
+        this.domicilio = domicilio;
         this.telf1 = telf1;
         this.telf2 = telf2;
-        this.parroquia = parroquia;
     }
-    public HermandadesHermanadas(int id){
+
+    public HermandadesHermanadas(int id) {
         this.id = id;
     }
+
     public HermandadesHermanadas() {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }      
 
     public int getId() {
         return id;
@@ -79,19 +79,19 @@ public class HermandadesHermanadas {
         this.domicilio = domicilio;
     }
 
-    public String getTelf1() {
+    public int getTelf1() {
         return telf1;
     }
 
-    public void setTelf1(String telf1) {
+    public void setTelf1(int telf1) {
         this.telf1 = telf1;
     }
 
-    public String getTelf2() {
+    public int getTelf2() {
         return telf2;
     }
 
-    public void setTelf2(String telf2) {
+    public void setTelf2(int telf2) {
         this.telf2 = telf2;
     }
 

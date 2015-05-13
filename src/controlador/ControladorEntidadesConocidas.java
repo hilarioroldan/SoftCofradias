@@ -21,6 +21,8 @@ public class ControladorEntidadesConocidas implements ActionListener {
 
     EntidadesConocidas ec;
     EntidadesConocidasVista ecv;
+    int identificadorModificar = 0;
+    int identificadorEliminar = 0;
 
     /**
      * BOTONES: INGRESAR-SALIR *
@@ -31,7 +33,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.setVisible(true);
         ecv.setLocationRelativeTo(null);
 
-        cargarTablaEntidadConocida1();
+        //cargarTablaEntidadConocida1();
+        cargarTablaEntidadConocidaPrincipal();
+        //cargarTablaEntidadConocida3();
 
         cargarCmbBD1();
         cargarCmbBD2();
@@ -61,12 +65,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.btnModificar.addActionListener(this);
 
         //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
-        ecv.tablaEntidadConocida1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tablaEntidadConocida1MousePressed(evt);
-            }
-        });
+       
 
         ecv.tablaEntidadConocida2.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -74,13 +73,21 @@ public class ControladorEntidadesConocidas implements ActionListener {
                 tablaEntidadConocida2MousePressed(evt);
             }
         });
-
+        
+        ecv.tablaEntidadConocida1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaEntidadConocida1MousePressed(evt);
+            }
+        });
+        
         ecv.tablaEntidadConocida3.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaEntidadConocida3MousePressed(evt);
             }
         });
+
     }
 
     @Override
@@ -89,29 +96,30 @@ public class ControladorEntidadesConocidas implements ActionListener {
         switch (comando) {
             case "INGRESAR":
                 ingresarEntidadConocida();
-                cargarTablaEntidadConocida1();
-                cargarTablaEntidadConocida2();
-                cargarTablaEntidadConocida3();
+                cargarTablaEntidadConocidaPrincipal(); // recargamos la tabla cuando se inserta
                 break;
 
             case "MOSTRAR":
-                cargarTablaEntidadConocida2();
+                cargarTablaEntidadConocidaUno();
                 break;
 
             case "BUSCAR1":
-                cargarTablaEntidadConocida4();
+                cargarTablaEntidadConocidaDos();
                 break;
             case "BUSCAR2":
-                cargarTablaEntidadConocida3();
+                cargarTablaEntidadConocidaTres();
                 break;
             case "ELIMINAR":
                 eliminarSeleccion();
+                cargarTablaEntidadConocidaModificar();
+                cargarTablaEntidadConocidaPrincipal();
+                cargarTablaEntidadConocidaEliminar();
                 break;
             case "MODIFICAR":
                 modificarEntidadConocida();
-                cargarTablaEntidadConocida1();
-                cargarTablaEntidadConocida2();
-                cargarTablaEntidadConocida3();
+                cargarTablaEntidadConocidaModificar();
+                cargarTablaEntidadConocidaPrincipal();
+                cargarTablaEntidadConocidaEliminar();
                 break;
             case "SALIR1":
                 ecv.dispose();
@@ -130,48 +138,103 @@ public class ControladorEntidadesConocidas implements ActionListener {
     }
 
     public void ingresarEntidadConocida() {
-        String identificador = ecv.txtIdentificador.getText();
-        String nombre = ecv.txtNombreEntidad.getText();
-        String localidad = ecv.txtLocalidad.getText();
-        String domicilio = ecv.txtDomicilio.getText();
-        String telf1 = ecv.txtTelf1.getText();
-        String telf2 = ecv.txTelf2.getText();
-        String cp = ecv.txtCp.getText();
-        String provincia = ecv.txtProvincia.getText();
-        String email = ecv.txtEmail.getText();
+        
         try {
-            agregarEntidadConocida(Integer.parseInt(identificador), nombre, localidad, domicilio, telf1, telf2, Integer.parseInt(cp), provincia, email);
-            JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
-            limpiarTexto();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "El Identificador " + ecv.txtIdentificador.getText() + " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
+            
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select max(identificador) from entidadesconocidas";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+            int identificador = 0;
+            
+            if (cbd.resultado.next()) {
+                identificador = cbd.resultado.getInt(1)+1;
+            } else {
+                identificador=1;
+            }            
+          
+            String nombre = ecv.txtNombreEntidad.getText();
+            String localidad = ecv.txtLocalidad.getText();
+            String domicilio = ecv.txtDomicilio.getText();
+            
+            // validacion de numeros
+            int telf1=0;
+            int telf2=0;
+            int cp=00000;
+            if (!ecv.txtTelf1.getText().equalsIgnoreCase("")) {
+                telf1 = Integer.parseInt(ecv.txtTelf1.getText());
+            }
+            if (!ecv.txtTelf2.getText().equalsIgnoreCase("")) {
+                telf2 = Integer.parseInt(ecv.txtTelf2.getText());
+            }  
+            if (!ecv.txtCp.getText().equalsIgnoreCase("")) {
+                cp = Integer.parseInt(ecv.txtCp.getText());
+            } 
+            // fin de validacion de numeros
+            String provincia = ecv.txtProvincia.getText();
+            String email = ecv.txtEmail.getText();
+            
+            try {
+                agregarEntidadConocida(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
+                JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+                limpiarTextoPantallaInsertar();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
+                limpiarTextoPantallaInsertar();
+            }
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Parametro incorrecto introducido. Revise los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            limpiarTextoPantallaInsertar();
         }
     }
 
     public void modificarEntidadConocida() {
-        int identificador = Integer.parseInt(ecv.txtIdentificador5.getText());
-        String nombre = ecv.txtNombreEntidad5.getText();
-        String localidad = ecv.txtLocalidad5.getText();
-        String domicilio = ecv.txtDomicilio5.getText();
-        String telf1 = ecv.txtTelf15.getText();
-        String telf2 = ecv.txtTelf25.getText();
-        int cp = Integer.parseInt(ecv.txtCp5.getText());
-        String provincia = ecv.txtProvincia5.getText();
-        String email = ecv.txtEmail5.getText();
-        modificarEntidadConocida(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
-
+        try {
+            
+            int clic = ecv.tablaEntidadConocida1.getSelectedRow();
+            
+            if (clic!=-1) {
+                
+            String nombre = ecv.txtNombreEntidad5.getText();
+            String localidad = ecv.txtLocalidad5.getText();
+            String domicilio = ecv.txtDomicilio5.getText();
+            int telf1 = Integer.parseInt(ecv.txtTelf15.getText());
+            int telf2 = Integer.parseInt(ecv.txtTelf25.getText());
+            int cp = Integer.parseInt(ecv.txtCp5.getText());
+            String provincia = ecv.txtProvincia5.getText();
+            String email = ecv.txtEmail5.getText();
+            modificarEntidadConocida(identificadorModificar, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Has introducido un parámetro un incorrecto. Revisa los campos correctamente");
+        }
+        
     }
 
     private void eliminarSeleccion() {
-        String seleccion = ecv.txtIdentificador4.getText();
         try {
-            eliminarEntidadConocida(Integer.parseInt(seleccion));
-            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
+            
+            int clic = ecv.tablaEntidadConocida3.getSelectedRow();
+            
+            if (clic!=-1) {
+                 eliminarEntidadConocida(identificadorEliminar);
+                JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!");
+        eliminarEntidadConocida(identificadorEliminar);
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            }
+            
+            
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorEntidadesConocidas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cargarTablaEntidadConocida1();
         limpiarTexto2();
         ecv.tablaEntidadConocida3.setModel(new DefaultTableModel());
         ecv.txtFiltro2.setText("");
@@ -222,24 +285,10 @@ public class ControladorEntidadesConocidas implements ActionListener {
         }
     }
 
-    private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {
-        int clic = ecv.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-
-        ecv.txtIdentificador5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 0));
-        ecv.txtNombreEntidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 1));
-        ecv.txtLocalidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 3));
-        ecv.txtDomicilio5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 2));
-        ecv.txtProvincia5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 5));
-        ecv.txtCp5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 4));
-        ecv.txtTelf15.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 6));
-        ecv.txtTelf25.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 7));
-        ecv.txtEmail5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 8));
-    }
-
     private void tablaEntidadConocida2MousePressed(java.awt.event.MouseEvent evt) {
         int clic = ecv.tablaEntidadConocida2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
 
-        ecv.txtIdentificador3.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 0));
+        
         ecv.txtNombreEntidad3.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 1));
         ecv.txtLocalidad3.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 3));
         ecv.txtDomicilio3.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 2));
@@ -249,11 +298,25 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.txtTelf23.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 7));
         ecv.txtEmail3.setText((String) ecv.tablaEntidadConocida2.getValueAt(clic, 8));
     }
-
+    
+    private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {
+        int clic = ecv.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
+        // guardarmos en la variable identificadorModificar el identificador para despues usarlo a la hora de eliminar
+        identificadorModificar = Integer.parseInt((String) ecv.tablaEntidadConocida1.getValueAt(clic, 0));
+        ecv.txtNombreEntidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 1));
+        ecv.txtLocalidad5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 3));
+        ecv.txtDomicilio5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 2));
+        ecv.txtProvincia5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 5));
+        ecv.txtCp5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 4));
+        ecv.txtTelf15.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 6));
+        ecv.txtTelf25.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 7));
+        ecv.txtEmail5.setText((String) ecv.tablaEntidadConocida1.getValueAt(clic, 8));
+    }
+    
     private void tablaEntidadConocida3MousePressed(java.awt.event.MouseEvent evt) {
         int clic = ecv.tablaEntidadConocida3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-
-        ecv.txtIdentificador4.setText((String) ecv.tablaEntidadConocida3.getValueAt(clic, 0));
+       // guardarmos en la variable identificadorEliminar el identificador para despues usarlo a la hora de eliminar
+        identificadorEliminar = Integer.parseInt((String) ecv.tablaEntidadConocida3.getValueAt(clic, 0));
         ecv.txtNombreEntidad4.setText((String) ecv.tablaEntidadConocida3.getValueAt(clic, 1));
         ecv.txtLocalidad4.setText((String) ecv.tablaEntidadConocida3.getValueAt(clic, 3));
         ecv.txtDomicilio4.setText((String) ecv.tablaEntidadConocida3.getValueAt(clic, 2));
@@ -264,43 +327,13 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.txtEmail4.setText((String) ecv.tablaEntidadConocida3.getValueAt(clic, 8));
     }
 
-    public void cargarTablaEntidadConocida1() {
-        DefaultTableModel m;
-        try {
-            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] fila = new String[9];
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "select * from entidadesconocidas";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+    
+    
 
-            while (cbd.resultado.next()) {
-                fila[0] = cbd.resultado.getString("identificador");
-                fila[1] = cbd.resultado.getString("nombre");
-                fila[2] = cbd.resultado.getString("domicilio");
-                fila[3] = cbd.resultado.getString("localidad");
-                fila[4] = cbd.resultado.getString("cp");
-                fila[5] = cbd.resultado.getString("provincia");
-                fila[6] = cbd.resultado.getString("telf1");
-                fila[7] = cbd.resultado.getString("telf2");
-                fila[8] = cbd.resultado.getString("email");
-                m.addRow(fila);
-            }
-
-            ecv.tablaEntidadConocida1.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            ecv.tablaEntidadConocida1.setRowSorter(ordenar);
-            ecv.tablaEntidadConocida1.setModel(m);
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void cargarTablaEntidadConocida2() {
-        EntidadesConocidas entidad = null;
+    public void cargarTablaEntidadConocidaUno() {
+        if (!ecv.txtFiltro1.getText().equalsIgnoreCase("")) {
+            
+            EntidadesConocidas entidad = null;
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
@@ -311,8 +344,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
             String campo = (String) ecv.cmbBD1.getSelectedItem();
             String filtro = ecv.txtFiltro1.getText();
             x = ec.buscarFiltro(filtro, campo);
-
-            Iterator<EntidadesConocidas> it = x.iterator();
+            
+            if (x.size()>0) {
+                Iterator<EntidadesConocidas> it = x.iterator();
             while (it.hasNext()) {
                 entidad = it.next();
                 fila[0] = String.valueOf(entidad.getIdentificador());
@@ -321,8 +355,8 @@ public class ControladorEntidadesConocidas implements ActionListener {
                 fila[3] = entidad.getLocalidad();
                 fila[4] = String.valueOf(entidad.getCP());
                 fila[5] = entidad.getProvincia();
-                fila[6] = entidad.getTelf1();
-                fila[7] = entidad.getTelf2();
+                fila[6] = String.valueOf(entidad.getTelf1());
+                fila[7] = String.valueOf(entidad.getTelf2());
                 fila[8] = entidad.getEmail();
                 m.addRow(fila);
             }
@@ -331,54 +365,31 @@ public class ControladorEntidadesConocidas implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             ecv.tablaEntidadConocida2.setRowSorter(ordenar);
             ecv.tablaEntidadConocida2.setModel(m);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                ecv.tablaEntidadConocida2.setModel(new DefaultTableModel());
+            }           
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+           //e.printStackTrace();
+            // JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        ecv.txtFiltro1.setText(""); // vaciamos el contenido de texlfield filtro
+        
+        } else {
+            
+            cargarTablaEntidadConocidaPrincipal();
+            
+        }
+        
 
     }
-
-    public void cargarTablaEntidadConocida3() {
-        EntidadesConocidas entidad = null;
-        DefaultTableModel m;
-        try {
-            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] fila = new String[9];
-            ArrayList<EntidadesConocidas> x;
-            String campo = (String) ecv.cmbBD2.getSelectedItem();
-            String filtro = ecv.txtFiltro2.getText();
-            x = ec.buscarFiltro(filtro, campo);
-
-            Iterator<EntidadesConocidas> it = x.iterator();
-            while (it.hasNext()) {
-                entidad = it.next();
-                fila[0] = String.valueOf(entidad.getIdentificador());
-                fila[1] = entidad.getNombre();
-                fila[2] = entidad.getDomicilio();
-                fila[3] = entidad.getLocalidad();
-                fila[4] = String.valueOf(entidad.getCP());
-                fila[5] = entidad.getProvincia();
-                fila[6] = entidad.getTelf1();
-                fila[7] = entidad.getTelf2();
-                fila[8] = entidad.getEmail();
-                m.addRow(fila);
-            }
-
-            ecv.tablaEntidadConocida3.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            ecv.tablaEntidadConocida3.setRowSorter(ordenar);
-            ecv.tablaEntidadConocida3.setModel(m);
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void cargarTablaEntidadConocida4() {
-        EntidadesConocidas entidad = null;
+    
+     public void cargarTablaEntidadConocidaDos() {
+         if (!ecv.txtFiltro3.getText().equalsIgnoreCase("")) {
+             
+             EntidadesConocidas entidad = null;
         DefaultTableModel m;
         try {
             String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
@@ -390,7 +401,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
             String filtro = ecv.txtFiltro3.getText();
             x = ec.buscarFiltro(filtro, campo);
 
-            Iterator<EntidadesConocidas> it = x.iterator();
+            if (x.size()>0) {
+                
+                Iterator<EntidadesConocidas> it = x.iterator();
             while (it.hasNext()) {
                 entidad = it.next();
                 fila[0] = String.valueOf(entidad.getIdentificador());
@@ -399,31 +412,209 @@ public class ControladorEntidadesConocidas implements ActionListener {
                 fila[3] = entidad.getLocalidad();
                 fila[4] = String.valueOf(entidad.getCP());
                 fila[5] = entidad.getProvincia();
-                fila[6] = entidad.getTelf1();
-                fila[7] = entidad.getTelf2();
+                fila[6] = String.valueOf(entidad.getTelf1());
+                fila[7] = String.valueOf(entidad.getTelf2());
                 fila[8] = entidad.getEmail();
                 m.addRow(fila);
-            }
-
+            }     
+            
             ecv.tablaEntidadConocida1.setModel(m);
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             ecv.tablaEntidadConocida1.setRowSorter(ordenar);
             ecv.tablaEntidadConocida1.setModel(m);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                ecv.tablaEntidadConocida1.setModel(new DefaultTableModel());
+            }     
+            
+            ecv.txtFiltro3.setText("");           
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+           
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
+             
+         } else {
+             cargarTablaEntidadConocidaModificar();
+         }
+        
+
+    }
+     
+      public void cargarTablaEntidadConocidaTres() {
+         if (!ecv.txtFiltro2.getText().equalsIgnoreCase("")) {
+             
+             EntidadesConocidas entidad = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[9];
+            ArrayList<EntidadesConocidas> x;
+            String campo = (String) ecv.cmbBD2.getSelectedItem();
+            String filtro = ecv.txtFiltro2.getText();
+            x = ec.buscarFiltro(filtro, campo);
+
+            if (x.size()>0) {
+                
+                Iterator<EntidadesConocidas> it = x.iterator();
+            while (it.hasNext()) {
+                entidad = it.next();
+                fila[0] = String.valueOf(entidad.getIdentificador());
+                fila[1] = entidad.getNombre();
+                fila[2] = entidad.getDomicilio();
+                fila[3] = entidad.getLocalidad();
+                fila[4] = String.valueOf(entidad.getCP());
+                fila[5] = entidad.getProvincia();
+                fila[6] = String.valueOf(entidad.getTelf1());
+                fila[7] = String.valueOf(entidad.getTelf2());
+                fila[8] = entidad.getEmail();
+                m.addRow(fila);
+            }     
+            
+            ecv.tablaEntidadConocida3.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            ecv.tablaEntidadConocida3.setRowSorter(ordenar);
+            ecv.tablaEntidadConocida3.setModel(m);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                ecv.tablaEntidadConocida3.setModel(new DefaultTableModel());
+            }     
+            
+            ecv.txtFiltro2.setText("");          
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+           //e.printStackTrace();
+            // JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+             
+         } else {
+             cargarTablaEntidadConocidaEliminar();
+         }
+
+    }
+
+    public void cargarTablaEntidadConocidaPrincipal() {
+      DefaultTableModel ff;
+
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            String fila[] = new String[9];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from entidadesconocidas";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString("identificador");
+                fila[1] = cdb.resultado.getString("nombre");
+                fila[2] = cdb.resultado.getString("domicilio");
+                fila[3] = cdb.resultado.getString("localidad");
+                fila[4] = cdb.resultado.getString("cp");
+                fila[5] = cdb.resultado.getString("provincia");
+                fila[6] = cdb.resultado.getString("telf1");
+                fila[7] = cdb.resultado.getString("telf2");
+                fila[8] = cdb.resultado.getString("email");
+
+                ff.addRow(fila);
+            }
+
+            ecv.tablaEntidadConocida2.setModel(ff);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
+            ecv.tablaEntidadConocida2.setRowSorter(ordenar);
+            ecv.tablaEntidadConocida2.setModel(ff);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
+        }      
+
+    }
+    
+    public void cargarTablaEntidadConocidaModificar() {
+      DefaultTableModel ff;
+
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            String fila[] = new String[9];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from entidadesconocidas";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString("identificador");
+                fila[1] = cdb.resultado.getString("nombre");
+                fila[2] = cdb.resultado.getString("domicilio");
+                fila[3] = cdb.resultado.getString("localidad");
+                fila[4] = cdb.resultado.getString("cp");
+                fila[5] = cdb.resultado.getString("provincia");
+                fila[6] = cdb.resultado.getString("telf1");
+                fila[7] = cdb.resultado.getString("telf2");
+                fila[8] = cdb.resultado.getString("email");
+
+                ff.addRow(fila);
+            }
+
+            ecv.tablaEntidadConocida1.setModel(ff);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
+            ecv.tablaEntidadConocida1.setRowSorter(ordenar);
+            ecv.tablaEntidadConocida1.setModel(ff);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
+        }      
+
+    }
+    
+    public void cargarTablaEntidadConocidaEliminar() {
+      DefaultTableModel ff;
+
+        try {
+            String[] titulo = {"Nro", "Nombre", "Domicilio", "Localidad", "C.P", "Provicia", "Telf1", "Telf2", "Email"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            String fila[] = new String[9];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from entidadesconocidas";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString("identificador");
+                fila[1] = cdb.resultado.getString("nombre");
+                fila[2] = cdb.resultado.getString("domicilio");
+                fila[3] = cdb.resultado.getString("localidad");
+                fila[4] = cdb.resultado.getString("cp");
+                fila[5] = cdb.resultado.getString("provincia");
+                fila[6] = cdb.resultado.getString("telf1");
+                fila[7] = cdb.resultado.getString("telf2");
+                fila[8] = cdb.resultado.getString("email");
+
+                ff.addRow(fila);
+            }
+
+            ecv.tablaEntidadConocida3.setModel(ff);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
+            ecv.tablaEntidadConocida3.setRowSorter(ordenar);
+            ecv.tablaEntidadConocida3.setModel(ff);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
+        }      
 
     }
 
     /*Limpiar Texto*/
-    public void limpiarTexto() {
-        ecv.txtIdentificador.setText("");
+    public void limpiarTextoPantallaInsertar() {
         ecv.txtNombreEntidad.setText("");
         ecv.txtLocalidad.setText("");
         ecv.txtDomicilio.setText("");
         ecv.txtTelf1.setText("");
-        ecv.txTelf2.setText("");
+        ecv.txtTelf2.setText("");
         ecv.txtCp.setText("");
         ecv.txtProvincia.setText("");
         ecv.txtEmail.setText("");
@@ -431,7 +622,6 @@ public class ControladorEntidadesConocidas implements ActionListener {
 
     /*Limpiar Texto*/
     public void limpiarTexto2() {
-        ecv.txtIdentificador4.setText("");
         ecv.txtNombreEntidad4.setText("");
         ecv.txtLocalidad4.setText("");
         ecv.txtDomicilio4.setText("");
@@ -449,13 +639,13 @@ public class ControladorEntidadesConocidas implements ActionListener {
     }
 
     /*Metodo para agregar una Entidad Conocida*/
-    public void agregarEntidadConocida(int identificador, String nombre, String localidad, String domicilio, String telf1, String telf2, int cp, String provincia, String email) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void agregarEntidadConocida(int identificador, String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ec = new EntidadesConocidas(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
         ec.grabar();
     }
 
     /*Metodo para modificar una Entidad Conocida*/
-    public void modificarEntidadConocida(int identificador, String nombre, String localidad, String domicilio, String telf1, String telf2, int cp, String provincia, String email) {
+    public void modificarEntidadConocida(int identificador, String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) {
         ec = new EntidadesConocidas(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
         try {
             ec.actualizar();
