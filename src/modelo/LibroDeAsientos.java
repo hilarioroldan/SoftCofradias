@@ -22,6 +22,7 @@ public class LibroDeAsientos {
     private int mayordomia_id;
     private int cuenta_bancaria_id;
     
+    
     public LibroDeAsientos(){}
 
     public LibroDeAsientos(int identificador, String fecha, String concepto, int ingresar, int deber, int mayordomia_id, int cuenta_bancaria_id) {

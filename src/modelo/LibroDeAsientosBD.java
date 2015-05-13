@@ -17,6 +17,7 @@ import servicios.Conexion;
 public class LibroDeAsientosBD {
     
     private LibroDeAsientos l1;
+
     
     public LibroDeAsientosBD(){}    
     
@@ -29,16 +30,24 @@ public class LibroDeAsientosBD {
     
     
     Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-        
+     Conexion cbd2 = ConectarServicio.getInstancia().getConexionDb();
+     
         cbd.un_sql = "SELECT identificador FROM librodeasientos WHERE identificador=" + l1.getIdentificador() +";";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+         
+        
+      
     
         if (cbd.resultado != null) {
             cbd.un_sql = "INSERT INTO librodeasientos VALUES ('"+l1.getIdentificador()+"','"+l1.getFecha()+"','"+l1.getConcepto()+"','"+l1.getIngresar()+"','"+l1.getDeber()+"','"+l1.getMayordomia_id()+"','"+l1.getCuenta_bancaria_id()+"')";            
             cbd.un_st.executeUpdate(cbd.un_sql);
        } else {
-            JOptionPane.showInputDialog(null, "Error al registrar una miembro", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showInputDialog(null, "Error al registrar un movimiento", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+     
+        
         
     }
     

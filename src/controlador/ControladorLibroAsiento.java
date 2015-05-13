@@ -7,9 +7,12 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -33,14 +36,35 @@ import vista.LibroDeAsientoVista;
  */ 
 public class ControladorLibroAsiento implements ActionListener{
 String fexha;
+int suma2;
+int suma;
+int suma3;
+
     LibroDeAsientos l1;
     LibroDeAsientoVista lv1;
+    MovimientoBancario m1;
     JFreeChart Grafica;
+
+    DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+
+    private void agregarDatos1(int identificador, int id_bancario, int año, String mes, int dia, int ingreso, int retiro) throws ClassNotFoundException {
+       
+        m1 = new MovimientoBancario(identificador,id_bancario,año,mes,dia,ingreso,retiro);
+    try {
+        m1.insertar();
+    } catch (InstantiationException ex) {
+        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
     
      public enum di {
 
-        ACEPTAR,ACEPTAR1,ACEPTAR2,ACEPTARCAL,CANCELAR,SALIR,VERCAL,BUSCAR,INGRESAR,RETIRAR,VER,VER2,GRAFICO;
+        ACEPTAR,ACEPTAR1,ACEPTAR2,ACEPTARCAL,CANCELAR,SALIR,VERCAL,BUSCAR,INGRESAR,RETIRAR,VER,VER2,GRAFICO,COMBOTXT;
     }
     
      
@@ -48,23 +72,26 @@ String fexha;
      
      l1 = new LibroDeAsientos();
      lv1 = new LibroDeAsientoVista();
+     m1 = new MovimientoBancario();
+    lv1.grafic.setEnabled(false);
+     
+     
      lv1.setVisible(true);
      lv1.setLocationRelativeTo(null);
      lv1.cant.setEnabled(false);
      lv1.retiro01.setEnabled(false);
      cargar_tabla_Bancaria();
-     
+     lv1.id_bancario.setEnabled(true);
 
      lv1.acept.setActionCommand("ACEPTAR");
      lv1.acept.addActionListener(this);
-     lv1.cancel.setActionCommand("CANCELAR");
-     lv1.acept.addActionListener(this);
+     lv1.cancel.setActionCommand("SALIR");
+     lv1.cancel.addActionListener(this);
      lv1.ingreso.setActionCommand("INGRESAR");
      lv1.ingreso.addActionListener(this);
      lv1.retiro.setActionCommand("RETIRAR");
      lv1.retiro.addActionListener(this);
-  //   lv1.ver1.setActionCommand("VER1"); EN DESARROLLO
-   //  lv1.ver1.addActionListener(this);
+
      lv1.ver2.setActionCommand("VER2");
      lv1.ver2.addActionListener(this);
      lv1.aceptarIng.setActionCommand("ACEPTAR1");
@@ -84,16 +111,235 @@ String fexha;
       lv1.uno.setActionCommand(lv1.calculadoratxt.getText());
      lv1.uno.addActionListener(this);
      cargarCmbBD1();  
-   // inicializacionGrafica();
+
+     lv1.seleccion_id.setActionCommand("COMBOTXT");
+     lv1.seleccion_id.addActionListener(this);
      
-     lv1.tabla_movimiento.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla hermandad           
+     
+     SeleccionNumeroCuenta();
+     
+     lv1.tabla_movimiento.addMouseListener(new java.awt.event.MouseAdapter() {          
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
             }
          });
-     }
      
+     }
+         private void cargarCmbBD1() {        
+        try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="select num_cuenta from cuentabancaria;";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+      
+              
+            while(cbd.resultado.next()){
+           
+               lv1.seleccion_id.addItem(cbd.resultado.getObject("num_cuenta"));
+  
+            }
+            
+           
+           
+           
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    }
+     
+     
+      private void SeleccionNumeroCuenta(){
+       try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="select identificador from cuentabancaria where num_cuenta="+lv1.seleccion_id.getSelectedItem()+"";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            
+         
+            
+            if(cbd.resultado.next()){
+                
+                lv1.id_bancario.setText(cbd.resultado.getString("identificador"));
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "ESTA VACIO");
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+     }
+    //metodo para insertar
+      
+      public void insertar(){
+       
+                try {
+                    
+                    Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+                    cbd.un_sql="select max(identificador) from librodeasientos";
+                    cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+                    
+                    int identificador=0; //= Integer.parseInt(lv1.ident.getText());
+                    
+                    if(cbd.resultado.next()){
+                    
+                    identificador=cbd.resultado.getInt(1)+1;
+                    }else{
+                    
+                    identificador=1;
+                    
+                    }
+                    
+                    
+                    
+                    String fecha= null;
+                    String concepto=lv1.concept.getText();
+                    
+                    int dia=Integer.parseInt(lv1.dia.getText());
+                    String mes1 = lv1.mes.getText();
+                    String mes=lv1.mes.getText();
+                    
+                    
+                    int año=Integer.parseInt(lv1.año.getText());
+                    
+                    
+                    if(mes1.equals("enero")){
+                        int uno=01;
+                        fecha =año+"-"+uno+"-"+dia;
+                        
+                    }else{
+                        
+                        if(mes1.equals("febrero")){
+                            int uno=02;
+                            fecha =año+"-"+uno+"-"+dia;
+                            
+                        }else{
+                            if(mes1.equals("marzo")){
+                                int uno=03;
+                                fecha =año+"-"+uno+"-"+dia;
+                                
+                            }else{
+                                
+                                if(mes1.equals("abril")){
+                                    int uno=04;
+                                    fecha =año+"-"+uno+"-"+dia;
+                                    
+                                }else{
+                                    if(mes1.equals("mayo")){
+                                        int uno=05;
+                                        fecha =año+"-"+uno+"-"+dia; ;
+                                        
+                                    }else{
+                                        
+                                        if(mes1.equals("junio")){
+                                            int uno=06;
+                                            fecha =año+"-"+uno+"-"+dia;
+                                            
+                                        }else{
+                                            if(mes1.equals("julio")){
+                                                int uno=07;
+                                                fecha =año+"-"+uno+"-"+dia;
+                                                
+                                            }else{
+                                                
+                                                if(mes1.equals("agosto")){
+                                                    int uno=8;
+                                                    fecha =año+"-"+uno+"-"+dia;
+                                                    
+                                                }else{
+                                                    if(mes1.equals("septiembre")){
+                                                        int uno=9;
+                                                        fecha =año+"-"+uno+"-"+dia;
+                                                        
+                                                    }else{
+                                                        
+                                                        if(mes1.equals("octubre")){
+                                                            int uno=10;
+                                                            fecha =año+"-"+uno+"-"+dia;
+                                                            
+                                                        }else{
+                                                            if(mes1.equals("noviembre")){
+                                                                int uno=11;
+                                                                fecha =año+"-"+uno+"-"+dia;
+                                                                
+                                                            }else{
+                                                                if(mes1.equals("diciembre")){
+                                                                    int uno=12;
+                                                                    fecha =año+"-"+uno+"-"+dia;
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    //para ingresar
+                    
+                    int ingresar=Integer.parseInt(lv1.cant.getText());
+                    int ingreso=Integer.parseInt(lv1.cant.getText());
+                    int deber=Integer.parseInt(lv1.retiro01.getText());
+                    int retiro=Integer.parseInt(lv1.retiro01.getText());
+                    
+                    int mayordomia_id=1;
+                    int cuenta_bancaria_id=Integer.parseInt(lv1.id_bancario.getText());
+                    int id_bancario=Integer.parseInt(lv1.id_bancario.getText());
+                    
+                    try {
+                        agregarDatos(identificador, fecha, concepto, ingresar, deber, mayordomia_id, cuenta_bancaria_id);
+                    } catch (ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
+                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                    try {
+                        agregarDatos1(identificador,id_bancario,año,mes,dia,ingreso,retiro);
+                    } catch (ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
+                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                    }
+                    
+                    
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE,null, ex);
+                
+            } catch (InstantiationException ex) {
+                Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+    }
+                
+                
+                
+      
+      }
+      
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -114,123 +360,21 @@ String fexha;
                   break;   
             
             case ACEPTAR:
-                
-            int identificador = Integer.parseInt(lv1.ident.getText()); 
-            String fecha= null;
-            String concepto=lv1.concept.getText();
-            
-            int dia=Integer.parseInt(lv1.dia.getText());
-            String mes1 = lv1.mes.getText();
-            int año=Integer.parseInt(lv1.año.getText());
-        
-            
-            if(mes1.equals("enero")){
-            int uno=01;
-           fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-            
-             if(mes1.equals("febrero")){
-            int uno=02;
-           fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-              if(mes1.equals("marzo")){
-            int uno=03;
-           fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-              
-               if(mes1.equals("abril")){
-            int uno=04;
-          fecha =año+"-"+uno+"-"+dia; 
-            
-                }else{
-                if(mes1.equals("mayo")){
-            int uno=05;
-            fecha =año+"-"+uno+"-"+dia; ;
-            
-            }else{
-                
-                 if(mes1.equals("junio")){
-            int uno=06;
-            fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-                  if(mes1.equals("julio")){
-            int uno=07;
-            fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-                  
-             if(mes1.equals("agosto")){
-            int uno=8;
-            fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-              if(mes1.equals("septiembre")){
-            int uno=9;
-            fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-              
-               if(mes1.equals("octubre")){
-            int uno=10;
-           fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-                if(mes1.equals("noviembre")){
-            int uno=11;
-           fecha =año+"-"+uno+"-"+dia; 
-            
-            }else{
-                 if(mes1.equals("diciembre")){
-            int uno=12;
-            fecha =año+"-"+uno+"-"+dia; 
-            
-                                }           
-                              }   
-                         }
-                          }         
-                      }   
-                  }
-                 
-                 }
-                
-                }
                
-               }
-              
-              }
-             
-             }
+                insertar();
             
-            }
-            
-          
-            //para ingresar
-             
-              int ingresar=Integer.parseInt(lv1.cant.getText());
-              int deber=Integer.parseInt(lv1.retiro01.getText());
-                   
-            int mayordomia_id=1;
-            int cuenta_bancaria_id=1;
-      
-
-                try {
-               agregarDatos(identificador, fecha, concepto, ingresar, deber, mayordomia_id, cuenta_bancaria_id);
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
                 
-            } catch (InstantiationException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                
+                
+                lv1.dispose();
             break;
+                
+               case COMBOTXT:
+                     
+                  SeleccionNumeroCuenta();
+                lv1.id_bancario.getText();
+                
+                break;
                 
             case ACEPTARCAL:
       
@@ -239,7 +383,7 @@ String fexha;
                      lv1.teclado.dispose();
                 break;
             case SALIR:
-                //j1.dispose();
+               lv1.dispose();
                 break;
                 
         
@@ -266,8 +410,11 @@ String fexha;
               
               break;
           case GRAFICO:
-             
+grafica_ingreso();   
+grafica_retiro();
+grafica_Saldo_total();
 inicializacionGrafica();
+
 lv1.grafico.dispose();
 
               button();
@@ -282,20 +429,7 @@ lv1.grafico.dispose();
     }
  
 }
-     private void cargarCmbBD1() {        
-        try{
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql="DESCRIBE cuentabancaria;";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-            lv1.seleccion_id.removeAllItems();
-            
-            while(cbd.resultado.next()){
-                lv1.seleccion_id.addItem(cbd.resultado.getString(1));
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-    }
+ 
     
     
     //metodo para agregar a la base de datos
@@ -305,6 +439,10 @@ lv1.grafico.dispose();
         l1.insertar();
         
     }
+     
+     
+ 
+     
         
      public void button(){
      
@@ -326,10 +464,12 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
      int clic = lv1.tabla_movimiento.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
  
         if (clic!=-1) {
+           lv1.grafic.setEnabled(true);
            lv1.año_busqueda.setEnabled(false);
             lv1.año_busqueda.setText(lv1.tabla_movimiento.getValueAt(clic, 0).toString());
-             lv1.cantida.setText(lv1.tabla_movimiento.getValueAt(clic, 3).toString());
-            lv1.retirado.setText(lv1.tabla_movimiento.getValueAt(clic, 4).toString());
+           //  lv1.cantida.setText(lv1.tabla_movimiento.getValueAt(clic, 3).toString());
+           // lv1.retirado.setText(lv1.tabla_movimiento.getValueAt(clic, 4).toString());
+            
   }
      }
      
@@ -359,8 +499,9 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 fila[2] = cdb.resultado.getString(3);
                 fila[3] = cdb.resultado.getString(4);
                 fila[4] = cdb.resultado.getString(5);
-                fila[5] = cdb.resultado.getString(6);
+                fila[5] = cdb.resultado.getString(7);
                    
+                
                    ff.addRow(fila);
                 
             }
@@ -380,10 +521,11 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         int clic = lv1.tabla_movimiento.getSelectedRow(); // se guarda en la variable el  de la fila cuando se hace click en una
 
         if (clic!=-1) {
+            lv1.grafic.setEnabled(true);
             lv1.año_busqueda.setText(lv1.tabla_movimiento.getValueAt(clic, 1).toString());
-            lv1.cantida.setText(lv1.tabla_movimiento.getValueAt(clic, 3).toString());
-            lv1.retirado.setText(lv1.tabla_movimiento.getValueAt(clic, 4).toString());
-           
+            //lv1.cantida.setText(lv1.tabla_movimiento.getValueAt(clic, 3).toString());
+          //lv1.retirado.setText(lv1.tabla_movimiento.getValueAt(clic, 4).toString());
+           lv1.id_banco_seleccionado.setText(lv1.tabla_movimiento.getValueAt(clic, 5).toString());
             
         //añadimos el año que deseamos mostrar en la grafica    
         Grafica = ChartFactory.createBarChart("Movimientos Bancarios",
@@ -392,15 +534,126 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
      
         }
     }
+     //este metodo nos mnuestra y calcula la cantidad de dinero ingresado en nuestra cuenta en año especifico
+     public void grafica_ingreso(){
+     
+         DefaultTableModel ff = null;
+         
+         try{
+            String titulo[] = {"identificador","fecha","concepto","ingresos","retiros","id bancario"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            int fila[] = new int[7];
+            String fe[] = new String[7];
+            
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+     
+     
+            cdb.un_sql = "select sum(ingresos) as total from movimientobancario where año="+lv1.año_busqueda.getText()+" and id_bancario="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+             while (cdb.resultado.next()) {
+
+              
+              suma = cdb.resultado.getInt("total");
+             
+    
+              //JOptionPane.showMessageDialog(null, suma);
+
+             }
+            //  JOptionPane.showMessageDialog(null, "cantidad retirada "+suma2);
+         }catch(Exception e){
+         e.printStackTrace();
+         }
+     
+         
+     
+     }
+     //******************************************************************************************//
+     //este metodo nos suma y muestra la cantidad total de dinero extraido en nuestra cuenta de iun año especifico
+    public void grafica_retiro(){
+     
+         DefaultTableModel ff = null;
+         
+         try{
+            String titulo[] = {"identificador","fecha","concepto","ingresos","retiros","id bancario"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            int fila[] = new int[7];
+            String fe[] = new String[7];
+            
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+     
+     
+            cdb.un_sql = "select sum(retiros) as total2 from movimientobancario where año="+lv1.año_busqueda.getText()+" and id_bancario="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+             while (cdb.resultado.next()) {
+
+              
+              suma2 = cdb.resultado.getInt("total2");
+             
+    
+             
+
+             }
+            
+         }catch(Exception e){
+         e.printStackTrace();
+         }
+     
+         
+     
+     }
+     //*****************************************************************************************//
+     public void grafica_Saldo_total(){
+     
+         DefaultTableModel ff = null;
+         
+         try{
+            String titulo[] = {"identificador","fecha","concepto","ingresos","retiros","id bancario"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            int fila[] = new int[7];
+            String fe[] = new String[7];
+            
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+     
+     
+            cdb.un_sql = "select cantidad from cuentabancaria where identificador="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+             while (cdb.resultado.next()) {
+
+              
+              suma3 = cdb.resultado.getInt("cantidad");
+           //  JOptionPane.showMessageDialog(null, suma3);
+    
+             
+
+             }
+            
+         }catch(Exception e){
+         e.printStackTrace();
+         }
+     
+         
+     
+     }
+     
+   //este metodo inicia los valores que hemos pasado a la grafica  
        public void inicializacionGrafica() {
 
-         
-         Datos.addValue(Integer.parseInt(lv1.cantida.getText()), "Ingresos","Ingresado");
-        Datos.addValue(Integer.parseInt(lv1.retirado.getText()), "Retiros", "Retirado");       
-         
+int ingreso=suma;
+int retiro=suma2;
+ int total =suma3;
+ 
+       Datos.addValue(ingreso, "Ingresos Totales","Ingresado");
+       Datos.addValue(retiro, "Retiros Totales", "Retirado");       
+        Datos.addValue(total, "Saldo Disponible", "Saldo");  
 
 Grafica = ChartFactory.createBarChart("Movimientos Bancarios",
-"Año de Movimiento "+lv1.año_busqueda.getText(), "Ingresos", Datos,
+"Año de Movimiento "+lv1.año_busqueda.getText() +" - Identidad Bancaria Perteneciente: "+lv1.id_banco_seleccionado.getText(), "Saldo Bancario", Datos,
 PlotOrientation.VERTICAL, true, true, false);
      
   
