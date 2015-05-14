@@ -49,19 +49,6 @@ int suma3;
     DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
 
-    private void agregarDatos1(int identificador, int id_bancario, int año, String mes, int dia, int ingreso, int retiro) throws ClassNotFoundException {
-       
-        m1 = new MovimientoBancario(identificador,id_bancario,año,mes,dia,ingreso,retiro);
-    try {
-        m1.insertar();
-    } catch (InstantiationException ex) {
-        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}
     
      public enum di {
 
@@ -73,7 +60,7 @@ int suma3;
      
      l1 = new LibroDeAsientos();
      lv1 = new LibroDeAsientoVista();
-     m1 = new MovimientoBancario();
+     //m1 = new MovimientoBancario();
     lv1.grafic.setEnabled(false);
      
      
@@ -314,14 +301,7 @@ int suma3;
                     }
                     
                     
-                    try {
-                        agregarDatos1(identificador,id_bancario,año,mes,dia,ingreso,retiro);
-                    } catch (ClassNotFoundException ex) {
-                        JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
-                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-                        
-                    }
-                    
+                   
                     
                     
                     
