@@ -36,13 +36,14 @@ import vista.LibroDeAsientoVista;
  */ 
 public class ControladorLibroAsiento implements ActionListener{
 String fexha;
+String fexha2;
 int suma2;
 int suma;
 int suma3;
 
     LibroDeAsientos l1;
     LibroDeAsientoVista lv1;
-    MovimientoBancario m1;
+   
     JFreeChart Grafica;
 
     DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
@@ -493,6 +494,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 //fila[0] = cdb.resultado.getString(0);          
               fila[0] = cdb.resultado.getString(1);
                 fexha = cdb.resultado.getString("fecha");
+               //seleccionamos solo el año , que es lo que nos interesa de la fecha
                 fexha = fexha.substring(0,4);//+"-"+fexha.substring(5,7)+"-"+fexha.substring(8,10);
                 fila[1]=fexha;
  
@@ -549,7 +551,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
      
      
-            cdb.un_sql = "select sum(ingresos) as total from movimientobancario where año="+lv1.año_busqueda.getText()+" and id_bancario="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.un_sql = "select sum(ingresar) as total from librodeasientos where year(fecha)="+lv1.año_busqueda.getText()+" and cuenta_bancaria_id="+lv1.id_banco_seleccionado.getText()+"";
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
              while (cdb.resultado.next()) {
@@ -558,7 +560,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
               suma = cdb.resultado.getInt("total");
              
     
-              //JOptionPane.showMessageDialog(null, suma);
+              JOptionPane.showMessageDialog(null, suma);
 
              }
             //  JOptionPane.showMessageDialog(null, "cantidad retirada "+suma2);
@@ -585,7 +587,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
      
      
-            cdb.un_sql = "select sum(retiros) as total2 from movimientobancario where año="+lv1.año_busqueda.getText()+" and id_bancario="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.un_sql = "select sum(debe) as total2 from librodeasientos where year(fecha)="+lv1.año_busqueda.getText()+" and cuenta_bancaria_id="+lv1.id_banco_seleccionado.getText()+"";//" and id_bancario="+lv1.id_banco_seleccionado.getText()+"" ;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
              while (cdb.resultado.next()) {
@@ -593,7 +595,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
               
               suma2 = cdb.resultado.getInt("total2");
              
-    
+    JOptionPane.showMessageDialog(null, suma2);
              
 
              }
@@ -620,7 +622,7 @@ Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
      
      
-            cdb.un_sql = "select cantidad from cuentabancaria where identificador="+lv1.id_banco_seleccionado.getText()+"" ;
+            cdb.un_sql = "select cantidad from cuentabancaria where identificador="+lv1.id_banco_seleccionado.getText()+" " ;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
              while (cdb.resultado.next()) {
