@@ -28,7 +28,7 @@ public class HermandadBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
        if (cbd.resultado != null) {
-            cbd.un_sql = "INSERT INTO hermandad (identificador, nombre, año_fundacion, domicilio, municipio, provincia, telf1, telf2, fax, descripcion) VALUES ('"+h.getIdentificador()+"', '"+h.getNombre()+"', '"+h.getAño_fundacion()+"', '"+h.getDomicilio()+"', '"+h.getMunicipio()+"', '"+h.getProvincia()+"', '"+h.getTelf1()+"', '"+h.getTelf2()+"', '"+h.getFax()+"', '"+h.getDescripcion()+"')";            
+            cbd.un_sql = "INSERT INTO hermandad (identificador, nombre, año_fundacion, domicilio, municipio, provincia, telf1, telf2, fax, descripcion) VALUES ('"+h.getIdentificador()+"', '"+h.getNombre()+"', '"+h.getAño_fundacion()+"', '"+h.getDomicilio()+"', '"+h.getMunicipio()+"', '"+h.getProvincia()+"', '"+h.getTelf1()+"', '"+h.getTelf2()+"', '"+h.getFax()+"', '"+h.getDescripcion()+"');";            
             cbd.un_st.executeUpdate(cbd.un_sql);
        } else {
             JOptionPane.showInputDialog(null, "Error al registrar una hermandad", "Error", JOptionPane.ERROR_MESSAGE);
@@ -72,9 +72,9 @@ public class HermandadBD {
         
         if (cbd.resultado != null) {
             if (cbd.resultado.next()) {
-                h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("identificador")));
+                h.setIdentificador(cbd.resultado.getInt("identificador"));
                 h.setNombre(cbd.resultado.getString("nombre"));
-                h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
+                h.setAño_fundacion(cbd.resultado.getString("año_fundacion"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));
@@ -119,7 +119,7 @@ public class HermandadBD {
                 h = new Hermandad();
                 h.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
                 h.setNombre(cbd.resultado.getString("nombre"));
-                h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
+                h.setAño_fundacion(cbd.resultado.getString("año_fundacion"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));
@@ -149,7 +149,7 @@ public class HermandadBD {
             h = new Hermandad();
                 h.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
                 h.setNombre(cbd.resultado.getString("nombre"));
-                h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
+                h.setAño_fundacion(cbd.resultado.getString("año_fundacion"));
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));

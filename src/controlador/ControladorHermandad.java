@@ -2,8 +2,10 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,7 +31,7 @@ public class ControladorHermandad implements ActionListener {
 
     public enum di {
 
-        GUARDAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
+        CREAR, MODIFICAR, NUEVO, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
     }
 
     public void iniciar() {
@@ -42,7 +44,6 @@ public class ControladorHermandad implements ActionListener {
         cargarTablaHermandades();
 
         //se añade las acciones a los controles del formulario padre
-        hv.btnGuardar.setActionCommand("GUARDAR");
         hv.btnModificar.setActionCommand("MODIFICAR");
         hv.btnNuevo.setActionCommand("NUEVO");
         hv.btnSalir.setActionCommand("SALIR");
@@ -70,8 +71,8 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnModificar2.setActionCommand("btnModificar2");
         hcv.btnEliminar1.setActionCommand("btnEliminar1");
         hcv.btnEliminar2.setActionCommand("btnEliminar2");
+        hv.btnCrear.setActionCommand("CREAR");
         //Se pone a escuchar las acciones del usuario
-        hv.btnGuardar.addActionListener(this);
         hv.btnModificar.addActionListener(this);
         hv.btnNuevo.addActionListener(this);
         hv.btnSalir.addActionListener(this);
@@ -99,6 +100,8 @@ public class ControladorHermandad implements ActionListener {
         hcv.btnModificar2.addActionListener(this);
         hcv.btnEliminar1.addActionListener(this);
         hcv.btnEliminar2.addActionListener(this);
+        hv.btnCrear.addActionListener(this);
+        
         hv.tblHermandad.addMouseListener(new java.awt.event.MouseAdapter() {  //tabla hermandad           
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -153,10 +156,18 @@ public class ControladorHermandad implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (di.valueOf(e.getActionCommand())) {
-            case GUARDAR:
-                String identificador = hv.txtIdentificador.getText();
+            case CREAR:
+                String año_fundacion = "";
+                //trabajando con fechas
+                if (hv.jDateChooser1.getDate()!=null) {
+                int año = hv.jDateChooser1.getCalendar().get(Calendar.YEAR);
+                int mes = hv.jDateChooser1.getCalendar().get(Calendar.MONTH);
+                int dia = hv.jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                año_fundacion = año+"-"+mes+"-"+dia;
+                //
+                }
+                // fin fecha
                 String nombre_hermandad = hv.txtNombreHermandad.getText();
-                String año_fundacion = hv.txtAñoFundacion.getText();
                 String domicilio = hv.txtDomicilio.getText();
                 String municipio = hv.txtMunicipio.getText();
                 String provincia = hv.txtProvincia.getText();
@@ -167,9 +178,9 @@ public class ControladorHermandad implements ActionListener {
 
                  {
                     try {
-                        agregarHermandad(Integer.parseInt(identificador), nombre_hermandad, Integer.parseInt(año_fundacion), domicilio, municipio, provincia, telf1, telf2, fax, descripcion);
+                        agregarHermandad(1, nombre_hermandad, año_fundacion, domicilio, municipio, provincia, telf1, telf2, fax, descripcion);
                     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                        Logger.getLogger(ControladorHermandad.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                 }
 
@@ -181,26 +192,7 @@ public class ControladorHermandad implements ActionListener {
                 break;
 
             case MODIFICAR:
-                String identificadorM = hv.txtIdentificador.getText();
-                String nombre_hermandadM = hv.txtNombreHermandad.getText();
-                String año_fundacionM = hv.txtAñoFundacion.getText();
-                String domicilioM = hv.txtDomicilio.getText();
-                String municipioM = hv.txtMunicipio.getText();
-                String provinciaM = hv.txtProvincia.getText();
-                String telf1M = hv.txtTelefono1.getText();    //String en bd
-                String telf2M = hv.txtTelefono2.getText();    //String en bd
-                String faxM = hv.txtFax.getText();    //String bd
-                String descripcionM = hv.txtDescripcion.getText();
-
-                try {
-                    modificarHermandad(Integer.parseInt(identificadorM), nombre_hermandadM, Integer.parseInt(año_fundacionM), domicilioM, municipioM, provinciaM, telf1M, telf2M, faxM, descripcionM);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "El identificador " + hv.txtIdentificador.getText() + "ya existe, ingrese un identificador distinto", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (NumberFormatException x) {
-                    JOptionPane.showMessageDialog(null, "Has introducido un valor no numérico en un campo inadecuado", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                cargarTablaHermandades();
-                limpiarTexto();
+                modificarHermandad();
                 break;
 
             case NUEVO:
@@ -325,6 +317,48 @@ public class ControladorHermandad implements ActionListener {
                 break;
         }
     }
+    
+    public void modificarHermandad(){
+        
+        int clic = hv.tblHermandad.getSelectedRow();
+        
+        if (clic!=-1) {
+                String nombre_hermandadM = hv.txtNombreHermandad.getText();
+                
+                //trabajando con fechas
+                String año_fundacion = "";
+                if (hv.jDateChooser1.getDate()!=null) {
+                int año = hv.jDateChooser1.getCalendar().get(Calendar.YEAR);
+                int mes = hv.jDateChooser1.getCalendar().get(Calendar.MONTH);
+                int dia = hv.jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                año_fundacion = año+"-"+mes+"-"+dia;
+                //
+                }
+                // fin fecha
+                String domicilioM = hv.txtDomicilio.getText();
+                String municipioM = hv.txtMunicipio.getText();
+                String provinciaM = hv.txtProvincia.getText();
+                String telf1M = hv.txtTelefono1.getText();    //String en bd
+                String telf2M = hv.txtTelefono2.getText();    //String en bd
+                String faxM = hv.txtFax.getText();    //String bd
+                String descripcionM = hv.txtDescripcion.getText();
+
+                try {
+                    modificarHermandad(1, nombre_hermandadM, año_fundacion, domicilioM, municipioM, provinciaM, telf1M, telf2M, faxM, descripcionM);
+                    JOptionPane.showMessageDialog(null, "Modificado correctamente");
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "El identificador 1 ya existe, ingrese un identificador distinto", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (NumberFormatException x) {
+                    JOptionPane.showMessageDialog(null, "Has introducido un valor erroneo en un campo inadecuado", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                cargarTablaHermandades();
+                limpiarTexto();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes de seleccionar la Tabla para cargar los valores", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }
 
     //metodo para eliminar una forma de pago
     public void eliminarFormaPago() {
@@ -342,6 +376,7 @@ public class ControladorHermandad implements ActionListener {
             int identificador = Integer.parseInt(hcv.txtIdentificador3.getText());
             String descripcion = hcv.txtDescripcion3.getText();
             modificarFormaPago(identificador, descripcion);
+            JOptionPane.showMessageDialog(null, "Modificado correctamente");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -374,6 +409,7 @@ public class ControladorHermandad implements ActionListener {
             String descripcion = hcv.txtDescripcion7.getText();
             Double precio = Double.parseDouble(hcv.txtPrecio3.getText());
             modificarTipoPago(identificador, descripcion, precio);
+            JOptionPane.showMessageDialog(null, "Modificado correctamente");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -686,14 +722,14 @@ public class ControladorHermandad implements ActionListener {
     }
 
     /*Metodo para agregar una Hermandad*/
-    public void agregarHermandad(int identificador, String nombre, int año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void agregarHermandad(int identificador, String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         h = new Hermandad(identificador, nombre, año_fundacion, domicilio, municipio, provincia, telf1, telf2, fax, descripcion);
         h.grabar();
     }
 
     /*Metodo para modificar una Hermandad*/
-    public void modificarHermandad(int identificador, String nombre, int año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void modificarHermandad(int identificador, String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         h = new Hermandad(identificador, nombre, año_fundacion, domicilio, municipio, provincia, telf1, telf2, fax, descripcion);
         h.actualizar();
@@ -717,25 +753,25 @@ public class ControladorHermandad implements ActionListener {
         DefaultTableModel m;
 
         try {
-            String titulo[] = {"Nro", "Nombre hermandad", "Año fundacion", "Domicilio", "Municipio", "Provincia", "Telf1", "Telf2", "Fax", "Descripcion"};
+            String titulo[] = {"Nombre hermandad", "Año fundacion", "Domicilio", "Municipio", "Provincia", "Telf1", "Telf2", "Fax", "Descripcion"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
-            String fila[] = new String[10];
+            String fila[] = new String[9];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
             cdb.un_sql = "select * from hermandad";
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
-                fila[0] = cdb.resultado.getString(1);
-                fila[1] = cdb.resultado.getString(2);
-                fila[2] = cdb.resultado.getString(3);
-                fila[3] = cdb.resultado.getString(4);
-                fila[4] = cdb.resultado.getString(5);
-                fila[5] = cdb.resultado.getString(6);
-                fila[6] = cdb.resultado.getString(7);
-                fila[7] = cdb.resultado.getString(8);
-                fila[8] = cdb.resultado.getString(9);
-                fila[9] = cdb.resultado.getString(10);
+                //fila[0] = cdb.resultado.getString(1);
+                fila[0] = cdb.resultado.getString(2);
+                fila[1] = cdb.resultado.getString(3);
+                fila[2] = cdb.resultado.getString(4);
+                fila[3] = cdb.resultado.getString(5);
+                fila[4] = cdb.resultado.getString(6);
+                fila[5] = cdb.resultado.getString(7);
+                fila[6] = cdb.resultado.getString(8);
+                fila[7] = cdb.resultado.getString(9);
+                fila[8] = cdb.resultado.getString(10);
                 m.addRow(fila);
             }
 
@@ -750,22 +786,32 @@ public class ControladorHermandad implements ActionListener {
     }
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
-        int clic = hv.tblHermandad.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-
-        if (clic != -1) {
-            try {
-                hv.txtIdentificador.setText(hv.tblHermandad.getValueAt(clic, 0).toString());
-                hv.txtNombreHermandad.setText(hv.tblHermandad.getValueAt(clic, 1).toString());
-                hv.txtAñoFundacion.setText(hv.tblHermandad.getValueAt(clic, 2).toString());
-                hv.txtDomicilio.setText(hv.tblHermandad.getValueAt(clic, 3).toString());
-                hv.txtMunicipio.setText(hv.tblHermandad.getValueAt(clic, 4).toString());
-                hv.txtProvincia.setText(hv.tblHermandad.getValueAt(clic, 5).toString());
-                hv.txtTelefono1.setText(hv.tblHermandad.getValueAt(clic, 6).toString());
-                hv.txtTelefono2.setText(hv.tblHermandad.getValueAt(clic, 7).toString());
-                hv.txtFax.setText(hv.tblHermandad.getValueAt(clic, 8).toString());
-                hv.txtDescripcion.setText(hv.tblHermandad.getValueAt(clic, 9).toString());
-            } catch (Exception e) {
+        
+        try {
+            Date x = null;
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado=cbd.un_st.executeQuery("select año_fundacion from hermandad where identificador=1");
+            if (cbd.resultado.next()) {
+                x = cbd.resultado.getDate(1);
             }
+            int clic = hv.tblHermandad.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+            
+            if (clic != -1) {
+                try {
+                    hv.txtNombreHermandad.setText(hv.tblHermandad.getValueAt(clic, 0).toString());
+                    hv.jDateChooser1.setDate(x);
+                    hv.txtDomicilio.setText(hv.tblHermandad.getValueAt(clic, 2).toString());
+                    hv.txtMunicipio.setText(hv.tblHermandad.getValueAt(clic, 3).toString());
+                    hv.txtProvincia.setText(hv.tblHermandad.getValueAt(clic, 4).toString());
+                    hv.txtTelefono1.setText(hv.tblHermandad.getValueAt(clic, 5).toString());
+                    hv.txtTelefono2.setText(hv.tblHermandad.getValueAt(clic, 6).toString());
+                    hv.txtFax.setText(hv.tblHermandad.getValueAt(clic, 7).toString());
+                    hv.txtDescripcion.setText(hv.tblHermandad.getValueAt(clic, 8).toString());
+                } catch (Exception e) {
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorHermandad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -845,9 +891,8 @@ public class ControladorHermandad implements ActionListener {
     }
 
     public void limpiarTexto() {
-        hv.txtIdentificador.setText("");
         hv.txtNombreHermandad.setText("");
-        hv.txtAñoFundacion.setText("");
+        hv.jDateChooser1.setDate(null);
         hv.txtDomicilio.setText("");
         hv.txtMunicipio.setText("");
         hv.txtProvincia.setText("");

@@ -99,6 +99,7 @@ public class ControladorPagoCuotas implements ActionListener {
 
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         switch (ControladorPagoCuotas.di.valueOf(e.getActionCommand())) {
 
@@ -129,25 +130,19 @@ public class ControladorPagoCuotas implements ActionListener {
 
             case GESTION:
                 
-                int comprobacion = p1.tablaHermano.getSelectedRow();
-                
+                int comprobacion = p1.tablaHermano.getSelectedRow(); // si hemos seleccionado una fila de la tabla
+                                                                     // entonces..
                 if (comprobacion != -1) {
 
-                p1.cuotas.setSize(350, 380);
-                p1.cuotas.setVisible(true);
-                p1.cuotas.setLocationRelativeTo(null);
-
-                //  int clic = p1.tablaHermano.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-                int clic = p1.tablaHermano.getSelectedRow();
-                if (clic != -1) {
+                    p1.cuotas.setSize(350, 380);
+                    p1.cuotas.setVisible(true);
+                    p1.cuotas.setLocationRelativeTo(null);
 
                     p1.her.setEnabled(false);
-                    p1.her.setText(p1.tablaHermano.getValueAt(clic, 0).toString());
-            //JOptionPane.showMessageDialog(null,p1.her.getText() );
+                    p1.her.setText(p1.tablaHermano.getValueAt(comprobacion, 0).toString());
+                    //JOptionPane.showMessageDialog(null,p1.her.getText() );
 
-                    cargarPagos();
-
-                }
+                    cargarPagos();               
                 
                 } else {
                     JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la tabla");

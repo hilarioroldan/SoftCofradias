@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Hermandad {
     private int identificador;
     private String nombre;
-    private int año_fundacion;
+    private String año_fundacion;
     private String domicilio;
     private String municipio;
     private String provincia;
@@ -25,7 +25,7 @@ public class Hermandad {
         
     }   
     
-    public Hermandad(int identificador, String nombre, int año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
+    public Hermandad(int identificador, String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
         
         this.identificador=identificador;
         this.nombre = nombre;
@@ -39,7 +39,7 @@ public class Hermandad {
         this.descripcion = descripcion;
     }
     
-    public Hermandad(String nombre, int año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
+    public Hermandad(String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
         
         this.nombre = nombre;
         this.año_fundacion = año_fundacion;
@@ -68,11 +68,11 @@ public class Hermandad {
         this.nombre = nombre;
     }
 
-    public int getAño_fundacion() {
+    public String getAño_fundacion() {
         return año_fundacion;
     }
 
-    public void setAño_fundacion(int año_fundacion) {
+    public void setAño_fundacion(String año_fundacion) {
         this.año_fundacion = año_fundacion;
     }
 

@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -30,10 +24,7 @@ import servicios.Conexion;
 import vista.HermanitoVista1;
 import vista.LibroDeAsientoVista;
 
-/**
- *
- * @author alex
- */ 
+
 public class ControladorLibroAsiento implements ActionListener{
 String fexha;
 String fexha2;
@@ -125,10 +116,7 @@ int suma3;
            
                lv1.seleccion_id.addItem(cbd.resultado.getObject("num_cuenta"));
   
-            }
-            
-           
-           
+            }          
            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,21 +127,25 @@ int suma3;
      
       private void SeleccionNumeroCuenta(){
        try{
+           
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
             cbd.un_sql="select identificador from cuentabancaria where num_cuenta="+lv1.seleccion_id.getSelectedItem()+"";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-            
-         
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);        
             
             if(cbd.resultado.next()){
                 
                 lv1.id_bancario.setText(cbd.resultado.getString("identificador"));
            
             }else{
+                
                 JOptionPane.showMessageDialog(null, "ESTA VACIO");
+                
             }
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            
             Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
      
      }
@@ -171,23 +163,21 @@ int suma3;
                     
                     if(cbd.resultado.next()){
                     
-                    identificador=cbd.resultado.getInt(1)+1;
+                        identificador=cbd.resultado.getInt(1)+1;
+                    
                     }else{
                     
-                    identificador=1;
+                        identificador=1;
                     
-                    }
+                    }    
                     
-                    
-                    
-                    String fecha= null;
                     String concepto=lv1.concept.getText();
                     
+                    // trabajando con fechas                    
+                    String fecha= null;                   
                     int dia=Integer.parseInt(lv1.dia.getText());
                     String mes1 = lv1.mes.getText();
-                    String mes=lv1.mes.getText();
-                    
-                    
+                    String mes=lv1.mes.getText();                    
                     int año=Integer.parseInt(lv1.año.getText());
                     
                     
@@ -278,9 +268,9 @@ int suma3;
                     //para ingresar
                     
                     int ingresar=Integer.parseInt(lv1.cant.getText());
-                    int ingreso=Integer.parseInt(lv1.cant.getText());
+                    //int ingreso=Integer.parseInt(lv1.cant.getText());
                     int deber=Integer.parseInt(lv1.retiro01.getText());
-                    int retiro=Integer.parseInt(lv1.retiro01.getText());
+                    //int retiro=Integer.parseInt(lv1.retiro01.getText());
                     
                     int mayordomia_id=1;
                     int cuenta_bancaria_id=Integer.parseInt(lv1.id_bancario.getText());
@@ -292,38 +282,18 @@ int suma3;
                         JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
                         Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
                         
-                    } catch (InstantiationException ex) {
+                    } catch (InstantiationException | IllegalAccessException | SQLException ex) {
                         Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    } 
                     
-                    
-                   
-                    
-                    
-                    
-                } catch (ClassNotFoundException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE,null, ex);
                 
-            } catch (InstantiationException ex) {
-                Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-        Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-    }
-                
-                
-                
-      
+            }
       }
       
     @Override
-    public void actionPerformed(ActionEvent e) {
-        
+    public void actionPerformed(ActionEvent e) {        
     
     switch (ControladorLibroAsiento.di.valueOf(e.getActionCommand())) {
         
@@ -342,11 +312,7 @@ int suma3;
             
             case ACEPTAR:
                
-                insertar();
-            
-                
-                
-                
+                insertar();     
                 lv1.dispose();
             break;
                 
@@ -363,11 +329,10 @@ int suma3;
                      lv1.textIngreso.setText(cog3+"");
                      lv1.teclado.dispose();
                 break;
+                
             case SALIR:
                lv1.dispose();
-                break;
-                
-        
+                break;       
                 
           case INGRESAR:
               lv1.ingresar.setEnabled(true);
@@ -425,9 +390,7 @@ lv1.grafico.dispose();
  
      
         
-     public void button(){
-     
-     
+     public void button(){    
 
 ChartPanel Panel = new ChartPanel(Grafica);
 JFrame Ventana = new JFrame("Movimiento de Saldo");
@@ -436,6 +399,7 @@ Ventana.pack();
 Ventana.setVisible(true);
 Ventana.setSize(1200,600);
 Ventana.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
      }
 
    
