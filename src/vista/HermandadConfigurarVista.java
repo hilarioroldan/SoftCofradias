@@ -30,9 +30,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         formaPagoInsertar = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtIdentificador1 = new javax.swing.JTextField();
         txtDescripcion1 = new javax.swing.JTextField();
         btnInsertarFormaPago = new javax.swing.JButton();
         btnSalir1 = new javax.swing.JButton();
@@ -71,9 +69,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         tipoPagoInsertar = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txtIdentificador5 = new javax.swing.JTextField();
         txtDescripcion5 = new javax.swing.JTextField();
         btnInsertarTipoPago = new javax.swing.JButton();
         btnSalir5 = new javax.swing.JButton();
@@ -138,8 +134,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("INSERTAR FORMA DE PAGO");
 
-        jLabel4.setText("Identificador:");
-
         jLabel5.setText("Descripcion:");
 
         btnInsertarFormaPago.setText("Insertar Forma de Pago");
@@ -154,10 +148,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIdentificador1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -174,17 +164,13 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtIdentificador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnInsertarFormaPago)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btnSalir1)
                 .addContainerGap())
         );
@@ -458,8 +444,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("INSERTAR TIPO DE PAGO");
 
-        jLabel17.setText("Identificador:");
-
         jLabel18.setText("Descripcion:");
 
         btnInsertarTipoPago.setText("Insertar Tipo de Pago");
@@ -485,10 +469,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
                         .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel16)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescripcion5, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -500,11 +480,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel16)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtIdentificador5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(txtDescripcion5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -514,7 +490,7 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
                     .addComponent(txtPrecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnInsertarTipoPago)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(btnSalir5)
                 .addContainerGap())
         );
@@ -1057,7 +1033,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1074,7 +1049,6 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1103,11 +1077,9 @@ public class HermandadConfigurarVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtDescripcion6;
     public javax.swing.JTextField txtDescripcion7;
     public javax.swing.JTextField txtDescripcion8;
-    public javax.swing.JTextField txtIdentificador1;
     public javax.swing.JTextField txtIdentificador2;
     public javax.swing.JTextField txtIdentificador3;
     public javax.swing.JTextField txtIdentificador4;
-    public javax.swing.JTextField txtIdentificador5;
     public javax.swing.JTextField txtIdentificador6;
     public javax.swing.JTextField txtIdentificador7;
     public javax.swing.JTextField txtIdentificador8;

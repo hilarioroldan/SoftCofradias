@@ -53,7 +53,7 @@ public class HermandadVista extends javax.swing.JFrame {
         tblHermandad = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
         btnConfigurar = new javax.swing.JButton();
         btnCrear = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -62,13 +62,13 @@ public class HermandadVista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración hermandad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tempus Sans ITC", 1, 18))); // NOI18N
 
-        jLabel2.setText("Nombre hermandad:");
+        jLabel2.setText("* Nombre hermandad:");
 
-        jLabel8.setText("Año fundación:");
+        jLabel8.setText("* Año fundación:");
 
-        jLabel9.setText("Domicilio:");
+        jLabel9.setText("* Domicilio:");
 
-        jLabel10.setText("Municipio:");
+        jLabel10.setText("* Municipio:");
 
         txtMunicipio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,9 +76,9 @@ public class HermandadVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Provincia:");
+        jLabel11.setText("* Provincia:");
 
-        jLabel3.setText("Teléfono1:");
+        jLabel3.setText("* Teléfono1:");
 
         jLabel4.setText("Teléfono2:");
 
@@ -109,7 +109,7 @@ public class HermandadVista extends javax.swing.JFrame {
 
         btnModificar.setText("Modificar");
 
-        btnNuevo.setText("Nuevo");
+        btnBorrar.setText("Borrar todos los datos de la BD");
 
         btnConfigurar.setText("Mas Opciones");
 
@@ -167,7 +167,7 @@ public class HermandadVista extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jLabel8)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel6)
                                             .addGap(18, 18, 18)
@@ -180,8 +180,8 @@ public class HermandadVista extends javax.swing.JFrame {
                                     .addComponent(btnCrear)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnModificar)
-                                    .addGap(216, 216, 216)
-                                    .addComponent(btnNuevo)))
+                                    .addGap(186, 186, 186)
+                                    .addComponent(btnBorrar)))
                             .addGap(8, 8, 8)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -224,7 +224,7 @@ public class HermandadVista extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar)
-                    .addComponent(btnNuevo)
+                    .addComponent(btnBorrar)
                     .addComponent(btnCrear))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,10 +306,10 @@ public class HermandadVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnBorrar;
     public javax.swing.JButton btnConfigurar;
     public javax.swing.JButton btnCrear;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JButton btnNuevo;
     public javax.swing.JButton btnSalir;
     public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;

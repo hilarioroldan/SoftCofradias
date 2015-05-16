@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
  
 //    package controlador;
@@ -19,14 +15,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import modelo.*;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 import vista.*;
-/**
- *
- * @author alex
- */
+
+
 public class ControladorHermano implements ActionListener {
 
 
@@ -73,6 +66,7 @@ public class ControladorHermano implements ActionListener {
     }
 
     public void iniciar() {
+        
         h1 = new modelo.hermanito();
         hv1 = new HermanitoVista1();
         hv1.setVisible(true);
@@ -124,6 +118,10 @@ public class ControladorHermano implements ActionListener {
                 jTable1MousePressed(evt);
             }
         });
+            
+            
+        // comprobacion de creacion de tipo de pago y forma de pago en configuracion hermandad
+        comprobarInserccionFormaPagoTipoPago();
        
     } 
     // METODOS PARA MODIFICAR EL TIPO DE PAGO DESEADO Y SELECCIONAR QUE TIPO QUEREMOS EN NUESTRO HERMANO
@@ -178,9 +176,8 @@ public class ControladorHermano implements ActionListener {
               
         try{
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql=" select forma_pago from formapago;";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
- 
+            cbd.un_sql="select forma_pago from formapago;";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql); 
               
               
             while(cbd.resultado.next()){
@@ -625,13 +622,66 @@ public class ControladorHermano implements ActionListener {
         h1 = new modelo.hermanito();
         return h1.buscarFiltro(filtro, campo);
     }
-  //METODOS PARA LOS PAGOS
-   
-   
+  // metodos para comprobar si se ha insertado al menos una 
+  // forma de pago o un tipo de pago en la configuracion de hdad
  
- ////////////////////////////////////////////////////////////////////////////////////////////////////
+ public void comprobarInserccionFormaPagoTipoPago() {
+     
+     boolean existeFormaPago = false;
+     boolean existeTipoPago = false;
+     
+        try {
+            
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado = cbd.un_st.executeQuery("select * from hermandad");
+            
+            if (cbd.resultado.next()) {
+                
+                cbd.resultado = cbd.un_st.executeQuery("select * from formapago");
+            
+            if (cbd.resultado.next()) {
+                existeFormaPago = true;
+            }
+            
+            cbd.resultado = cbd.un_st.executeQuery("select * from tipopago");
+            
+            if (cbd.resultado.next()) {
+                existeTipoPago = true;
+            }
+            
+            if (existeFormaPago==true && existeTipoPago==true) {
+                hv1.guardar.setEnabled(true);
+            } else {
+                hv1.guardar.setEnabled(false);
+                
+                if (existeFormaPago==false) {
+                    JOptionPane.showMessageDialog(null, "Para poder crear un Hermano debes de crear al menos una forma de pago \n "
+                            + "Dirigase a: Hermandad -> Configurar hermandad -> Más opciones -> Forma de pago -> Insertar", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                if (existeTipoPago==false) {
+                    JOptionPane.showMessageDialog(null, "Para poder crear un Hermano debes de crear al menos una forma de pago \n "
+                            + "Dirigase a: Hermandad -> Configurar hermandad -> Más opciones -> Forma de pago -> Insertar", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+                
+            } else {
+                hv1.guardar.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Debes de crear una hermandad antes de poder crear un Hermano", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+            
+            
+            
+            
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ }
  
- 
+
      
         
 

@@ -11,9 +11,9 @@ public class Hermandad {
     private String domicilio;
     private String municipio;
     private String provincia;
-    private String telf1;
-    private String telf2;
-    private String fax;
+    private int telf1;
+    private int telf2;
+    private int fax;
     private String descripcion;
     
         
@@ -25,7 +25,7 @@ public class Hermandad {
         
     }   
     
-    public Hermandad(int identificador, String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
+    public Hermandad(int identificador, String nombre, String año_fundacion, String domicilio, String municipio, String provincia, int telf1, int telf2, int fax, String descripcion) {
         
         this.identificador=identificador;
         this.nombre = nombre;
@@ -39,7 +39,7 @@ public class Hermandad {
         this.descripcion = descripcion;
     }
     
-    public Hermandad(String nombre, String año_fundacion, String domicilio, String municipio, String provincia, String telf1, String telf2, String fax, String descripcion) {
+    public Hermandad(String nombre, String año_fundacion, String domicilio, String municipio, String provincia, int telf1, int telf2, int fax, String descripcion) {
         
         this.nombre = nombre;
         this.año_fundacion = año_fundacion;
@@ -100,27 +100,27 @@ public class Hermandad {
         this.provincia = provincia;
     }
 
-    public String getTelf1() {
+    public int getTelf1() {
         return telf1;
     }
 
-    public void setTelf1(String telf1) {
+    public void setTelf1(int telf1) {
         this.telf1 = telf1;
     }
 
-    public String getTelf2() {
+    public int getTelf2() {
         return telf2;
     }
 
-    public void setTelf2(String telf2) {
+    public void setTelf2(int telf2) {
         this.telf2 = telf2;
     }
 
-    public String getFax() {
+    public int getFax() {
         return fax;
     }
 
-    public void setFax(String fax) {
+    public void setFax(int fax) {
         this.fax = fax;
     }
     

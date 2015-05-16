@@ -125,7 +125,7 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jDateChooser1" min="-2" pref="103" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -144,8 +144,8 @@
                                           <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                                          <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+                                          <Component id="btnBorrar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -202,7 +202,7 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -220,7 +220,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nombre hermandad:"/>
+                <Property name="text" type="java.lang.String" value="* Nombre hermandad:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNombreHermandad">
@@ -230,12 +230,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="A&#xf1;o fundaci&#xf3;n:"/>
+                <Property name="text" type="java.lang.String" value="* A&#xf1;o fundaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Domicilio:"/>
+                <Property name="text" type="java.lang.String" value="* Domicilio:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDomicilio">
@@ -245,7 +245,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Municipio:"/>
+                <Property name="text" type="java.lang.String" value="* Municipio:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMunicipio">
@@ -258,7 +258,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Provincia:"/>
+                <Property name="text" type="java.lang.String" value="* Provincia:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProvincia">
@@ -268,7 +268,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono1:"/>
+                <Property name="text" type="java.lang.String" value="* Tel&#xe9;fono1:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelefono1">
@@ -366,9 +366,9 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNuevo">
+            <Component class="javax.swing.JButton" name="btnBorrar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="text" type="java.lang.String" value="Borrar todos los datos de la BD"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

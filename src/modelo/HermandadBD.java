@@ -78,9 +78,9 @@ public class HermandadBD {
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
-                h.setFax(cbd.resultado.getString("fax"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
+                h.setFax(cbd.resultado.getInt("fax"));
                 h.setDescripcion(cbd.resultado.getString("descripcion"));  
             } else {
                  /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
@@ -123,9 +123,9 @@ public class HermandadBD {
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
-                h.setFax(cbd.resultado.getString("fax"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
+                h.setFax(cbd.resultado.getInt("fax"));
                 h.setDescripcion(cbd.resultado.getString("descripcion"));
                 
                 listaHermandad.add(h);
@@ -153,9 +153,9 @@ public class HermandadBD {
                 h.setDomicilio(cbd.resultado.getString("domicilio"));
                 h.setMunicipio(cbd.resultado.getString("municipio"));
                 h.setProvincia(cbd.resultado.getString("provincia"));
-                h.setTelf1(cbd.resultado.getString("telf1"));
-                h.setTelf2(cbd.resultado.getString("telf2"));
-                h.setFax(cbd.resultado.getString("fax"));
+                h.setTelf1(cbd.resultado.getInt("telf1"));
+                h.setTelf2(cbd.resultado.getInt("telf2"));
+                h.setFax(cbd.resultado.getInt("fax"));
                 h.setDescripcion(cbd.resultado.getString("descripcion"));
                 
                 listaHermandad.add(h);
