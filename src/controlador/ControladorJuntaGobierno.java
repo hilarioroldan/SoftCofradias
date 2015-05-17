@@ -188,7 +188,7 @@ public class ControladorJuntaGobierno implements ActionListener{
            j1.tablagobierno.setModel(jj);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -223,7 +223,7 @@ public class ControladorJuntaGobierno implements ActionListener{
            j1.tablagobierno1.setModel(rr);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     /*private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
@@ -272,7 +272,7 @@ public class ControladorJuntaGobierno implements ActionListener{
             j1.tablagobierno1.setModel(ff);
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla"+e, "Error", JOptionPane.ERROR_MESSAGE);        
         }
         
     }

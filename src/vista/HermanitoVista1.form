@@ -773,7 +773,7 @@
                                           <Component id="apellidostxt" min="-2" pref="247" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -793,8 +793,8 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="fecha" max="32767" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jDateChooser1" min="-2" pref="104" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="56" max="32767" attributes="0"/>
@@ -827,15 +827,17 @@
                                       <Component id="telefono" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="emailtxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="direccion1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="CP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="fecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="emailtxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="direccion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="30" max="32767" attributes="0"/>
                               </Group>
@@ -934,7 +936,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Emal:"/>
+                            <Property name="text" type="java.lang.String" value="Email:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="emailtxt">
@@ -967,7 +969,7 @@
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="fecha">
+                        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
@@ -1074,7 +1076,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="N&#xba; Tipo de pago:"/>
+                            <Property name="text" type="java.lang.String" value="Tipo de pago:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JComboBox" name="seleecion_forma_pago">

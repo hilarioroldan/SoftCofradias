@@ -144,7 +144,7 @@ public class JuntaGobiernoBD {
         
         Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
         
-        cbd.un_sql = "SELECT * FROM juntadegobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
+        cbd.un_sql = "SELECT * FROM juntagobierno WHERE " + campo + " LIKE '%" + filtro + "%' ORDER BY identificador;";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         while(cbd.resultado.next()){

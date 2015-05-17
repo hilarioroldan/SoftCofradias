@@ -1257,13 +1257,7 @@ ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error: Parametros incorrectos introducidos", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE,null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
         

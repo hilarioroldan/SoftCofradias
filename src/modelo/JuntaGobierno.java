@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author alex
- */
 public class JuntaGobierno extends persona {
 
     private int identificador;
@@ -28,7 +20,7 @@ public class JuntaGobierno extends persona {
          this.identificador=identificador;
     }
     
-    public JuntaGobierno(int identificador,String cargo, String observaciones, String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,int numero_hermano_id) {
+    public JuntaGobierno(int identificador,String cargo, String observaciones, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,int numero_hermano_id) {
         
         super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id, id_hermandad);
         this.cargo = cargo;

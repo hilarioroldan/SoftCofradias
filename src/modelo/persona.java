@@ -1,82 +1,72 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-/**
- *
- * @author Alex Dopino
- */
 public class persona {
 
-  
     private String nombre;
     private String nif;
     private String apellido;
     private String municipio;
     private String provincia;
     private String pais;
-    
-    private String tfno;
+
+    private int tfno;
     private String email;
     private String banco;
     private String cuenta_bancaria;
     private int tipo_pago_id;
-    int forma_pago_id; 
+    int forma_pago_id;
     private int id_hermandad;
 
- public persona(){
- 
- }
-  public persona( String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id,int id_hermandad ) {
-        
-        this.nombre = nombre;
-        this.nif = nif;
-        this.apellido = apellido;
-        this.municipio = municipio;
-        this.provincia = provincia;
-        this.pais = pais;
-        this.tfno = tfno;
-        this.email = email;
-        this.banco = banco;
-        this.cuenta_bancaria = cuenta_bancaria;
-        this.tipo_pago_id = tipo_pago_id;
-        this.forma_pago_id = forma_pago_id;
-        this.id_hermandad=id_hermandad;
-        
-    }
-    public persona( String nombre, String nif, String apellido, String municipio, String provincia, String pais, String tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
-        
-        this.nombre = nombre;
-        this.nif = nif;
-        this.apellido = apellido;
-        this.municipio = municipio;
-        this.provincia = provincia;
-        this.pais = pais;
-        this.tfno = tfno;
-        this.email = email;
-        this.banco = banco;
-        this.cuenta_bancaria = cuenta_bancaria;
-        this.tipo_pago_id = tipo_pago_id;
-        this.forma_pago_id = forma_pago_id;
-        
-        
+    public persona() {
+
     }
 
-    public persona(String nombre,String apellido){
-    
-    this.nombre=nombre;
-    this.apellido=apellido;
-    
+    public persona(String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad) {
+
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+        this.tipo_pago_id = tipo_pago_id;
+        this.forma_pago_id = forma_pago_id;
+        this.id_hermandad = id_hermandad;
+
     }
-   //constructor personalizado para insercion de datos en la tabla formadepagos
-    public persona(int forma_pago_id){
-    this.forma_pago_id=forma_pago_id;
+
+    public persona(String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
+
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+        this.tipo_pago_id = tipo_pago_id;
+        this.forma_pago_id = forma_pago_id;
+
+    }
+
+    public persona(String nombre, String apellido) {
+
+        this.nombre = nombre;
+        this.apellido = apellido;
+
+    }
+
+    //constructor personalizado para insercion de datos en la tabla formadepagos
+
+    public persona(int forma_pago_id) {
+        this.forma_pago_id = forma_pago_id;
     }
 
     public int getId_hermandad() {
@@ -87,11 +77,11 @@ public class persona {
         this.id_hermandad = id_hermandad;
     }
 
-    public String getTfno() {
+    public int getTfno() {
         return tfno;
     }
 
-    public void setTfno(String tfno) {
+    public void setTfno(int tfno) {
         this.tfno = tfno;
     }
 
@@ -133,9 +123,8 @@ public class persona {
 
     public void setForma_pago_id(int forma_pago_id) {
         this.forma_pago_id = forma_pago_id;
-    }    
-    
-   
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -189,6 +178,4 @@ public class persona {
         return "persona{" + "nombre=" + nombre + ", nif=" + nif + ", apellido=" + apellido + ", municipio=" + municipio + ", provincia=" + provincia + ", pais=" + pais + ", tfno=" + tfno + ", email=" + email + ", banco=" + banco + ", cuenta_bancaria=" + cuenta_bancaria + ", tipo_pago_id=" + tipo_pago_id + ", forma_pago_id=" + forma_pago_id + ", id_hermandad=" + id_hermandad + '}';
     }
 
-    
-    
 }

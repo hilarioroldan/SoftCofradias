@@ -837,7 +837,7 @@ public class ControladorPagoCuotas implements ActionListener {
                 fila[4] = hermanos.getMunicipio();
                 fila[5] = hermanos.getProvincia();
                 fila[6] = hermanos.getPais();
-                fila[7] = hermanos.getTfno();
+                fila[7] = String.valueOf(hermanos.getTfno());
                 fila[8] = hermanos.getEmail();
                 fila[9] = hermanos.getBanco();
                 fila[10] = hermanos.getCuenta_bancaria();
