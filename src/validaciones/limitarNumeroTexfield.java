@@ -18,6 +18,7 @@ public class limitarNumeroTexfield extends PlainDocument{
   
   public void insertString(int arg0, String arg1, AttributeSet arg2) throws  BadLocationException{
       if ((editor.getText().length()+arg1.length()) > this.num) {
+          java.awt.Toolkit.getDefaultToolkit().beep();
           return;
       } super.insertString(arg0, arg1, arg2);
   }

@@ -8,7 +8,6 @@ public class persona {
     private String municipio;
     private String provincia;
     private String pais;
-
     private int tfno;
     private String email;
     private String banco;
@@ -55,6 +54,39 @@ public class persona {
         this.forma_pago_id = forma_pago_id;
 
     }
+    
+    
+    
+    public persona(String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int forma_pago_id) {
+
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+        this.forma_pago_id = forma_pago_id;
+
+    }
+    
+     public persona(String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria) {
+
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+
+    }
 
     public persona(String nombre, String apellido) {
 
@@ -62,6 +94,23 @@ public class persona {
         this.apellido = apellido;
 
     }
+
+    public persona(String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int id_hermandad, String x) {
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.tfno = tfno;
+        this.email = email;
+        this.banco = banco;
+        this.cuenta_bancaria = cuenta_bancaria;
+        this.tipo_pago_id = tipo_pago_id;
+        this.id_hermandad = id_hermandad;
+    }
+    
+    
 
     //constructor personalizado para insercion de datos en la tabla formadepagos
 

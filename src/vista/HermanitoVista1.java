@@ -51,7 +51,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         apellidostxt1 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        niftx1 = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         nherma1 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
@@ -64,12 +63,13 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         telefono1 = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         emailtxt1 = new javax.swing.JTextField();
-        fecha1 = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         CP1 = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         direccion2 = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
+        niftx1 = new javax.swing.JFormattedTextField();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel8 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -92,7 +92,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         apellidostxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        niftx = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         nherma = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -111,6 +110,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         direccion1 = new javax.swing.JTextField();
         CP = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        niftx = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -244,12 +244,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
 
         jLabel25.setText("NIF/DNI:");
 
-        niftx1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                niftx1ActionPerformed(evt);
-            }
-        });
-
         jLabel26.setText("Nº Hermano:");
 
         nherma1.addActionListener(new java.awt.event.ActionListener() {
@@ -266,13 +260,19 @@ public class HermanitoVista1 extends javax.swing.JFrame {
 
         jLabel31.setText("Tfno:");
 
-        jLabel32.setText("Emal:");
+        jLabel32.setText("Email:");
 
         jLabel40.setText("Fecha de Nacimiento:");
 
         jLabel41.setText("CP:");
 
         jLabel42.setText("Direccion:");
+
+        try {
+            niftx1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########-?")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -293,8 +293,8 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                 .addGap(61, 61, 61)
                                 .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(niftx1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(niftx1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel28)
@@ -330,8 +330,8 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                         .addComponent(CP1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -364,11 +364,11 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                         .addComponent(jLabel41)
                         .addComponent(jLabel40)
                         .addComponent(direccion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel32)
-                        .addComponent(emailtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(emailtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -388,7 +388,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
 
         jLabel30.setText("Forma De Pago");
 
-        jLabel43.setText("Nº Tipo de pago:");
+        jLabel43.setText("Tipo de pago:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -486,7 +486,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS DEL SOLICITANTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jLabel2.setText("Nombre: ");
+        jLabel2.setText("* Nombre: ");
 
         nombretext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,15 +494,9 @@ public class HermanitoVista1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Apellidos: ");
+        jLabel3.setText("* Apellidos: ");
 
-        jLabel4.setText("NIF/DNI:");
-
-        niftx.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                niftxActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("* NIF/DNI:");
 
         jLabel23.setText("Nº Hermano:");
 
@@ -512,21 +506,27 @@ public class HermanitoVista1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Municipio:");
+        jLabel5.setText("* Municipio:");
 
-        jLabel6.setText("Pais:");
+        jLabel6.setText("* Pais:");
 
-        jLabel7.setText("Provincia:");
+        jLabel7.setText("* Provincia:");
 
-        jLabel11.setText("Tfno:");
+        jLabel11.setText("* Tfno:");
 
         jLabel12.setText("Email:");
 
-        jLabel37.setText("Direccion:");
+        jLabel37.setText("* Direccion:");
 
-        jLabel38.setText("CP:");
+        jLabel38.setText("* CP:");
 
-        jLabel39.setText("Fecha de Nacimiento:");
+        jLabel39.setText("* Fecha de Nacimiento:");
+
+        try {
+            niftx.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########-?")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -577,8 +577,8 @@ public class HermanitoVista1 extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(niftx, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(niftx, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
@@ -980,10 +980,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nhermaActionPerformed
 
-    private void niftxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niftxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_niftxActionPerformed
-
     private void nombretextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombretextActionPerformed
@@ -999,10 +995,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     private void nombretext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretext1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombretext1ActionPerformed
-
-    private void niftx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niftx1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_niftx1ActionPerformed
 
     private void nherma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nherma1ActionPerformed
         // TODO add your handling code here:
@@ -1095,7 +1087,6 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     public javax.swing.JToggleButton eliminar;
     public javax.swing.JTextField emailtxt;
     public javax.swing.JTextField emailtxt1;
-    public javax.swing.JTextField fecha1;
     private javax.swing.ButtonGroup grupo1;
     public javax.swing.JButton guardar;
     public javax.swing.JButton guardar1;
@@ -1103,6 +1094,7 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     private javax.swing.JTextField hermaB;
     private javax.swing.JButton jButton2;
     public com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1164,8 +1156,8 @@ public class HermanitoVista1 extends javax.swing.JFrame {
     public javax.swing.JTextField municipiotxt1;
     public javax.swing.JTextField nherma;
     public javax.swing.JTextField nherma1;
-    public javax.swing.JTextField niftx;
-    public javax.swing.JTextField niftx1;
+    public javax.swing.JFormattedTextField niftx;
+    public javax.swing.JFormattedTextField niftx1;
     public javax.swing.JTextField nombretext;
     public javax.swing.JTextField nombretext1;
     public javax.swing.JTextField paistxt;

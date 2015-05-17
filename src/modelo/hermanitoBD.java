@@ -56,6 +56,69 @@ public class hermanitoBD {
         }
 
     }
+    
+    public void modificarSinTipoPago() throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+
+        Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+
+        cbd.un_sql = "SELECT numero_hermano FROM hermanos WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+        if (cbd.resultado != null) {
+            cbd.un_sql = "UPDATE hermanos SET  nombre='" + h2.getNombre() + "',apellidos='" + h2.getApellido() + "',nif='" + h2.getNif() + "',municipio='" + h2.getMunicipio() + "',provincia='" + h2.getProvincia() + "',pais='" + h2.getPais() + "',tfno='" + h2.getTfno() + "',email='" + h2.getEmail() + "',banco='" + h2.getBanco() + "',cuenta_bancaria='" + h2.getCuenta_bancaria() + "',forma_pago_id='" + h2.getForma_pago_id() + "',id_hermandad=1, fecha_nacimiento='" + h2.getFecha() + "',direccion='" + h2.getDireccion() + "', codigo_postal='" + h2.getCp() + "' WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+
+            cbd.un_st.executeUpdate(cbd.un_sql);
+        } else {
+            /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
+            throw new Error("Registro" + h2.getNumero_hermano() + "No se encuentra en la tabla'" + this.getClass().getName());
+        }
+
+    }
+    
+    public void modificarSinFormaPago() throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+
+        Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+
+        cbd.un_sql = "SELECT numero_hermano FROM hermanos WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+        if (cbd.resultado != null) {
+            cbd.un_sql = "UPDATE hermanos SET  nombre='" + h2.getNombre() + "',apellidos='" + h2.getApellido() + "',nif='" + h2.getNif() + "',municipio='" + h2.getMunicipio() + "',provincia='" + h2.getProvincia() + "',pais='" + h2.getPais() + "',tfno='" + h2.getTfno() + "',email='" + h2.getEmail() + "',banco='" + h2.getBanco() + "',cuenta_bancaria='" + h2.getCuenta_bancaria() + "',tipo_pago_id='" + h2.getTipo_pago_id()+ "',id_hermandad=1, fecha_nacimiento='" + h2.getFecha() + "',direccion='" + h2.getDireccion() + "', codigo_postal='" + h2.getCp() + "' WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+            JOptionPane.showMessageDialog(null, "tipopagoid:"+h2.getTipo_pago_id());
+            cbd.un_st.executeUpdate(cbd.un_sql);
+        } else {
+            /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
+            throw new Error("Registro" + h2.getNumero_hermano() + "No se encuentra en la tabla'" + this.getClass().getName());
+        }
+
+    }
+    
+    public void modificarSinFormaPagoSinTipoPago() throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+
+        Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+
+        cbd.un_sql = "SELECT numero_hermano FROM hermanos WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+        if (cbd.resultado != null) {
+            cbd.un_sql = "UPDATE hermanos SET  nombre='" + h2.getNombre() + "',apellidos='" + h2.getApellido() + "',nif='" + h2.getNif() + "',municipio='" + h2.getMunicipio() + "',provincia='" + h2.getProvincia() + "',pais='" + h2.getPais() + "',tfno='" + h2.getTfno() + "',email='" + h2.getEmail() + "',banco='" + h2.getBanco() + "',cuenta_bancaria='" + h2.getCuenta_bancaria() + "',id_hermandad=1, fecha_nacimiento='" + h2.getFecha() + "',direccion='" + h2.getDireccion() + "', codigo_postal='" + h2.getCp() + "' WHERE numero_hermano=" + h2.getNumero_hermano() + ";";
+
+            cbd.un_st.executeUpdate(cbd.un_sql);
+        } else {
+            /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
+            throw new Error("Registro" + h2.getNumero_hermano() + "No se encuentra en la tabla'" + this.getClass().getName());
+        }
+
+    }
 
     public hermanito leer() throws ClassNotFoundException,
             InstantiationException,

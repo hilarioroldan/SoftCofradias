@@ -7,6 +7,7 @@ public class hermanito extends persona {
 
     private int numero_hermano;
     private String forma_de_pago;
+    private String tipo_de_pagox;
     private String direccion;
     private int cp;
     private String fecha;
@@ -19,6 +20,22 @@ public class hermanito extends persona {
 
     public hermanito(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) {
         super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id);
+        this.numero_hermano = numero_hermano;
+        this.direccion = direccion;
+        this.cp = cp;
+        this.fecha = fecha;
+    }
+    
+     public hermanito(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int forma_pago_id) {
+        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, forma_pago_id);
+        this.numero_hermano = numero_hermano;
+        this.direccion = direccion;
+        this.cp = cp;
+        this.fecha = fecha;
+    }     
+     
+     public hermanito(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria) {
+        super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria);
         this.numero_hermano = numero_hermano;
         this.direccion = direccion;
         this.cp = cp;
@@ -83,6 +100,16 @@ public class hermanito extends persona {
         this.fecha = fecha;
     }
 
+    public String getTipo_de_pagox() {
+        return tipo_de_pagox;
+    }
+
+    public void setTipo_de_pagox(String tipo_de_pagox) {
+        this.tipo_de_pagox = tipo_de_pagox;
+    }
+    
+    
+
     @Override
     public String toString() {
         return super.toString() + "hermanito{" + "numero_hermano=" + numero_hermano + ", forma_de_pago=" + forma_de_pago + ", direccion=" + direccion + ", cp=" + cp + ", fecha=" + fecha + '}';
@@ -99,6 +126,22 @@ public class hermanito extends persona {
         hermanitoBD h = new hermanitoBD(this);
         h.modificar();
     }
+    
+    public void actualizarSinFormaPago() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hermanitoBD h = new hermanitoBD(this);
+        h.modificarSinFormaPago();
+    }
+    
+    public void actualizarSinTipoPago() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hermanitoBD h = new hermanitoBD(this);
+        h.modificarSinTipoPago();
+    }
+    
+    public void actualizarSinTipoPagoSinFormaPago() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hermanitoBD h = new hermanitoBD(this);
+        h.modificarSinFormaPagoSinTipoPago();
+    }
+    
 
     /*Este metodo me permite instanciar la clase proveedordb y llamar al metodo borrar para hacer uso de el*/
     public void borrar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {

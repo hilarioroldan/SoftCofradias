@@ -827,7 +827,7 @@ public class ControladorHermandad implements ActionListener {
         FormaPago x = new FormaPago(identificador, tipo_pago);
         try {
             x.grabar();
-            JOptionPane.showMessageDialog(null, "Pago de cuota insertada correctamente");
+            JOptionPane.showMessageDialog(null, "Forma de pago insertada correctamente");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         }
