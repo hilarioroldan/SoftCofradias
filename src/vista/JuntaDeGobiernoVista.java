@@ -34,6 +34,22 @@ seleccion.addActionListener(new ActionListener() {
     private void initComponents() {
 
         añadirNuevoCargo = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        cargonuevo = new javax.swing.JTextField();
+        salirr = new javax.swing.JButton();
+        insertar_cargo = new javax.swing.JButton();
+        gestion_cargos = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        añadir_cargo = new javax.swing.JButton();
+        Eliminar_cargo = new javax.swing.JButton();
+        aceptar_cargo = new javax.swing.JButton();
+        eliminacion = new javax.swing.JDialog();
+        jPanel10 = new javax.swing.JPanel();
+        Eliminalo = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cargo_seleccion_eliminacion = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -48,7 +64,7 @@ seleccion.addActionListener(new ActionListener() {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         obs = new javax.swing.JTextPane();
-        jButton2 = new javax.swing.JButton();
+        gestionar = new javax.swing.JButton();
         aceptar = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -69,15 +85,174 @@ seleccion.addActionListener(new ActionListener() {
         modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Cargo"));
+
+        jLabel2.setText("Cargo:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cargonuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cargonuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        salirr.setText("Salir");
+
+        insertar_cargo.setText("Insertar");
+
         javax.swing.GroupLayout añadirNuevoCargoLayout = new javax.swing.GroupLayout(añadirNuevoCargo.getContentPane());
         añadirNuevoCargo.getContentPane().setLayout(añadirNuevoCargoLayout);
         añadirNuevoCargoLayout.setHorizontalGroup(
             añadirNuevoCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(añadirNuevoCargoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(añadirNuevoCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, añadirNuevoCargoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(insertar_cargo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salirr)))
+                .addContainerGap())
         );
         añadirNuevoCargoLayout.setVerticalGroup(
             añadirNuevoCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(añadirNuevoCargoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(añadirNuevoCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salirr)
+                    .addComponent(insertar_cargo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Gestion de cargos"));
+
+        añadir_cargo.setText("Añadir cargo");
+
+        Eliminar_cargo.setText("Eliminar Cargo");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(añadir_cargo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Eliminar_cargo)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(añadir_cargo)
+                    .addComponent(Eliminar_cargo))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        aceptar_cargo.setText("Aceptar");
+        aceptar_cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptar_cargoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gestion_cargosLayout = new javax.swing.GroupLayout(gestion_cargos.getContentPane());
+        gestion_cargos.getContentPane().setLayout(gestion_cargosLayout);
+        gestion_cargosLayout.setHorizontalGroup(
+            gestion_cargosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gestion_cargosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(aceptar_cargo)
+                .addContainerGap())
+            .addGroup(gestion_cargosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gestion_cargosLayout.setVerticalGroup(
+            gestion_cargosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gestion_cargosLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(aceptar_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminacion de un cargo"));
+
+        Eliminalo.setText("Eliminar");
+
+        jLabel8.setText("Seleccione un Cargo:");
+
+        cargo_seleccion_eliminacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cargo_seleccion_eliminacion, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(Eliminalo)
+                .addGap(23, 23, 23))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Eliminalo)
+                    .addComponent(jLabel8)
+                    .addComponent(cargo_seleccion_eliminacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("Aceptar");
+
+        javax.swing.GroupLayout eliminacionLayout = new javax.swing.GroupLayout(eliminacion.getContentPane());
+        eliminacion.getContentPane().setLayout(eliminacionLayout);
+        eliminacionLayout.setHorizontalGroup(
+            eliminacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eliminacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(eliminacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eliminacionLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
+        );
+        eliminacionLayout.setVerticalGroup(
+            eliminacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eliminacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,7 +278,7 @@ seleccion.addActionListener(new ActionListener() {
 
         jScrollPane1.setViewportView(obs);
 
-        jButton2.setText("Añadir nuevo cargo");
+        gestionar.setText("Gestion de cargos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +311,7 @@ seleccion.addActionListener(new ActionListener() {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(seleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton2)))
+                                .addComponent(gestionar)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -155,7 +330,7 @@ seleccion.addActionListener(new ActionListener() {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(seleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addComponent(jButton2))
+                    .addComponent(gestionar))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -431,6 +606,10 @@ this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_seleccionActionPerformed
 
+    private void aceptar_cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_cargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aceptar_cargoActionPerformed
+
    
     
     
@@ -465,6 +644,10 @@ this.dispose();
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -475,25 +658,40 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton Eliminalo;
+    public javax.swing.JButton Eliminar_cargo;
     public javax.swing.JButton aceptar;
+    public javax.swing.JButton aceptar_cargo;
     public javax.swing.JTextField apel;
-    private javax.swing.JDialog añadirNuevoCargo;
+    public javax.swing.JDialog añadirNuevoCargo;
+    public javax.swing.JButton añadir_cargo;
+    public javax.swing.JComboBox cargo_seleccion_eliminacion;
+    public javax.swing.JTextField cargonuevo;
     public javax.swing.JComboBox cmbBD1;
+    public javax.swing.JDialog eliminacion;
     public javax.swing.JButton eliminar;
-    public javax.swing.JButton jButton2;
+    public javax.swing.JDialog gestion_cargos;
+    public javax.swing.JButton gestionar;
+    public javax.swing.JButton insertar_cargo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -505,6 +703,7 @@ this.dispose();
     public javax.swing.JTextPane obs;
     public javax.swing.JButton salir;
     public javax.swing.JButton salir2;
+    public javax.swing.JButton salirr;
     public javax.swing.JComboBox seleccion;
     public javax.swing.JTable tablagobierno;
     public javax.swing.JTable tablagobierno1;
