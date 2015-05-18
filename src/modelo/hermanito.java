@@ -60,6 +60,12 @@ public class hermanito extends persona {
 
     }
 
+    public hermanito(int numero_hermano) {
+        this.numero_hermano = numero_hermano;
+    }
+    
+    
+
     public int getNumero_hermano() {
         return numero_hermano;
     }

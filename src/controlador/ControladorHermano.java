@@ -44,7 +44,7 @@ public class ControladorHermano implements ActionListener {
         hv1.setVisible(true);
         hv1.setLocationRelativeTo(null);
         cargarTablaHermanos();
-        cargarTablaHermanos2();
+        //cargarTablaHermanos2();
         
         // VALIDACIONES //   
         soloNumerosSoloLetras x = new soloNumerosSoloLetras();
@@ -522,8 +522,10 @@ e.printStackTrace();
             String campo = (String) hv1.cmbBD1.getSelectedItem();
             String filtro = hv1.txtFiltro1.getText();
             x = h1.buscarFiltro(filtro, campo);
-
-            Iterator<modelo.hermanito> it = x.iterator();
+            
+            if (x.size()>0) {
+                
+                Iterator<modelo.hermanito> it = x.iterator();
             while (it.hasNext()) {
                 hermanos = it.next();
                 fila[0] = String.valueOf(hermanos.getNumero_hermano());
@@ -547,6 +549,12 @@ e.printStackTrace();
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
             hv1.tablaHermano1.setRowSorter(ordenar);
             hv1.tablaHermano1.setModel(ff);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+            }
+
+            
 
         } catch (Exception e) {
             //   e.printStackTrace();  
@@ -569,11 +577,13 @@ e.printStackTrace();
     private void eliminarSeleccion() {
 
         int clic = hv1.tablaHermano.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-        int clic2 = hv1.tablaHermano.getSelectedRow();
-        String forma_pago_id = hv1.tablaHermano.getValueAt(clic, 13).toString();
-        String num = hv1.tablaHermano.getValueAt(clic2, 0).toString();
+          
+        if (clic!=-1) {
+            
+            String num = hv1.tablaHermano.getValueAt(clic, 0).toString();
         try {
-            eliminarHermano(Integer.parseInt(num), Integer.parseInt(forma_pago_id));
+            eliminarHermano(Integer.parseInt(num));
+            ponerNumHermano();
             JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
@@ -581,6 +591,12 @@ e.printStackTrace();
         cargarTablaHermanos();
 
         hv1.tablaHermano.setModel(new DefaultTableModel());
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes de seleccionar una Fila de la Tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
 
     }
 
@@ -746,9 +762,9 @@ e.printStackTrace();
     }
 
     /*Metodo para borrar una Hermandad*/
-    public void eliminarHermano(int numero_hermano, int forma_pago_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        modelo.hermanito h1;
-        h1 = new modelo.hermanito(numero_hermano, forma_pago_id);
+    public void eliminarHermano(int numero_hermano) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        hermanito h1;
+        h1 = new hermanito(numero_hermano);
         h1.borrar();
     }
 

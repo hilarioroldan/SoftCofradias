@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.SQLException;
@@ -11,10 +7,6 @@ import javax.swing.JOptionPane;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 
-/**
- *
- * @author alex
- */
 public class JuntaGobiernoBD {
     
      private JuntaGobierno j;
@@ -84,7 +76,7 @@ public class JuntaGobiernoBD {
                 j.setNombre(cbd.resultado.getString("nombre"));
                 //h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
                 j.setApellido(cbd.resultado.getString("apellidos"));
-                j.setCargo(cbd.resultado.getString("cargo"));
+                j.setCargo(cbd.resultado.getInt("cargo"));
                 j.setObservaciones(cbd.resultado.getString("observacion"));
                 j.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                
@@ -127,7 +119,7 @@ public class JuntaGobiernoBD {
                 j.setNombre(cbd.resultado.getString("nombre"));
                 //h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
                 j.setApellido(cbd.resultado.getString("apellidos"));
-                j.setCargo(cbd.resultado.getString("cargo"));
+                j.setCargo(cbd.resultado.getInt("cargo"));
                 j.setObservaciones(cbd.resultado.getString("observacion"));
                 j.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 
@@ -155,8 +147,8 @@ public class JuntaGobiernoBD {
                 j.setNombre(cbd.resultado.getString("nombre"));
                 //h.setAño_fundacion(Integer.parseInt(cbd.resultado.getString("año_fundacion")));
                 j.setApellido(cbd.resultado.getString("apellidos"));
-                j.setCargo(cbd.resultado.getString("cargo"));
-                j.setObservaciones(cbd.resultado.getString("observacion"));
+                j.setCargo(cbd.resultado.getInt("cargo"));
+                j.setObservaciones(cbd.resultado.getString("observaciones"));
                 j.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 
                 listaGobierno.add(j);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class JuntaGobierno extends persona {
 
     private int identificador;
-    private String cargo;
+    private int cargo;
     private String observaciones;
     private int numero_hermano_id;
 
@@ -20,7 +20,7 @@ public class JuntaGobierno extends persona {
          this.identificador=identificador;
     }
     
-    public JuntaGobierno(int identificador,String cargo, String observaciones, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,int numero_hermano_id) {
+    public JuntaGobierno(int identificador,int cargo, String observaciones, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id, int id_hermandad,int numero_hermano_id) {
         
         super(nombre, nif, apellido, municipio, provincia, pais, tfno, email, banco, cuenta_bancaria, tipo_pago_id, forma_pago_id, id_hermandad);
         this.cargo = cargo;
@@ -30,7 +30,7 @@ public class JuntaGobierno extends persona {
         
     }
 
-  public JuntaGobierno(int identificador,String nombre,String apellido,String cargo,String observaciones,int numero_hermano_id){
+  public JuntaGobierno(int identificador,String nombre,String apellido,int cargo,String observaciones,int numero_hermano_id){
       
       super(nombre, apellido);
       
@@ -42,11 +42,11 @@ public class JuntaGobierno extends persona {
 
 
     
-    public String getCargo() {
+    public int getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(int cargo) {
         this.cargo = cargo;
     }
 
