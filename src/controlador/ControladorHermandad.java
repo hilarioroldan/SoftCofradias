@@ -21,6 +21,7 @@ import servicios.Conexion;
 import vista.HermandadConfigurarVista;
 import vista.HermandadVista;
 import vista.VentanaPrincipal;
+import validaciones.*;
 
 public class ControladorHermandad implements ActionListener {
 
@@ -34,7 +35,8 @@ public class ControladorHermandad implements ActionListener {
         CREAR, MODIFICAR, BORRAR, SALIR, CONFIGURAR, INSERTARFP, MOSTRARFP, MODIFICARFP, ELIMINARFP, INSERTARTP, MOSTRARTP, MODIFICARTP, ELIMINARTP, btnInsertarFormaPago, btnInsertarTipoPago, btnSalir, btnSalir1, btnSalir2, btnSalir3, btnSalir4, btnSalir5, btnSalir6, btnSalir7, btnSalir8, btnModificar1, btnModificar2, btnEliminar1, btnEliminar2;
     }
 
-    public void iniciar() {
+    public void iniciar() {       
+        
         h = new Hermandad();
         hv = new HermandadVista();
         hcv = new HermandadConfigurarVista();
@@ -42,6 +44,21 @@ public class ControladorHermandad implements ActionListener {
         hv.setVisible(true);
         hv.setLocationRelativeTo(null);
         cargarTablaHermandades();
+        
+        // validaciones
+        hv.txtTelefono1.setDocument(new limitarNumeroTexfield(hv.txtTelefono1, 9));
+        hv.txtTelefono2.setDocument(new limitarNumeroTexfield(hv.txtTelefono2, 9));
+        
+        soloNumerosSoloLetras sn = new soloNumerosSoloLetras();
+       sn.SLetras(hv.txtNombreHermandad);
+        sn.SLetras(hv.txtMunicipio);
+        sn.SLetras(hv.txtProvincia);
+        sn.SNumeros(hv.txtTelefono1);
+        sn.SNumeros(hv.txtTelefono2);
+        sn.SNumeros(hv.txtFax);
+        sn.SNumeros(hv.txtNumeroDeHermanos);
+        
+        
         
         // desactivacion de botones
         hcv.txtIdentificador2.setEnabled(false);

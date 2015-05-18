@@ -16,6 +16,7 @@ import modelo.EntidadesConocidas;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 import vista.EntidadesConocidasVista;
+import validaciones.*;
 
 public class ControladorEntidadesConocidas implements ActionListener {
 
@@ -32,6 +33,49 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv = new EntidadesConocidasVista();
         ecv.setVisible(true);
         ecv.setLocationRelativeTo(null);
+        
+        //validaciones
+        soloNumerosSoloLetras x = new soloNumerosSoloLetras();
+        x.SLetras(ecv.txtNombreEntidad);
+        x.SLetras(ecv.txtNombreEntidad3);
+        x.SLetras(ecv.txtNombreEntidad4);
+        x.SLetras(ecv.txtNombreEntidad5);
+        x.SLetras(ecv.txtLocalidad);
+        x.SLetras(ecv.txtLocalidad3);
+        x.SLetras(ecv.txtLocalidad4);
+        x.SLetras(ecv.txtLocalidad5);
+        x.SLetras(ecv.txtProvincia);
+        x.SLetras(ecv.txtProvincia3);
+        x.SLetras(ecv.txtProvincia4);
+        x.SLetras(ecv.txtProvincia5);
+        x.SNumeros(ecv.txtCp);
+        x.SNumeros(ecv.txtCp3);
+        x.SNumeros(ecv.txtCp4);
+        x.SNumeros(ecv.txtCp5);
+        x.SNumeros(ecv.txtTelf1);
+        x.SNumeros(ecv.txtTelf13);
+        x.SNumeros(ecv.txtTelf14);
+        x.SNumeros(ecv.txtTelf15);
+        x.SNumeros(ecv.txtTelf2);
+        x.SNumeros(ecv.txtTelf23);
+        x.SNumeros(ecv.txtTelf24);
+        x.SNumeros(ecv.txtTelf25);
+        
+        ecv.txtCp.setDocument(new limitarNumeroTexfield(ecv.txtCp, 5));
+        ecv.txtCp3.setDocument(new limitarNumeroTexfield(ecv.txtCp3, 5));
+        ecv.txtCp4.setDocument(new limitarNumeroTexfield(ecv.txtCp4, 5));
+        ecv.txtCp5.setDocument(new limitarNumeroTexfield(ecv.txtCp5, 5));
+        
+        ecv.txtTelf1.setDocument(new limitarNumeroTexfield(ecv.txtTelf1, 9));
+        ecv.txtTelf13.setDocument(new limitarNumeroTexfield(ecv.txtTelf13, 9));
+        ecv.txtTelf14.setDocument(new limitarNumeroTexfield(ecv.txtTelf14, 9));
+        ecv.txtTelf15.setDocument(new limitarNumeroTexfield(ecv.txtTelf15, 9));
+        
+        ecv.txtTelf2.setDocument(new limitarNumeroTexfield(ecv.txtTelf2, 9));
+        ecv.txtTelf23.setDocument(new limitarNumeroTexfield(ecv.txtTelf23, 9));
+        ecv.txtTelf24.setDocument(new limitarNumeroTexfield(ecv.txtTelf24, 9));
+        ecv.txtTelf25.setDocument(new limitarNumeroTexfield(ecv.txtTelf25, 9));
+        
 
         //cargarTablaEntidadConocida1();
         cargarTablaEntidadConocidaPrincipal();

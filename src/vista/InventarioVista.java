@@ -99,8 +99,8 @@ public class InventarioVista extends javax.swing.JFrame {
         scrolltbl1 = new javax.swing.JScrollPane();
         tblInventario1 = new javax.swing.JTable();
         txtCantidad2 = new javax.swing.JTextField();
-        txtFechaRealizacion2 = new javax.swing.JTextField();
-        txtFechaBaja2 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         btnSalir2 = new javax.swing.JButton();
         buscar = new javax.swing.JPanel();
         jScrollPane16 = new javax.swing.JScrollPane();
@@ -142,8 +142,8 @@ public class InventarioVista extends javax.swing.JFrame {
         btnBuscar4 = new javax.swing.JButton();
         txtCantidad4 = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
-        txtFechaRealizacion4 = new javax.swing.JTextField();
-        txtFechaBaja4 = new javax.swing.JTextField();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
         btnSalir4 = new javax.swing.JButton();
         eliminar = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -184,8 +184,8 @@ public class InventarioVista extends javax.swing.JFrame {
         btnBuscar3 = new javax.swing.JButton();
         txtCantidad3 = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
-        txtFechaRealizacion3 = new javax.swing.JTextField();
-        txtFechaBaja3 = new javax.swing.JTextField();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jDateChooser6 = new com.toedter.calendar.JDateChooser();
         btnSalir3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -481,12 +481,6 @@ public class InventarioVista extends javax.swing.JFrame {
         ));
         scrolltbl1.setViewportView(tblInventario1);
 
-        txtFechaRealizacion2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaRealizacion2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -514,6 +508,7 @@ public class InventarioVista extends javax.swing.JFrame {
                         .addGap(191, 495, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane22, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane21, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombre2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,8 +519,7 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(txtValoracionEconomica2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRegistro2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCantidad2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaRealizacion2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaBaja2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -574,10 +568,10 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(jLabel61)
                             .addComponent(txtEstilo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel62)
-                            .addComponent(txtFechaRealizacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel63)
                             .addComponent(txtProcedencia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -599,7 +593,7 @@ public class InventarioVista extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel67)
-                            .addComponent(txtFechaBaja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel68)
@@ -762,8 +756,8 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(txtValoracionEconomica4)
                             .addComponent(txtRegistro4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCantidad4)
-                            .addComponent(txtFechaRealizacion4)
-                            .addComponent(txtFechaBaja4))
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cuadroImagen4, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -816,10 +810,10 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(jLabel49)
                             .addComponent(txtEstilo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel50)
-                            .addComponent(txtFechaRealizacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel51)
                             .addComponent(txtProcedencia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -848,7 +842,7 @@ public class InventarioVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel55)
-                    .addComponent(txtFechaBaja4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel56)
@@ -1007,8 +1001,8 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(txtValoracionEconomica3)
                             .addComponent(txtRegistro3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCantidad3)
-                            .addComponent(txtFechaRealizacion3)
-                            .addComponent(txtFechaBaja3))
+                            .addComponent(jDateChooser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cuadroImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1060,10 +1054,10 @@ public class InventarioVista extends javax.swing.JFrame {
                             .addComponent(jLabel34)
                             .addComponent(txtEstilo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel35)
-                            .addComponent(txtFechaRealizacion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                            .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel36)
                             .addComponent(txtProcedencia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1090,7 +1084,7 @@ public class InventarioVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
-                    .addComponent(txtFechaBaja3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
@@ -1175,17 +1169,13 @@ public class InventarioVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProcedencia1ActionPerformed
 
-    private void txtValoracionEconomica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValoracionEconomica1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValoracionEconomica1ActionPerformed
-
     private void btnDerecha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDerecha2ActionPerformed
 
-    private void txtFechaRealizacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaRealizacion2ActionPerformed
+    private void txtValoracionEconomica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValoracionEconomica1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaRealizacion2ActionPerformed
+    }//GEN-LAST:event_txtValoracionEconomica1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1247,8 +1237,14 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JPanel eliminar;
     public com.toedter.calendar.JDateChooser jDate1;
     public com.toedter.calendar.JDateChooser jDate2;
-    public javax.swing.JLabel jLabel15;
-    public javax.swing.JLabel jLabel17;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser2;
+    public com.toedter.calendar.JDateChooser jDateChooser3;
+    public com.toedter.calendar.JDateChooser jDateChooser4;
+    public com.toedter.calendar.JDateChooser jDateChooser5;
+    public com.toedter.calendar.JDateChooser jDateChooser6;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
     public javax.swing.JLabel jLabel31;
     public javax.swing.JLabel jLabel32;
     public javax.swing.JLabel jLabel33;
@@ -1261,7 +1257,7 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel40;
     public javax.swing.JLabel jLabel41;
     public javax.swing.JLabel jLabel42;
-    public javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel43;
     public javax.swing.JLabel jLabel44;
     public javax.swing.JLabel jLabel46;
     public javax.swing.JLabel jLabel47;
@@ -1290,7 +1286,7 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel71;
     public javax.swing.JLabel jLabel72;
     public javax.swing.JLabel jLabel73;
-    public javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel85;
     public javax.swing.JLabel jLabel86;
     public javax.swing.JLabel jLabel87;
     public javax.swing.JLabel jLabel88;
@@ -1304,7 +1300,7 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel96;
     public javax.swing.JLabel jLabel97;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel5;
     public javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1347,12 +1343,6 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JTextField txtEstilo2;
     public javax.swing.JTextField txtEstilo3;
     public javax.swing.JTextField txtEstilo4;
-    public javax.swing.JTextField txtFechaBaja2;
-    public javax.swing.JTextField txtFechaBaja3;
-    public javax.swing.JTextField txtFechaBaja4;
-    public javax.swing.JTextField txtFechaRealizacion2;
-    public javax.swing.JTextField txtFechaRealizacion3;
-    public javax.swing.JTextField txtFechaRealizacion4;
     public javax.swing.JTextField txtFiltro3;
     public javax.swing.JTextField txtFiltro4;
     public javax.swing.JTextArea txtMejora1;

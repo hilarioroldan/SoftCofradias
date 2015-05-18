@@ -15,6 +15,7 @@ import javax.swing.table.TableRowSorter;
 import modelo.HermandadesHermanadas;
 import servicios.ConectarServicio;
 import servicios.Conexion;
+import validaciones.*;
 import vista.HermandadesHermanadasVista;
 
 public class ControladorHermandadesHermanadas implements ActionListener {
@@ -33,6 +34,40 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         hHvista = new HermandadesHermanadasVista();
         hHvista.setVisible(true);
         hHvista.setLocationRelativeTo(null);
+        
+        //validando
+        soloNumerosSoloLetras x = new soloNumerosSoloLetras();
+        x.SLetras(hHvista.txtNombreHh);
+        x.SLetras(hHvista.txtNombreEntidad3);
+        x.SLetras(hHvista.txtNombreEntidad2);
+        x.SLetras(hHvista.txtNombreEntidad4);
+        x.SLetras(hHvista.txtLocalidad);
+        x.SLetras(hHvista.txtLocalidad2);
+        x.SLetras(hHvista.txtLocalidad3);
+        x.SLetras(hHvista.txtLocalidad4);
+        x.SLetras(hHvista.txtParroquia);
+        x.SLetras(hHvista.txtParroquia2);
+        x.SLetras(hHvista.txtParroquia3);
+        x.SLetras(hHvista.txtParroquia4);
+        x.SNumeros(hHvista.txtTelf1);
+        x.SNumeros(hHvista.txtTelf12);
+        x.SNumeros(hHvista.txtTelf13);
+        x.SNumeros(hHvista.txtTelf14);
+        x.SNumeros(hHvista.txTelf2);
+        x.SNumeros(hHvista.txtTelf22);
+        x.SNumeros(hHvista.txtTelf23);
+        x.SNumeros(hHvista.txtTelf24);
+        
+        hHvista.txtTelf1.setDocument(new limitarNumeroTexfield(hHvista.txtTelf1, 9));
+        hHvista.txtTelf12.setDocument(new limitarNumeroTexfield(hHvista.txtTelf12, 9));
+        hHvista.txtTelf13.setDocument(new limitarNumeroTexfield(hHvista.txtTelf13, 9));
+        hHvista.txtTelf14.setDocument(new limitarNumeroTexfield(hHvista.txtTelf14, 9));
+        
+        hHvista.txTelf2.setDocument(new limitarNumeroTexfield(hHvista.txTelf2, 9));
+        hHvista.txtTelf22.setDocument(new limitarNumeroTexfield(hHvista.txtTelf22, 9));
+        hHvista.txtTelf23.setDocument(new limitarNumeroTexfield(hHvista.txtTelf23, 9));
+        hHvista.txtTelf24.setDocument(new limitarNumeroTexfield(hHvista.txtTelf24, 9));
+        
         
         cargarTablaEntidadConocidaBuscar();
         
@@ -221,6 +256,7 @@ public class ControladorHermandadesHermanadas implements ActionListener {
         limpiarTexto2();
         cargarTablaEntidadConocidaEliminar();
         cargarTablaEntidadConocidaBuscar();
+        cargarTablaEntidadConocidaModificar();
         
         hHvista.txtFiltro2.setText(""); 
         

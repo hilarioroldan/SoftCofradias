@@ -38,6 +38,10 @@ public class ControladorHermano implements ActionListener {
     }
 
     public void iniciar() {
+        
+        boolean correcto = comprobarCreacionHdad();
+        
+        if (correcto==true) {
 
         h1 = new modelo.hermanito();
         hv1 = new HermanitoVista1();
@@ -118,9 +122,8 @@ public class ControladorHermano implements ActionListener {
                 jTable1MousePressed(evt);
             }
         });
-
-        // comprobacion de creacion de tipo de pago y forma de pago en configuracion hermandad
-        comprobarInserccionFormaPagoTipoPago();
+        
+        }       
 
     }
 
@@ -687,10 +690,13 @@ e.printStackTrace();
     // metodos para comprobar si se ha insertado al menos una 
     // forma de pago o un tipo de pago en la configuracion de hdad
 
-    public void comprobarInserccionFormaPagoTipoPago() {
+    public boolean comprobarCreacionHdad() {
 
         boolean existeFormaPago = false;
         boolean existeTipoPago = false;
+        boolean existeHdad = false;
+        
+        boolean correcto = false;
 
         try {
 
@@ -703,18 +709,25 @@ e.printStackTrace();
 
                 if (cbd.resultado.next()) {
                     existeFormaPago = true;
+                } else {
+                    existeFormaPago = false;
                 }
 
                 cbd.resultado = cbd.un_st.executeQuery("select * from tipopago");
 
                 if (cbd.resultado.next()) {
                     existeTipoPago = true;
+                } else {
+                    existeTipoPago = false;
                 }
 
                 if (existeFormaPago == true && existeTipoPago == true) {
-                    hv1.guardar.setEnabled(true);
+                    existeFormaPago = true;
+                    existeTipoPago = true;
+                    correcto = true;
                 } else {
-                    hv1.guardar.setEnabled(false);
+                    
+                    correcto = false;
 
                     if (existeFormaPago == false) {
                         JOptionPane.showMessageDialog(null, "Para poder crear un Hermano debes de crear al menos una forma de pago \n "
@@ -722,19 +735,24 @@ e.printStackTrace();
                     }
 
                     if (existeTipoPago == false) {
-                        JOptionPane.showMessageDialog(null, "Para poder crear un Hermano debes de crear al menos una forma de pago \n "
-                                + "Dirigase a: Hermandad -> Configurar hermandad -> Más opciones -> Forma de pago -> Insertar", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Para poder crear un Hermano debes de crear al menos un tipo de pago \n "
+                                + "Dirigase a: Hermandad -> Configurar hermandad -> Más opciones -> Tipo de pago -> Insertar", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                
+                existeHdad = true;
 
             } else {
-                hv1.guardar.setEnabled(false);
+                correcto = false;
+                existeHdad = false;
                 JOptionPane.showMessageDialog(null, "Debes de crear una hermandad antes de poder crear un Hermano", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return correcto;
     }
 
     public void agregarHermano(int numero_hermano, String direccion, int cp, String fecha, String nombre, String nif, String apellido, String municipio, String provincia, String pais, int tfno, String email, String banco, String cuenta_bancaria, int tipo_pago_id, int forma_pago_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {

@@ -27,7 +27,9 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        add = new javax.swing.JPanel();
         ingresar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtNombreEntidad = new javax.swing.JTextField();
@@ -45,8 +47,9 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        btnSalir = new javax.swing.JButton();
         btnIngresar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        busq = new javax.swing.JPanel();
         buscar = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         txtNombreEntidad3 = new javax.swing.JTextField();
@@ -66,12 +69,13 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         txtEmail3 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaEntidadConocida2 = new javax.swing.JTable();
-        btnSalir3 = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         cmbBD1 = new javax.swing.JComboBox();
         jLabel42 = new javax.swing.JLabel();
         txtFiltro1 = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnSalir3 = new javax.swing.JButton();
+        modi = new javax.swing.JPanel();
         modificar = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
         txtNombreEntidad5 = new javax.swing.JTextField();
@@ -91,13 +95,14 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         txtEmail5 = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaEntidadConocida1 = new javax.swing.JTable();
-        btnSalir2 = new javax.swing.JButton();
         jLabel63 = new javax.swing.JLabel();
         cmbBD3 = new javax.swing.JComboBox();
         jLabel64 = new javax.swing.JLabel();
         txtFiltro3 = new javax.swing.JTextField();
         btnBuscar1 = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
+        btnSalir2 = new javax.swing.JButton();
+        delete = new javax.swing.JPanel();
         eliminar = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         txtNombreEntidad4 = new javax.swing.JTextField();
@@ -117,15 +122,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         txtEmail4 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaEntidadConocida3 = new javax.swing.JTable();
-        btnSalir4 = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
         cmbBD2 = new javax.swing.JComboBox();
         jLabel53 = new javax.swing.JLabel();
         txtFiltro2 = new javax.swing.JTextField();
         btnBuscar2 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JToggleButton();
+        btnSalir4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        ingresar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
 
         jLabel2.setText("Nombre Entidad:");
 
@@ -143,8 +150,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
 
         jLabel9.setText("Email:");
 
-        btnSalir.setText("Salir");
-
         btnIngresar.setText("Ingresar");
 
         javax.swing.GroupLayout ingresarLayout = new javax.swing.GroupLayout(ingresar);
@@ -152,11 +157,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         ingresarLayout.setHorizontalGroup(
             ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ingresarLayout.createSequentialGroup()
-                .addContainerGap(651, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addContainerGap())
-            .addGroup(ingresarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ingresarLayout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -192,13 +193,13 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addGroup(ingresarLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombreEntidad)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtNombreEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         ingresarLayout.setVerticalGroup(
             ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ingresarLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,12 +223,37 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(btnIngresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                .addContainerGap(263, Short.MAX_VALUE))
+        );
+
+        btnSalir.setText("Salir");
+
+        javax.swing.GroupLayout addLayout = new javax.swing.GroupLayout(add);
+        add.setLayout(addLayout);
+        addLayout.setHorizontalGroup(
+            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir)))
+                .addContainerGap())
+        );
+        addLayout.setVerticalGroup(
+            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Ingresar Entidad Conocida", ingresar);
+        jTabbedPane1.addTab("Ingresar", add);
+
+        buscar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
 
         jLabel33.setText("Nombre Entidad:");
 
@@ -258,8 +284,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaEntidadConocida2);
 
-        btnSalir3.setText("Salir");
-
         jLabel41.setText("Buscar por:");
 
         cmbBD1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -273,7 +297,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         buscarLayout.setHorizontalGroup(
             buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buscarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(13, 13, 13)
                 .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(buscarLayout.createSequentialGroup()
                         .addComponent(jLabel34)
@@ -318,21 +342,14 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addGroup(buscarLayout.createSequentialGroup()
                         .addComponent(jLabel33)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombreEntidad3)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(buscarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buscarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir3)))
-                .addContainerGap())
+                        .addComponent(txtNombreEntidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
         buscarLayout.setVerticalGroup(
             buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buscarLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(txtNombreEntidad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,14 +378,39 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(jLabel42)
                     .addComponent(txtFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnSalir3)
-                .addContainerGap())
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Buscar Entidad Conocida", buscar);
+        btnSalir3.setText("Salir");
+
+        javax.swing.GroupLayout busqLayout = new javax.swing.GroupLayout(busq);
+        busq.setLayout(busqLayout);
+        busqLayout.setHorizontalGroup(
+            busqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(busqLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(busqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, busqLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir3)))
+                .addContainerGap())
+        );
+        busqLayout.setVerticalGroup(
+            busqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(busqLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir3)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Buscar", busq);
+
+        modificar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
 
         jLabel55.setText("Nombre Entidad:");
 
@@ -399,8 +441,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tablaEntidadConocida1);
 
-        btnSalir2.setText("Salir");
-
         jLabel63.setText("Buscar por:");
 
         cmbBD3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -416,7 +456,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         modificarLayout.setHorizontalGroup(
             modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(13, 13, 13)
                 .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(modificarLayout.createSequentialGroup()
                         .addComponent(jLabel56)
@@ -464,21 +504,14 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addGroup(modificarLayout.createSequentialGroup()
                         .addComponent(jLabel55)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombreEntidad5)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(modificarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir2)))
-                .addContainerGap())
+                        .addComponent(txtNombreEntidad5, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
+            .addComponent(jScrollPane5)
         );
         modificarLayout.setVerticalGroup(
             modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel55)
                     .addComponent(txtNombreEntidad5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -508,14 +541,40 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(txtFiltro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar1)
                     .addComponent(btnModificar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnSalir2.setText("Salir");
+
+        javax.swing.GroupLayout modiLayout = new javax.swing.GroupLayout(modi);
+        modi.setLayout(modiLayout);
+        modiLayout.setHorizontalGroup(
+            modiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modiLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir2)
                 .addContainerGap())
         );
+        modiLayout.setVerticalGroup(
+            modiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modiLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir2)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
 
-        jTabbedPane1.addTab("Modificar Entidad Conocida", modificar);
+        jTabbedPane1.addTab("Modificar", modi);
+
+        eliminar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
+        eliminar.setToolTipText("");
 
         jLabel44.setText("Nombre Entidad:");
 
@@ -546,8 +605,6 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tablaEntidadConocida3);
 
-        btnSalir4.setText("Salir");
-
         jLabel52.setText("Buscar por:");
 
         cmbBD2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -563,7 +620,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         eliminarLayout.setHorizontalGroup(
             eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(eliminarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(13, 13, 13)
                 .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(eliminarLayout.createSequentialGroup()
                         .addComponent(jLabel45)
@@ -611,21 +668,14 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addGroup(eliminarLayout.createSequentialGroup()
                         .addComponent(jLabel44)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombreEntidad4)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(eliminarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eliminarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir4)))
-                .addContainerGap())
+                        .addComponent(txtNombreEntidad4, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
         eliminarLayout.setVerticalGroup(
             eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(eliminarLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(txtNombreEntidad4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -655,14 +705,37 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                     .addComponent(txtFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar2)
                     .addComponent(btnEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnSalir4)
-                .addContainerGap())
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Eliminar Entidad Conocida", eliminar);
+        btnSalir4.setText("Salir");
+
+        javax.swing.GroupLayout deleteLayout = new javax.swing.GroupLayout(delete);
+        delete.setLayout(deleteLayout);
+        deleteLayout.setHorizontalGroup(
+            deleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(deleteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(deleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deleteLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir4)))
+                .addContainerGap())
+        );
+        deleteLayout.setVerticalGroup(
+            deleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deleteLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Eliminar", delete);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -714,6 +787,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel add;
     public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnBuscar1;
     public javax.swing.JButton btnBuscar2;
@@ -725,9 +799,11 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     public javax.swing.JButton btnSalir3;
     public javax.swing.JButton btnSalir4;
     private javax.swing.JPanel buscar;
+    private javax.swing.JPanel busq;
     public javax.swing.JComboBox cmbBD1;
     public javax.swing.JComboBox cmbBD2;
     public javax.swing.JComboBox cmbBD3;
+    private javax.swing.JPanel delete;
     private javax.swing.JPanel eliminar;
     private javax.swing.JPanel ingresar;
     private javax.swing.JLabel jLabel2;
@@ -772,6 +848,8 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private javax.swing.JPanel modi;
     private javax.swing.JPanel modificar;
     public javax.swing.JTable tablaEntidadConocida1;
     public javax.swing.JTable tablaEntidadConocida2;

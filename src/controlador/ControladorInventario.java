@@ -1,5 +1,6 @@
 package controlador;
 
+import static groovy.util.Eval.x;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ import javax.swing.table.TableRowSorter;
 import modelo.Inventario;
 import servicios.ConectarServicio;
 import servicios.Conexion;
+import validaciones.*;
 import vista.InventarioVista;
 
 public class ControladorInventario implements ActionListener {
@@ -46,6 +48,37 @@ public class ControladorInventario implements ActionListener {
             
             iv.setVisible(true);
             iv.setLocationRelativeTo(null);
+            
+            // VALIDACIONES //   
+        soloNumerosSoloLetras x = new soloNumerosSoloLetras();
+        x.SLetras(iv.txtNombre1);
+        x.SLetras(iv.txtNombre2);
+        x.SLetras(iv.txtNombre3);
+        x.SLetras(iv.txtNombre4);
+        x.SLetras(iv.txtAdquisicion1);
+        x.SLetras(iv.txtAdquisicion2);
+        x.SLetras(iv.txtAdquisicion3);
+        x.SLetras(iv.txtAdquisicion4);
+        x.SLetras(iv.txtAutor1);
+        x.SLetras(iv.txtAutor2);
+        x.SLetras(iv.txtAutor3);
+        x.SLetras(iv.txtAutor4);
+        x.SLetras(iv.txtEstilo1);
+        x.SLetras(iv.txtEstilo2);
+        x.SLetras(iv.txtEstilo3);
+        x.SLetras(iv.txtEstilo4);
+        x.SLetras(iv.txtProcedencia1);
+        x.SLetras(iv.txtProcedencia2);
+        x.SLetras(iv.txtProcedencia3);
+        x.SLetras(iv.txtProcedencia4);
+        x.SNumeros(iv.txtValoracionEconomica1);
+        x.SNumeros(iv.txtValoracionEconomica2);
+        x.SNumeros(iv.txtValoracionEconomica3);
+        x.SNumeros(iv.txtValoracionEconomica4);
+        x.SNumeros(iv.txtCantidad1);
+        x.SNumeros(iv.txtCantidad2);
+        x.SNumeros(iv.txtCantidad3);
+        x.SNumeros(iv.txtCantidad4);
             
             localizarIdentificadorMayorInventario();
             iv.txtRegistro1.setEnabled(false);
@@ -204,7 +237,16 @@ public class ControladorInventario implements ActionListener {
         String nombre = iv.txtNombre4.getText();
         String autor = iv.txtAutor4.getText();
         String estilo = iv.txtEstilo4.getText();
-        String fecha_realizacion = iv.txtFechaRealizacion4.getText();
+        //trabajando con fechas
+                String fecha_realizacion = "";
+                if (iv.jDateChooser1.getDate() != null) {
+                    int año = iv.jDateChooser1.getCalendar().get(Calendar.YEAR);
+                    int mes = iv.jDateChooser1.getCalendar().get(Calendar.MONTH);
+                    int dia = iv.jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                    fecha_realizacion = año + "-" + mes + "-" + dia;
+                    //
+                }
+                // fin fecha
         String procedencia = iv.txtProcedencia4.getText();
         String valoracion_economica = iv.txtValoracionEconomica4.getText();
         String mejora = iv.txtMejora4.getText();
@@ -212,7 +254,16 @@ public class ControladorInventario implements ActionListener {
         String cantidad = iv.txtCantidad4.getText();
         String observaciones = iv.txtObservaciones4.getText();
         String adquisicion = iv.txtAdquisicion4.getText();
-        String fecha_baja = iv.txtFechaBaja4.getText();
+        //trabajando con fechas
+                String fecha_baja = "";
+                if (iv.jDateChooser2.getDate() != null) {
+                    int año = iv.jDateChooser2.getCalendar().get(Calendar.YEAR);
+                    int mes = iv.jDateChooser2.getCalendar().get(Calendar.MONTH);
+                    int dia = iv.jDateChooser2.getCalendar().get(Calendar.DAY_OF_MONTH);
+                    fecha_baja = año + "-" + mes + "-" + dia;
+                    //
+                }
+                // fin fecha
 
         try {   
             
@@ -252,12 +303,12 @@ ex.printStackTrace();
         iv.txtAdquisicion3.setText("");
         iv.txtAutor3.setText("");
         iv.txtEstilo3.setText("");
-        iv.txtFechaRealizacion3.setText("");
+        iv.jDateChooser5.setDate(null);
         iv.txtProcedencia3.setText("");
         iv.txtValoracionEconomica3.setText("");
         iv.txtMejora3.setText("");
         iv.txtRestauracion3.setText("");
-        iv.txtFechaBaja3.setText("");
+        iv.jDateChooser6.setDate(null);
         iv.txtCantidad3.setText("");
         iv.txtObservaciones3.setText("");
         iv.cuadroImagen3.setIcon(null);
@@ -271,12 +322,12 @@ ex.printStackTrace();
         iv.txtAdquisicion4.setText("");
         iv.txtAutor4.setText("");
         iv.txtEstilo4.setText("");
-        iv.txtFechaRealizacion4.setText("");
+        iv.jDateChooser3.setDate(null);
         iv.txtProcedencia4.setText("");
         iv.txtValoracionEconomica4.setText("");
         iv.txtMejora4.setText("");
         iv.txtRestauracion4.setText("");
-        iv.txtFechaBaja4.setText("");
+        iv.jDateChooser4.setDate(null);
         iv.txtCantidad4.setText("");
         iv.txtObservaciones4.setText("");
         iv.cuadroImagen4.setIcon(null);
@@ -290,12 +341,12 @@ ex.printStackTrace();
         iv.txtAdquisicion2.setText("");
         iv.txtAutor2.setText("");
         iv.txtEstilo2.setText("");
-        iv.txtFechaRealizacion2.setText("");
+        iv.jDateChooser1.setDate(null);
         iv.txtProcedencia2.setText("");
         iv.txtValoracionEconomica2.setText("");
         iv.txtMejora2.setText("");
         iv.txtRestauracion2.setText("");
-        iv.txtFechaBaja2.setText("");
+        iv.jDateChooser2.setDate(null);
         iv.txtCantidad2.setText("");
         iv.txtObservaciones2.setText("");
         iv.cuadroImagen2.setIcon(null);
@@ -369,6 +420,8 @@ ex.printStackTrace();
         Inventario inventario = null;
         DefaultTableModel m;
         try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();            
+            
             String[] titulo = {"Nro", "Nombre", "Autor", "Estilo", "Fecha Realizacion", "Procedencia", "Valoracion Economica", "Mejora", "Restauracion", "Cantidad", "Observaciones", "Adquisicion", "Fecha Baja"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
@@ -408,7 +461,12 @@ ex.printStackTrace();
                     iv.txtNombre4.setText(fila[1]);
                     iv.txtAutor4.setText(fila[2]);
                     iv.txtEstilo4.setText(fila[3]);
-                    iv.txtFechaRealizacion4.setText(fila[4]);
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+fila[0]);
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser3.setDate(fechax);
                     iv.txtProcedencia4.setText(fila[5]);
                     iv.txtValoracionEconomica4.setText(fila[6]);
                     iv.txtMejora4.setText(fila[7]);
@@ -416,7 +474,12 @@ ex.printStackTrace();
                     iv.txtCantidad4.setText(fila[9]);
                     iv.txtObservaciones4.setText(fila[10]);
                     iv.txtAdquisicion4.setText(fila[11]);
-                    iv.txtFechaBaja4.setText(fila[12]);
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+fila[0]);
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser4.setDate(fechaxx);
 
                     foto = this.leerImagen(Integer.parseInt(fila[0]));
 
@@ -555,6 +618,8 @@ ex.printStackTrace();
             Inventario x = null;
 
             try {
+                Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+                
                 inventarioSeleccionado = buscarInventario(String.valueOf(identificadorMenor), "identificador");
 
                 Iterator<Inventario> it = inventarioSeleccionado.iterator();
@@ -566,7 +631,12 @@ ex.printStackTrace();
                     iv.txtNombre2.setText(x.getNombre());
                     iv.txtAutor2.setText(x.getAutor());
                     iv.txtEstilo2.setText(x.getEstilo());
-                    iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser1.setDate(fechax);
                     iv.txtProcedencia2.setText(x.getProcedencia());
                     iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
                     iv.txtMejora2.setText(x.getMejora());
@@ -575,7 +645,12 @@ ex.printStackTrace();
                     iv.txtObservaciones2.setText(x.getObservaciones());
                     iv.txtAdquisicion2.setText(x.getAdquisicion());
                     if (x.getFecha_baja()!=null || x.getFecha_baja().equals("")) {
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+x.getIdentificador());
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser2.setDate(fechaxx);
                     }
                     
                 }
@@ -590,7 +665,8 @@ ex.printStackTrace();
                 }
 
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+               // JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             } catch (java.lang.NullPointerException e) {
                 
             }
@@ -625,6 +701,8 @@ ex.printStackTrace();
         Inventario x = null;
 
         try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            
             inventarioSeleccionado = buscarInventario(String.valueOf(contador - 1), "identificador");
 
             if (inventarioSeleccionado.size() > 0) {  // si el arraylist devuelve algun dato entonces..
@@ -642,7 +720,12 @@ ex.printStackTrace();
                         iv.txtNombre2.setText(x.getNombre());
                         iv.txtAutor2.setText(x.getAutor());
                         iv.txtEstilo2.setText(x.getEstilo());
-                        iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser1.setDate(fechax);
                         iv.txtProcedencia2.setText(x.getProcedencia());
                         iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
                         iv.txtMejora2.setText(x.getMejora());
@@ -650,7 +733,12 @@ ex.printStackTrace();
                         iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
                         iv.txtObservaciones2.setText(x.getObservaciones());
                         iv.txtAdquisicion2.setText(x.getAdquisicion());
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+x.getIdentificador());
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser2.setDate(fechaxx);
                     }
 
                     Image foto = null;
@@ -676,7 +764,12 @@ ex.printStackTrace();
                         iv.txtNombre2.setText(x.getNombre());
                         iv.txtAutor2.setText(x.getAutor());
                         iv.txtEstilo2.setText(x.getEstilo());
-                        iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser1.setDate(fechax);
                         iv.txtProcedencia2.setText(x.getProcedencia());
                         iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
                         iv.txtMejora2.setText(x.getMejora());
@@ -684,7 +777,12 @@ ex.printStackTrace();
                         iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
                         iv.txtObservaciones2.setText(x.getObservaciones());
                         iv.txtAdquisicion2.setText(x.getAdquisicion());
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+x.getIdentificador());
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser2.setDate(fechaxx);
                     }
 
                     Image foto = null;
@@ -752,6 +850,8 @@ ex.printStackTrace();
         Inventario x = null;
 
         try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            
             inventarioSeleccionado = buscarInventario(String.valueOf(contador + 1), "identificador");
 
             if (inventarioSeleccionado.size() > 0) { // si contiene algun valor el array
@@ -770,7 +870,12 @@ ex.printStackTrace();
                         iv.txtNombre2.setText(x.getNombre());
                         iv.txtAutor2.setText(x.getAutor());
                         iv.txtEstilo2.setText(x.getEstilo());
-                        iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser1.setDate(fechax);
                         iv.txtProcedencia2.setText(x.getProcedencia());
                         iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
                         iv.txtMejora2.setText(x.getMejora());
@@ -778,7 +883,12 @@ ex.printStackTrace();
                         iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
                         iv.txtObservaciones2.setText(x.getObservaciones());
                         iv.txtAdquisicion2.setText(x.getAdquisicion());
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+x.getIdentificador());
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser2.setDate(fechaxx);
                     }
 
                     Image foto;
@@ -804,7 +914,12 @@ ex.printStackTrace();
                         iv.txtNombre2.setText(x.getNombre());
                         iv.txtAutor2.setText(x.getAutor());
                         iv.txtEstilo2.setText(x.getEstilo());
-                        iv.txtFechaRealizacion2.setText(String.valueOf(x.getFecha_realizacion()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechax = null;
+                    if(cbd.resultado.next()){
+                        fechax = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser1.setDate(fechax);
                         iv.txtProcedencia2.setText(x.getProcedencia());
                         iv.txtValoracionEconomica2.setText(String.valueOf(x.getValoracion_economica()));
                         iv.txtMejora2.setText(x.getMejora());
@@ -812,7 +927,12 @@ ex.printStackTrace();
                         iv.txtCantidad2.setText(String.valueOf(x.getCantidad()));
                         iv.txtObservaciones2.setText(x.getObservaciones());
                         iv.txtAdquisicion2.setText(x.getAdquisicion());
-                        iv.txtFechaBaja2.setText(String.valueOf(x.getFecha_baja()));
+                        cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+x.getIdentificador());
+                    Date fechaxx = null;
+                    if(cbd.resultado.next()){
+                        fechaxx = cbd.resultado.getDate(1);
+                    }
+                    iv.jDateChooser2.setDate(fechaxx);
                     }
 
                     Image foto;
@@ -838,141 +958,191 @@ ex.printStackTrace();
     }
 
     private void tblInventario1MousePressed(java.awt.event.MouseEvent evt) {
-
-        int clic = iv.tblInventario1.getSelectedRow();
-        iv.txtRegistro2.setText((String) iv.tblInventario1.getValueAt(clic, 0));
-        iv.txtNombre2.setText((String) iv.tblInventario1.getValueAt(clic, 1));
-        iv.txtAutor2.setText((String) iv.tblInventario1.getValueAt(clic, 2));
-        iv.txtEstilo2.setText((String) iv.tblInventario1.getValueAt(clic, 3));
-        iv.txtFechaRealizacion2.setText((String) iv.tblInventario1.getValueAt(clic, 4));
-        iv.txtProcedencia2.setText((String) iv.tblInventario1.getValueAt(clic, 5));
-        iv.txtValoracionEconomica2.setText((String) iv.tblInventario1.getValueAt(clic, 6));
-        iv.txtMejora2.setText((String) iv.tblInventario1.getValueAt(clic, 7));
-        iv.txtRestauracion2.setText((String) iv.tblInventario1.getValueAt(clic, 8));
-        iv.txtCantidad2.setText((String) iv.tblInventario1.getValueAt(clic, 9));
-        iv.txtObservaciones2.setText((String) iv.tblInventario1.getValueAt(clic, 10));
-        iv.txtAdquisicion2.setText((String) iv.tblInventario1.getValueAt(clic, 11));
-        iv.txtFechaBaja2.setText((String) iv.tblInventario1.getValueAt(clic, 12));
-
-        Image foto;
-        foto = leerImagen(Integer.parseInt(iv.txtRegistro2.getText()));
-        if (foto != null) {
-            iv.cuadroImagen2.setIcon(new ImageIcon(foto));
-        } else {
-            iv.cuadroImagen2.setIcon(null);
-            //JOptionPane.showMessageDialog(null, "imagen vacia");
-        }
-
-        contador = Integer.parseInt(iv.txtRegistro2.getText());
-
-        ///////////////////////////////////////////////////////////
-        int identificadorMayor = 0;
-        int identificadorMenor = 0;
-
-        try { // busqueda del mayor
-
-            // buscamos el numero mayor de identificador que existe en la BD
+        try {
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "SELECT identificador FROM inventario ORDER BY identificador DESC LIMIT 1";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-
-            while (cbd.resultado.next()) {
-                identificadorMayor = cbd.resultado.getInt(1);
+            
+            int clic = iv.tblInventario1.getSelectedRow();
+            iv.txtRegistro2.setText((String) iv.tblInventario1.getValueAt(clic, 0));
+            iv.txtNombre2.setText((String) iv.tblInventario1.getValueAt(clic, 1));
+            iv.txtAutor2.setText((String) iv.tblInventario1.getValueAt(clic, 2));
+            iv.txtEstilo2.setText((String) iv.tblInventario1.getValueAt(clic, 3));
+            cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+iv.tblInventario1.getValueAt(clic, 0));
+            Date fechax = null;
+            if(cbd.resultado.next()){
+                fechax = cbd.resultado.getDate(1);
             }
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        try { // busqueda del menor
-
-            // buscamos el numero menor de identificador que existe en la BD
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "SELECT identificador FROM inventario ORDER BY identificador ASC LIMIT 1";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-
-            while (cbd.resultado.next()) {
-                identificadorMenor = cbd.resultado.getInt(1);
+            iv.jDateChooser1.setDate(fechax);
+            iv.txtProcedencia2.setText((String) iv.tblInventario1.getValueAt(clic, 5));
+            iv.txtValoracionEconomica2.setText((String) iv.tblInventario1.getValueAt(clic, 6));
+            iv.txtMejora2.setText((String) iv.tblInventario1.getValueAt(clic, 7));
+            iv.txtRestauracion2.setText((String) iv.tblInventario1.getValueAt(clic, 8));
+            iv.txtCantidad2.setText((String) iv.tblInventario1.getValueAt(clic, 9));
+            iv.txtObservaciones2.setText((String) iv.tblInventario1.getValueAt(clic, 10));
+            iv.txtAdquisicion2.setText((String) iv.tblInventario1.getValueAt(clic, 11));
+            cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+iv.tblInventario1.getValueAt(clic, 0));
+            Date fechaxx = null;
+            if(cbd.resultado.next()){
+                fechaxx = cbd.resultado.getDate(1);
             }
-
+            iv.jDateChooser2.setDate(fechaxx);
+            
+            Image foto;
+            foto = leerImagen(Integer.parseInt(iv.txtRegistro2.getText()));
+            if (foto != null) {
+                iv.cuadroImagen2.setIcon(new ImageIcon(foto));
+            } else {
+                iv.cuadroImagen2.setIcon(null);
+                //JOptionPane.showMessageDialog(null, "imagen vacia");
+            }
+            
+            contador = Integer.parseInt(iv.txtRegistro2.getText());
+            
+            ///////////////////////////////////////////////////////////
+            int identificadorMayor = 0;
+            int identificadorMenor = 0;
+            
+            try { // busqueda del mayor
+                
+                // buscamos el numero mayor de identificador que existe en la BD
+                cbd.un_sql = "SELECT identificador FROM inventario ORDER BY identificador DESC LIMIT 1";
+                cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+                
+                while (cbd.resultado.next()) {
+                    identificadorMayor = cbd.resultado.getInt(1);
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            try { // busqueda del menor
+                
+                // buscamos el numero menor de identificador que existe en la BD
+                cbd.un_sql = "SELECT identificador FROM inventario ORDER BY identificador ASC LIMIT 1";
+                cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+                
+                while (cbd.resultado.next()) {
+                    identificadorMenor = cbd.resultado.getInt(1);
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // fin de busqueda
+            if (identificadorMayor == identificadorMenor) {
+                iv.btnDerecha1.setEnabled(false);
+                iv.btnIzquierda1.setEnabled(false);
+            } else if (iv.txtRegistro2.getText().equalsIgnoreCase(String.valueOf(identificadorMenor))) {
+                iv.btnDerecha1.setEnabled(true);
+                iv.btnIzquierda1.setEnabled(false);
+            } else if (iv.txtRegistro2.getText().equalsIgnoreCase(String.valueOf(identificadorMayor))) {
+                iv.btnDerecha1.setEnabled(false);
+                iv.btnIzquierda1.setEnabled(true);
+            } else {
+                iv.btnDerecha1.setEnabled(true);
+                iv.btnIzquierda1.setEnabled(true);
+            }
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        // fin de busqueda
-        if (identificadorMayor == identificadorMenor) {
-            iv.btnDerecha1.setEnabled(false);
-            iv.btnIzquierda1.setEnabled(false);
-        } else if (iv.txtRegistro2.getText().equalsIgnoreCase(String.valueOf(identificadorMenor))) {
-            iv.btnDerecha1.setEnabled(true);
-            iv.btnIzquierda1.setEnabled(false);
-        } else if (iv.txtRegistro2.getText().equalsIgnoreCase(String.valueOf(identificadorMayor))) {
-            iv.btnDerecha1.setEnabled(false);
-            iv.btnIzquierda1.setEnabled(true);
-        } else {
-            iv.btnDerecha1.setEnabled(true);
-            iv.btnIzquierda1.setEnabled(true);
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     private void tblInventario2MousePressed(java.awt.event.MouseEvent evt) {
-
-        int clic = iv.tblInventario2.getSelectedRow();
-        iv.txtRegistro4.setText((String) iv.tblInventario2.getValueAt(clic, 0));
-        iv.txtNombre4.setText((String) iv.tblInventario2.getValueAt(clic, 1));
-        iv.txtAutor4.setText((String) iv.tblInventario2.getValueAt(clic, 2));
-        iv.txtEstilo4.setText((String) iv.tblInventario2.getValueAt(clic, 3));
-        iv.txtFechaRealizacion4.setText((String) iv.tblInventario2.getValueAt(clic, 4));
-        iv.txtProcedencia4.setText((String) iv.tblInventario2.getValueAt(clic, 5));
-        iv.txtValoracionEconomica4.setText((String) iv.tblInventario2.getValueAt(clic, 6));
-        iv.txtMejora4.setText((String) iv.tblInventario2.getValueAt(clic, 7));
-        iv.txtRestauracion4.setText((String) iv.tblInventario2.getValueAt(clic, 8));
-        iv.txtCantidad4.setText((String) iv.tblInventario2.getValueAt(clic, 9));
-        iv.txtObservaciones4.setText((String) iv.tblInventario2.getValueAt(clic, 10));
-        iv.txtAdquisicion4.setText((String) iv.tblInventario2.getValueAt(clic, 11));
-        iv.txtFechaBaja4.setText((String) iv.tblInventario2.getValueAt(clic, 12));
-
-        Image foto = null;
-        foto = leerImagen(Integer.parseInt(iv.txtRegistro4.getText()));
-
-        if (foto != null) {
-            iv.cuadroImagen4.setIcon(new ImageIcon(foto));
-        } else {
-            iv.cuadroImagen4.setIcon(null);
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            
+            int clic = iv.tblInventario2.getSelectedRow();
+            iv.txtRegistro4.setText((String) iv.tblInventario2.getValueAt(clic, 0));
+            iv.txtNombre4.setText((String) iv.tblInventario2.getValueAt(clic, 1));
+            iv.txtAutor4.setText((String) iv.tblInventario2.getValueAt(clic, 2));
+            iv.txtEstilo4.setText((String) iv.tblInventario2.getValueAt(clic, 3));
+            cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+iv.tblInventario2.getValueAt(clic, 0));
+            Date fechax = null;
+            if(cbd.resultado.next()){
+                fechax = cbd.resultado.getDate(1);
+            }
+            iv.jDateChooser3.setDate(fechax);
+            iv.txtProcedencia4.setText((String) iv.tblInventario2.getValueAt(clic, 5));
+            iv.txtValoracionEconomica4.setText((String) iv.tblInventario2.getValueAt(clic, 6));
+            iv.txtMejora4.setText((String) iv.tblInventario2.getValueAt(clic, 7));
+            iv.txtRestauracion4.setText((String) iv.tblInventario2.getValueAt(clic, 8));
+            iv.txtCantidad4.setText((String) iv.tblInventario2.getValueAt(clic, 9));
+            iv.txtObservaciones4.setText((String) iv.tblInventario2.getValueAt(clic, 10));
+            iv.txtAdquisicion4.setText((String) iv.tblInventario2.getValueAt(clic, 11));
+            cbd.resultado = cbd.un_st.executeQuery("select fecha_baja from inventario where identificador="+iv.tblInventario2.getValueAt(clic, 0));
+            Date fechaxx = null;
+            if(cbd.resultado.next()){
+                fechaxx = cbd.resultado.getDate(1);
+            }
+            iv.jDateChooser4.setDate(fechaxx);
+            
+            Image foto = null;
+            foto = leerImagen(Integer.parseInt(iv.txtRegistro4.getText()));
+            
+            if (foto != null) {
+                iv.cuadroImagen4.setIcon(new ImageIcon(foto));
+            } else {
+                iv.cuadroImagen4.setIcon(null);
+            }
+            
+            contador = Integer.parseInt(iv.txtRegistro4.getText());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        contador = Integer.parseInt(iv.txtRegistro4.getText());
 
     }
 
     private void tblInventario3MousePressed(java.awt.event.MouseEvent evt) {
-
-        int clic = iv.tblInventario3.getSelectedRow();
-        iv.txtRegistro3.setText((String) iv.tblInventario3.getValueAt(clic, 0));
-        iv.txtNombre3.setText((String) iv.tblInventario3.getValueAt(clic, 1));
-        iv.txtAutor3.setText((String) iv.tblInventario3.getValueAt(clic, 2));
-        iv.txtEstilo3.setText((String) iv.tblInventario3.getValueAt(clic, 3));
-        iv.txtFechaRealizacion3.setText((String) iv.tblInventario3.getValueAt(clic, 4));
-        iv.txtProcedencia3.setText((String) iv.tblInventario3.getValueAt(clic, 5));
-        iv.txtValoracionEconomica3.setText((String) iv.tblInventario3.getValueAt(clic, 6));
-        iv.txtMejora3.setText((String) iv.tblInventario3.getValueAt(clic, 7));
-        iv.txtRestauracion3.setText((String) iv.tblInventario3.getValueAt(clic, 8));
-        iv.txtCantidad3.setText((String) iv.tblInventario3.getValueAt(clic, 9));
-        iv.txtObservaciones3.setText((String) iv.tblInventario3.getValueAt(clic, 10));
-        iv.txtAdquisicion3.setText((String) iv.tblInventario3.getValueAt(clic, 11));
-        iv.txtFechaBaja3.setText((String) iv.tblInventario3.getValueAt(clic, 12));
-
-        Image foto;
-        foto = leerImagen(Integer.parseInt(iv.txtRegistro3.getText()));
-        if (foto!=null) {
-            iv.cuadroImagen3.setIcon(new ImageIcon(foto));
-        } else {
-            iv.cuadroImagen3.setIcon(null);
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            
+            int clic = iv.tblInventario3.getSelectedRow();
+            iv.txtRegistro3.setText((String) iv.tblInventario3.getValueAt(clic, 0));
+            iv.txtNombre3.setText((String) iv.tblInventario3.getValueAt(clic, 1));
+            iv.txtAutor3.setText((String) iv.tblInventario3.getValueAt(clic, 2));
+            iv.txtEstilo3.setText((String) iv.tblInventario3.getValueAt(clic, 3));
+            cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+iv.tblInventario3.getValueAt(clic, 0));
+            Date fechax = null;
+            if(cbd.resultado.next()){
+                fechax = cbd.resultado.getDate(1);
+            }
+            iv.jDateChooser5.setDate(fechax);
+            iv.txtProcedencia3.setText((String) iv.tblInventario3.getValueAt(clic, 5));
+            iv.txtValoracionEconomica3.setText((String) iv.tblInventario3.getValueAt(clic, 6));
+            iv.txtMejora3.setText((String) iv.tblInventario3.getValueAt(clic, 7));
+            iv.txtRestauracion3.setText((String) iv.tblInventario3.getValueAt(clic, 8));
+            iv.txtCantidad3.setText((String) iv.tblInventario3.getValueAt(clic, 9));
+            iv.txtObservaciones3.setText((String) iv.tblInventario3.getValueAt(clic, 10));
+            iv.txtAdquisicion3.setText((String) iv.tblInventario3.getValueAt(clic, 11));
+             cbd.resultado = cbd.un_st.executeQuery("select fecha_realizacion from inventario where identificador="+iv.tblInventario3.getValueAt(clic, 0));
+            Date fechaxx = null;
+            if(cbd.resultado.next()){
+                fechaxx = cbd.resultado.getDate(1);
+            }
+            iv.jDateChooser6.setDate(fechaxx);
+            
+            Image foto;
+            foto = leerImagen(Integer.parseInt(iv.txtRegistro3.getText()));
+            if (foto!=null) {
+                iv.cuadroImagen3.setIcon(new ImageIcon(foto));
+            } else {
+                iv.cuadroImagen3.setIcon(null);
+            }
+            
+            
+            contador = Integer.parseInt(iv.txtRegistro3.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
-        contador = Integer.parseInt(iv.txtRegistro3.getText());
 
     }
 

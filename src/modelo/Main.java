@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         try {
-            FileInputStream propFile = new FileInputStream("src//modelo//configurarbd.txt");
+            FileInputStream propFile = new FileInputStream("src\\modelo\\configurarbd.txt");
             Properties p = new Properties(System.getProperties());
             p.load(propFile);
             System.setProperties(p);
