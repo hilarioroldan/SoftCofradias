@@ -45,10 +45,10 @@ public class CartonVista extends javax.swing.JFrame {
         jCheckBox10 = new javax.swing.JCheckBox();
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnSalirCartonCuota = new javax.swing.JButton();
         btnModificarCuotaMes = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("AÑO");
@@ -83,9 +83,9 @@ public class CartonVista extends javax.swing.JFrame {
 
         jCheckBox12.setText("Pagado");
 
-        jButton1.setText("Salir");
+        btnSalirCartonCuota.setText("Salir");
 
-        btnModificarCuotaMes.setText("Modificar");
+        btnModificarCuotaMes.setText("Marcar cuota");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +137,7 @@ public class CartonVista extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnModificarCuotaMes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnSalirCartonCuota)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +175,7 @@ public class CartonVista extends javax.swing.JFrame {
                     .addComponent(jCheckBox12))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnSalirCartonCuota)
                     .addComponent(btnModificarCuotaMes))
                 .addContainerGap())
         );
@@ -231,8 +231,8 @@ public class CartonVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnModificarCuotaMes;
+    public javax.swing.JButton btnSalirCartonCuota;
     public javax.swing.JTextField cuadroAñoCarton;
-    private javax.swing.JButton jButton1;
     public javax.swing.JCheckBox jCheckBox1;
     public javax.swing.JCheckBox jCheckBox10;
     public javax.swing.JCheckBox jCheckBox11;

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import modelo.hermanito;
 import modelo.PagoCuotas;
 import servicios.ConectarServicio;
 import servicios.Conexion;
+import validaciones.soloNumerosSoloLetras;
 import vista.CartonVista;
 import vista.PagoCuotasVista;
 
@@ -29,17 +31,17 @@ public class ControladorPagoCuotas implements ActionListener {
     CartonCuotas cc;
     CartonVista cv;
     int contador = 0;
-    
+
     int identificadorCartonSeleccionado = 0;
 
     public enum di {
 
         ACEPTAR, SALIR, MODIFICAR,
-        GESTION, VER, SALIR1, CANCELAR, BUSCAR, 
+        GESTION, VER, SALIR1, CANCELAR, BUSCAR,
         CONSULTARCARTON, ACCEDERCARTON, ACCIONADOCUADROAÑOCARTON,
         BTNAÑADIRCARTON, BTNAGREGARNUEVOCARTON, BTNBUSCARCARTON,
         BTNBUSCARAÑOCARTON, BTNELIMINARCARTON, BTNELIMINARCARTON2,
-        ELIMINARCARTON, MODIFICARCUOTACARTON;
+        ELIMINARCARTON, MODIFICARCUOTACARTON, BTNSALIRCARTONCUOTA, btnSalirOpcionesConsultaCarton;
     }
 
     public void iniciar() {
@@ -51,6 +53,14 @@ public class ControladorPagoCuotas implements ActionListener {
         p1.setVisible(true);
         p1.setLocationRelativeTo(null);
         cargarTablaHermanos();
+
+        //validaciones
+        // VALIDACIONES //   
+        soloNumerosSoloLetras x = new soloNumerosSoloLetras();
+        x.SNumeros(p1.pric);
+        x.SNumeros(p1.jTextField2);
+        x.SNumeros(p1.txtAñoCuota);
+        x.SNumeros(p1.txtAñoCuota2);
 
         //se añade las acciones a los controles del formulario padre
         cv.btnModificarCuotaMes.setActionCommand("MODIFICARCUOTACARTON");
@@ -89,7 +99,11 @@ public class ControladorPagoCuotas implements ActionListener {
         p1.busqueda.addActionListener(this);
         p1.btnConsultarCarton.setActionCommand("CONSULTARCARTON");
         p1.btnConsultarCarton.addActionListener(this);
-        
+        cv.btnSalirCartonCuota.setActionCommand("BTNSALIRCARTONCUOTA");
+        cv.btnSalirCartonCuota.addActionListener(this);
+        p1.btnSalirOpcionesConsultaCarton.setActionCommand("btnSalirOpcionesConsultaCarton");
+        p1.btnSalirOpcionesConsultaCarton.addActionListener(this);
+
         p1.tblCuota2.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -105,19 +119,8 @@ public class ControladorPagoCuotas implements ActionListener {
 
             case ACEPTAR:
 
-                int identificador = Integer.parseInt(p1.ide.getText());
-                int numero_hermano_id = Integer.parseInt(p1.her.getText());
-                String date = p1.fechaa.getText();
-                int precio = Integer.parseInt(p1.pric.getText());
-                int mayordomia_id = 1;
-                String pagado = String.valueOf(p1.seleccio.getSelectedItem());
+                aceptarPagodeCuota();
 
-                try {
-                    agregarPago(identificador, numero_hermano_id, date, mayordomia_id, precio, pagado);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                    Logger.getLogger(PagoCuotasVista.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.p1.dispose();
                 break;
 
             case SALIR:
@@ -129,9 +132,9 @@ public class ControladorPagoCuotas implements ActionListener {
                 break;
 
             case GESTION:
-                
+
                 int comprobacion = p1.tablaHermano.getSelectedRow(); // si hemos seleccionado una fila de la tabla
-                                                                     // entonces..
+                // entonces..
                 if (comprobacion != -1) {
 
                     p1.cuotas.setSize(350, 380);
@@ -142,8 +145,8 @@ public class ControladorPagoCuotas implements ActionListener {
                     p1.her.setText(p1.tablaHermano.getValueAt(comprobacion, 0).toString());
                     //JOptionPane.showMessageDialog(null,p1.her.getText() );
 
-                    cargarPagos();               
-                
+                    cargarPagos();
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la tabla");
                 }
@@ -163,60 +166,113 @@ public class ControladorPagoCuotas implements ActionListener {
             case BUSCAR:
                 cargarTablaHermanos2();
                 break;
-                
+
             case CONSULTARCARTON:
                 consultarCarton();
                 break;
-                
+
             case ACCEDERCARTON:
                 accederCarton();
                 break;
-                
+
             case ACCIONADOCUADROAÑOCARTON:
                 localizarCartonPorEntradaTeclado();
                 break;
-                
+
             case BTNAÑADIRCARTON:
                 añadirNuevoCarton();
                 break;
-                
+
             case BTNAGREGARNUEVOCARTON:
                 btnAgregarNuevoCarton();
                 break;
-                
+
             case BTNBUSCARCARTON:
                 buscarCarton();
                 break;
-                
+
             case BTNBUSCARAÑOCARTON:
                 buscarAñoCarton();
                 break;
-                
+
             case BTNELIMINARCARTON:
                 eliminarCarton();
                 break;
-                
+
             case BTNELIMINARCARTON2:
                 cargarTablaCuotasFiltro2();
                 break;
-                
+
             case ELIMINARCARTON:
                 eliminarCartonFinalx();
                 cargarTablaCuotas2();
                 break;
-                
+
             case MODIFICARCUOTACARTON:
-        {
-            try {
-                modificarCuotadeCarton();
-            } catch (SQLException ex) {
-                Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+                modificarCartonCuota();
+                break;
+
+            case BTNSALIRCARTONCUOTA:
+                cv.dispose();
+                break;
+                
+            case btnSalirOpcionesConsultaCarton:
+                p1.consultarcarton.dispose();
                 break;
         }
     }
-    
+
+    public void modificarCartonCuota() {
+
+        try {
+            modificarCuotadeCarton();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void aceptarPagodeCuota() {
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado = cbd.un_st.executeQuery("select max(identificador) from pagocuotas");
+            int identificador = 1;
+
+            if (cbd.resultado.next()) {
+                identificador = cbd.resultado.getInt(1) + 1;
+            } else {
+                identificador = 1;
+            }
+
+            int numero_hermano_id = Integer.parseInt(p1.her.getText());
+
+            String date = "";
+            if (p1.jDateChooser1.getDate() != null) {
+                // Trabajando con fecha
+                int año = p1.jDateChooser1.getCalendar().get(Calendar.YEAR);
+                int mes = p1.jDateChooser1.getCalendar().get(Calendar.MONTH);
+                int dia = p1.jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                date = año + "-" + mes + "-" + dia;
+                //
+            }
+
+            int precio = Integer.parseInt(p1.pric.getText());
+            int mayordomia_id = 1;
+            String pagado = String.valueOf(p1.seleccio.getSelectedItem());
+
+            try {
+                agregarPago(identificador, numero_hermano_id, date, mayordomia_id, precio, pagado);
+                JOptionPane.showMessageDialog(null, "Pago realizado correctamente");
+                p1.cuotas.dispose();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(PagoCuotasVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void modificarCuotadeCarton() throws SQLException {
         Conexion cbd = null;
         try {
@@ -224,15 +280,15 @@ public class ControladorPagoCuotas implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String fechax = cv.cuadroAñoCarton.getText();
-        
-        cbd.un_sql = "SELECT * FROM cartoncuotas WHERE identificador=" + identificadorCartonSeleccionado +" and año="+fechax+";";
+
+        cbd.un_sql = "SELECT * FROM cartoncuotas WHERE identificador=" + identificadorCartonSeleccionado + " and año=" + fechax + ";";
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-        
+
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE cartoncuotas SET enero= ?" + ", febrero = ?" + ", marzo = ?" + ", abril = ?" + ", mayo = ?" + ", junio = ?" + ", julio = ?" + ", agosto = ?" + ", septiembre = ?" + ", octubre = ?" + ", noviembre = ?" + ", diciembre = ?" + " WHERE identificador="+identificadorCartonSeleccionado+";";
-            
+            cbd.un_sql = "UPDATE cartoncuotas SET enero= ?" + ", febrero = ?" + ", marzo = ?" + ", abril = ?" + ", mayo = ?" + ", junio = ?" + ", julio = ?" + ", agosto = ?" + ", septiembre = ?" + ", octubre = ?" + ", noviembre = ?" + ", diciembre = ?" + " WHERE identificador=" + identificadorCartonSeleccionado + ";";
+
             //end declaracion bool
             boolean enerox = false;
             boolean febrerox = false;
@@ -245,85 +301,83 @@ public class ControladorPagoCuotas implements ActionListener {
             boolean septiembrex = false;
             boolean octubrex = false;
             boolean noviembrex = false;
-            boolean diciembrex = false;            
+            boolean diciembrex = false;
             //fin
-            
-            if (cv.jCheckBox1.isSelected()==true) {
-                   enerox =  true;
-                } else {
-                    enerox = false;
-                }
-            
-            if (cv.jCheckBox2.isSelected()==true) {
-                   febrerox =  true;
-                } else {
-                    febrerox = false;
-                }
-            
-            if (cv.jCheckBox3.isSelected()==true) {
-                   marzox =  true;
-                } else {
-                    marzox = false;
-                }
-            
-            if (cv.jCheckBox4.isSelected()==true) {
-                   abrilx =  true;
-                } else {
-                    abrilx = false;
-                }
-            
-            if (cv.jCheckBox5.isSelected()==true) {
-                   mayox =  true;
-                } else {
-                    mayox = false;
-                }
-            
-            if (cv.jCheckBox6.isSelected()==true) {
-                   juniox =  true;
-                } else {
-                    juniox = false;
-                }
-            
-            if (cv.jCheckBox7.isSelected()==true) {
-                   juliox =  true;
-                } else {
-                    juliox = false;
-                }
-            
-            if (cv.jCheckBox8.isSelected()==true) {
-                   agostox =  true;
-                } else {
-                    agostox = false;
-                }
-            
-            if (cv.jCheckBox9.isSelected()==true) {
-                   septiembrex =  true;
-                } else {
-                    septiembrex = false;
-                }
-            
-            if (cv.jCheckBox10.isSelected()==true) {
-                   octubrex =  true;
-                } else {
-                    octubrex = false;
-                }
-            
-            if (cv.jCheckBox11.isSelected()==true) {
-                   noviembrex =  true;
-                } else {
-                    noviembrex = false;
-                }
-            
-            if (cv.jCheckBox12.isSelected()==true) {
-                   diciembrex =  true;
-                } else {
-                    diciembrex = false;
-                }
-                
-                
-            
+
+            if (cv.jCheckBox1.isSelected() == true) {
+                enerox = true;
+            } else {
+                enerox = false;
+            }
+
+            if (cv.jCheckBox2.isSelected() == true) {
+                febrerox = true;
+            } else {
+                febrerox = false;
+            }
+
+            if (cv.jCheckBox3.isSelected() == true) {
+                marzox = true;
+            } else {
+                marzox = false;
+            }
+
+            if (cv.jCheckBox4.isSelected() == true) {
+                abrilx = true;
+            } else {
+                abrilx = false;
+            }
+
+            if (cv.jCheckBox5.isSelected() == true) {
+                mayox = true;
+            } else {
+                mayox = false;
+            }
+
+            if (cv.jCheckBox6.isSelected() == true) {
+                juniox = true;
+            } else {
+                juniox = false;
+            }
+
+            if (cv.jCheckBox7.isSelected() == true) {
+                juliox = true;
+            } else {
+                juliox = false;
+            }
+
+            if (cv.jCheckBox8.isSelected() == true) {
+                agostox = true;
+            } else {
+                agostox = false;
+            }
+
+            if (cv.jCheckBox9.isSelected() == true) {
+                septiembrex = true;
+            } else {
+                septiembrex = false;
+            }
+
+            if (cv.jCheckBox10.isSelected() == true) {
+                octubrex = true;
+            } else {
+                octubrex = false;
+            }
+
+            if (cv.jCheckBox11.isSelected() == true) {
+                noviembrex = true;
+            } else {
+                noviembrex = false;
+            }
+
+            if (cv.jCheckBox12.isSelected() == true) {
+                diciembrex = true;
+            } else {
+                diciembrex = false;
+            }
+
             PreparedStatement ps = cbd.conexion.prepareStatement(cbd.un_sql);
-            
+
             ps.setBoolean(1, enerox);
             ps.setBoolean(2, febrerox);
             ps.setBoolean(3, marzox);
@@ -336,102 +390,101 @@ public class ControladorPagoCuotas implements ActionListener {
             ps.setBoolean(10, octubrex);
             ps.setBoolean(11, noviembrex);
             ps.setBoolean(12, diciembrex);
-            
+
             ps.executeUpdate();
             ps.close();
             JOptionPane.showMessageDialog(null, "Modificado correctamente");
         } else {
-             JOptionPane.showMessageDialog(null, "Error");
-        } 
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }
-    
-    public void eliminarCartonFinalx(){        
+
+    public void eliminarCartonFinalx() {
         String seleccion = p1.txtIdentificadorCuota.getText();
-        
+
         try {
             eliminarCarton(Integer.parseInt(seleccion));
             JOptionPane.showMessageDialog(null, "Eliminado correctamente");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
-    
+
     private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {
         p1.txtIdentificadorCuota.setEnabled(false);
         int clic = p1.tblCuota2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-        
+
         p1.txtIdentificadorCuota.setText((String) p1.tblCuota2.getValueAt(clic, 0));
         p1.txtAñoCuota2.setText((String) p1.tblCuota2.getValueAt(clic, 2));
-        
+
     }
-    
+
     public void eliminarCarton() {
         p1.eliminarAño.setVisible(true);
         p1.eliminarAño.setLocationRelativeTo(null);
         p1.eliminarAño.setSize(630, 400);
         cargarTablaCuotas2();
     }
-    
+
     public void buscarAñoCarton() {
         cargarTablaCuotasFiltro();
     }
-    
+
     public void buscarCarton() {
         p1.buscarAño.setVisible(true);
         p1.buscarAño.setLocationRelativeTo(null);
         p1.buscarAño.setSize(630, 400);
         cargarTablaCuotas();
     }
-    
-    public void btnAgregarNuevoCarton() {       
-        
+
+    public void btnAgregarNuevoCarton() {
+
         try {
-            
+
             int numero_hermano_i = Integer.parseInt(p1.her.getText()); // guardamos en esta variable el numero de hermano
-            
+
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql="select max(identificador) from cartoncuotas;"; // cogemos el identificador mas grande
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);           
-            
-            if(cbd.resultado.next()) {
-                
-            int contador = cbd.resultado.getInt(1); // guardamos el identificador de antes en esta variable
-             
-            int fecha = Integer.parseInt(p1.jTextField2.getText());
-            // comprobacion de que la fecha no existe
-            boolean error = false;
-            cbd.un_sql="select * from cartoncuotas where numero_hermano_id="+numero_hermano_i+";"; // cogemos el identificador mas grande
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql); 
-            while(cbd.resultado.next()){
-                int año = cbd.resultado.getInt("año");
-                if (año==fecha) {
-                    error=true;
+            cbd.un_sql = "select max(identificador) from cartoncuotas;"; // cogemos el identificador mas grande
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+            if (cbd.resultado.next()) {
+
+                int contador = cbd.resultado.getInt(1); // guardamos el identificador de antes en esta variable
+
+                int fecha = Integer.parseInt(p1.jTextField2.getText());
+                // comprobacion de que la fecha no existe
+                boolean error = false;
+                cbd.un_sql = "select * from cartoncuotas where numero_hermano_id=" + numero_hermano_i + ";"; // cogemos el identificador mas grande
+                cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+                while (cbd.resultado.next()) {
+                    int año = cbd.resultado.getInt("año");
+                    if (año == fecha) {
+                        error = true;
+                    }
                 }
-            }
-            // fin de comprobacion de la fecha
-            if (error==false) {
-            agregarCarton(contador+1, fecha, numero_hermano_i);
-            JOptionPane.showMessageDialog(null, "Insertado correctamente");
+                // fin de comprobacion de la fecha
+                if (error == false) {
+                    agregarCarton(contador + 1, fecha, numero_hermano_i);
+                    JOptionPane.showMessageDialog(null, "Insertado correctamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "La fecha introducida ya existe");
+                    error = false;
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, "La fecha introducida ya existe");
-                error=false;
-            }
-            
-            
-            } else {
-                
+
                 //int numero_hermano_i = Integer.parseInt(p1.her.getText());
                 int fecha = Integer.parseInt(p1.jTextField2.getText());
                 agregarCarton(1, fecha, numero_hermano_i);
-                
+
             }
-            
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void añadirNuevoCarton() {
         p1.jTextField1.setEnabled(false);
         p1.añadirNuevoAño.setVisible(true);
@@ -439,16 +492,16 @@ public class ControladorPagoCuotas implements ActionListener {
         int numero_hermano_i = Integer.parseInt(p1.her.getText());
         p1.jTextField1.setText(String.valueOf(numero_hermano_i));
     }
-    
+
     public void localizarCartonPorEntradaTeclado() {
         try {
             String entrada = cv.cuadroAñoCarton.getText();
             int numero_hermano_i = Integer.parseInt(p1.her.getText());
-            
+
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
             cbd.un_sql = "select * from cartoncuotas where año like " + entrada + " and numero_hermano_id=" + numero_hermano_i + ";";
             cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-            
+
             if (cbd.resultado.next()) {
                 //JOptionPane.showMessageDialog(null, "algo hay");
                 identificadorCartonSeleccionado = cbd.resultado.getInt("identificador");
@@ -464,84 +517,83 @@ public class ControladorPagoCuotas implements ActionListener {
                 boolean octubre = cbd.resultado.getBoolean("octubre");
                 boolean noviembre = cbd.resultado.getBoolean("noviembre");
                 boolean diciembre = cbd.resultado.getBoolean("diciembre");
-                
+
                 if (enero) {
-                   cv.jCheckBox1.setSelected(true);
+                    cv.jCheckBox1.setSelected(true);
                 } else {
                     cv.jCheckBox1.setSelected(false);
                 }
-                
+
                 if (febrero) {
-                   cv.jCheckBox2.setSelected(true);
+                    cv.jCheckBox2.setSelected(true);
                 } else {
                     cv.jCheckBox2.setSelected(false);
                 }
-                
+
                 if (marzo) {
-                   cv.jCheckBox3.setSelected(true);
+                    cv.jCheckBox3.setSelected(true);
                 } else {
                     cv.jCheckBox3.setSelected(false);
                 }
-                
+
                 if (abril) {
-                   cv.jCheckBox4.setSelected(true);
+                    cv.jCheckBox4.setSelected(true);
                 } else {
                     cv.jCheckBox4.setSelected(false);
                 }
-                
+
                 if (mayo) {
-                   cv.jCheckBox5.setSelected(true);
+                    cv.jCheckBox5.setSelected(true);
                 } else {
                     cv.jCheckBox5.setSelected(false);
                 }
-                
+
                 if (junio) {
-                   cv.jCheckBox6.setSelected(true);
+                    cv.jCheckBox6.setSelected(true);
                 } else {
                     cv.jCheckBox6.setSelected(false);
                 }
-                
+
                 if (julio) {
-                   cv.jCheckBox7.setSelected(true);
+                    cv.jCheckBox7.setSelected(true);
                 } else {
                     cv.jCheckBox7.setSelected(false);
                 }
-                
+
                 if (agosto) {
-                   cv.jCheckBox8.setSelected(true);
+                    cv.jCheckBox8.setSelected(true);
                 } else {
                     cv.jCheckBox8.setSelected(false);
                 }
-                
+
                 if (septiembre) {
-                   cv.jCheckBox9.setSelected(true);
+                    cv.jCheckBox9.setSelected(true);
                 } else {
                     cv.jCheckBox9.setSelected(false);
                 }
-                
+
                 if (octubre) {
-                   cv.jCheckBox10.setSelected(true);
+                    cv.jCheckBox10.setSelected(true);
                 } else {
                     cv.jCheckBox10.setSelected(false);
                 }
-                
+
                 if (noviembre) {
-                   cv.jCheckBox11.setSelected(true);
+                    cv.jCheckBox11.setSelected(true);
                 } else {
                     cv.jCheckBox11.setSelected(false);
                 }
-                
+
                 if (diciembre) {
-                   cv.jCheckBox12.setSelected(true);
+                    cv.jCheckBox12.setSelected(true);
                 } else {
                     cv.jCheckBox12.setSelected(false);
                 }
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningun resultado");
             }
-            
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ControladorPagoCuotas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -549,19 +601,32 @@ public class ControladorPagoCuotas implements ActionListener {
         }
     }
 
-    
     public void accederCarton() {
         cv.setVisible(true);
         p1.consultarcarton.setVisible(false);
+        cv.jCheckBox1.setSelected(false);
+        cv.jCheckBox2.setSelected(false);
+        cv.jCheckBox3.setSelected(false);
+        cv.jCheckBox4.setSelected(false);
+        cv.jCheckBox5.setSelected(false);
+        cv.jCheckBox6.setSelected(false);
+        cv.jCheckBox7.setSelected(false);
+        cv.jCheckBox8.setSelected(false);
+        cv.jCheckBox9.setSelected(false);
+        cv.jCheckBox10.setSelected(false);
+        cv.jCheckBox11.setSelected(false);
+        cv.jCheckBox12.setSelected(false);
+        cv.cuadroAñoCarton.setText("");
+
     }
-    
+
     public void consultarCarton() {
         p1.cuotas.setVisible(false);
         p1.consultarcarton.setVisible(true);
         p1.consultarcarton.setLocationRelativeTo(null);
         p1.consultarcarton.setSize(500, 300);
     }
-    
+
     public void cargarTablaCuotasFiltro() {
         DefaultTableModel ff;
 
@@ -573,7 +638,7 @@ public class ControladorPagoCuotas implements ActionListener {
             String fila[] = new String[14];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
             int año = Integer.parseInt(p1.txtAñoCuota.getText());
-            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id="+numero_hermano_i+" and año="+año;
+            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id=" + numero_hermano_i + " and año=" + año;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
@@ -604,7 +669,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void cargarTablaCuotas2() {
         DefaultTableModel ff;
 
@@ -615,7 +680,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JTable p = new JTable(ff);
             String fila[] = new String[15];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
-            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id="+numero_hermano_i;
+            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id=" + numero_hermano_i;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
@@ -647,7 +712,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void cargarTablaCuotasFiltro2() {
         DefaultTableModel ff;
 
@@ -659,7 +724,7 @@ public class ControladorPagoCuotas implements ActionListener {
             String fila[] = new String[15];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
             int año = Integer.parseInt(p1.txtAñoCuota2.getText());
-            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id="+numero_hermano_i+" and año="+año;
+            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id=" + numero_hermano_i + " and año=" + año;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
@@ -680,7 +745,7 @@ public class ControladorPagoCuotas implements ActionListener {
                 fila[14] = cdb.resultado.getString("diciembre");
 
                 ff.addRow(fila);
-                
+
                 p1.txtIdentificadorCuota.setText(fila[0]);
             }
 
@@ -693,7 +758,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void cargarTablaCuotas() {
         DefaultTableModel ff;
 
@@ -704,7 +769,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JTable p = new JTable(ff);
             String fila[] = new String[14];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
-            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id="+numero_hermano_i;
+            cdb.un_sql = "select * from cartoncuotas where numero_hermano_id=" + numero_hermano_i;
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
@@ -776,7 +841,7 @@ public class ControladorPagoCuotas implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-      //metodo para cargar los pagos
+    //metodo para cargar los pagos
 
     public void cargarPagos() {
         DefaultTableModel ff;
@@ -870,13 +935,13 @@ public class ControladorPagoCuotas implements ActionListener {
         h1 = new hermanito();
         return h1.buscarFiltro(filtro, campo);
     }
-    
+
     //agregar carton
     private void agregarCarton(int identificador, int año, int numero_hermano_id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         cc = new CartonCuotas(identificador, año, numero_hermano_id);
         cc.grabar();
     }
-    
+
     /*Metodo para borrar una Entidad Conocida*/
     public void eliminarCarton(int identificador) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         cc = new CartonCuotas(identificador);

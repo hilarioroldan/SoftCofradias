@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import controlador.ControladorEntidadesConocidas;
@@ -13,22 +9,26 @@ import controlador.ControladorInformes;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
 import controlador.ControladorLibroAsiento;
+import controlador.ControladorLoteriasYSorteos;
 import controlador.ControladorPagoCuotas;
+import controlador.ControladorPapeletaSitio;
 import controlador.ControladorPlaningMayordomia;
 import controlador.ControladorPlaningSecretaria;
+import controlador.ControladorProtocolo;
+import controlador.ControladorSalidaProcesional;
 import modelo.PlaningMayordomia;
 
-/**
- *
- * @author hilario
- */
+
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        this.setUndecorated(true);
+        this.setResizable(false);
         initComponents();
+       // this.setLocation(null);
     }
 
     /**
@@ -41,7 +41,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        tw_social = new javax.swing.JButton();
+        fb_social = new javax.swing.JButton();
+        rss_social = new javax.swing.JButton();
+        go_social = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -65,37 +69,71 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Viner Hand ITC", 1, 36)); // NOI18N
-        jLabel1.setText("SoftCofradias");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(jLabel1)
-                .addContainerGap(185, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jLabel1)
-                .addContainerGap(160, Short.MAX_VALUE))
-        );
+        tw_social.setBorderPainted(false);
+        tw_social.setContentAreaFilled(false);
+        tw_social.setFocusPainted(false);
+        tw_social.setMaximumSize(new java.awt.Dimension(40, 40));
+        tw_social.setMinimumSize(new java.awt.Dimension(40, 40));
+        tw_social.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tw_socialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(tw_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, -1, -1));
 
+        fb_social.setBorderPainted(false);
+        fb_social.setContentAreaFilled(false);
+        jPanel1.add(fb_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, -1, -1));
+
+        rss_social.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rss.png"))); // NOI18N
+        rss_social.setBorderPainted(false);
+        rss_social.setContentAreaFilled(false);
+        rss_social.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rss_socialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rss_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, -1, -1));
+
+        go_social.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/g.png"))); // NOI18N
+        go_social.setBorderPainted(false);
+        go_social.setContentAreaFilled(false);
+        go_social.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go_socialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(go_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 430, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/main.jpg"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
         jMenuBar1.setMargin(new java.awt.Insets(0, 0, 2, 0));
 
+        jMenu1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu1.setBorder(null);
+        jMenu1.setForeground(new java.awt.Color(152, 42, 111));
         jMenu1.setText("Hermandad");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu1.setMaximumSize(new java.awt.Dimension(80, 32767));
+        jMenu1.setOpaque(true);
+        jMenu1.setPreferredSize(new java.awt.Dimension(90, 35));
 
+        jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem2.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem2.setText("Configurar Hermandad");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +142,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem1.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem1.setText("Hermanos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +152,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem3.setText("Junta de Gobierno");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,8 +164,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu2.setForeground(new java.awt.Color(152, 42, 111));
         jMenu2.setText("Secretaria");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu2.setMaximumSize(new java.awt.Dimension(80, 32767));
+        jMenu2.setOpaque(true);
+        jMenu2.setPreferredSize(new java.awt.Dimension(90, 19));
 
+        jMenuItem9.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem9.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem9.setText("Entidades conocidas");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +182,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem9);
 
+        jMenuItem10.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem10.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem10.setText("Hermandades hermanadas");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +192,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem10);
 
+        jMenuItem11.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem11.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem11.setText("Planing Secretaria");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +202,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem11);
 
+        jMenuItem12.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem12.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem12.setText("Inventario");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,8 +214,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu3.setForeground(new java.awt.Color(152, 42, 111));
         jMenu3.setText("Mayordomia - Tesorería");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu3.setOpaque(true);
+        jMenu3.setPreferredSize(new java.awt.Dimension(145, 19));
 
+        jMenuItem13.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem13.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem13.setText("Planing Mayordomia");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +231,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem13);
 
+        jMenuItem15.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem15.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem15.setText("Pago de cuotas");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +241,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem15);
 
+        jMenuItem16.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem16.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem16.setText("Libro de asientos");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,30 +251,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem16);
 
+        jMenuItem17.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem17.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem17.setText("Cuenta Bancaria");
         jMenu3.add(jMenuItem17);
 
+        jMenuItem18.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem18.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem18.setText("Loterías y sorteos");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem18);
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu4.setForeground(new java.awt.Color(152, 42, 111));
         jMenu4.setText("Salida procesional");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu4.setOpaque(true);
+        jMenu4.setPreferredSize(new java.awt.Dimension(113, 19));
 
+        jMenuItem19.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem19.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem19.setText("Papeleta de sitio");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem19);
 
+        jMenuItem20.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem20.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem20.setText("Protocolo");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem20);
 
-        jMenuItem21.setText("Ficha de reparto");
+        jMenuItem21.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem21.setForeground(new java.awt.Color(152, 42, 111));
+        jMenuItem21.setText("Salida Procesional");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem21);
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu6.setForeground(new java.awt.Color(152, 42, 111));
         jMenu6.setText("Informes");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu6.setMaximumSize(new java.awt.Dimension(60, 32767));
+        jMenu6.setOpaque(true);
+        jMenu6.setPreferredSize(new java.awt.Dimension(70, 19));
 
-        jMenuItem4.setText("Listado de Hermanos");
+        jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem4.setForeground(new java.awt.Color(152, 42, 111));
+        jMenuItem4.setText("Listado de hermanos");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -215,29 +325,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem4);
 
-        jMenuItem5.setText("Listado de Enseres y Patrimonio");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
+        jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem5.setForeground(new java.awt.Color(152, 42, 111));
+        jMenuItem5.setText("Listado Inventario");
         jMenu6.add(jMenuItem5);
-
-        jMenuItem6.setText("Listado Libro de Asientos");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem6);
 
         jMenuBar1.add(jMenu6);
 
+        jMenu5.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu5.setForeground(new java.awt.Color(152, 42, 111));
         jMenu5.setText("Acerca de");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu5.setOpaque(true);
 
+        jMenuItem30.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem30.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem30.setText("Informacion");
         jMenu5.add(jMenuItem30);
 
+        jMenuItem31.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem31.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem31.setText("Salir");
         jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,14 +365,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       
        ControladorHermandad ch = new ControladorHermandad();
        ch.iniciar();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -276,9 +382,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
        ControladorEntidadesConocidas cec = new ControladorEntidadesConocidas();
-       cec.iniciar();
-       
-        
+       cec.iniciar();        
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -322,19 +426,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       ControladorInformes ci = new ControladorInformes();
-        ci.cargarInformeListaHermanos();
+       // ControladorInformes ci = new ControladorInformes();
+        //ci.informeListaHermanos();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        ControladorInformes ci = new ControladorInformes();
-        ci.cargarInformeListaEnseresyPatrimonio();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        ControladorLoteriasYSorteos cLs = new ControladorLoteriasYSorteos();
+        cLs.iniciar();
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        ControladorInformes ci = new ControladorInformes();
-        ci.cargarInformeListaLibrodeAsientos();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        ControladorPapeletaSitio ps = new ControladorPapeletaSitio();
+        ps.iniciar();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        ControladorSalidaProcesional cs = new ControladorSalidaProcesional();
+        cs.iniciar();
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void tw_socialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tw_socialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tw_socialActionPerformed
+
+    private void rss_socialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rss_socialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rss_socialActionPerformed
+
+    private void go_socialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_socialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_go_socialActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        ControladorProtocolo cp = new ControladorProtocolo();
+        cp.iniciar();
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,13 +492,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                VentanaPrincipal p = new VentanaPrincipal();
+                p.setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton fb_social;
+    private javax.swing.JButton go_social;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -398,8 +528,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton rss_social;
+    private javax.swing.JButton tw_social;
     // End of variables declaration//GEN-END:variables
 }

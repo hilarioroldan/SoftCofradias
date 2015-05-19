@@ -45,11 +45,12 @@ public class ControladorProtocolo implements ActionListener{
        pv1.Aceptar.addActionListener(this);
        pv1.Salir.setActionCommand("SALIR");
        pv1.Salir.addActionListener(this);
-      
+       //seleccion();
+       Seleccion_salida();
+       //pv1.hermano_seleccion.setActionCommand("SELECCION1");
+       //pv1.hermano_seleccion.addActionListener(this);
        
-      seleccion();
-       
-     
+       //cargar_seleccion();
        
        
        
@@ -65,24 +66,19 @@ public class ControladorProtocolo implements ActionListener{
     } 
        ///METODO PARA SELECCIONAR EL HERMANO QUE QUEREMOS INTRODUCIR
          
-        
-         
-         //METODO PARA CARGAR ESA SELECCION
-         
-         
-         public void seleccion(){
+         /*public void seleccion(){
          
           try{
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql="select identificador from salidaprocesional;";
+            cbd.un_sql="select nombre,apellidos from hermanos;";
             cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-       pv1.Seleccion_salida.removeAllItems();
+       pv1.hermano_seleccion.removeAllItems();
               
             while(cbd.resultado.next()){
                 
-                
-               
-               pv1.Seleccion_salida.addItem(1); 
+                String nombre=cbd.resultado.getString("nombre");
+                String apellidos=cbd.resultado.getString("apellidos");
+               pv1.hermano_seleccion.addItem(apellidos); 
                //pv1.hermano_seleccion.addItem();
   
             }                      
@@ -92,9 +88,53 @@ public class ControladorProtocolo implements ActionListener{
         } 
          
          
-         }
+         }*/
   
-        
+         
+         //METODO PARA CARGAR ESA SELECCION
+         
+        /* public void cargar_seleccion(){
+         
+         try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="select numero_hermano from hermanos where apellidos='"+pv1.hermano_seleccion.getSelectedItem()+"';";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+           
+              
+            if(cbd.resultado.next()){
+           numero = cbd.resultado.getString("numero_hermano");
+              pv1.id_muestra.setText(""+numero);
+  
+            }                      
+           
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+         
+         
+         }*/
+       //metodo para sacar la salida procesional
+            public void Seleccion_salida(){
+         
+         try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="select identificador from salidaprocesional";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            pv1.Seleccion_salida.removeAllItems();
+              
+           while(cbd.resultado.next()){
+           String salida = cbd.resultado.getString("identificador");
+              pv1.Seleccion_salida.addItem(salida);
+  
+            }                      
+           
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+         
+         
+         }
+         
        
        
        
@@ -104,10 +144,7 @@ public class ControladorProtocolo implements ActionListener{
    
        
        case ACEPTAR:
-
-                    
-                   
-                       try {
+   try {
                     
                     Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
                     cbd.un_sql="select max(identificador) from protocolo";
@@ -125,16 +162,15 @@ public class ControladorProtocolo implements ActionListener{
                     }
                     
                     String descripcion = pv1.area_de_texto.getText();
-                    
-                    int numero_hermano_id=Integer.parseInt(pv1.id_muestra.getText()); 
-                    
-                    int salida_profesional_id=(int) pv1.Seleccion_salida.getSelectedItem();
+                    String numero_hermano_id=pv1.id_muestra.getText();
+                   
+                 String salida_profesional_id=(String) pv1.Seleccion_salida.getSelectedItem();
                     
                    
                     
                    
                     try {
-                        agregarDatos(identificador,descripcion,numero_hermano_id,salida_profesional_id);
+                        agregarDatos(identificador,descripcion,Integer.parseInt(numero_hermano_id),Integer.parseInt(salida_profesional_id) );
                     } catch (ClassNotFoundException ex) {
                         JOptionPane.showMessageDialog(null, "No se Ha introducido ningun dato");
                         Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,6 +183,10 @@ public class ControladorProtocolo implements ActionListener{
                         Logger.getLogger(HermanitoVista1.class.getName()).log(Level.SEVERE, null, ex);
                     }
         
+                    
+                    
+                    
+                    
                 } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE,null, ex);
                 
@@ -156,16 +196,17 @@ public class ControladorProtocolo implements ActionListener{
                 Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
         Logger.getLogger(ControladorLibroAsiento.class.getName()).log(Level.SEVERE, null, ex);
-    }            
-                
-                    
-                    
-        
+    }
            
            
            
            break;
-  
+   
+       case SELECCION1:
+           
+           //cargar_seleccion();
+           pv1.id_muestra.getText();
+           break;
    
    
    

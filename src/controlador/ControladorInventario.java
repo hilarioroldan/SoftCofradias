@@ -1,6 +1,5 @@
 package controlador;
 
-import static groovy.util.Eval.x;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

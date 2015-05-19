@@ -484,20 +484,20 @@ public class ControladorHermano implements ActionListener {
                 fila[11] = cdb.resultado.getString("email");
                 fila[12] = cdb.resultado.getString("banco");
                 fila[13] = cdb.resultado.getString("cuenta_bancaria");
-                //
-                cdb.resultado = cdb.un_st.executeQuery("select p.forma_pago from hermanos h, formapago p where p.identificador=h.forma_pago_id and h.numero_hermano="+fila[0]);
+                
+                /*cdb.resultado = cdb.un_st.executeQuery("select p.forma_pago from hermanos h, formapago p where p.identificador=h.forma_pago_id and h.numero_hermano="+fila[0]);
                 String formaPago = "";
                 if (cdb.resultado.next()) {
                     formaPago=cdb.resultado.getString(1);
-                }
-                fila[14] = formaPago;
+                }*/
+                fila[14] = cdb.resultado.getString("forma_pago_id");
                 //
-                cdb.resultado = cdb.un_st.executeQuery("select p.tipo_pago from hermanos h, tipopago p where p.identificador=h.tipo_pago_id and h.numero_hermano="+fila[0]);
+                /*cdb.resultado = cdb.un_st.executeQuery("select p.tipo_pago from hermanos h, tipopago p where p.identificador=h.tipo_pago_id and h.numero_hermano="+fila[0]);
                 String tipoPago = "";
                 if (cdb.resultado.next()) {
                     tipoPago=cdb.resultado.getString(1);
-                }
-                fila[15] = tipoPago;
+                }*/
+                fila[15] = cdb.resultado.getString("tipo_pago_id");
 
                 ff.addRow(fila);
             }
@@ -587,7 +587,7 @@ e.printStackTrace();
         try {
             eliminarHermano(Integer.parseInt(num));
             ponerNumHermano();
-            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -641,21 +641,21 @@ e.printStackTrace();
         }
         
         } else if (hv1.seleecion_forma_pago1.getSelectedItem()!=null && hv1.Tipo_pago_seleccion1.getSelectedItem()==null) {
-            JOptionPane.showMessageDialog(null, "forma pago lleno, tipo pago vacio");
+           // JOptionPane.showMessageDialog(null, "forma pago lleno, tipo pago vacio");
             try {
                 modificarHermanoSinTipoPago(Integer.parseInt(numero_hermano1), direccion1, Integer.parseInt(cp1), fecha1, nombre1, apellido1, nif1, municipio1, provincia1, pais1, tfno1, email1, banco1, cuenta_bancaria1, Integer.parseInt(forma_pago_id1));
                 JOptionPane.showMessageDialog(null, "Hermano modificado correctamente");
             } catch (Exception e) {
             }
         } else if (hv1.seleecion_forma_pago1.getSelectedItem()==null && hv1.Tipo_pago_seleccion1.getSelectedItem()!=null) {
-            JOptionPane.showMessageDialog(null, "forma pago vacio, tipo pago lleno");
+           // JOptionPane.showMessageDialog(null, "forma pago vacio, tipo pago lleno");
             modificarHermanoSinFormaDePago();
             
         } else {
             try {
                 modificarHermanoSinFormaPagoSinTipoPago(Integer.parseInt(numero_hermano1), direccion1, Integer.parseInt(cp1), fecha1, nombre1, apellido1, nif1, municipio1, provincia1, pais1, tfno1, email1, banco1, cuenta_bancaria1);
                 JOptionPane.showMessageDialog(null, "Hermano modificado correctamente");
-                JOptionPane.showMessageDialog(null, "nada");
+                //JOptionPane.showMessageDialog(null, "nada");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -867,8 +867,8 @@ e.printStackTrace();
         String forma_pago_id = id_forma1;
         
         x.setFecha(fecha);
-        
-        cbd.un_st.executeUpdate("UPDATE hermanos set nombre='"+x.getNombre()+"', apellidos='"+x.getApellido()+"', nif='"+x.getNif()+"', municipio='"+x.getMunicipio()+"', pais='"+x.getPais()+"', provincia='"+x.getProvincia()+"', tfno="+x.getTfno()+", email='"+x.getEmail()+"', banco='"+x.getBanco()+"', cuenta_bancaria='"+x.getCuenta_bancaria()+"', tipo_pago_id="+tipo_pago_id+", fecha_nacimiento='"+x.getFecha()+"', direccion='"+x.getDireccion()+"', codigo_postal="+x.getCp()+";");
+       // JOptionPane.showMessageDialog(null, "nuumero: "+tipo_pago_id);
+        cbd.un_st.executeUpdate("UPDATE hermanos SET  nombre='" + x.getNombre() + "',apellidos='" + x.getApellido() + "',nif='" + x.getNif() + "',municipio='" + x.getMunicipio() + "',provincia='" + x.getProvincia() + "',pais='" + x.getPais() + "',tfno='" + x.getTfno() + "',email='" + x.getEmail() + "',banco='" + x.getBanco() + "',cuenta_bancaria='" + x.getCuenta_bancaria() + "',tipo_pago_id='" + tipo_pago_id+ "',id_hermandad=1, fecha_nacimiento='" + x.getFecha() + "',direccion='" + x.getDireccion() + "', codigo_postal='" + x.getCp() +"' WHERE numero_hermano=5;");
         
         } catch (Exception e) {
             e.printStackTrace();

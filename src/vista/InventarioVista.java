@@ -188,7 +188,7 @@ public class InventarioVista extends javax.swing.JFrame {
         jDateChooser6 = new com.toedter.calendar.JDateChooser();
         btnSalir3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane7.setBorder(null);
         jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -1243,8 +1243,8 @@ public class InventarioVista extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser jDateChooser4;
     public com.toedter.calendar.JDateChooser jDateChooser5;
     public com.toedter.calendar.JDateChooser jDateChooser6;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
+    public javax.swing.JLabel jLabel15;
+    public javax.swing.JLabel jLabel17;
     public javax.swing.JLabel jLabel31;
     public javax.swing.JLabel jLabel32;
     public javax.swing.JLabel jLabel33;
@@ -1257,7 +1257,7 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel40;
     public javax.swing.JLabel jLabel41;
     public javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
+    public javax.swing.JLabel jLabel43;
     public javax.swing.JLabel jLabel44;
     public javax.swing.JLabel jLabel46;
     public javax.swing.JLabel jLabel47;
@@ -1286,7 +1286,7 @@ public class InventarioVista extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel71;
     public javax.swing.JLabel jLabel72;
     public javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel85;
+    public javax.swing.JLabel jLabel85;
     public javax.swing.JLabel jLabel86;
     public javax.swing.JLabel jLabel87;
     public javax.swing.JLabel jLabel88;

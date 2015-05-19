@@ -25,6 +25,7 @@ public class ControladorPlaningSecretaria implements ActionListener {
     
     
     public void iniciar() {
+        //Planing
         pS = new PlaningSecretaria();
         pSvista = new PlaningSecretariaVista();
         pSvista.setVisible(true);
@@ -44,6 +45,7 @@ public class ControladorPlaningSecretaria implements ActionListener {
         pSvista.btnSalir2.setActionCommand("SALIR2");
         pSvista.btnSalir3.setActionCommand("SALIR3");
         pSvista.btnSalir4.setActionCommand("SALIR4");
+        //pSvista.modificar3.setActionCommand("MODIFICAR");
         //Se pone a escuchar las acciones del usuario
         pSvista.btnIngresar.addActionListener(this);
         pSvista.btnBuscar.addActionListener(this);
@@ -53,6 +55,7 @@ public class ControladorPlaningSecretaria implements ActionListener {
         pSvista.btnSalir2.addActionListener(this);
         pSvista.btnSalir3.addActionListener(this);
         pSvista.btnSalir4.addActionListener(this);
+        //pSvista.modificar3.addActionListener(this);
         
         //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
         pSvista.tablaEntidadConocida1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,6 +111,24 @@ public class ControladorPlaningSecretaria implements ActionListener {
                 break;
             case "ELIMINAR":
                 eliminarSeleccion();
+                break;
+            case "MODIFICAR":
+                String identificador3 = pSvista.txtIdentificador3.getText();
+                String hora3= pSvista.txtHora3.getText();
+                String fecha3 = pSvista.txtFecha3.getText();
+                String descripcion3 = pSvista.txtDescripcion3.getText();
+                
+                try {
+                    
+                    modificarPlaning(Integer.parseInt(identificador3),hora3, Date.valueOf(fecha3), descripcion3);
+                    JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
+                    limpiarTexto();
+                    
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                
                 break;
             case "SALIR1":
                 pSvista.dispose();
@@ -203,7 +224,7 @@ public class ControladorPlaningSecretaria implements ActionListener {
     public void cargarTablaSecretaria() {
         DefaultTableModel m;
         try {
-            String[] titulo = {"Nro", "Hora", "Fecha", "Descripcion"};
+            String[] titulo = {"Nro", "Hora", "Descripcion", "Fecha"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
             String[] fila = new String[4];
@@ -234,14 +255,14 @@ public class ControladorPlaningSecretaria implements ActionListener {
         PlaningSecretaria planingsecretaria = null;
         DefaultTableModel m;
         try {
-            String[] titulo = {"Nro", "Hora", "Fecha", "Descripcion"};
+            String[] titulo = {"Nro", "Hora", "Descripcion", "Fecha"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
             String[] fila = new String[4];
             ArrayList <PlaningSecretaria> x;
             String campo = (String) pSvista.cmbBD1.getSelectedItem();
             String filtro = pSvista.txtFiltro1.getText();
-            x = planingsecretaria.buscarFiltro(filtro, campo);
+            x = pS.buscarFiltro(filtro, campo);
             
             Iterator <PlaningSecretaria> it = x.iterator();
             while(it.hasNext()){
@@ -268,7 +289,8 @@ public class ControladorPlaningSecretaria implements ActionListener {
         PlaningSecretaria planing = null;
         DefaultTableModel m;
         try {
-            String[] titulo = {"Nro", "Hora","Fecha","Descripcion"};
+                        
+            String[] titulo = {"Nro", "Hora", "Descripcion", "Fecha"};
             m = new DefaultTableModel(null, titulo);
             JTable p = new JTable(m);
             String[] fila = new String[4];
@@ -328,8 +350,8 @@ public class ControladorPlaningSecretaria implements ActionListener {
     }
 
     /*Metodo para modificar una Entidad Conocida*/
-    public void modificarPlaning(String hora,Date fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        pS = new PlaningSecretaria(hora,fecha,descripcion);
+    public void modificarPlaning(int identificador,String hora,Date fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        pS = new PlaningSecretaria(identificador,hora,fecha,descripcion);
         pS.actualizar();
     }
 

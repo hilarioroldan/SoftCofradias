@@ -113,7 +113,7 @@ public class HermandadesHermanadasVista extends javax.swing.JFrame {
         btnBuscar2 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JToggleButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Hermandades hermanadas"));
 

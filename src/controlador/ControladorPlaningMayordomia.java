@@ -148,8 +148,21 @@ public class ControladorPlaningMayordomia implements ActionListener {
     }
 
     public void insertarPlaning() {
+        int identificador = 1;
         try {
-            int identificador = Integer.parseInt(pmv.txtIdentificador1.getText());
+            try {
+                Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+                cbd.resultado = cbd.un_st.executeQuery("select max(identificador) from planingmayordomia");
+                
+                if (cbd.resultado.next()) {
+                    identificador = cbd.resultado.getInt(1)+1;
+                } else {
+                    identificador = 1;
+                }
+                
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+            }
             String hora = pmv.txtHora1.getText();
 
             // Trabajando con fecha
@@ -481,7 +494,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
     }
 
     public void limpiarPantalla1() {
-        pmv.txtIdentificador1.setText("");
+        
         pmv.txtHora1.setText("");
         pmv.Jdate1.setDate(null);
         pmv.txtLabor1.setText("");
@@ -515,7 +528,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
             JOptionPane.showMessageDialog(null, "Insertado correctamente");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             //Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "El Identificador " + pmv.txtIdentificador1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         }
     }
 

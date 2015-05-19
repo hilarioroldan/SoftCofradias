@@ -130,7 +130,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JToggleButton();
         btnSalir4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         ingresar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
 
