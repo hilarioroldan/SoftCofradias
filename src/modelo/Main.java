@@ -1,6 +1,5 @@
 package modelo;
 
-import controlador.ControladorHermandad;
 import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;

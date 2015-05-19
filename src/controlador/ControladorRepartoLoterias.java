@@ -87,24 +87,7 @@ public class ControladorRepartoLoterias implements ActionListener {
         String comando = e.getActionCommand();
         switch (comando) {
             case "INGRESAR":
-                String identificador = rlvista.txtIdentificador.getText();
-                String num_hermano_id = rlvista.txtnumhermanoid.getText();
-                String num_desde = rlvista.txtnumdesde.getText();
-                String num_hasta = rlvista.txtnumhasta.getText();
-                String cantidad = rlvista.txtcantidad.getText();
-                String loterias_id = rlvista.txtloteriasid.getText();
-                
-                try {
-                   
-                    agregarReparto(Integer.parseInt(identificador), Integer.parseInt(num_hermano_id),Integer.parseInt(num_desde),Integer.parseInt(num_hasta),Integer.parseInt(cantidad),Integer.parseInt(loterias_id));
-                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
-                    limpiarTexto();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
-                }   
-                cargarTablaReparto();
-                cargarTablaReparto2();
-                cargarTablaReparto3();
+                ingresarLoteria();
                 break;
                 
             case "BUSCAR1":
@@ -150,6 +133,27 @@ public class ControladorRepartoLoterias implements ActionListener {
                 break;
         }
 
+    }
+    
+    public void ingresarLoteria(){
+        String identificador = rlvista.txtIdentificador.getText();
+                String num_hermano_id = rlvista.txtnumhermanoid.getText();
+                String num_desde = rlvista.txtnumdesde.getText();
+                String num_hasta = rlvista.txtnumhasta.getText();
+                String cantidad = rlvista.txtcantidad.getText();
+                String loterias_id = rlvista.txtloteriasid.getText();
+                
+                try {
+                   
+                    agregarReparto(Integer.parseInt(identificador), Integer.parseInt(num_hermano_id),Integer.parseInt(num_desde),Integer.parseInt(num_hasta),Integer.parseInt(cantidad),Integer.parseInt(loterias_id));
+                    JOptionPane.showMessageDialog(null, "Insertado Correctamente");
+                    limpiarTexto();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
+                }   
+                cargarTablaReparto();
+                cargarTablaReparto2();
+                cargarTablaReparto3();
     }
     
     private void eliminarSeleccion() {

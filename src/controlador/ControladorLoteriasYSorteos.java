@@ -149,6 +149,7 @@ public class ControladorLoteriasYSorteos implements ActionListener {
                     //
                 }
             // fin
+            
                     String sorteo = Lsvista.txtNombre.getText();
                     double cantidad = Double.parseDouble(Lsvista.txtCantidad.getText());
                     double ganancia = Double.parseDouble(Lsvista.txtGanaciaUnidad.getText());
