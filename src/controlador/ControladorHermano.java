@@ -526,6 +526,8 @@ e.printStackTrace();
             String filtro = hv1.txtFiltro1.getText();
             x = h1.buscarFiltro(filtro, campo);
             
+            if (!filtro.equalsIgnoreCase("")) {
+            
             if (x.size()>0) {
                 
                 Iterator<modelo.hermanito> it = x.iterator();
@@ -557,7 +559,9 @@ e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
             }
 
-            
+            } else {
+                
+            }
 
         } catch (Exception e) {
             //   e.printStackTrace();  
@@ -872,11 +876,18 @@ e.printStackTrace();
         
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
-        
-        
-        
+        }  
     }
+    public String localizarTipoPagoId(int numeroHermano) {
+        String nombre = "";
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado = cbd.un_st.executeQuery("select t.tipo_pago from hermanos h, tipopago t where h.tipo_pago_id=t.identificador and h.numero_hermano="+numeroHermano+";");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nombre;
+            
+        }
 
 }

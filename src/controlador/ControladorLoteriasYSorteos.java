@@ -1,8 +1,8 @@
 package controlador;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +18,7 @@ import modelo.LoteriasYSorteos;
 import servicios.ConectarServicio;
 import servicios.Conexion;
 import vista.LoteriasYSorteosVista;
+import validaciones.*;
 
 public class ControladorLoteriasYSorteos implements ActionListener {
 
@@ -30,8 +31,32 @@ public class ControladorLoteriasYSorteos implements ActionListener {
     public void iniciar() {
         ls = new LoteriasYSorteos();
         Lsvista = new LoteriasYSorteosVista();
+        //Lsvista.setSize(700, 500);
         Lsvista.setVisible(true);
         Lsvista.setLocationRelativeTo(null);
+        
+        // validaciones
+        soloNumerosSoloLetras x = new soloNumerosSoloLetras();
+        x.SLetras(Lsvista.txtNombre);
+        x.SLetras(Lsvista.txtNombre2);
+        x.SLetras(Lsvista.txtNombre3);
+        x.SLetras(Lsvista.txtNombre4);
+        x.SNumeros(Lsvista.txtCantidad);
+        x.SNumeros(Lsvista.txtCantidad2);
+        x.SNumeros(Lsvista.txtCantidad3);
+        x.SNumeros(Lsvista.txtCantidad4);
+        x.SNumeros(Lsvista.txtPrecioUnidad);
+        x.SNumeros(Lsvista.txtPrecioUnidad2);
+        x.SNumeros(Lsvista.txtPrecioUnidad3);
+        x.SNumeros(Lsvista.txtPrecioUnidad4);
+        x.SNumeros(Lsvista.txtGanaciaUnidad);
+        x.SNumeros(Lsvista.txtGanaciaUnidad2);
+        x.SNumeros(Lsvista.txtGanaciaUnidad3);
+        x.SNumeros(Lsvista.txtGanaciaUnidad4);
+        
+        Lsvista.txtIdentificador2.setEnabled(false);
+        Lsvista.txtIdentificador3.setEnabled(false);
+        Lsvista.txtIdentificador4.setEnabled(false);
         
         cargarTablaSecretaria();
         
@@ -159,7 +184,7 @@ public class ControladorLoteriasYSorteos implements ActionListener {
                         agregarLoterias(identificador, sorteo, fecha, cantidad, ganancia, precio_unidad);
                         JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
                         limpiarTexto();
-                    } catch (Exception ex) {
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | HeadlessException ex) {
                         JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
                     }
                     cargarTablaSecretaria();
@@ -350,6 +375,10 @@ public class ControladorLoteriasYSorteos implements ActionListener {
             String filtro = Lsvista.txtFiltro1.getText();
             x = ls.buscarFiltro(filtro, campo);
             
+            if (!filtro.equalsIgnoreCase("")) {
+            
+            if (x.size()>0) {
+            
             Iterator <LoteriasYSorteos> it = x.iterator();
             while(it.hasNext()){
                 loteria = it.next();
@@ -360,13 +389,18 @@ public class ControladorLoteriasYSorteos implements ActionListener {
                 fila[4] = String.valueOf(loteria.getPrecio_unidad());
                 fila[5] = String.valueOf(loteria.getGanancia_unidad());
                 m.addRow(fila);
-            }           
+            }            
             
             Lsvista.tablaEntidadConocida2.setModel(m);
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             Lsvista.tablaEntidadConocida2.setRowSorter(ordenar);
             Lsvista.tablaEntidadConocida2.setModel(m);
             
+            } else {
+                JOptionPane.showMessageDialog(null, "No se han encontrado ningún resultado");
+               ordenarTablaMostrar();
+            }
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
         }
@@ -387,12 +421,16 @@ public class ControladorLoteriasYSorteos implements ActionListener {
             String filtro = Lsvista.txtFiltro2.getText();
             x = ls.buscarFiltro(filtro, campo);
             
+            if (!filtro.equalsIgnoreCase("")) {
+                
+                if (x.size()>0) {
+            
             Iterator <LoteriasYSorteos> it = x.iterator();
             while(it.hasNext()){
                 loteria = it.next();
                 fila[0] = String.valueOf(loteria.getIdentificador());
                 fila[1] = loteria.getSorteo();
-                fila[2] = loteria.getFecha_devolucion().toString();
+                fila[2] = loteria.getFecha_devolucion();
                 fila[3] = String.valueOf(loteria.getCantidad());
                 fila[4] = String.valueOf(loteria.getPrecio_unidad());
                 fila[5] = String.valueOf(loteria.getGanancia_unidad());
@@ -404,6 +442,15 @@ public class ControladorLoteriasYSorteos implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             Lsvista.tablaEntidadConocida3.setRowSorter(ordenar);
             Lsvista.tablaEntidadConocida3.setModel(m);
+            
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                    ordenarTablaEliminar();
+                }
+            
+            } else {
+                
+            }
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
@@ -427,6 +474,72 @@ public class ControladorLoteriasYSorteos implements ActionListener {
         Lsvista.txtCantidad4.setText("");
         Lsvista.jDateChooser4.setDate(null);
         Lsvista.txtPrecioUnidad4.setText("");
+    }
+    
+    public void ordenarTablaMostrar(){
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Sorteo", "Fecha devolución", "Cantidad", "Precio unidad", "Ganancia unidad"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[6];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado = cbd.un_st.executeQuery("select * from loterias");
+            
+            while (cbd.resultado.next()) {
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("sorteo");
+                fila[2] = cbd.resultado.getString("fecha_devolucion");
+                fila[3] = cbd.resultado.getString("cantidad");
+                fila[4] = cbd.resultado.getString("precio_unidad");
+                fila[5] = cbd.resultado.getString("ganancia_unidad");
+                m.addRow(fila);
+            }
+            
+            
+            Lsvista.tablaEntidadConocida2.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            Lsvista.tablaEntidadConocida2.setRowSorter(ordenar);
+            Lsvista.tablaEntidadConocida2.setModel(m);
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+        
+    
+    }
+    
+    public void ordenarTablaEliminar(){
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Sorteo", "Fecha devolución", "Cantidad", "Precio unidad", "Ganancia unidad"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[6];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.resultado = cbd.un_st.executeQuery("select * from loterias");
+            
+            while (cbd.resultado.next()) {
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("sorteo");
+                fila[2] = cbd.resultado.getString("fecha_devolucion");
+                fila[3] = cbd.resultado.getString("cantidad");
+                fila[4] = cbd.resultado.getString("precio_unidad");
+                fila[5] = cbd.resultado.getString("ganancia_unidad");
+                m.addRow(fila);
+            }
+            
+            
+            Lsvista.tablaEntidadConocida3.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            Lsvista.tablaEntidadConocida3.setRowSorter(ordenar);
+            Lsvista.tablaEntidadConocida3.setModel(m);
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+        
+    
     }
 
     /* Método para buscar una Entidad Conocida indicando el campo y el valor */

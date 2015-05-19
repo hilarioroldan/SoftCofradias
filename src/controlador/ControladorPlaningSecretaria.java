@@ -35,30 +35,32 @@ public class ControladorPlaningSecretaria implements ActionListener {
         
         cargarCmbBD1();
         cargarCmbBD2();
-
+        cargarCmbBD3();
         //se añade las acciones a los controles del formulario padre
         pSvista.btnIngresar.setActionCommand("INGRESAR");
         pSvista.btnBuscar.setActionCommand("BUSCAR1");
         pSvista.btnBuscar2.setActionCommand("BUSCAR2");
+        pSvista.btnBuscar3.setActionCommand("BUSCAR3");
         pSvista.btnEliminar.setActionCommand("ELIMINAR");
         pSvista.btnSalir.setActionCommand("SALIR1");
-        pSvista.btnSalir2.setActionCommand("SALIR2");
+        pSvista.btnSalir5.setActionCommand("SALIR2");
         pSvista.btnSalir3.setActionCommand("SALIR3");
         pSvista.btnSalir4.setActionCommand("SALIR4");
-        //pSvista.modificar3.setActionCommand("MODIFICAR");
+        pSvista.modificar3.setActionCommand("MODIFICAR");
         //Se pone a escuchar las acciones del usuario
         pSvista.btnIngresar.addActionListener(this);
         pSvista.btnBuscar.addActionListener(this);
         pSvista.btnBuscar2.addActionListener(this);
+        pSvista.btnBuscar3.addActionListener(this);
         pSvista.btnEliminar.addActionListener(this);
         pSvista.btnSalir.addActionListener(this);
-        pSvista.btnSalir2.addActionListener(this);
+        pSvista.btnSalir5.addActionListener(this);
         pSvista.btnSalir3.addActionListener(this);
         pSvista.btnSalir4.addActionListener(this);
-        //pSvista.modificar3.addActionListener(this);
+        pSvista.modificar3.addActionListener(this);
         
         //Al Hacer click a una fila de la tabla los valores se cargaran en los cuadros de texto correspondientes
-        pSvista.tablaEntidadConocida1.addMouseListener(new java.awt.event.MouseAdapter() {
+        pSvista.tablaEntidadConocida4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaEntidadConocida1MousePressed(evt);
@@ -109,14 +111,17 @@ public class ControladorPlaningSecretaria implements ActionListener {
             case "BUSCAR2":
                 cargarTablaSecretaria3();
                 break;
+            case "BUSCAR3":
+                cargarTabla4();
+                break;
             case "ELIMINAR":
                 eliminarSeleccion();
                 break;
             case "MODIFICAR":
-                String identificador3 = pSvista.txtIdentificador3.getText();
-                String hora3= pSvista.txtHora3.getText();
-                String fecha3 = pSvista.txtFecha3.getText();
-                String descripcion3 = pSvista.txtDescripcion3.getText();
+                String identificador3 = pSvista.txtIdentificador5.getText();
+                String hora3= pSvista.txthora5.getText();
+                String fecha3 = pSvista.txtfecha5.getText();
+                String descripcion3 = pSvista.txtDescripcion5.getText();
                 
                 try {
                     
@@ -191,13 +196,28 @@ public class ControladorPlaningSecretaria implements ActionListener {
         }        
     }
     
+    private void cargarCmbBD3() {        
+        try{
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql="DESCRIBE planingsecretaria;";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+            pSvista.cmbBD3.removeAllItems();
+            
+            while(cbd.resultado.next()){
+                pSvista.cmbBD3.addItem(cbd.resultado.getString(1));
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorPlaningSecretaria.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
     private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {                                     
-        int clic = pSvista.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
+        int clic = pSvista.tablaEntidadConocida4.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
         
-        pSvista.txtIdentificador2.setText((String) pSvista.tablaEntidadConocida1.getValueAt(clic, 0));
-        pSvista.txtHora2.setText((String) pSvista.tablaEntidadConocida1.getValueAt(clic, 1));
-        pSvista.txtFecha2.setText((String) pSvista.tablaEntidadConocida1.getValueAt(clic, 3));
-        pSvista.txtDescripcion2.setText((String) pSvista.tablaEntidadConocida1.getValueAt(clic, 2));
+        pSvista.txtIdentificador5.setText((String) pSvista.tablaEntidadConocida4.getValueAt(clic, 0));
+        pSvista.txthora5.setText((String) pSvista.tablaEntidadConocida4.getValueAt(clic, 1));
+        pSvista.txtfecha5.setText((String) pSvista.tablaEntidadConocida4.getValueAt(clic, 3));
+        pSvista.txtDescripcion5.setText((String) pSvista.tablaEntidadConocida4.getValueAt(clic, 2));
         
     }
     
@@ -240,10 +260,44 @@ public class ControladorPlaningSecretaria implements ActionListener {
                 m.addRow(fila);
             }
             
-            pSvista.tablaEntidadConocida1.setModel(m);
+            pSvista.tablaEntidadConocida4.setModel(m);
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            pSvista.tablaEntidadConocida1.setRowSorter(ordenar);
-            pSvista.tablaEntidadConocida1.setModel(m);
+            pSvista.tablaEntidadConocida4.setRowSorter(ordenar);
+            pSvista.tablaEntidadConocida4.setModel(m);
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
+        }
+        
+    }
+    
+    public void cargarTabla4() {
+        PlaningSecretaria planingsecretaria = null;
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Hora", "Descripcion", "Fecha"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            ArrayList <PlaningSecretaria> x;
+            String campo = (String) pSvista.cmbBD3.getSelectedItem();
+            String filtro = pSvista.txtFiltro3.getText();
+            x = pS.buscarFiltro(filtro, campo);
+            
+            Iterator <PlaningSecretaria> it = x.iterator();
+            while(it.hasNext()){
+                planingsecretaria = it.next();
+                fila[0] = String.valueOf(planingsecretaria.getId());
+                fila[1] = planingsecretaria.getHora();
+                fila[3] = planingsecretaria.getFecha().toString();
+                fila[2] = planingsecretaria.getDescripcion();
+                m.addRow(fila);
+            }           
+            
+            pSvista.tablaEntidadConocida4.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            pSvista.tablaEntidadConocida4.setRowSorter(ordenar);
+            pSvista.tablaEntidadConocida4.setModel(m);
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        

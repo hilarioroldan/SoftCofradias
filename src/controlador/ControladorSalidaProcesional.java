@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class ControladorSalidaProcesional implements ActionListener {
     public void iniciar() {
         sp = new SalidaProcesional();
         spvista = new SalidaProcesionalVista();
+        spvista.setSize(1000, 700);
         spvista.setVisible(true);
         spvista.setLocationRelativeTo(null);
         
@@ -34,6 +36,12 @@ public class ControladorSalidaProcesional implements ActionListener {
         
         cargarCmbBD1();
         cargarCmbBD2();
+        
+          
+        spvista.txtIdentificador5.setEnabled(false);
+        spvista.txtIdentificador7.setEnabled(false);
+        spvista.txtIdentificador8.setEnabled(false);
+        
 
         //se añade las acciones a los controles del formulario padre
         spvista.btnIngresar.setActionCommand("INGRESAR");
@@ -85,20 +93,7 @@ public class ControladorSalidaProcesional implements ActionListener {
         String comando = e.getActionCommand();
         switch (comando) {
             case "INGRESAR":
-                int identificador = Integer.parseInt(spvista.txtIdentificador.getText());
-                Date anio = Date.valueOf(spvista.txt_anio.getText());
-                String descripcion = String.valueOf(spvista.txtdescripcion.getText());
-                
-                try {
-                    agregarSalida(identificador, anio, descripcion);
-                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!", "SoftCospadias", JOptionPane.ERROR_MESSAGE);
-                    limpiarTexto();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCospadias", JOptionPane.ERROR_MESSAGE);
-                }   
-                cargarTablaFicha();
-                cargarTablaFicha2();
-                cargarTablaFicha3();
+                ingresar();
                 break;
                 
             case "BUSCAR1":
@@ -111,20 +106,7 @@ public class ControladorSalidaProcesional implements ActionListener {
                 eliminarSeleccion();
                 break;
             case "MODIFICAR":
-                int identificador3 = Integer.parseInt(spvista.txtIdentificador7.getText());
-                Date anio3 = Date.valueOf(spvista.txt_anio4.getText());
-                String descripcion3 = String.valueOf(spvista.txtdescripcion4.getText());
-                
-                
-                try {
-                    modificarSalida(identificador3,anio3,descripcion3);
-                    JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!", "SoftCospadias", JOptionPane.ERROR_MESSAGE);
-                    limpiarTexto();    
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCospadias", JOptionPane.ERROR_MESSAGE);
-                }
-                
-                
+                modificar();               
                 break;
             case "SALIR1":
                 spvista.dispose();
@@ -142,18 +124,83 @@ public class ControladorSalidaProcesional implements ActionListener {
 
     }
     
+    public void ingresar() {
+                try {
+                    Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+                    cbd.resultado = cbd.un_st.executeQuery("select max(identificador) from salidaprocesional");
+                    int identificador = 1;
+                    if (cbd.resultado.next()) {
+                        identificador = cbd.resultado.getInt(1)+1;
+                    } else {
+                        identificador = 1;
+                    }
+                    // trabajando con fechas
+                    String fecha = "";
+                    if (spvista.jDateChooser1.getDate()!=null) {
+                        int año = spvista.jDateChooser1.getCalendar().get(Calendar.YEAR);
+                        int mes = spvista.jDateChooser1.getCalendar().get(Calendar.MONTH);
+                        int dia = spvista.jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+                        fecha = año + "-" + mes + "-" + dia;
+                    }
+                    // fin trabajando con fechas
+                    String descripcion = String.valueOf(spvista.txtdescripcion.getText());
+                    
+                    try {
+                        agregarSalida(identificador, fecha, descripcion);
+                        JOptionPane.showMessageDialog(null, "Insertado Correctamente");
+                        limpiarTexto();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex+ " ya existe, ingrese un identificador distinto", "SofCospadias", JOptionPane.ERROR_MESSAGE);
+                    }
+                    cargarTablaFicha();
+                    cargarTablaFicha2();
+                    cargarTablaFicha3();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                    Logger.getLogger(ControladorSalidaProcesional.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+    }
+    
+    public void modificar() {
+        int identificador3 = Integer.parseInt(spvista.txtIdentificador7.getText());
+                // trabajando con fechas
+                String fecha = "";
+                if (spvista.jDateChooser3.getDate()!=null) {
+                int año = spvista.jDateChooser3.getCalendar().get(Calendar.YEAR);
+                int mes = spvista.jDateChooser3.getCalendar().get(Calendar.MONTH);
+                int dia = spvista.jDateChooser3.getCalendar().get(Calendar.DAY_OF_MONTH);
+                fecha = año + "-" + mes + "-" + dia;
+                }
+                // fin trabajando con fechas
+                String descripcion3 = String.valueOf(spvista.txtdescripcion4.getText());
+                
+                
+                try {
+                    modificarSalida(identificador3,fecha,descripcion3);
+                    JOptionPane.showMessageDialog(null, "Modificado Correctamente");
+                    cargarTablaFicha();
+                    cargarTablaFicha2();
+                    cargarTablaFicha3();
+                    limpiarTexto();    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+    }
+    
     private void eliminarSeleccion() {
         String seleccion = spvista.txtIdentificador8.getText();
         try {
             eliminarSalida(Integer.parseInt(seleccion));
-            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCospadias", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
+            spvista.txtFiltro2.setText("");
+            cargarTablaFicha();
+            cargarTablaFicha2();
+            cargarTablaFicha3();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorSalidaProcesional.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cargarTablaFicha();
         limpiarTexto2();
-        spvista.tablaEntidadConocida3.setModel(new DefaultTableModel());
-        spvista.txtFiltro2.setText("");
+        //spvista.tablaEntidadConocida3.setModel(new DefaultTableModel());
+        
     }
     
     
@@ -187,31 +234,71 @@ public class ControladorSalidaProcesional implements ActionListener {
         }        
     }
     
-    private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {                                     
-        int clic = spvista.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-        
-        spvista.txtIdentificador5.setText((String) spvista.tablaEntidadConocida1.getValueAt(clic, 0));
-        spvista.txt_anio2.setText((String) spvista.tablaEntidadConocida1.getValueAt(clic, 1));
-        spvista.txtdescripcion2.setText((String) spvista.tablaEntidadConocida1.getValueAt(clic, 2));
+    private void tablaEntidadConocida1MousePressed(java.awt.event.MouseEvent evt) {
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            
+            int clic = spvista.tablaEntidadConocida1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
+            
+            spvista.txtIdentificador5.setText((String) spvista.tablaEntidadConocida1.getValueAt(clic, 0));
+            String id = (String) spvista.tablaEntidadConocida1.getValueAt(clic, 0);
+            cbd.resultado = cbd.un_st.executeQuery("select fecha from salidaprocesional where identificador="+id);
+            // trabajando con fecha
+            Date fecha = null;
+            if (cbd.resultado.next()) {
+                fecha = cbd.resultado.getDate(1);
+            }
+            spvista.jDateChooser2.setDate(fecha);
+            // fin trabajando con fecha
+            spvista.txtdescripcion2.setText((String) spvista.tablaEntidadConocida1.getValueAt(clic, 2));
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorSalidaProcesional.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
-    private void tablaEntidadConocida2MousePressed(java.awt.event.MouseEvent evt) {                                     
-        int clic = spvista.tablaEntidadConocida2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-        
-        
-        spvista.txtIdentificador7.setText((String) spvista.tablaEntidadConocida2.getValueAt(clic, 0));
-        spvista.txt_anio4.setText((String) spvista.tablaEntidadConocida2.getValueAt(clic, 1));
-        spvista.txtdescripcion4.setText((String) spvista.tablaEntidadConocida2.getValueAt(clic, 2));
+    private void tablaEntidadConocida2MousePressed(java.awt.event.MouseEvent evt) { 
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            int clic = spvista.tablaEntidadConocida2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
+            
+            
+            spvista.txtIdentificador7.setText((String) spvista.tablaEntidadConocida2.getValueAt(clic, 0));
+            String id = (String) spvista.tablaEntidadConocida2.getValueAt(clic, 0);
+            cbd.resultado = cbd.un_st.executeQuery("select fecha from salidaprocesional where identificador="+id);
+            // trabajando con fecha
+            Date fecha = null;
+            if (cbd.resultado.next()) {
+                fecha = cbd.resultado.getDate(1);
+            }
+            spvista.jDateChooser3.setDate(fecha);
+            // fin trabajando con fecha
+            spvista.txtdescripcion4.setText((String) spvista.tablaEntidadConocida2.getValueAt(clic, 2));
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorSalidaProcesional.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
-    private void tablaEntidadConocida3MousePressed(java.awt.event.MouseEvent evt) {                                     
-        int clic = spvista.tablaEntidadConocida3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
-        
-       spvista.txtIdentificador8.setText((String) spvista.tablaEntidadConocida3.getValueAt(clic, 0));
-       spvista.txt_anio5.setText((String) spvista.tablaEntidadConocida3.getValueAt(clic, 1));
-       spvista.txtdescripcion5.setText((String) spvista.tablaEntidadConocida3.getValueAt(clic, 2));
+    private void tablaEntidadConocida3MousePressed(java.awt.event.MouseEvent evt) { 
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            int clic = spvista.tablaEntidadConocida3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una fila de la tabla
+            
+            spvista.txtIdentificador8.setText((String) spvista.tablaEntidadConocida3.getValueAt(clic, 0));
+            String id = (String) spvista.tablaEntidadConocida3.getValueAt(clic, 0);       
+            cbd.resultado = cbd.un_st.executeQuery("select fecha from salidaprocesional where identificador="+id);
+// trabajando con fecha
+            Date fecha = null;
+            if (cbd.resultado.next()) {
+                fecha = cbd.resultado.getDate(1);
+            }
+            spvista.jDateChooser4.setDate(fecha);
+            // fin trabajando con fecha
+            spvista.txtdescripcion5.setText((String) spvista.tablaEntidadConocida3.getValueAt(clic, 2));
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorSalidaProcesional.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -223,13 +310,13 @@ public class ControladorSalidaProcesional implements ActionListener {
             JTable p = new JTable(m);
             String[] fila = new String[3];
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "select * from salidaprocesional";
+            cbd.un_sql = "select * from salidaprocesional order by identificador";
             cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
             
             while(cbd.resultado.next()){
                 fila[0] = cbd.resultado.getString("identificador");
-                fila[1] = cbd.resultado.getString("anio");
-                fila[2] = cbd.resultado.getString("descripcion");
+                fila[1] = cbd.resultado.getString("fecha");
+                fila[2] = cbd.resultado.getString("descripcion_salida_procesional");
                 
                 m.addRow(fila);
             }
@@ -256,9 +343,13 @@ public class ControladorSalidaProcesional implements ActionListener {
             ArrayList <SalidaProcesional> x;
             String campo = (String) spvista.cmbBD1.getSelectedItem();
             String filtro = spvista.txtFiltro1.getText();
-            x = sp.buscarFiltro(filtro, campo);
             
-            Iterator <SalidaProcesional> it = x.iterator();
+            if (!filtro.equalsIgnoreCase("")) {
+                
+                x = sp.buscarFiltro(filtro, campo);
+                
+                if (x.size()>0) {
+                    Iterator <SalidaProcesional> it = x.iterator();
             while(it.hasNext()){
                 ficha = it.next();
                 fila[0] = String.valueOf(ficha.getIdentificador());
@@ -271,6 +362,17 @@ public class ControladorSalidaProcesional implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             spvista.tablaEntidadConocida2.setRowSorter(ordenar);
             spvista.tablaEntidadConocida2.setModel(m);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                }
+            
+            
+            
+            } else {
+                
+            }
+            
+            
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, e+"Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
@@ -290,9 +392,14 @@ public class ControladorSalidaProcesional implements ActionListener {
             ArrayList <SalidaProcesional> x;
             String campo = (String) spvista.cmbBD2.getSelectedItem();
             String filtro = spvista.txtFiltro2.getText();
-            x = sp.buscarFiltro(filtro, campo);
             
-            Iterator <SalidaProcesional> it = x.iterator();
+            if (!filtro.equalsIgnoreCase("")) {
+                
+                x = sp.buscarFiltro(filtro, campo);
+                
+                if (x.size()>0) {
+                    
+                     Iterator <SalidaProcesional> it = x.iterator();
             while(it.hasNext()){
                 ficha = it.next();
                 fila[0] = String.valueOf(ficha.getIdentificador());
@@ -306,6 +413,18 @@ public class ControladorSalidaProcesional implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
             spvista.tablaEntidadConocida3.setRowSorter(ordenar);
             spvista.tablaEntidadConocida3.setModel(m);
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                }
+            
+           
+            
+            } else {
+                
+            }
+            
+            
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);        
@@ -315,15 +434,14 @@ public class ControladorSalidaProcesional implements ActionListener {
 
     /*Limpiar Texto*/
     public void limpiarTexto() {
-        spvista.txtIdentificador.setText("");
-        spvista.txt_anio.setText("");
+        spvista.jDateChooser1.setDate(null);
         spvista.txtdescripcion.setText("");
     }
     
     /*Limpiar Texto*/
     public void limpiarTexto2() {
         spvista.txtIdentificador8.setText("");
-        spvista.txt_anio5.setText("");
+        spvista.jDateChooser4.setDate(null);
         spvista.txtdescripcion5.setText("");
     }
 
@@ -338,7 +456,7 @@ public class ControladorSalidaProcesional implements ActionListener {
 
     
     
-    public void modificarSalida(int identificador, Date fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public void modificarSalida(int identificador, String fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         sp = new SalidaProcesional(identificador, fecha, descripcion);
         sp.actualizar();
     }
@@ -356,7 +474,7 @@ public class ControladorSalidaProcesional implements ActionListener {
     }
     
     
-    private void agregarSalida(int identificador, Date fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    private void agregarSalida(int identificador, String fecha, String descripcion) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         sp = new SalidaProcesional(identificador,fecha,descripcion);
         sp.grabar();
     }

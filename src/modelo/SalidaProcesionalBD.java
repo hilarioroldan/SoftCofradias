@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -53,7 +48,7 @@ public class SalidaProcesionalBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE salidaprocesional SET anio='"+sp.getAnio()+"', descripcion='"+sp.getDescripcion()+"' WHERE identificador="+sp.getIdentificador()+";";            
+            cbd.un_sql = "UPDATE salidaprocesional SET fecha='"+sp.getAnio()+"', descripcion_salida_procesional='"+sp.getDescripcion()+"' WHERE identificador="+sp.getIdentificador()+";";            
             cbd.un_st.executeUpdate(cbd.un_sql);
         } else {
              /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
@@ -114,8 +109,8 @@ public class SalidaProcesionalBD {
             while(cbd.resultado.next()){
                 sp = new SalidaProcesional();
                 sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
-                sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("anio")));
-                sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("descripcion")));
+                sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("fecha")));
+                sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("descripcion_salida_procesional")));
                 
                 salida.add(sp);
             }           
@@ -138,8 +133,8 @@ public class SalidaProcesionalBD {
                 sp = new SalidaProcesional();
                 
                 sp.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
-                sp.setAnio(Date.valueOf(cbd.resultado.getString("anio")));
-                sp.setDescripcion(String.valueOf(cbd.resultado.getString("descripcion")));
+                sp.setAnio(cbd.resultado.getString("fecha"));
+                sp.setDescripcion(String.valueOf(cbd.resultado.getString("descripcion_salida_procesional")));
                 
                 salida.add(sp);
         }

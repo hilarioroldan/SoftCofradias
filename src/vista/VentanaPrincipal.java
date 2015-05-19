@@ -5,7 +5,6 @@ import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
 import controlador.ControladorHermandadesHermanadas;
 import controlador.ControladorHermano;
-import controlador.ControladorInformes;
 import controlador.ControladorInventario;
 import controlador.ControladorJuntaGobierno;
 import controlador.ControladorLibroAsiento;
@@ -14,8 +13,12 @@ import controlador.ControladorPagoCuotas;
 import controlador.ControladorPapeletaSitio;
 import controlador.ControladorPlaningMayordomia;
 import controlador.ControladorPlaningSecretaria;
-import controlador.ControladorProtocolo;
 import controlador.ControladorSalidaProcesional;
+import java.awt.Color;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import modelo.PlaningMayordomia;
 
 
@@ -76,10 +79,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tw_social.setIcon(new javax.swing.ImageIcon("C:\\Users\\Adrián\\Documents\\NetBeansProjects\\SoftCofradias\\src\\img\\tw.png")); // NOI18N
         tw_social.setBorderPainted(false);
         tw_social.setContentAreaFilled(false);
         tw_social.setFocusPainted(false);
@@ -90,34 +95,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 tw_socialActionPerformed(evt);
             }
         });
-        jPanel1.add(tw_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, -1, -1));
+        jPanel1.add(tw_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 80, 60));
 
+        fb_social.setIcon(new javax.swing.ImageIcon("C:\\Users\\Adrián\\Documents\\NetBeansProjects\\SoftCofradias\\src\\img\\fb.png")); // NOI18N
         fb_social.setBorderPainted(false);
         fb_social.setContentAreaFilled(false);
-        jPanel1.add(fb_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, -1, -1));
+        fb_social.setDefaultCapable(false);
+        fb_social.setFocusPainted(false);
+        fb_social.setFocusable(false);
+        fb_social.setRequestFocusEnabled(false);
+        fb_social.setRolloverEnabled(false);
+        fb_social.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fb_socialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fb_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 80, 60));
 
         rss_social.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rss.png"))); // NOI18N
         rss_social.setBorderPainted(false);
         rss_social.setContentAreaFilled(false);
+        rss_social.setFocusPainted(false);
+        rss_social.setFocusable(false);
+        rss_social.setRequestFocusEnabled(false);
+        rss_social.setRolloverEnabled(false);
         rss_social.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rss_socialActionPerformed(evt);
             }
         });
-        jPanel1.add(rss_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, -1, -1));
+        jPanel1.add(rss_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 520, -1, 60));
 
         go_social.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/g.png"))); // NOI18N
         go_social.setBorderPainted(false);
         go_social.setContentAreaFilled(false);
+        go_social.setDefaultCapable(false);
+        go_social.setFocusPainted(false);
+        go_social.setFocusable(false);
+        go_social.setRequestFocusEnabled(false);
+        go_social.setRolloverEnabled(false);
         go_social.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 go_socialActionPerformed(evt);
             }
         });
-        jPanel1.add(go_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 430, -1, -1));
+        jPanel1.add(go_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 517, -1, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/main.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 780));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(null);
@@ -218,6 +245,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3.setForeground(new java.awt.Color(152, 42, 111));
         jMenu3.setText("Mayordomia - Tesorería");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu3.setMaximumSize(new java.awt.Dimension(180, 32767));
         jMenu3.setOpaque(true);
         jMenu3.setPreferredSize(new java.awt.Dimension(145, 19));
 
@@ -272,6 +300,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu4.setForeground(new java.awt.Color(152, 42, 111));
         jMenu4.setText("Salida procesional");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu4.setMaximumSize(new java.awt.Dimension(140, 32767));
         jMenu4.setOpaque(true);
         jMenu4.setPreferredSize(new java.awt.Dimension(113, 19));
 
@@ -288,11 +317,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem20.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem20.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem20.setText("Protocolo");
-        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
-            }
-        });
         jMenu4.add(jMenuItem20);
 
         jMenuItem21.setBackground(new java.awt.Color(255, 255, 255));
@@ -311,7 +335,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu6.setForeground(new java.awt.Color(152, 42, 111));
         jMenu6.setText("Informes");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu6.setMaximumSize(new java.awt.Dimension(60, 32767));
+        jMenu6.setMaximumSize(new java.awt.Dimension(95, 32767));
         jMenu6.setOpaque(true);
         jMenu6.setPreferredSize(new java.awt.Dimension(70, 19));
 
@@ -336,6 +360,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu5.setForeground(new java.awt.Color(152, 42, 111));
         jMenu5.setText("Acerca de");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu5.setMaximumSize(new java.awt.Dimension(75, 32767));
         jMenu5.setOpaque(true);
 
         jMenuItem30.setBackground(new java.awt.Color(255, 255, 255));
@@ -355,18 +380,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        setJMenuBar(jMenuBar1);
+        jMenuBar1.add(javax.swing.Box.createGlue());
+        JButton actionQuit = new JButton("Salir");
+        actionQuit.setForeground(new Color(152,42,111));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jMenuBar1.add(actionQuit);
+        actionQuit.setBorderPainted(false);
+        actionQuit.setContentAreaFilled(false);
+        actionQuit.setFocusPainted(false);
+        actionQuit.setOpaque(false);
+
+        actionQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.exit(0);
+            }
+        });
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -457,10 +487,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_go_socialActionPerformed
 
-    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        ControladorProtocolo cp = new ControladorProtocolo();
-        cp.iniciar();
-    }//GEN-LAST:event_jMenuItem20ActionPerformed
+    private void fb_socialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fb_socialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fb_socialActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.SQLException;
@@ -32,7 +28,7 @@ public class PapeletaSitioBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
        if (cbd.resultado != null) {
-            cbd.un_sql = "INSERT INTO papeletasitio VALUES ('"+ps.getIdentificador()+"', '"+ps.getNumero_hermano_id()+"', '"+ps.getFecha()+"', '"+ps.getSale()+"', '"+ps.getSalida_procesional_id()+"', '"+ps.getNumero_papeleta()+"')";            
+            cbd.un_sql = "INSERT INTO papeletasitio VALUES ('"+ps.getIdentificador()+"', '"+ps.getNumero_hermano_id()+"', '1', '"+ps.getDonativo()+"', '"+ps.getSale()+"', '"+ps.getNumero_papeleta()+"', '"+ps.getFecha()+"');";
             cbd.un_st.executeUpdate(cbd.un_sql);
        } else {
             JOptionPane.showInputDialog(null, "Error al registrar una papeleta", "Error", JOptionPane.ERROR_MESSAGE);
@@ -52,8 +48,9 @@ public class PapeletaSitioBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE papeletasitio SET numero_hermano_id='"+ps.getNumero_hermano_id()+"', fecha='"+ps.getFecha()+"', sale='"+ps.getSale()+"', donativo='"+ps.getDonativo()+"', salida_procesional_id='"+ps.getSalida_procesional_id()+"', numero_papeleta='"+ps.getNumero_papeleta()+"' WHERE identificador="+ps.getIdentificador()+";";            
+            cbd.un_sql = "UPDATE papeletasitio SET numero_hermano_id='"+ps.getNumero_hermano_id()+"', fecha='"+ps.getFecha()+"', sale='"+ps.getSale()+"', donativo='"+ps.getDonativo()+"', numero_papeleta='"+ps.getNumero_papeleta()+"' WHERE identificador="+ps.getIdentificador()+";";            
             cbd.un_st.executeUpdate(cbd.un_sql);
+            JOptionPane.showMessageDialog(null, "BD "+ps.getIdentificador());
         } else {
              /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
                 throw new Error("Registro" + ps.getIdentificador() + "No se encuentra en la tabla proveedor Ubicacion'" + this.getClass().getName());
@@ -113,10 +110,10 @@ public class PapeletaSitioBD {
             while(cbd.resultado.next()){
                 ps = new PapeletaSitio();
                 ps.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
-                ps.setFecha(cbd.resultado.getDate("fecha"));
+                ps.setFecha(cbd.resultado.getString("fecha"));
                 ps.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 ps.setNumero_papeleta(Integer.parseInt(cbd.resultado.getString("numero_papeleta")));
-                ps.setSale(Integer.parseInt(cbd.resultado.getString("sale")));
+                ps.setSale(cbd.resultado.getString("sale"));
                 ps.setDonativo(Integer.parseInt(cbd.resultado.getString("donativo")));
                 ps.setSalida_procesional_id(Integer.parseInt(cbd.resultado.getString("salida_procesional_id")));
                 papeleta.add(ps);
@@ -139,10 +136,10 @@ public class PapeletaSitioBD {
             
                 ps = new PapeletaSitio();
                 ps.setIdentificador(Integer.parseInt(cbd.resultado.getString("identificador")));
-                ps.setFecha(cbd.resultado.getDate("fecha"));
+                ps.setFecha(cbd.resultado.getString("fecha"));
                 ps.setNumero_hermano_id(Integer.parseInt(cbd.resultado.getString("numero_hermano_id")));
                 ps.setNumero_papeleta(Integer.parseInt(cbd.resultado.getString("numero_papeleta")));
-                ps.setSale(Integer.parseInt(cbd.resultado.getString("sale")));
+                ps.setSale(cbd.resultado.getString("sale"));
                 ps.setDonativo(Integer.parseInt(cbd.resultado.getString("donativo")));
                 ps.setSalida_procesional_id(Integer.parseInt(cbd.resultado.getString("salida_procesional_id")));
                 papeleta.add(ps);

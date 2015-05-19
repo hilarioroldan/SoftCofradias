@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SalidaProcesional {
     private int identificador;
-    private Date anio;
+    private String fecha;
     private String descripcion;
 
     public SalidaProcesional() {
@@ -21,9 +16,9 @@ public class SalidaProcesional {
         this.identificador = identificador;
     }
 
-    public SalidaProcesional(int identificador, Date anio, String descripcion) {
+    public SalidaProcesional(int identificador, String fecha, String descripcion) {
         this.identificador = identificador;
-        this.anio = anio;
+        this.fecha = fecha;
         this.descripcion = descripcion;
     }
 
@@ -35,12 +30,12 @@ public class SalidaProcesional {
         this.identificador = identificador;
     }
 
-    public Date getAnio() {
-        return anio;
+    public String getAnio() {
+        return fecha;
     }
 
-    public void setAnio(Date anio) {
-        this.anio = anio;
+    public void setAnio(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getDescripcion() {
