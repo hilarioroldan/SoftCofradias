@@ -84,7 +84,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tw_social.setIcon(new javax.swing.ImageIcon("C:\\Users\\Adrián\\Documents\\NetBeansProjects\\SoftCofradias\\src\\img\\tw.png")); // NOI18N
         tw_social.setBorderPainted(false);
         tw_social.setContentAreaFilled(false);
         tw_social.setFocusPainted(false);
@@ -97,7 +96,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(tw_social, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 80, 60));
 
-        fb_social.setIcon(new javax.swing.ImageIcon("C:\\Users\\Adrián\\Documents\\NetBeansProjects\\SoftCofradias\\src\\img\\fb.png")); // NOI18N
         fb_social.setBorderPainted(false);
         fb_social.setContentAreaFilled(false);
         fb_social.setDefaultCapable(false);
