@@ -612,7 +612,7 @@ seleccion.addActionListener(new ActionListener() {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Modificar", jPanel4);
+        jTabbedPane1.addTab("Mas opciones", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -38,9 +38,9 @@ public class ControladorJuntaGobierno implements ActionListener {
         j1.setSize(900, 500);
         j1.setVisible(true);
         j1.setLocationRelativeTo(null);
-        //cargarTablaMiembros();
+        
+        cargarTablaMiembros1();
         cargarTablaMiembros2();
-        cargarTablaJuntas2();
 
         cargarCMB1();
         cargarCMB2();
@@ -276,7 +276,8 @@ public class ControladorJuntaGobierno implements ActionListener {
                 
                 agregarJuntaGobierno(identificador, nombre, apellido, cargo, observaciones, numero_hermano_id);
                 JOptionPane.showMessageDialog(null, "Cargo de junta de gobierno introducido correctamente");
-                cargarTablaJuntas2();
+                cargarTablaMiembros1();
+                cargarTablaMiembros2();
                 } else {
                     JOptionPane.showMessageDialog(null, "El número de hermano ingresado no existe");
                 }
@@ -362,6 +363,9 @@ public class ControladorJuntaGobierno implements ActionListener {
             String fila[] = new String[6];
             String campo = (String) j1.comboModificar.getSelectedItem();
             String filtro = j1.txtModificar.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             ArrayList <JuntaGobierno> j;
             JuntaGobierno jg = null;
             
@@ -388,9 +392,44 @@ public class ControladorJuntaGobierno implements ActionListener {
             j1.tablagobierno.setModel(jj);
             } else {
                 JOptionPane.showMessageDialog(null, "No se han encontrado resultados");
+                cargarTablaMiembros1();
             }
             
-            
+            }
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla" + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        j1.txtModificar.setText("");
+    }
+    
+     public void cargarTablaMiembros1() {
+        DefaultTableModel rr;
+
+        try {
+            String titulo[] = {"identificador", "nombre", "apellido", "cargo", "observaciones", "numero de hermano"};
+            rr = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(rr);
+            String fila[] = new String[6];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from juntagobierno order by identificador asc";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString(1);
+                fila[1] = cdb.resultado.getString(2);
+                fila[2] = cdb.resultado.getString(3);
+                fila[3] = cdb.resultado.getString(4);
+                fila[4] = cdb.resultado.getString(5);
+                fila[5] = cdb.resultado.getString(6);
+
+                rr.addRow(fila);
+            }
+
+            j1.tablagobierno.setModel(rr);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(rr);
+            j1.tablagobierno.setRowSorter(ordenar);
+            j1.tablagobierno.setModel(rr);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla" + e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -406,7 +445,7 @@ public class ControladorJuntaGobierno implements ActionListener {
             JTable p = new JTable(rr);
             String fila[] = new String[6];
             Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
-            cdb.un_sql = "select * from juntagobierno";
+            cdb.un_sql = "select * from juntagobierno order by identificador asc";
             cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
 
             while (cdb.resultado.next()) {
@@ -486,7 +525,12 @@ public class ControladorJuntaGobierno implements ActionListener {
             ArrayList<JuntaGobierno> x;
             String campo = (String) j1.cmbBD1.getSelectedItem();
             String filtro = j1.txtFiltro1.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = s.buscarFiltro(filtro, campo);
+            
+            if (x.size()>0) {
 
             Iterator<JuntaGobierno> it = x.iterator();
             while (it.hasNext()) {
@@ -505,11 +549,19 @@ public class ControladorJuntaGobierno implements ActionListener {
             TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
             j1.tablagobierno1.setRowSorter(ordenar);
             j1.tablagobierno1.setModel(ff);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún valor");
+                cargarTablaMiembros2();
+            }
+            
+            }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
             e.printStackTrace();
 //JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla" + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
+        j1.txtFiltro1.setText("");
 
     }
 
@@ -523,7 +575,8 @@ public class ControladorJuntaGobierno implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cargarTablaMiembrosEliminar();
+        cargarTablaMiembros1();
+        cargarTablaMiembros2();
 
         j1.tablagobierno.setModel(new DefaultTableModel());
 

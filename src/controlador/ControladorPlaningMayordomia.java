@@ -227,94 +227,133 @@ public class ControladorPlaningMayordomia implements ActionListener {
         ArrayList<PlaningMayordomia> x = null;
         String campo = (String) pmv.cmb1.getSelectedItem();
         String filtro = pmv.txtFiltro1.getText();
-        try {
-            x = buscarPlaning(filtro, campo);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Iterator<PlaningMayordomia> it = x.iterator();
-        while (it.hasNext()) {
-            pm = it.next();
-            fila[0] = String.valueOf(pm.getIdentificador());
-            fila[1] = pm.getHora();
-            fila[2] = pm.getFecha();
-            fila[3] = pm.getLabor();
-            m.addRow(fila);
-
-            pmv.tbl1.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            pmv.tbl1.setRowSorter(ordenar);
-            pmv.tbl1.setModel(m);
+        
+        if (!filtro.equalsIgnoreCase("")) {
+        
+            try {
+                x = buscarPlaning(filtro, campo);
+                
+                if (x.size()>0) {
+                
+                Iterator<PlaningMayordomia> it = x.iterator();
+                while (it.hasNext()) {
+                    pm = it.next();
+                    fila[0] = String.valueOf(pm.getIdentificador());
+                    fila[1] = pm.getHora();
+                    fila[2] = pm.getFecha();
+                    fila[3] = pm.getLabor();
+                    m.addRow(fila);
+                    
+                    pmv.tbl1.setModel(m);
+                    TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+                    pmv.tbl1.setRowSorter(ordenar);
+                    pmv.tbl1.setModel(m);
+                }   
+                
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                    actualizarTbl1();
+                    limpiarPantalla2();
+                }
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         }
 
     }
 
     public void buscarPantalla2() {
-        //int contador = 1; // con este contador sacaremos el primero valor para devolverlo a la interfez (txt)
-        PlaningMayordomia pm = null;
-        DefaultTableModel m;
-
-        String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
-        m = new DefaultTableModel(null, titulo);
-        JTable p = new JTable(m);
-        String[] fila = new String[4];
-        ArrayList<PlaningMayordomia> x = null;
-        String campo = (String) pmv.cmb2.getSelectedItem();
-        String filtro = pmv.txtFiltro2.getText();
         try {
+            //int contador = 1; // con este contador sacaremos el primero valor para devolverlo a la interfez (txt)
+            PlaningMayordomia pm = null;
+            DefaultTableModel m;
+            
+            String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            ArrayList<PlaningMayordomia> x = null;
+            String campo = (String) pmv.cmb2.getSelectedItem();
+            String filtro = pmv.txtFiltro2.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = buscarPlaning(filtro, campo);
+            
+            if (x.size()>0) {
+            
+            Iterator<PlaningMayordomia> it = x.iterator();
+            while (it.hasNext()) {
+                pm = it.next();
+                fila[0] = String.valueOf(pm.getIdentificador());
+                fila[1] = pm.getHora();
+                fila[2] = pm.getFecha();
+                fila[3] = pm.getLabor();
+                m.addRow(fila);
+                
+                pmv.tbl2.setModel(m);
+                TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+                pmv.tbl2.setRowSorter(ordenar);
+                pmv.tbl2.setModel(m);
+            }
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                limpiarPantalla3();
+                actualizarTbl2();
+            }
+            
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Iterator<PlaningMayordomia> it = x.iterator();
-        while (it.hasNext()) {
-            pm = it.next();
-            fila[0] = String.valueOf(pm.getIdentificador());
-            fila[1] = pm.getHora();
-            fila[2] = pm.getFecha();
-            fila[3] = pm.getLabor();
-            m.addRow(fila);
-
-            pmv.tbl2.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            pmv.tbl2.setRowSorter(ordenar);
-            pmv.tbl2.setModel(m);
         }
 
     }
 
     public void buscarPantalla3() {
-        PlaningMayordomia pm = null;
-        DefaultTableModel m;
-
-        String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
-        m = new DefaultTableModel(null, titulo);
-        JTable p = new JTable(m);
-        String[] fila = new String[4];
-        ArrayList<PlaningMayordomia> x = null;
-        String campo = (String) pmv.cmb3.getSelectedItem();
-        String filtro = pmv.txtFiltro3.getText();
         try {
+            PlaningMayordomia pm = null;
+            DefaultTableModel m;
+            
+            String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            ArrayList<PlaningMayordomia> x = null;
+            String campo = (String) pmv.cmb3.getSelectedItem();
+            String filtro = pmv.txtFiltro3.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = buscarPlaning(filtro, campo);
+            
+            if (x.size()>0) {
+            
+            Iterator<PlaningMayordomia> it = x.iterator();
+            while (it.hasNext()) {
+                pm = it.next();
+                fila[0] = String.valueOf(pm.getIdentificador());
+                fila[1] = pm.getHora();
+                fila[2] = pm.getFecha();
+                fila[3] = pm.getLabor();
+                m.addRow(fila);
+                
+                pmv.tbl3.setModel(m);
+                TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+                pmv.tbl3.setRowSorter(ordenar);
+                pmv.tbl3.setModel(m);
+            }
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                limpiarPantalla4();
+                actualizarTbl3();
+            }
+            
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Iterator<PlaningMayordomia> it = x.iterator();
-        while (it.hasNext()) {
-            pm = it.next();
-            fila[0] = String.valueOf(pm.getIdentificador());
-            fila[1] = pm.getHora();
-            fila[2] = pm.getFecha();
-            fila[3] = pm.getLabor();
-            m.addRow(fila);
-
-            pmv.tbl3.setModel(m);
-            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
-            pmv.tbl3.setRowSorter(ordenar);
-            pmv.tbl3.setModel(m);
         }
 
     }
@@ -498,6 +537,22 @@ public class ControladorPlaningMayordomia implements ActionListener {
         pmv.txtHora1.setText("");
         pmv.Jdate1.setDate(null);
         pmv.txtLabor1.setText("");
+    }
+    
+    public void limpiarPantalla2() {
+        pmv.txtIdentificador2.setText("");
+        pmv.txtHora2.setText("");
+        pmv.txtFecha2.setText("");
+        pmv.txtLabor2.setText("");
+        pmv.txtFiltro1.setText("");
+    }
+    
+    public void limpiarPantalla3() {
+        pmv.txtIdentificador3.setText("");
+        pmv.txtHora3.setText("");
+        pmv.txtFecha3.setText("");
+        pmv.txtLabor3.setText("");
+        pmv.txtFiltro2.setText("");
     }
 
     public void limpiarPantalla4() {

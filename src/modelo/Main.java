@@ -12,6 +12,28 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
+        /*try {
+            salir:
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                switch (info.getName()) {
+                    case "GTK+": 
+                        //Si encuentra la interfaz GTK+, interfaz de linux normalmente
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break salir;
+                    case "Windows":
+                        //Si encuentra la interfaz de windows
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break salir;
+                    default: 
+                        //Sino encuentra ninguna de las anteriores, usa la nimbus
+                        javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                        break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(vista.VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }*/
+        
         try {
             FileInputStream propFile = new FileInputStream("src\\modelo\\configurarbd.txt");
             Properties p = new Properties(System.getProperties());

@@ -460,6 +460,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="tw_social">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/tw.png"/>
+            </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="focusPainted" type="boolean" value="false"/>
@@ -481,6 +484,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="fb_social">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/fb.png"/>
+            </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="defaultCapable" type="boolean" value="false"/>

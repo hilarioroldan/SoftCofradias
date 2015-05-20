@@ -205,7 +205,9 @@ public class ControladorPapeletaSitio implements ActionListener {
     }
     
     public void modificar() {
-        try {
+        
+        if (psvista.jComboBox2.getSelectedIndex()!=-1) {
+            try {
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
             String identificador3 = psvista.txtIdentificador4.getText();
             String num_hermano_id4 = psvista.txtnumhermanoid4.getText();
@@ -230,6 +232,35 @@ public class ControladorPapeletaSitio implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPapeletaSitio.class.getName()).log(Level.SEVERE, null, ex);
         }
+        } else {
+            try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            String identificador3 = psvista.txtIdentificador4.getText();
+            String num_hermano_id4 = psvista.txtnumhermanoid4.getText();
+            String fecha4 = "";
+            //trabajando con fechas
+            if (psvista.jDateChooser3.getDate() != null) {
+                int año = psvista.jDateChooser3.getCalendar().get(Calendar.YEAR);
+                int mes = psvista.jDateChooser3.getCalendar().get(Calendar.MONTH);
+                int dia = psvista.jDateChooser3.getCalendar().get(Calendar.DAY_OF_MONTH);
+                fecha4 = año + "-" + mes + "-" + dia;
+                //
+            }
+            // fin fecha
+            String sale4 = (String) psvista.jComboBox2.getSelectedItem();
+            String donativo4 = psvista.txtdonativo1.getText();
+            String num_papeleta4 = psvista.txtnumpapeleta1.getText();
+            cbd.un_st.executeUpdate("update papeletasitio set numero_hermano_id='"+num_hermano_id4+"', donativo='"+donativo4+"', numero_papeleta='"+num_papeleta4+"', fecha='"+fecha4+"' where identificador="+identificador3+";");
+            JOptionPane.showMessageDialog(null, "Modificado correctamente");
+            cargarTablaPapeleta();
+            cargarTablaPapeleta2();
+            cargarTablaPapeleta3();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(ControladorPapeletaSitio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        
                
     }
     

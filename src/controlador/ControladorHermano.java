@@ -34,7 +34,7 @@ public class ControladorHermano implements ActionListener {
 
     public enum di {
 
-        GUARDAR, SALIR, MODIFICAR, ELIMINAR, BUSCAR, GUARDAR2, COMBOFORMAPAGO, COMBOTIPOPAGO, MODIFICARTIPOPAGO, MODIFICARFORMAPAGO;
+        GUARDAR, SALIR,SALIR2, SALIR3, MODIFICAR, ELIMINAR, BUSCAR, GUARDAR2, COMBOFORMAPAGO, COMBOTIPOPAGO, MODIFICARTIPOPAGO, MODIFICARFORMAPAGO;
     }
 
     public void iniciar() {
@@ -48,6 +48,7 @@ public class ControladorHermano implements ActionListener {
         hv1.setVisible(true);
         hv1.setLocationRelativeTo(null);
         cargarTablaHermanos();
+        cargarTablaHermanosBuscar();
         //cargarTablaHermanos2();
         
         // VALIDACIONES //   
@@ -95,6 +96,11 @@ public class ControladorHermano implements ActionListener {
         hv1.guardar1.addActionListener(this);
         hv1.salir2.setActionCommand("SALIR");
         hv1.salir2.addActionListener(this);
+        hv1.salir1.setActionCommand("SALIR2");
+        hv1.salir1.addActionListener(this);
+        hv1.btnSalir3.setActionCommand("SALIR3");
+        hv1.btnSalir3.addActionListener(this);
+        
         cargarCmbBD2();
         agregarTipoPago();
         agregarFormaPago();
@@ -170,6 +176,14 @@ public class ControladorHermano implements ActionListener {
                 break;
             case MODIFICARFORMAPAGO:
                 SeleccionFormaPago1();
+                break;
+                
+            case SALIR2:
+                hv1.modificacion.dispose();
+                break;
+                
+            case SALIR3:
+                hv1.dispose();
                 break;
 
         }
@@ -269,8 +283,7 @@ public class ControladorHermano implements ActionListener {
                 hv1.CP1.setText(hv1.tablaHermano.getValueAt(clic, 6).toString());
                 // hv1.hid1.setText(hv1.tablaHermano.getValueAt(clic, 13).toString());
             
-            //cargarTablaHermanos();
-            //limpiarTexto();
+         
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorHermano.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -512,6 +525,62 @@ e.printStackTrace();
 //JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void cargarTablaHermanosBuscar() {
+        DefaultTableModel ff;
+
+        try {
+            String titulo[] = {"Numero de Hermano", "Nombre", "Apellidos", "Nif", "fecha de nacimiento", "direccion", "cp", "Municipio", "Provincia", "Pais", "Tfno", "Email", "Banco", "Cuenta bancaria", "Forma pago", "Tipo pago"};
+            ff = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(ff);
+            String fila[] = new String[16];
+            Conexion cdb = ConectarServicio.getInstancia().getConexionDb();
+            cdb.un_sql = "select * from hermanos";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                fila[0] = cdb.resultado.getString("numero_hermano");
+                fila[1] = cdb.resultado.getString("nombre");
+                fila[2] = cdb.resultado.getString("apellidos");
+                fila[3] = cdb.resultado.getString("nif");
+                fila[4] = cdb.resultado.getString("fecha_nacimiento");
+                fila[5] = cdb.resultado.getString("direccion");
+                fila[6] = cdb.resultado.getString("codigo_postal");
+                fila[7] = cdb.resultado.getString("municipio");
+                fila[8] = cdb.resultado.getString("provincia");
+                fila[9] = cdb.resultado.getString("pais");
+                fila[10] = cdb.resultado.getString("tfno");
+                fila[11] = cdb.resultado.getString("email");
+                fila[12] = cdb.resultado.getString("banco");
+                fila[13] = cdb.resultado.getString("cuenta_bancaria");
+                
+                /*cdb.resultado = cdb.un_st.executeQuery("select p.forma_pago from hermanos h, formapago p where p.identificador=h.forma_pago_id and h.numero_hermano="+fila[0]);
+                String formaPago = "";
+                if (cdb.resultado.next()) {
+                    formaPago=cdb.resultado.getString(1);
+                }*/
+                fila[14] = cdb.resultado.getString("forma_pago_id");
+                //
+                /*cdb.resultado = cdb.un_st.executeQuery("select p.tipo_pago from hermanos h, tipopago p where p.identificador=h.tipo_pago_id and h.numero_hermano="+fila[0]);
+                String tipoPago = "";
+                if (cdb.resultado.next()) {
+                    tipoPago=cdb.resultado.getString(1);
+                }*/
+                fila[15] = cdb.resultado.getString("tipo_pago_id");
+
+                ff.addRow(fila);
+            }
+
+            hv1.tablaHermano1.setModel(ff);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(ff);
+            hv1.tablaHermano1.setRowSorter(ordenar);
+            hv1.tablaHermano1.setModel(ff);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+e.printStackTrace();
+//JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public void cargarTablaHermanos2() {
         modelo.hermanito hermanos = null;
@@ -557,6 +626,8 @@ e.printStackTrace();
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                cargarTablaHermanosBuscar();
+                hv1.txtFiltro1.setText("");
             }
 
             } else {
@@ -640,6 +711,9 @@ e.printStackTrace();
         try {
             modificarHermano(Integer.parseInt(numero_hermano1), direccion1, Integer.parseInt(cp1), fecha1, nombre1, apellido1, nif1, municipio1, provincia1, pais1, tfno1, email1, banco1, cuenta_bancaria1, Integer.parseInt(tipo_pago_id1), Integer.parseInt(forma_pago_id1));
             JOptionPane.showMessageDialog(null, "Hermano modificado correctamente");
+            limpiarModificarHermano();
+            cargarTablaHermanos();
+            cargarTablaHermanosBuscar();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | java.lang.NullPointerException ex) {
             
         }
@@ -813,6 +887,23 @@ e.printStackTrace();
         hv1.jDateChooser1.setDate(null);
         hv1.bancotxt.setText("");
         hv1.cuenta.setText("");
+    }
+    
+    public void limpiarModificarHermano() {
+        hv1.nombretext1.setText("");
+        hv1.apellidostxt1.setText("");
+        hv1.niftx1.setText("");
+        hv1.nherma1.setText("");
+        hv1.municipiotxt1.setText("");
+        hv1.provinciatxt1.setText("");
+        hv1.paistxt1.setText("");
+        hv1.telefono1.setText("");
+        hv1.emailtxt1.setText("");
+        hv1.direccion1.setText("");
+        hv1.CP1.setText("");
+        hv1.jDateChooser2.setDate(null);
+        hv1.bancotxt1.setText("");
+        hv1.cuenta1.setText("");
     }
     
     public String ponerNumHermano() {

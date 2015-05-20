@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.SQLException;
@@ -52,7 +48,7 @@ public class PlaningSecretariaBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
         if (cbd.resultado != null) {
-            cbd.un_sql = "UPDATE planingsecretaria SET hora='"+ps.getHora()+"', descripcion='"+ps.getDescripcion()+"', WHERE id="+ps.getId()+";";            
+            cbd.un_sql = "UPDATE planingsecretaria SET hora='"+ps.getHora()+"', descripcion='"+ps.getDescripcion()+"' WHERE identificador="+ps.getId()+";";            
             cbd.un_st.executeUpdate(cbd.un_sql);
         } else {
              /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/

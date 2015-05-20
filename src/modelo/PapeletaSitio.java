@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class PapeletaSitio {
     private int identificador;
     private int numero_hermano_id;
-    private Date fecha;
-    private int sale;
+    private String fecha;
+    private String sale;
     private int donativo;
     private int salida_procesional_id;
     private int numero_papeleta;
@@ -21,7 +21,30 @@ public class PapeletaSitio {
         this.identificador = identificador;
     }
 
-    public PapeletaSitio(int identificador, int numero_hermano_id, Date fecha, int sale, int donativo, int salida_procesional_id, int numero_papeleta) {
+    public PapeletaSitio(int numero_hermano_id, String fecha, String sale, int donativo, int numero_papeleta) {
+        this.numero_hermano_id = numero_hermano_id;
+        this.fecha = fecha;
+        this.sale = sale;
+        this.donativo = donativo;
+        this.numero_papeleta = numero_papeleta;
+    }    
+    
+
+    public PapeletaSitio(int identificador, int numero_hermano_id, String fecha, String sale, int donativo,
+            int numero_papeleta) {
+        this.identificador = identificador;
+        this.numero_hermano_id = numero_hermano_id;
+        this.fecha = fecha;
+        this.sale = sale;
+        this.donativo = donativo;
+        this.numero_papeleta = numero_papeleta;
+    }
+
+    public PapeletaSitio(int identificador, int numero_hermano_id, String fecha, String sale, Double donativo, int numero_papeleta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public PapeletaSitio(int identificador, int numero_hermano_id, String fecha, String sale, int donativo, int salida_procesional_id, int numero_papeleta) {
         this.identificador = identificador;
         this.numero_hermano_id = numero_hermano_id;
         this.fecha = fecha;
@@ -30,6 +53,8 @@ public class PapeletaSitio {
         this.salida_procesional_id = salida_procesional_id;
         this.numero_papeleta = numero_papeleta;
     }
+    
+    
 
     public int getIdentificador() {
         return identificador;
@@ -47,19 +72,19 @@ public class PapeletaSitio {
         this.numero_hermano_id = numero_hermano_id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public int getSale() {
+    public String getSale() {
         return sale;
     }
 
-    public void setSale(int sale) {
+    public void setSale(String sale) {
         this.sale = sale;
     }
 
