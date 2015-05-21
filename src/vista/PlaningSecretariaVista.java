@@ -88,11 +88,11 @@ public class PlaningSecretariaVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel2.setText("Hora");
+        jLabel2.setText("* Hora");
 
-        jLabel3.setText("Fecha:");
+        jLabel3.setText("* Fecha:");
 
-        jLabel4.setText("Descripcion");
+        jLabel4.setText("* Descripcion");
 
         btnSalir.setText("Salir");
 

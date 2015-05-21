@@ -28,7 +28,7 @@ public class CartonCuotasBD {
         cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
         
        if (cbd.resultado != null) {
-            cbd.un_sql = "INSERT INTO cartoncuotas (identificador, año, numero_hermano_id) VALUES (?, ?, ?);";
+            cbd.un_sql = "INSERT INTO cartoncuotas (identificador, año, numero_hermano_id, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre) VALUES (?, ?, ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
             PreparedStatement ps = cbd.conexion.prepareStatement(cbd.un_sql);
             ps.setInt(1, cc.getIdentificador());
             ps.setInt(2, cc.getAño());

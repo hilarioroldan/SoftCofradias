@@ -95,6 +95,45 @@ public class InventarioBD {
         
     }
      
+     /* Metodo modificar sin imagen*/
+     public void modificarSinImagen() throws ClassNotFoundException, 
+                                InstantiationException, 
+                                IllegalAccessException,
+                                SQLException {
+        
+        Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+        
+        cbd.un_sql = "SELECT * FROM inventario WHERE identificador=" + i.getIdentificador() +";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+        
+        if (cbd.resultado != null) {
+            cbd.un_sql = "UPDATE inventario SET identificador= ?" + ", nombre = ?" + ", autor = ?" + ", estilo = ?" + ", fecha_realizacion = ?" + ", procedencia = ?" + ", valoracion_economica = ?" + ", mejora = ?" + ", restauracion = ?" + ", cantidad = ?" + ", observaciones = ?" + ", adquisicion = ?" + ", fecha_baja = ? WHERE identificador="+i.getIdentificador()+";";
+            
+            PreparedStatement ps = cbd.conexion.prepareStatement(cbd.un_sql);
+            
+            ps.setInt(1, i.getIdentificador());
+            ps.setString(2, i.getNombre());
+            ps.setString(3, i.getAutor());
+            ps.setString(4, i.getEstilo());
+            ps.setString(5, i.getFecha_realizacion());
+            ps.setString(6, i.getProcedencia());
+            ps.setDouble(7, i.getValoracion_economica());
+            ps.setString(8, i.getMejora());
+            ps.setString(9, i.getRestauracion());
+            ps.setInt(10, i.getCantidad());
+            ps.setString(11, i.getObservaciones());
+            //ps.setInt(11, 1);
+            ps.setString(12, i.getAdquisicion());
+            ps.setString(13, i.getFecha_baja());
+            ps.executeUpdate();
+            ps.close();
+        } else {
+             /*Generamos nuestro propio error, luego este se activa por el catch quien lo lanza nuevamente*/
+                throw new Error("Registro" + i.getIdentificador() + "No se encuentra en la tabla Inventario Ubicacion'" + this.getClass().getName());
+        } 
+        
+    }
+     
     /* Metodo leer */
      public Inventario leer() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         

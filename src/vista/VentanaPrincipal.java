@@ -1,6 +1,7 @@
 
 package vista;
 
+import controlador.ControladorCuentaBancaria;
 import controlador.ControladorEntidadesConocidas;
 import controlador.ControladorHermandad;
 import controlador.ControladorHermandadesHermanadas;
@@ -13,13 +14,10 @@ import controlador.ControladorPagoCuotas;
 import controlador.ControladorPapeletaSitio;
 import controlador.ControladorPlaningMayordomia;
 import controlador.ControladorPlaningSecretaria;
+import controlador.ControladorProtocolo;
 import controlador.ControladorSalidaProcesional;
 import java.awt.Color;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import modelo.PlaningMayordomia;
 
 
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -72,6 +70,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
@@ -282,6 +281,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem17.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem17.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem17.setText("Cuenta Bancaria");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem17);
 
         jMenuItem18.setBackground(new java.awt.Color(255, 255, 255));
@@ -317,6 +321,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem20.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem20.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem20.setText("Protocolo");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem20);
 
         jMenuItem21.setBackground(new java.awt.Color(255, 255, 255));
@@ -341,7 +350,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem4.setForeground(new java.awt.Color(152, 42, 111));
-        jMenuItem4.setText("Listado de hermanos");
+        jMenuItem4.setText("Listado de Hermanos");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -353,6 +362,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem5.setForeground(new java.awt.Color(152, 42, 111));
         jMenuItem5.setText("Listado Inventario");
         jMenu6.add(jMenuItem5);
+
+        jMenuItem6.setText("Listado Libro de Asientos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem6);
 
         jMenuBar1.add(jMenu6);
 
@@ -431,8 +448,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       ControladorJuntaGobierno cj = new ControladorJuntaGobierno();
-       cj.iniciar();
+      /* ControladorJuntaGobierno cj = new ControladorJuntaGobierno();
+       cj.iniciar();*/
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -451,8 +468,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        ControladorLibroAsiento cla = new ControladorLibroAsiento();
-        cla.iniciar();
+       /* ControladorLibroAsiento cla = new ControladorLibroAsiento();
+        cla.iniciar();*/
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -490,6 +507,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void fb_socialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fb_socialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fb_socialActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+       /* ControladorProtocolo p = new ControladorProtocolo();
+        p.iniciar();*/
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+       /* ControladorCuentaBancaria ccb = new ControladorCuentaBancaria();
+        ccb.iniciar();*/
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ControladorLibroAsiento cla = new ControladorLibroAsiento();
+        cla.iniciar();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,6 +589,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton rss_social;

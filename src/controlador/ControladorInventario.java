@@ -263,6 +263,8 @@ public class ControladorInventario implements ActionListener {
                     //
                 }
                 // fin fecha
+                
+                if (fis!=null && longitudBytes!=0) {
 
         try {   
             
@@ -279,19 +281,43 @@ public class ControladorInventario implements ActionListener {
             }
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-ex.printStackTrace();
-//JOptionPane.showMessageDialog(null, "El Identificador " + iv.txtRegistro1.getText() + " ya existe, ingrese un identificador distinto " + ex, "SofCofradias", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
         } catch (java.lang.IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, "Error al introducir un dato incorrecto, revise todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+                } else {
+                    
+                    try {   
+            
+            if (fecha_baja==null || fecha_baja.equalsIgnoreCase("")) {
+            modificarInventarioSinImagen(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, null);
+            JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
+
+            iv.cuadroImagen4.setIcon(null);
+            } else {
+                modificarInventarioSinImagen(Integer.parseInt(identificador), nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, fecha_baja);
+            JOptionPane.showMessageDialog(null, "¡Modificado Correctamente!");
+
+            iv.cuadroImagen4.setIcon(null);
+            }
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al introducir un valor numerico en un campo inadecuado");
+        } catch (java.lang.IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Error al introducir un dato incorrecto, revise todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+                    
+                }
 
         cargarTablaEntidadConocida1();
         vaciarTxtPantalla3();
         vaciarTxtPantalla2();
         iv.btnIzquierda1.setEnabled(false);
         iv.btnDerecha1.setEnabled(false);
+        iv.dispose();
         }
 
     }
@@ -1318,6 +1344,9 @@ ex.printStackTrace();
     }
 
     public void insertarPantalla1() {
+        
+        if (!iv.txtNombre1.getText().equalsIgnoreCase("") && !iv.txtAdquisicion1.getText().equalsIgnoreCase("") && !iv.txtAutor1.getText().equalsIgnoreCase("") && !iv.txtEstilo1.getText().equalsIgnoreCase("") && !iv.txtProcedencia1.getText().equalsIgnoreCase("") && !iv.txtValoracionEconomica1.getText().equalsIgnoreCase("") && !iv.txtCantidad1.getText().equalsIgnoreCase("") && iv.jDate1.getDate()!=null) {
+        
         try {
             int identificador = 0;
             //localizamos el identificador mayor//
@@ -1386,8 +1415,9 @@ ex.printStackTrace();
                 if (iv.jDate1.getDate()!=null && iv.jDate2.getDate()==null) {
                     
                     agregarInventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, Double.parseDouble(valoracion_economica), mejora, restauracion, Integer.parseInt(cantidad), observaciones, adquisicion, this.fis, null, this.longitudBytes);
-                    JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
-                    
+                    JOptionPane.showMessageDialog(null, "Insertado Correctamente");
+                    fis = null;
+                    longitudBytes = 0;
                 } else if (iv.jDate1.getDate()==null) {
                     
                     JOptionPane.showMessageDialog(null, "El campo Fecha Realizacion es Obligatorio");
@@ -1430,7 +1460,9 @@ ex.printStackTrace();
             Logger.getLogger(ControladorInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        } else {
+            JOptionPane.showMessageDialog(null, "Asegúrese de haber ingresado todos los parámetros obligatorios");
+        }
         
     }
 
@@ -1492,13 +1524,19 @@ ex.printStackTrace();
         i.grabar();
     }
 
-    /*Metodo para modificar una Entidad Conocida*/
+    /*Metodo para modificar un Inventario*/
     public void modificarInventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, valoracion_economica, mejora, restauracion, cantidad, observaciones, adquisicion, imagen, fecha_baja, longitudBytes);
         i.actualizar();
     }
+    
+    /*Metodo para modificar un Inventario sin imagen*/
+    public void modificarInventarioSinImagen(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, String fecha_baja) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        i = new Inventario(identificador, nombre, autor, estilo, fecha_realizacion, procedencia, valoracion_economica, mejora, restauracion, cantidad, observaciones, adquisicion, fecha_baja);
+        i.actualizarSinImagen();
+    }
 
-    /*Metodo para borrar una Entidad Conocida*/
+    /*Metodo para borrar un Inventario*/
     public void eliminarInventario(int identificador) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         i = new Inventario(identificador);
         i.borrar();

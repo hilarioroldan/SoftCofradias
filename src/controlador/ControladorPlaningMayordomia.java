@@ -39,9 +39,9 @@ public class ControladorPlaningMayordomia implements ActionListener {
         pmv.setVisible(true);
         pmv.setLocationRelativeTo(null);
 
-        actualizarTbl1(); // cargamos las tablas
-        actualizarTbl2();
-        actualizarTbl3();
+        this.cargarTablaBuscar();
+            this.cargarTablaEliminar();
+            this.cargarTablaModificar();
 
         //cargamos los combos
         cargarCmbBD1();
@@ -102,10 +102,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
 
             case "INSERTAR":
                 insertarPlaning();
-                actualizarTbl1(); // cargamos las tablas
-                actualizarTbl2();
-                actualizarTbl3();
-                limpiarPantalla1(); // limpiar pantalla
+                
                 break;
 
             case "BUSCAR":
@@ -148,6 +145,9 @@ public class ControladorPlaningMayordomia implements ActionListener {
     }
 
     public void insertarPlaning() {
+        
+        if (!pmv.txtHora1.getText().equalsIgnoreCase("") && !pmv.txtLabor1.getText().equalsIgnoreCase("") && pmv.Jdate1.getDate()!=null) {
+        
         int identificador = 1;
         try {
             try {
@@ -175,8 +175,16 @@ public class ControladorPlaningMayordomia implements ActionListener {
             String labor = pmv.txtLabor1.getText();
 
             agregarPlaningMayordomia(identificador, hora, fecha, labor);
+            this.cargarTablaBuscar();
+            this.cargarTablaEliminar();
+            this.cargarTablaModificar();
+                limpiarPantalla1(); // limpiar pantalla
         } catch (java.lang.NullPointerException e) {
             JOptionPane.showMessageDialog(null, "El campo fecha, debe contener algun valor", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Asegúrese de haber rellenado todos los campos obligatorios");
         }
     }
 
@@ -185,7 +193,16 @@ public class ControladorPlaningMayordomia implements ActionListener {
             int identificador = Integer.parseInt(pmv.txtIdentificador3.getText());
             String hora = pmv.txtHora3.getText();
             String labor = pmv.txtLabor3.getText();
-            String fecha = pmv.txtFecha3.getText();
+            // trabajando con fechas
+        String fecha = "";
+        if (pmv.txtFecha2.getDate() != null) {
+            int año = pmv.txtFecha2.getCalendar().get(Calendar.YEAR);
+            int mes = pmv.txtFecha2.getCalendar().get(Calendar.MONTH);
+            int dia = pmv.txtFecha2.getCalendar().get(Calendar.DAY_OF_MONTH);
+            fecha = año + "-" + mes + "-" + dia;
+            //
+        }
+        // fin
 
             modificarPlaningMayordomia(identificador, hora, fecha, labor);
             JOptionPane.showMessageDialog(null, "Modificado correctamente");
@@ -197,9 +214,9 @@ public class ControladorPlaningMayordomia implements ActionListener {
             // JOptionPane.showMessageDialog(null, "Fecha vacia");
         }
 
-        actualizarTbl1(); // cargamos las tablas
-        actualizarTbl2();
-        actualizarTbl3();
+        this.cargarTablaBuscar();
+            this.cargarTablaEliminar();
+            this.cargarTablaModificar();
     }
 
     public void eliminar() {
@@ -207,9 +224,9 @@ public class ControladorPlaningMayordomia implements ActionListener {
             int identificador = Integer.parseInt(pmv.txtIdentificador4.getText());
             eliminarPlaningMayordomia(identificador);
             JOptionPane.showMessageDialog(null, "Eliminado correctamente");
-            this.actualizarTbl1();
-            this.actualizarTbl2();
-            this.actualizarTbl3();
+            this.cargarTablaBuscar();
+            this.cargarTablaEliminar();
+            this.cargarTablaModificar();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -252,7 +269,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
                 
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
-                    actualizarTbl1();
+                    cargarTablaBuscar(); // cargamos las tablas
                     limpiarPantalla2();
                 }
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
@@ -260,6 +277,9 @@ public class ControladorPlaningMayordomia implements ActionListener {
             }
         
         }
+        pmv.txtFiltro1.setText("");
+        pmv.txtFiltro2.setText("");
+        pmv.txtFiltro3.setText("");
 
     }
 
@@ -301,13 +321,16 @@ public class ControladorPlaningMayordomia implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
                 limpiarPantalla3();
-                actualizarTbl2();
+                cargarTablaModificar();
             }
             
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pmv.txtFiltro1.setText("");
+        pmv.txtFiltro2.setText("");
+        pmv.txtFiltro3.setText("");
 
     }
 
@@ -348,139 +371,110 @@ public class ControladorPlaningMayordomia implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
                 limpiarPantalla4();
-                actualizarTbl3();
+                cargarTablaEliminar();
             }
             
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pmv.txtFiltro1.setText("");
+        pmv.txtFiltro2.setText("");
+        pmv.txtFiltro3.setText("");
 
     }
-
-    public void actualizarTbl1() {
-        DefaultTableModel m;
-
-        try {
-            String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] x = new String[4];
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "SELECT * FROM planingmayordomia";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-
-            while (cbd.resultado.next()) {
-                x[0] = cbd.resultado.getString("identificador");
-                x[1] = cbd.resultado.getString("hora");
-                x[2] = cbd.resultado.getString("fecha");
-                x[3] = cbd.resultado.getString("labor");
-                m.addRow(x);
-            }
-            pmv.tbl1.setModel(m);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla " + e, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void actualizarTbl2() {
-        DefaultTableModel m;
-
-        try {
-            String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] x = new String[4];
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "SELECT * FROM planingmayordomia";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-
-            while (cbd.resultado.next()) {
-                x[0] = cbd.resultado.getString("identificador");
-                x[1] = cbd.resultado.getString("hora");
-                x[2] = cbd.resultado.getString("fecha");
-                x[3] = cbd.resultado.getString("labor");
-                m.addRow(x);
-            }
-            pmv.tbl2.setModel(m);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla " + e, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void actualizarTbl3() {
-        DefaultTableModel m;
-
-        try {
-            String[] titulo = {"Nro", "Hora", "Fecha", "Labor"};
-            m = new DefaultTableModel(null, titulo);
-            JTable p = new JTable(m);
-            String[] x = new String[4];
-            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
-            cbd.un_sql = "SELECT * FROM planingmayordomia";
-            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
-
-            while (cbd.resultado.next()) {
-                x[0] = cbd.resultado.getString("identificador");
-                x[1] = cbd.resultado.getString("hora");
-                x[2] = cbd.resultado.getString("fecha");
-                x[3] = cbd.resultado.getString("labor");
-                m.addRow(x);
-            }
-            pmv.tbl3.setModel(m);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla " + e, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
+    
 
     private void jTable1MousePressed1(java.awt.event.MouseEvent evt) {
-        int clic = pmv.tbl1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-
-        if (clic != -1) {
-            try {
-                pmv.txtIdentificador2.setText((String) pmv.tbl1.getValueAt(clic, 0));
-                pmv.txtHora2.setText((String) pmv.tbl1.getValueAt(clic, 1));
-                pmv.txtFecha2.setText((String) pmv.tbl1.getValueAt(clic, 2));
-                pmv.txtLabor2.setText((String) pmv.tbl1.getValueAt(clic, 3));
-                // formateo de fecha en java           
-
-            } catch (Exception e) {
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            int clic = pmv.tbl1.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+            
+            if (clic != -1) {
+                try {
+                    pmv.txtIdentificador2.setText((String) pmv.tbl1.getValueAt(clic, 0));
+                    pmv.txtHora2.setText((String) pmv.tbl1.getValueAt(clic, 3));
+                    int identificador = Integer.parseInt((String) pmv.tbl1.getValueAt(clic, 0));
+                    Date fecha = null;
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha from planingmayordomia where identificador=" + identificador);
+                    if (cbd.resultado.next()) {
+                        fecha = cbd.resultado.getDate(1);
+                    }
+                    pmv.jDateChooser1.setDate(fecha);
+                    pmv.txtLabor2.setText((String) pmv.tbl1.getValueAt(clic, 1));
+                    // formateo de fecha en java
+                    
+                } catch (Exception e) {
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void jTable1MousePressed2(java.awt.event.MouseEvent evt) {
-        int clic = pmv.tbl2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-
-        if (clic != -1) {
-            try {
-                pmv.txtIdentificador3.setText((String) pmv.tbl2.getValueAt(clic, 0));
-                pmv.txtHora3.setText((String) pmv.tbl2.getValueAt(clic, 1));
-                pmv.txtFecha3.setText((String) pmv.tbl2.getValueAt(clic, 2));
-                pmv.txtLabor3.setText((String) pmv.tbl2.getValueAt(clic, 3));
-                // formateo de fecha en java           
-
-            } catch (Exception e) {
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            int clic = pmv.tbl2.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+            
+            if (clic != -1) {
+                try {
+                    pmv.txtIdentificador3.setText((String) pmv.tbl2.getValueAt(clic, 0));
+                    pmv.txtHora3.setText((String) pmv.tbl2.getValueAt(clic, 3));
+                    int identificador = Integer.parseInt((String) pmv.tbl2.getValueAt(clic, 0));
+                    Date fecha = null;
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha from planingmayordomia where identificador=" + identificador);
+                    if (cbd.resultado.next()) {
+                        fecha = cbd.resultado.getDate(1);
+                    }
+                    pmv.txtFecha2.setDate(fecha);
+                    pmv.txtLabor3.setText((String) pmv.tbl2.getValueAt(clic, 1));
+                    // formateo de fecha en java
+                    
+                } catch (Exception e) {
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void jTable1MousePressed3(java.awt.event.MouseEvent evt) {
-        int clic = pmv.tbl3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
-
-        if (clic != -1) {
-            try {
-                pmv.txtIdentificador4.setText((String) pmv.tbl3.getValueAt(clic, 0));
-                pmv.txtHora4.setText((String) pmv.tbl3.getValueAt(clic, 1));
-                pmv.txtFecha4.setText((String) pmv.tbl3.getValueAt(clic, 2));
-                pmv.txtLabor4.setText((String) pmv.tbl3.getValueAt(clic, 3));
-                // formateo de fecha en java           
-
-            } catch (Exception e) {
+        try {
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            int clic = pmv.tbl3.getSelectedRow(); // se guarda en la variable el numero de la fila cuando se hace click en una
+            
+            if (clic != -1) {
+                try {
+                    pmv.txtIdentificador4.setText((String) pmv.tbl3.getValueAt(clic, 0));
+                    pmv.txtHora4.setText((String) pmv.tbl3.getValueAt(clic, 3));
+                    int identificador = Integer.parseInt((String) pmv.tbl1.getValueAt(clic, 0));
+                    Date fecha = null;
+                    cbd.resultado = cbd.un_st.executeQuery("select fecha from planingmayordomia where identificador=" + identificador);
+                    if (cbd.resultado.next()) {
+                        fecha = cbd.resultado.getDate(1);
+                    }
+                    pmv.txtFecha3.setDate(fecha);
+                    pmv.txtLabor4.setText((String) pmv.tbl3.getValueAt(clic, 1));
+                    // formateo de fecha en java
+                    
+                } catch (Exception e) {
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorPlaningMayordomia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -542,7 +536,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
     public void limpiarPantalla2() {
         pmv.txtIdentificador2.setText("");
         pmv.txtHora2.setText("");
-        pmv.txtFecha2.setText("");
+        pmv.jDateChooser1.setDate(null);
         pmv.txtLabor2.setText("");
         pmv.txtFiltro1.setText("");
     }
@@ -550,7 +544,7 @@ public class ControladorPlaningMayordomia implements ActionListener {
     public void limpiarPantalla3() {
         pmv.txtIdentificador3.setText("");
         pmv.txtHora3.setText("");
-        pmv.txtFecha3.setText("");
+        pmv.txtFecha2.setDate(null);
         pmv.txtLabor3.setText("");
         pmv.txtFiltro2.setText("");
     }
@@ -558,9 +552,102 @@ public class ControladorPlaningMayordomia implements ActionListener {
     public void limpiarPantalla4() {
         pmv.txtIdentificador4.setText("");
         pmv.txtHora4.setText("");
-        pmv.txtFecha4.setText("");
+        pmv.txtFecha3.setDate(null);
         pmv.txtLabor4.setText("");
         pmv.txtFiltro3.setText("");
+    }
+    
+    public void cargarTablaBuscar() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Labor", "Hora", "Fecha"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select * from planingmayordomia order by identificador asc";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+            while (cbd.resultado.next()) {
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("labor");
+                fila[3] = cbd.resultado.getString("hora");
+                fila[2] = cbd.resultado.getString("fecha");
+                m.addRow(fila);
+            }
+
+            pmv.tbl1.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            pmv.tbl1.setRowSorter(ordenar);
+            pmv.tbl1.setModel(m);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+           //e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    public void cargarTablaModificar() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Labor", "Hora", "Fecha"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select * from planingmayordomia order by identificador asc";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+            while (cbd.resultado.next()) {
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("labor");
+                fila[3] = cbd.resultado.getString("hora");
+                fila[2] = cbd.resultado.getString("fecha");
+                m.addRow(fila);
+            }
+
+            pmv.tbl2.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            pmv.tbl2.setRowSorter(ordenar);
+            pmv.tbl2.setModel(m);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+           //e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    public void cargarTablaEliminar() {
+        DefaultTableModel m;
+        try {
+            String[] titulo = {"Nro", "Labor", "Hora", "Fecha"};
+            m = new DefaultTableModel(null, titulo);
+            JTable p = new JTable(m);
+            String[] fila = new String[4];
+            Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+            cbd.un_sql = "select * from planingmayordomia order by identificador asc";
+            cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+
+            while (cbd.resultado.next()) {
+                fila[0] = cbd.resultado.getString("identificador");
+                fila[1] = cbd.resultado.getString("labor");
+                fila[3] = cbd.resultado.getString("hora");
+                fila[2] = cbd.resultado.getString("fecha");
+                m.addRow(fila);
+            }
+
+            pmv.tbl3.setModel(m);
+            TableRowSorter<TableModel> ordenar = new TableRowSorter<>(m);
+            pmv.tbl3.setRowSorter(ordenar);
+            pmv.tbl3.setModel(m);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+           //e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Error al extraer los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public static Date ParseFecha(String fecha) {

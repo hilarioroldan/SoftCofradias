@@ -32,6 +32,19 @@ public class EntidadesConocidas {
         this.provincia=provincia;
         this.email=email;
     }
+
+    public EntidadesConocidas(int identificador, String nombre, String localidad, String domicilio, int telf1, int cp, String provincia, String email) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.localidad = localidad;
+        this.domicilio = domicilio;
+        this.telf1 = telf1;
+        this.cp = cp;
+        this.provincia = provincia;
+        this.email = email;
+    }
+    
+    
     
     public EntidadesConocidas(String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) {
         
@@ -132,6 +145,11 @@ public class EntidadesConocidas {
     public void grabar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         EntidadesConocidasBD ec = new EntidadesConocidasBD(this);        
         ec.grabar();
+    }
+    
+    public void grabarSintelf2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        EntidadesConocidasBD ec = new EntidadesConocidasBD(this);        
+        ec.grabarSintelf2();
     }
 
     public void actualizar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {

@@ -39,7 +39,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
         pagos = new javax.swing.JButton();
         btnConsultarCarton = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        cancelar = new javax.swing.JButton();
+        saliropciones = new javax.swing.JButton();
         aceptar = new javax.swing.JButton();
         verpagos = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -60,7 +60,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         btnAgregarNuevoCarton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        salirnuevocarton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         buscarAño = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
@@ -70,7 +70,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
         btnBuscarAñoCarton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCuota = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        salirbuscaraño = new javax.swing.JButton();
         eliminarAño = new javax.swing.JDialog();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -82,7 +82,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
         btnBuscarCuotasEliminar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtIdentificadorCuota = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        salireliminaraño = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -109,11 +109,11 @@ public class PagoCuotasVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Fecha:");
+        jLabel4.setText("* Fecha:");
 
         jLabel5.setText("Estado De Pagado:");
 
-        jLabel6.setText("Precio:");
+        jLabel6.setText("* Precio:");
 
         pagos.setText("Ver pagos");
         pagos.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +183,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        cancelar.setText("Cancelar");
+        saliropciones.setText("Salir");
 
         aceptar.setText("Ingresar cuota");
 
@@ -200,7 +200,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                     .addGroup(cuotasLayout.createSequentialGroup()
                         .addComponent(aceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelar)))
+                        .addComponent(saliropciones)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cuotasLayout.setVerticalGroup(
@@ -211,7 +211,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(cuotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptar)
-                    .addComponent(cancelar))
+                    .addComponent(saliropciones))
                 .addContainerGap())
         );
 
@@ -342,7 +342,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
 
         jLabel9.setText("Numero de hermano:");
 
-        jLabel10.setText("Nuevo año:");
+        jLabel10.setText("* Nuevo año:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +388,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Salir");
+        salirnuevocarton.setText("Salir");
 
         javax.swing.GroupLayout añadirNuevoAñoLayout = new javax.swing.GroupLayout(añadirNuevoAño.getContentPane());
         añadirNuevoAño.getContentPane().setLayout(añadirNuevoAñoLayout);
@@ -400,7 +400,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, añadirNuevoAñoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(salirnuevocarton)))
                 .addContainerGap())
         );
         añadirNuevoAñoLayout.setVerticalGroup(
@@ -409,7 +409,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(salirnuevocarton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -461,7 +461,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Salir");
+        salirbuscaraño.setText("Salir");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -473,7 +473,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(salirbuscaraño)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -481,8 +481,8 @@ public class PagoCuotasVista extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salirbuscaraño)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -563,7 +563,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton5.setText("Salir");
+        salireliminaraño.setText("Salir");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -575,7 +575,7 @@ public class PagoCuotasVista extends javax.swing.JFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5)))
+                        .addComponent(salireliminaraño)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -583,8 +583,8 @@ public class PagoCuotasVista extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(salireliminaraño)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -822,16 +822,12 @@ public class PagoCuotasVista extends javax.swing.JFrame {
     public javax.swing.JButton btnSalirOpcionesConsultaCarton;
     public javax.swing.JDialog buscarAño;
     public javax.swing.JButton busqueda;
-    public javax.swing.JButton cancelar;
     public javax.swing.JFrame consultarcarton;
     public javax.swing.JDialog cuotas;
     public javax.swing.JDialog eliminarAño;
     public javax.swing.JTextField filtro;
     public javax.swing.JButton gesti;
     public javax.swing.JTextField her;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
-    public javax.swing.JButton jButton5;
     public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -866,6 +862,10 @@ public class PagoCuotasVista extends javax.swing.JFrame {
     public javax.swing.JTextField pric;
     public javax.swing.JButton salir;
     public javax.swing.JButton salir1;
+    public javax.swing.JButton salirbuscaraño;
+    public javax.swing.JButton salireliminaraño;
+    public javax.swing.JButton salirnuevocarton;
+    public javax.swing.JButton saliropciones;
     public javax.swing.JScrollPane scroll;
     public javax.swing.JComboBox seleccio;
     public javax.swing.JComboBox seleccion;

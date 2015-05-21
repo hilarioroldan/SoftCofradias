@@ -197,17 +197,17 @@ public class InventarioVista extends javax.swing.JFrame {
 
         jLabel85.setText("Nº de Registro:");
 
-        jLabel86.setText("Nombre:");
+        jLabel86.setText("* Nombre:");
 
-        jLabel87.setText("Adquisicion:");
+        jLabel87.setText("* Adquisicion:");
 
-        jLabel88.setText("Autor:");
+        jLabel88.setText("* Autor:");
 
-        jLabel89.setText("Estilo:");
+        jLabel89.setText("* Estilo:");
 
-        jLabel90.setText("Fecha Realización");
+        jLabel90.setText("* Fecha Realización");
 
-        jLabel91.setText("Procedencia:");
+        jLabel91.setText("* Procedencia:");
 
         txtProcedencia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +215,7 @@ public class InventarioVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel92.setText("Valoración Económica:");
+        jLabel92.setText("* Valoración Económica:");
 
         txtValoracionEconomica1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +237,7 @@ public class InventarioVista extends javax.swing.JFrame {
 
         jLabel95.setText("Fecha Baja:");
 
-        jLabel96.setText("Cantidad:");
+        jLabel96.setText("* Cantidad:");
 
         jLabel97.setText("Observaciones:");
 

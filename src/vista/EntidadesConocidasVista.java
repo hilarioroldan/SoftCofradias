@@ -134,17 +134,17 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
 
         ingresar.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades Conocidas"));
 
-        jLabel2.setText("Nombre Entidad:");
+        jLabel2.setText("* Nombre Entidad:");
 
-        jLabel3.setText("Localidad:");
+        jLabel3.setText("* Localidad:");
 
-        jLabel4.setText("Domicilio:");
+        jLabel4.setText("* Domicilio:");
 
-        jLabel5.setText("Provincia:");
+        jLabel5.setText("* Provincia:");
 
-        jLabel6.setText("CP:");
+        jLabel6.setText("* CP:");
 
-        jLabel7.setText("Telf1:");
+        jLabel7.setText("* Telf1:");
 
         jLabel8.setText("Telf2:");
 
@@ -194,7 +194,7 @@ public class EntidadesConocidasVista extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNombreEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         ingresarLayout.setVerticalGroup(
             ingresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

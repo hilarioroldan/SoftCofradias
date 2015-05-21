@@ -162,6 +162,9 @@ public class ControladorPlaningSecretaria implements ActionListener {
     }
 
     public void ingresar() {
+        
+        if (!pSvista.txtHora.getText().equalsIgnoreCase("") && pSvista.jDateChooser1.getDate()!=null && !pSvista.txtDescripcion.getText().equalsIgnoreCase("")) {
+        
         try {
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
             cbd.resultado = cbd.un_st.executeQuery("select max(identificador) from planingsecretaria");
@@ -193,12 +196,16 @@ public class ControladorPlaningSecretaria implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex + " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
         }
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Asegúrese de haber introducido todos los campos obligatorios");
+        }
     }
 
     private void eliminarSeleccion() {
         try {
             eliminarHermandadHermanadas(identificadorEliminar);
-            JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!", "SoftCofradias", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
             cargarTablaBuscar();
             cargarTablaEliminar();
             cargarTablaModificar();
@@ -443,6 +450,8 @@ public class ControladorPlaningSecretaria implements ActionListener {
             
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
+                limpiarTextoModificar();
+                cargarTablaModificar();
             }
             
             } else {

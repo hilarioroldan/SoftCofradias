@@ -23,6 +23,24 @@ public class Inventario {
     String fecha_baja;
     int longitudBytes;
 
+    public Inventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, String fecha_baja) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.autor = autor;
+        this.estilo = estilo;
+        this.fecha_realizacion = fecha_realizacion;
+        this.procedencia = procedencia;
+        this.valoracion_economica = valoracion_economica;
+        this.mejora = mejora;
+        this.restauracion = restauracion;
+        this.cantidad = cantidad;
+        this.observaciones = observaciones;
+        this.adquisicion = adquisicion;
+        this.fecha_baja = fecha_baja;
+    }
+    
+    
+
     public Inventario(int identificador, String nombre, String autor, String estilo, String fecha_realizacion, String procedencia, Double valoracion_economica, String mejora, String restauracion, int cantidad, String observaciones, String adquisicion, FileInputStream imagen, String fecha_baja, int longitudBytes) {
         this.identificador = identificador;
         this.nombre = nombre;
@@ -203,6 +221,11 @@ public class Inventario {
     public void actualizar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         InventarioBD i = new InventarioBD(this);        
         i.modificar();
+    }
+    
+    public void actualizarSinImagen() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        InventarioBD i = new InventarioBD(this);        
+        i.modificarSinImagen();
     }
     
     /*Este metodo retorna un conjunto de datos de la tabla Inventario*/

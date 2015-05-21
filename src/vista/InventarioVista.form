@@ -268,7 +268,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel86">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Nombre:"/>
+                        <Property name="text" type="java.lang.String" value="* Nombre:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -281,7 +281,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel87">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Adquisicion:"/>
+                        <Property name="text" type="java.lang.String" value="* Adquisicion:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -294,7 +294,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel88">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Autor:"/>
+                        <Property name="text" type="java.lang.String" value="* Autor:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -307,7 +307,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel89">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Estilo:"/>
+                        <Property name="text" type="java.lang.String" value="* Estilo:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -320,7 +320,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel90">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Fecha Realizaci&#xf3;n"/>
+                        <Property name="text" type="java.lang.String" value="* Fecha Realizaci&#xf3;n"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -328,7 +328,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel91">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Procedencia:"/>
+                        <Property name="text" type="java.lang.String" value="* Procedencia:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -344,7 +344,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel92">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Valoraci&#xf3;n Econ&#xf3;mica:"/>
+                        <Property name="text" type="java.lang.String" value="* Valoraci&#xf3;n Econ&#xf3;mica:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -422,7 +422,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel96">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cantidad:"/>
+                        <Property name="text" type="java.lang.String" value="* Cantidad:"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

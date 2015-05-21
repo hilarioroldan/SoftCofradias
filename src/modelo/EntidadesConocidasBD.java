@@ -33,6 +33,24 @@ public class EntidadesConocidasBD {
         
     }
     
+    /* Método Grabar */
+    
+    public void grabarSintelf2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        
+        Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
+        
+        cbd.un_sql = "SELECT identificador FROM entidadesconocidas WHERE identificador=" + ec.getIdentificador() + ";";
+        cbd.resultado = cbd.un_st.executeQuery(cbd.un_sql);
+        
+        if (cbd.resultado != null) {
+            cbd.un_sql = "INSERT INTO entidadesconocidas(identificador, nombre, localidad, domicilio, telf1, secretaria_id, cp, provincia, email) VALUES ("+ec.getIdentificador()+", '"+ec.getNombre()+"', '"+ec.getLocalidad()+"', '"+ec.getDomicilio()+"', '"+ec.getTelf1()+"',1, '"+ec.getCP()+"', '"+ec.getProvincia()+"', '"+ec.getEmail()+"');";
+            cbd.un_st.executeUpdate(cbd.un_sql);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar una Entidad Conocida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
     /* Método Modificar */
     
     public void modificar() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {

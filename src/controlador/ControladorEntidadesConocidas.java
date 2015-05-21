@@ -77,9 +77,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.txtTelf25.setDocument(new limitarNumeroTexfield(ecv.txtTelf25, 9));
         
 
-        //cargarTablaEntidadConocida1();
         cargarTablaEntidadConocidaPrincipal();
-        //cargarTablaEntidadConocida3();
+        cargarTablaEntidadConocidaEliminar();
+        cargarTablaEntidadConocidaModificar();
 
         cargarCmbBD1();
         cargarCmbBD2();
@@ -183,6 +183,8 @@ public class ControladorEntidadesConocidas implements ActionListener {
 
     public void ingresarEntidadConocida() {
         
+        if (!ecv.txtNombreEntidad.getText().equalsIgnoreCase("") && !ecv.txtLocalidad.getText().equalsIgnoreCase("") && !ecv.txtDomicilio.getText().equalsIgnoreCase("") && !ecv.txtProvincia.getText().equalsIgnoreCase("") && !ecv.txtCp.getText().equalsIgnoreCase("") && !ecv.txtTelf1.getText().equalsIgnoreCase("")) {
+        
         try {
             
             Conexion cbd = ConectarServicio.getInstancia().getConexionDb();
@@ -218,18 +220,28 @@ public class ControladorEntidadesConocidas implements ActionListener {
             String provincia = ecv.txtProvincia.getText();
             String email = ecv.txtEmail.getText();
             
+            
             try {
                 agregarEntidadConocida(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
-                JOptionPane.showMessageDialog(null, "¡Insertado Correctamente!");
+                JOptionPane.showMessageDialog(null, "Insertado Correctamente");
                 limpiarTextoPantallaInsertar();
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 JOptionPane.showMessageDialog(null, "El Identificador " + identificador + " ya existe, ingrese un identificador distinto", "SofCofradias", JOptionPane.ERROR_MESSAGE);
                 limpiarTextoPantallaInsertar();
-            }
+            }        
+            
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | java.lang.NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Parametro incorrecto introducido. Revise los campos", "Error", JOptionPane.ERROR_MESSAGE);
             limpiarTextoPantallaInsertar();
+        }
+        
+        cargarTablaEntidadConocidaEliminar();
+        cargarTablaEntidadConocidaModificar();
+        cargarTablaEntidadConocidaPrincipal();
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Asegúrese de haber introducido todos los campos obligatorios");
         }
     }
 
@@ -267,7 +279,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
             
             if (clic!=-1) {
                  eliminarEntidadConocida(identificadorEliminar);
-                JOptionPane.showMessageDialog(null, "¡Eliminado Correctamente!");
+                JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
         eliminarEntidadConocida(identificadorEliminar);
             } else {
                 JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
@@ -279,7 +291,7 @@ public class ControladorEntidadesConocidas implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(ControladorEntidadesConocidas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        limpiarTexto2();
+        limpiarTextoPantallaEliminar();
         ecv.tablaEntidadConocida3.setModel(new DefaultTableModel());
         ecv.txtFiltro2.setText("");
     }
@@ -387,6 +399,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
             ArrayList<EntidadesConocidas> x;
             String campo = (String) ecv.cmbBD1.getSelectedItem();
             String filtro = ecv.txtFiltro1.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = ec.buscarFiltro(filtro, campo);
             
             if (x.size()>0) {
@@ -412,8 +427,12 @@ public class ControladorEntidadesConocidas implements ActionListener {
             
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
-                ecv.tablaEntidadConocida2.setModel(new DefaultTableModel());
-            }           
+                cargarTablaEntidadConocidaPrincipal();
+                limpiarTextoPantallaBuscar();
+                
+            }  
+            
+            }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
            //e.printStackTrace();
@@ -441,8 +460,11 @@ public class ControladorEntidadesConocidas implements ActionListener {
             JTable p = new JTable(m);
             String[] fila = new String[9];
             ArrayList<EntidadesConocidas> x;
-            String campo = (String) ecv.cmbBD3.getSelectedItem();
+            String campo = (String) ecv.cmbBD3.getSelectedItem();           
             String filtro = ecv.txtFiltro3.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = ec.buscarFiltro(filtro, campo);
 
             if (x.size()>0) {
@@ -469,8 +491,11 @@ public class ControladorEntidadesConocidas implements ActionListener {
             
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
-                ecv.tablaEntidadConocida1.setModel(new DefaultTableModel());
-            }     
+                cargarTablaEntidadConocidaModificar();
+                limpiarTextoPantallaModificar();
+            }
+            
+            }      
             
             ecv.txtFiltro3.setText("");           
 
@@ -499,6 +524,9 @@ public class ControladorEntidadesConocidas implements ActionListener {
             ArrayList<EntidadesConocidas> x;
             String campo = (String) ecv.cmbBD2.getSelectedItem();
             String filtro = ecv.txtFiltro2.getText();
+            
+            if (!filtro.equalsIgnoreCase("")) {
+            
             x = ec.buscarFiltro(filtro, campo);
 
             if (x.size()>0) {
@@ -525,8 +553,11 @@ public class ControladorEntidadesConocidas implements ActionListener {
             
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ningún resultado");
-                ecv.tablaEntidadConocida3.setModel(new DefaultTableModel());
+                cargarTablaEntidadConocidaEliminar();
+                limpiarTextoPantallaEliminar();
             }     
+            
+            }
             
             ecv.txtFiltro2.setText("");          
 
@@ -663,9 +694,21 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.txtProvincia.setText("");
         ecv.txtEmail.setText("");
     }
-
-    /*Limpiar Texto*/
-    public void limpiarTexto2() {
+    
+     /*Limpiar Texto*/
+    public void limpiarTextoPantallaModificar() {
+        ecv.txtNombreEntidad5.setText("");
+        ecv.txtLocalidad5.setText("");
+        ecv.txtDomicilio5.setText("");
+        ecv.txtTelf15.setText("");
+        ecv.txtTelf25.setText("");
+        ecv.txtCp5.setText("");
+        ecv.txtProvincia5.setText("");
+        ecv.txtEmail5.setText("");
+    }
+    
+     /*Limpiar Texto*/
+    public void limpiarTextoPantallaEliminar() {
         ecv.txtNombreEntidad4.setText("");
         ecv.txtLocalidad4.setText("");
         ecv.txtDomicilio4.setText("");
@@ -674,6 +717,17 @@ public class ControladorEntidadesConocidas implements ActionListener {
         ecv.txtCp4.setText("");
         ecv.txtProvincia4.setText("");
         ecv.txtEmail4.setText("");
+    }
+    
+     public void limpiarTextoPantallaBuscar() {
+        ecv.txtNombreEntidad3.setText("");
+        ecv.txtLocalidad3.setText("");
+        ecv.txtDomicilio3.setText("");
+        ecv.txtTelf13.setText("");
+        ecv.txtTelf23.setText("");
+        ecv.txtCp3.setText("");
+        ecv.txtProvincia3.setText("");
+        ecv.txtEmail3.setText("");
     }
 
     /* Método para buscar una Entidad Conocida indicando el campo y el valor */
@@ -685,6 +739,12 @@ public class ControladorEntidadesConocidas implements ActionListener {
     /*Metodo para agregar una Entidad Conocida*/
     public void agregarEntidadConocida(int identificador, String nombre, String localidad, String domicilio, int telf1, int telf2, int cp, String provincia, String email) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ec = new EntidadesConocidas(identificador, nombre, localidad, domicilio, telf1, telf2, cp, provincia, email);
+        ec.grabar();
+    }
+    
+    /*Metodo para agregar una Entidad Conocida sin telf2*/
+    public void agregarEntidadConocidaSintelf2(int identificador, String nombre, String localidad, String domicilio, int telf1, int cp, String provincia, String email) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        ec = new EntidadesConocidas(identificador, nombre, localidad, domicilio, telf1, cp, provincia, email);
         ec.grabar();
     }
 

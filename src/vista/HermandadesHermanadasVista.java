@@ -117,15 +117,15 @@ public class HermandadesHermanadasVista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Hermandades hermanadas"));
 
-        jLabel2.setText("Nombre hermandad:");
+        jLabel2.setText("* Nombre hermandad:");
 
-        jLabel3.setText("Localidad:");
+        jLabel3.setText("* Localidad:");
 
-        jLabel4.setText("Domicilio:");
+        jLabel4.setText("* Domicilio:");
 
-        jLabel5.setText("Parroquia: ");
+        jLabel5.setText("* Parroquia: ");
 
-        jLabel7.setText("Telf1:");
+        jLabel7.setText("* Telf1:");
 
         jLabel8.setText("Telf2:");
 
